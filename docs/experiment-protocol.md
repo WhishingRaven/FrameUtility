@@ -1,659 +1,302 @@
 # Experimental Protocol
 
-This document defines the initial execution procedure for FrameUtility.
-
-The protocol is divided into:
-
-1. SLAM keyframe selection
-2. contribution measurement
-3. contribution-factor analysis
-4. controlled camera degradation
-5. model comparison
+This document defines the executable protocol for FrameUtility.
 
 ---
 
-# Phase 0 — Environment Setup
+# Phase 0 — Freeze the Environment
 
-## Step 0.1 — Initial Systems
+## Step 0.1 — Backends
 
-Set up:
+Set up and record exact commits / versions for:
 
-    VGGT-SLAM
-    MASt3R-SLAM
+- VGGT or the selected VGGT reconstruction path;
+- MASt3R or the selected MASt3R reconstruction path.
 
-Use fixed repository commits and record them.
+The experiment must bypass adaptive keyframe selection. The backend should receive an explicitly specified image set.
 
-## Step 0.2 — Evaluation Tools
-
-Prepare evaluation for:
-
-### Pose
-
-- ATE
-- RPE
-- translation error
-- rotation error
-
-### Geometry
-
-Where ground truth is available:
-
-- depth error,
-- point-cloud error,
-- reconstruction completeness.
-
-## Step 0.3 — Reproducibility
+## Step 0.2 — Reproducibility
 
 Fix:
 
-- random seeds,
-- model weights,
-- preprocessing,
-- image resolution,
-- inference parameters,
-- hardware/software versions.
+- model weights;
+- image resolution;
+- preprocessing;
+- camera-intrinsic handling;
+- inference options;
+- random seeds where relevant;
+- hardware and software versions.
 
-Run identical inputs multiple times before beginning the main experiment.
-
-Estimate normal run-to-run variance.
-
-Contribution changes smaller than baseline variance should not be treated as meaningful.
+Run identical input sets repeatedly and measure normal numerical variance.
 
 ---
 
 # Phase 1 — Dataset Preparation
 
-Select sequences with ground-truth camera trajectories and, preferably, ground-truth geometry/depth.
+Select sequences/scenes with:
 
-The initial dataset should contain different geometric conditions such as:
+- accurate camera poses;
+- camera intrinsics;
+- preferably GT depth, point cloud, or mesh;
+- enough neighboring viewpoints to construct multiple contexts.
 
-- straight corridors,
-- corners,
-- texture-rich rooms,
-- texture-poor regions,
-- repeated structures,
-- depth-rich scenes.
+Store a manifest:
 
-Keep original sequences unchanged.
+| scene | frame | timestamp | image | intrinsics | GT pose | GT depth/geometry |
+|---|---:|---:|---|---|---|---|
 
-Record:
-
-- frame IDs,
-- timestamps,
-- FPS,
-- resolution,
-- intrinsics,
-- GT poses,
-- GT depth/geometry where available.
+Keep original images immutable.
 
 ---
 
-# Phase 2 — Run Original Keyframe Selection
+# Phase 2 — Choose Target Observations and Contexts
 
-For each sequence:
+For each scene:
 
-## Step 2.1
+1. choose candidate target frame `Fi`;
+2. choose a context `K_-i` that excludes `Fi`;
+3. verify that all context views and the target belong to the same static scene;
+4. record overlap and relative-pose statistics;
+5. optionally construct several context sizes for the same target.
 
-Run VGGT-SLAM normally.
-
-Do not modify its keyframe-selection heuristic.
-
-Record:
-
-    selected frames
-    rejected frames
-
-## Step 2.2
-
-Run MASt3R-SLAM on the identical sequence.
-
-Record the same information.
-
-## Step 2.3
-
-Save selector-specific internal values when accessible.
-
-Examples may include:
-
-- disparity,
-- correspondence count,
-- overlap,
-- tracking score,
-- keyframe threshold.
-
-Suggested output:
-
-| sequence | model | frame | timestamp | selected | selector_score |
-|---|---|---:|---:|---|---:|
+Do not derive `K_-i` from one system's keyframe selection if the goal is backend-neutral comparison.
 
 ---
 
-# Phase 3 — Baseline Reconstruction
+# Phase 3 — Drop Baseline
 
-For each system, let its original selected keyframe set be:
+For each `(scene, K_-i, Fi)`:
 
-    K
+1. run reconstruction using only `K_-i`;
+2. compute all evaluation metrics;
+3. store output as `DROP`.
 
-Run or preserve the reconstruction produced using `K`.
+```text
+E_drop,m = E_m(K_-i)
+```
 
-Calculate:
-
-    E(K)
-
-Store:
-
-- camera poses,
-- depth,
-- reconstructed geometry,
-- ATE,
-- RPE,
-- geometry metrics,
-- runtime.
-
-This is the baseline for contribution experiments.
+This is the reference against which every target-view variant is evaluated.
 
 ---
 
-# Phase 4 — Selected-Frame Contribution
+# Phase 4 — Clean Add Baseline
 
-For every selected frame:
+Add the clean target view:
 
-    Fi ∈ K
+```text
+K_clean = K_-i ∪ {Fi(clean)}
+```
 
-perform a leave-one-out experiment.
+Run reconstruction and compute:
 
-## Step 4.1
+```text
+U_clean,m = E_drop,m - E_m(K_clean)
+```
 
-Construct:
+Classify the tuple:
 
-    K_-i = K \ {Fi}
+- clearly positive clean utility: suitable for useful-to-harmful transition analysis;
+- near-zero clean utility: redundant-view case;
+- negative clean utility: already-harmful clean-view case; retain separately and inspect.
 
-## Step 4.2
-
-Run reconstruction using `K_-i`.
-
-The keyframe set must be explicitly controlled.
-
-Do not allow the original selector to simply replace `Fi` with another frame, since this would measure selector adaptation rather than the contribution of `Fi`.
-
-## Step 4.3
-
-Calculate:
-
-    C_remove(i) = E(K_-i) - E(K)
-
-## Step 4.4
-
-Classify provisionally:
-
-    positive
-        useful
-
-    approximately zero
-        redundant
-
-    negative
-        potentially harmful
-
-The threshold for "approximately zero" should be determined from experimental variance rather than chosen arbitrarily.
+“Near zero” must be defined relative to measured run variance or a predeclared practical tolerance.
 
 ---
 
-# Phase 5 — Rejected-Frame Contribution
+# Phase 5 — Generate Motion-Blur Variants
 
-For every rejected frame:
+For every target frame, generate a reproducible severity ladder.
 
-    Fj ∉ K
+Example manifest:
 
-or for a representative sampled subset if the sequence is too large:
+| variant | path length | angular displacement | measured pixel blur |
+|---|---:|---:|---:|
+| B0 | 0 | 0 | 0 |
+| B1 | ... | ... | ... |
+| B2 | ... | ... | ... |
+| B3 | ... | ... | ... |
+| B4 | ... | ... | ... |
+| B5 | ... | ... | ... |
 
-## Step 5.1
+Preferred synthesis:
 
-Construct:
+1. sample camera poses during exposure;
+2. render or depth-aware warp each sample;
+3. average radiance / image samples;
+4. keep nominal target timestamp and central/end pose definition consistent across severities.
 
-    K_+j = K ∪ {Fj}
-
-Insert the frame at its correct temporal position.
-
-## Step 5.2
-
-Run reconstruction.
-
-## Step 5.3
-
-Calculate:
-
-    C_add(j) = E(K) - E(K_+j)
-
-Interpretation:
-
-    positive
-        missed useful frame
-
-    approximately zero
-        redundant frame
-
-    negative
-        harmful frame correctly rejected
+For a first implementation, pure rotational blur may be used because homographic warping avoids depth-dependent errors.
 
 ---
 
-# Phase 6 — Construct the Selection–Contribution Dataset
+# Phase 6 — Add-vs-Drop Sweep
 
-Create one unified table.
+For each severity `b`:
 
-Suggested schema:
+1. construct `K_b = K_-i ∪ {Fi(b)}`;
+2. run the backend on exactly `K_b`;
+3. compute metrics;
+4. calculate marginal utility.
 
-| sequence | model | frame | selected | contribution | contribution_type |
-|---|---|---:|---|---:|---|
-| seq01 | VGGT-SLAM | 14 | true | 0.42 | remove |
-| seq01 | VGGT-SLAM | 15 | false | 0.03 | add |
-| ... | ... | ... | ... | ... | ... |
+```text
+U_i,m(b | K_-i) = E_drop,m - E_m(K_b)
+```
 
-Add reconstruction metrics separately rather than immediately collapsing all metrics into one score.
+Suggested result table:
+
+| scene | target | context_id | backend | blur | metric | E_drop | E_add | utility |
+|---|---:|---|---|---:|---|---:|---:|---:|
 
 ---
 
-# Phase 7 — Evaluate Keyframe Selection
+# Phase 7 — Detect Negative-Utility Transitions
 
-Analyze:
+For each curve:
 
-## Selected Frames
+```text
+b -> U(b)
+```
 
-What fraction are:
+record:
 
-- strongly useful?
-- weakly useful?
-- redundant?
-- harmful?
+- maximum utility;
+- utility loss from clean;
+- first observed severity with `U < 0`;
+- interpolated `b*` only when neighboring samples straddle zero and interpolation is defensible;
+- whether reconstruction fails entirely.
 
-## Rejected Frames
+Do not force every curve to have a crossing.
 
-What fraction are:
+---
 
-- useful but missed?
-- redundant?
-- harmful?
+# Phase 8 — Repeat Across Contexts
 
-## Ranking Analysis
+Repeat Phases 3–7 for:
+
+- multiple target frames;
+- multiple scenes;
+- multiple context sizes;
+- low- and high-redundancy contexts;
+- different baselines / relative motions;
+- different texture and depth conditions.
+
+This phase is essential. A single context only demonstrates a case study.
+
+---
+
+# Phase 9 — Backend Comparison
+
+Run identical image sets through each backend.
 
 Compare:
 
-    selector score / selection decision
+- median `U(b)`;
+- `P(U < 0 | b)`;
+- failure rate;
+- distribution of `b*`;
+- sensitivity to overlap and context redundancy.
 
-against:
-
-    measured contribution
-
-Possible metrics:
-
-- Spearman rank correlation,
-- precision/recall after defining a useful-frame threshold,
-- ROC/AUC where appropriate,
-- contribution distribution of selected vs rejected frames.
-
-The threshold-based analysis should be secondary to the continuous contribution analysis.
+Do not compare their native keyframe decisions in the main study.
 
 ---
 
-# Phase 8 — Extract Geometric Factors
+# Phase 10 — Context-Factor Analysis
 
-For every frame calculate:
+For every tuple, record:
 
-## Camera Motion
+### Relative geometry
 
-- relative translation,
-- relative rotation,
-- baseline.
+- translation;
+- rotation;
+- baseline;
+- approximate parallax;
+- view overlap.
 
-## Geometric Novelty
+### Scene/context properties
 
-- parallax,
-- viewpoint change,
-- feature/correspondence overlap,
-- newly visible geometry if measurable.
+- texture density;
+- depth variation;
+- number of context views;
+- target redundancy / nearest-view similarity;
+- visibility of unique scene regions where measurable.
 
-## Scene Characteristics
-
-- feature density,
-- texture density,
-- depth mean,
-- depth variance.
-
-Append these measurements to the contribution dataset.
+Analyze how these variables shift utility curves or the probability of negative utility.
 
 ---
 
-# Phase 9 — Analyze Contribution Factors
+# Phase 11 — Sanity Checks
 
-Test relationships such as:
+### Check A — clean utility
 
-    contribution vs parallax
-    contribution vs overlap
-    contribution vs translation
-    contribution vs rotation
-    contribution vs depth variation
+Verify that the clean target usually helps in the subset used for transition claims.
 
-Calculate:
+### Check B — blur synthesis
 
-- Pearson correlation,
-- Spearman correlation,
-- partial correlations.
+Visually inspect sampled variants and ensure stronger severity corresponds to a larger exposure path / image displacement.
 
-Fit multivariate models where necessary to account for correlated variables.
+### Check C — geometry preservation
 
-Do not interpret observational correlations as causal effects.
+Verify that nominal viewpoint and scene content are unchanged except for the image-formation integration.
 
----
+### Check D — deterministic input set
 
-# Phase 10 — Identify Frames for Controlled Experiments
+Ensure the backend does not silently replace, reject, or augment views.
 
-Select representative frames from different contribution classes:
+### Check E — numerical variance
 
-    strongly useful
-    moderately useful
-    redundant
-    harmful
-
-Prefer frames from multiple:
-
-- scenes,
-- trajectories,
-- viewpoint changes,
-- texture conditions.
-
-These frames become the basis of degradation experiments.
+Repeat representative conditions. Effects smaller than baseline variance should not be interpreted.
 
 ---
 
-# Phase 11 — Controlled Motion Blur
+# Phase 12 — Primary Figures
 
-For each selected clean frame:
+**Figure 1.** Experimental schematic: fixed `K_-i`, one target view, blur sweep, add-vs-drop comparison.
 
-    Fi(B0)
-    Fi(B1)
-    Fi(B2)
-    Fi(B3)
+**Figure 2.** Example `U(b)` curves for several targets.
 
-where:
+**Figure 3.** Probability `P(U < 0)` versus blur severity.
 
-    B0 = clean
-    B1 = low blur
-    B2 = medium blur
-    B3 = high blur
+**Figure 4.** Distribution of `b*`.
 
-Only degradation severity should change.
+**Figure 5.** VGGT vs MASt3R utility curves under identical contexts.
 
-Replace the original frame with each degraded version while keeping the rest of the sequence fixed.
+**Figure 6.** Utility / transition severity versus overlap, baseline, redundancy, and texture.
 
-Measure:
-
-    C_i(B0)
-    C_i(B1)
-    C_i(B2)
-    C_i(B3)
-
-Calculate:
-
-    ΔC_i(B) = C_i(B) - C_i(B0)
-
-Plot:
-
-    blur severity
-          ↓
-    frame contribution
-
-Look for transitions:
-
-    useful
-      ↓
-    weakly useful
-      ↓
-    redundant
-      ↓
-    harmful
+**Figure 7.** Qualitative reconstructions for clean-add, harmful-blur-add, and drop conditions.
 
 ---
 
-# Phase 12 — Controlled Rolling Shutter
+# Phase 13 — Optional Multi-Degradation Extension
 
-Use a physically meaningful rolling-shutter simulation or controlled renderer.
+If time permits, repeat the same protocol for another degradation while preserving the add-vs-drop design.
 
-Keep fixed:
+Priority candidates:
 
-- scene,
-- nominal camera trajectory,
-- frame timestamps,
-- intrinsics,
-- illumination.
+1. defocus blur;
+2. exposure / low light;
+3. partial occlusion;
+4. sensor noise;
+5. rolling shutter.
 
-Vary:
-
-    sensor readout time
-
-Example:
-
-    RS0 = global shutter
-    RS1 = low
-    RS2 = medium
-    RS3 = high
-
-Measure:
-
-    C_i(RS0)
-    C_i(RS1)
-    C_i(RS2)
-    C_i(RS3)
-
-Calculate contribution loss relative to the global-shutter condition.
-
----
-
-# Phase 13 — Blur × Rolling-Shutter Experiment
-
-Generate:
-
-| RS / Blur | B0 | B1 | B2 | B3 |
-|---|---:|---:|---:|---:|
-| RS0 | ✓ | ✓ | ✓ | ✓ |
-| RS1 | ✓ | ✓ | ✓ | ✓ |
-| RS2 | ✓ | ✓ | ✓ | ✓ |
-| RS3 | ✓ | ✓ | ✓ | ✓ |
-
-For every condition measure:
-
-- frame contribution,
-- pose error,
-- depth error,
-- reconstruction error.
-
-Produce heatmaps:
-
-    x-axis = blur severity
-    y-axis = rolling-shutter severity
-    value  = frame contribution
-
-and:
-
-    value = reconstruction error
-
-Test for an interaction between blur and rolling shutter.
-
----
-
-# Phase 14 — Context-Dependence Test
-
-Leave-one-out contribution may underestimate frames with redundant neighbors.
-
-Test this explicitly.
-
-## Pair Removal
-
-For neighboring frames:
-
-    remove Fi
-    remove Fj
-    remove Fi and Fj
-
-Compare:
-
-    C_i
-    C_j
-    C_{i,j}
-
-A strong joint effect despite weak individual effects indicates redundancy/interdependence.
-
-## Random Subsets
-
-If computationally feasible:
-
-1. sample many frame subsets,
-2. evaluate reconstruction,
-3. compare performance when frame `i` is present versus absent.
-
-Estimate expected marginal contribution:
-
-    C_i ≈ E[Q(S ∪ {Fi}) - Q(S)]
-
-This can later be extended to approximate Shapley values.
-
----
-
-# Phase 15 — Compare VGGT-SLAM and MASt3R-SLAM
-
-Use identical source sequences.
-
-Compare:
-
-### Selection
-
-- keyframe density,
-- selected-frame locations,
-- agreement between selectors.
-
-### Contribution
-
-- average selected-frame contribution,
-- redundant-frame rate,
-- harmful-frame rate,
-- missed-useful-frame rate.
-
-### Degradation
-
-- sensitivity to blur,
-- sensitivity to rolling shutter,
-- useful-to-harmful transition points.
-
-### Failure Modes
-
-Determine whether the two systems fail for the same frames and under the same visual conditions.
-
----
-
-# Phase 16 — Robustness Checks
-
-Repeat important experiments across:
-
-- multiple sequences,
-- multiple scenes,
-- different frame rates,
-- different motion patterns,
-- different keyframe densities.
-
-Use multiple evaluation metrics.
-
-Check that conclusions are not caused by:
-
-- one scene,
-- one metric,
-- one selector threshold,
-- one model,
-- stochastic inference variation.
-
----
-
-# Expected Figures
-
-The final study should ideally contain:
-
-## Figure 1
-
-Timeline showing:
-
-    all frames
-    VGGT-SLAM keyframes
-    MASt3R-SLAM keyframes
-
-## Figure 2
-
-Distribution of measured contribution for:
-
-    selected vs rejected frames
-
-## Figure 3
-
-Selection–Contribution matrix:
-
-    useful selected
-    redundant selected
-    harmful selected
-    useful rejected
-
-## Figure 4
-
-Frame contribution along the camera trajectory.
-
-## Figure 5
-
-Contribution vs:
-
-    viewpoint change
-    parallax
-    overlap
-
-## Figure 6
-
-Contribution vs motion-blur severity.
-
-## Figure 7
-
-Contribution vs rolling-shutter severity.
-
-## Figure 8
-
-Blur × rolling-shutter contribution heatmap.
-
-## Figure 9
-
-Examples of:
-
-    useful → redundant → harmful
-
-transitions.
-
-## Figure 10
-
-VGGT-SLAM vs MASt3R-SLAM comparison.
+The dependent variable and drop baseline remain unchanged.
 
 ---
 
 # Final Questions
 
-At the end of the project, the experiments should allow us to answer:
+The project should ultimately answer:
 
-1. Do neural SLAM systems select frames with high actual contribution?
-2. How many selected keyframes are redundant?
-3. Are any selected frames actively harmful?
-4. Do the systems miss useful frames?
-5. What geometric properties characterize high-contribution frames?
-6. How does realistic camera degradation change frame contribution?
-7. Can degradation turn an otherwise useful frame into a harmful one?
-8. Are these effects different between VGGT-SLAM and MASt3R-SLAM?
+1. Does progressive degradation continuously reduce the marginal value of an otherwise valid observation?
+2. Can its marginal utility become negative?
+3. At what severities and under what contexts does this happen?
+4. How common is the phenomenon across scenes?
+5. Does the transition differ between reconstruction backends?
+6. Which context variables make a degraded observation easier or harder to tolerate?
 
 The central empirical comparison is:
 
-    SLAM thinks this frame matters.
-
-                VS
-
-    Does it actually improve the reconstruction?
+```text
+K_-i ∪ {degraded Fi}
+          VS
+K_-i
+```

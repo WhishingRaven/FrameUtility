@@ -1,400 +1,222 @@
 # FrameUtility
 
-**Do Modern Neural SLAM Systems Select the Frames That Actually Matter?**
+**When Does an Additional View Become Harmful?**
 
-FrameUtility is an empirical study of frame contribution and keyframe selection in modern neural SLAM systems.
+FrameUtility is an empirical study of the **marginal utility of degraded observations in multi-view 3D reconstruction**.
 
-The central questions are:
+The project no longer treats the keyframe-selection heuristic of VGGT-SLAM or MASt3R-SLAM as the object of evaluation. Modern reconstruction systems are complete pipelines, and a keyframe decision is meaningful only in the context of the state produced by that pipeline. Instead, FrameUtility fixes the observation set and asks a controlled downstream question:
 
-> How much does each frame actually contribute to geometry estimation?
+> Given a fixed set of valid views, when does adding one geometrically valid but degraded observation become worse than excluding it?
 
-and
+The initial reconstruction backends are:
 
-> Do modern SLAM systems actually select the frames with the highest contribution?
+- VGGT / VGGT-based reconstruction
+- MASt3R-based reconstruction
 
-The initial targets are:
-
-- VGGT-SLAM
-- MASt3R-SLAM
+The initial degradation is **motion blur**. Additional degradations may be added only after the core experiment is validated.
 
 ---
 
 ## 1. Motivation
 
-A video used for SLAM may contain thousands of frames, but processing every frame is unnecessary and computationally expensive.
+Recent feed-forward and foundation-model-based 3D reconstruction methods can consume many images directly. Existing work already shows that:
 
-SLAM systems therefore perform **keyframe selection**: only a subset of frames is retained for mapping and geometry estimation.
+- blur and other real-world degradations reduce pose and geometry accuracy;
+- low-quality video frames can hurt classical SfM/VO pipelines;
+- outlier or non-overlapping views can damage feed-forward reconstruction;
+- view pruning can improve robustness.
 
-Existing systems typically select keyframes using heuristics based on quantities such as:
+Therefore, the novelty of this project is **not** to show that blur is harmful, nor to propose another blur detector or keyframe selector.
 
-- viewpoint change,
-- feature/correspondence overlap,
-- optical flow or disparity,
-- camera motion,
-- tracking quality.
-
-However, a frame satisfying a keyframe-selection heuristic is not necessarily a frame that actually improves the final reconstruction.
-
-This motivates a different question:
-
-> Are the frames selected by a SLAM system actually the frames that contribute most to its reconstruction?
-
-We therefore distinguish between:
-
-    Predicted Importance
-        = importance implied by the SLAM keyframe-selection heuristic
-
-and
-
-    Measured Contribution
-        = actual change in reconstruction quality caused by a frame
-
-The goal of FrameUtility is to compare the two.
+The narrower question is whether a degraded observation has a **negative marginal value** relative to withholding that observation altogether.
 
 ---
 
-## 2. Core Concept: Frame Contribution
+## 2. Core Quantity: Conditional Marginal Utility
 
-Suppose a SLAM system selects the keyframe set:
+Let the fixed context of clean observations be
 
-    K = {F1, F3, F6, F8, F10}
+```text
+K_-i = {F1, ..., F(i-1), F(i+1), ..., Fn}
+```
 
-We first run reconstruction using the complete selected set and obtain:
+and let `Fi(b)` denote the same target observation at the same nominal viewpoint, with blur severity `b`.
 
-    E(K)
+Let `E(S)` be a reconstruction error measured from image set `S`.
 
-where `E` represents reconstruction error.
+Define the marginal utility of the degraded observation as
 
-### Selected Frames: Leave-One-Out
-
-For a selected frame `Fi`, remove it:
-
-    K_-i = K \ {Fi}
-
-and run reconstruction again.
-
-Define:
-
-    C_remove(i) = E(K_-i) - E(K)
+```text
+U_i(b | K_-i) = E(K_-i) - E(K_-i ∪ {Fi(b)})
+```
 
 Interpretation:
 
-    C_remove(i) > 0
-    → removing the frame makes reconstruction worse
-    → useful selected frame
+```text
+U_i(b | K_-i) > 0
+    adding Fi(b) improves reconstruction
 
-    C_remove(i) ≈ 0
-    → removing the frame changes little
-    → redundant selected frame
+U_i(b | K_-i) ≈ 0
+    adding Fi(b) provides negligible benefit
 
-    C_remove(i) < 0
-    → removing the frame improves reconstruction
-    → potentially harmful selected frame
+U_i(b | K_-i) < 0
+    reconstruction is better when Fi(b) is withheld
+    → negative marginal utility
+```
 
----
+The zero crossing is the central event:
 
-## 3. Rejected Frames: Add-One-In
+```text
+b* : U_i(b* | K_-i) = 0
+```
 
-Selected frames alone are not sufficient to evaluate a keyframe selector.
-
-A system may reject a frame that would actually have improved reconstruction.
-
-For a rejected frame `Fj`, add it to the selected set:
-
-    K_+j = K ∪ {Fj}
-
-and measure:
-
-    C_add(j) = E(K) - E(K_+j)
-
-Interpretation:
-
-    C_add(j) > 0
-    → adding the rejected frame improves reconstruction
-    → potentially missed useful frame
-
-    C_add(j) ≈ 0
-    → rejected frame provides little additional information
-    → appropriate rejection
-
-    C_add(j) < 0
-    → adding the frame makes reconstruction worse
-    → appropriate rejection of a harmful frame
-
-This produces four important cases:
-
-| SLAM Decision | Measured Contribution | Interpretation |
-|---|---|---|
-| Selected | High positive | Good selection |
-| Selected | Near zero | Redundant selection |
-| Selected | Negative | Harmful selection |
-| Rejected | High positive | Missed useful frame |
-| Rejected | Near zero / negative | Good rejection |
+`b*` is not an intrinsic property of a frame. It depends on scene, context, viewpoint, reconstruction backend, degradation type, and metric.
 
 ---
 
-## 4. Frame Contribution Is Context-Dependent
+## 3. Why Context Dependence Is Not a Bug
 
-A frame does not necessarily have one intrinsic contribution value.
+Frame utility is conditional on the other available observations. Therefore the project does **not** claim that a frame has one universal contribution score.
 
-Its contribution depends on which other frames are already present.
+The experimental unit is a tuple:
 
-For example, two neighboring frames may contain nearly identical information.
+```text
+(scene, context K_-i, target frame Fi, degradation severity b, backend)
+```
 
-Removing either one individually may have little effect, while removing both may significantly damage reconstruction.
+The study repeats the intervention across many tuples and analyzes distributions such as:
 
-Therefore, contribution should formally be considered:
+```text
+P(U < 0 | blur severity = b)
+```
 
-    C_i(K)
+and, when a zero crossing exists,
 
-rather than simply:
+```text
+distribution of b*
+```
 
-    C_i
-
-The initial experiments use leave-one-out and add-one-in measurements because they are simple and interpretable.
-
-Later experiments may estimate more general contribution using random subsets or approximate Shapley values.
-
----
-
-## 5. What Determines Frame Contribution?
-
-After measuring contribution, we investigate why some frames are useful while others are redundant or harmful.
-
-We hypothesize that frame utility depends on the interaction between:
-
-    Geometric Information
-
-and
-
-    Image Degradation
-
-Rather than assuming a fixed linear relationship, we write:
-
-    Frame Utility = f(Geometric Information, Degradation)
-
-### Geometric Factors
-
-Candidate variables include:
-
-- viewpoint change,
-- parallax,
-- camera translation,
-- camera rotation,
-- feature/correspondence overlap,
-- texture / feature density,
-- depth variation,
-- visibility of previously unseen geometry.
-
-### Degradation Factors
-
-Initial focus:
-
-- motion blur,
-- rolling-shutter distortion.
+This turns context dependence into a factor to sample over rather than a hidden assumption.
 
 ---
 
-## 6. Why Degradation Requires Controlled Experiments
+## 4. Research Questions
 
-Geometric information and image degradation are naturally confounded in real video.
+**RQ1.** How does progressive motion blur change the conditional marginal utility of an otherwise geometrically valid observation?
 
-For example, fast camera rotation may simultaneously produce:
+**RQ2.** Does a finite blur severity exist at which including the observation becomes worse than excluding it?
 
-    viewpoint change ↑
-    optical flow ↑
-    feature overlap ↓
-    motion blur ↑
-    rolling-shutter distortion ↑
+**RQ3.** How often does negative marginal utility occur across scenes, viewpoints, and observation contexts?
 
-Therefore, simple correlations from smartphone video cannot reliably isolate the effect of degradation.
+**RQ4.** Are the transition severity and failure pattern different between VGGT-based and MASt3R-based reconstruction?
 
-FrameUtility separates the study into:
+**RQ5.** Which geometric/context variables shift the transition, such as baseline, overlap, redundancy, texture, or depth variation?
 
-1. observational keyframe/contribution analysis,
-2. controlled degradation experiments.
+Optional extension:
+
+**RQ6.** Do different degradation types produce qualitatively different utility curves?
 
 ---
 
-## 7. Research Questions
+## 5. Main Experiment
 
-### Keyframe Selection
+For each selected experimental tuple:
 
-**RQ1.**
-How much does the measured contribution of individual frames vary?
+1. Construct a clean context `K_-i`.
+2. Run the reconstruction backend on `K_-i` and measure `E_drop = E(K_-i)`.
+3. Create controlled variants `Fi(b0), Fi(b1), ..., Fi(bm)` from the same target view.
+4. For each blur severity, reconstruct from `K_-i ∪ {Fi(b)}`.
+5. Compute `U_i(b | K_-i)`.
+6. Repeat across target frames, contexts, scenes, and backends.
 
-**RQ2.**
-Do VGGT-SLAM and MASt3R-SLAM select frames with high measured contribution?
+The important comparison is always:
 
-**RQ3.**
-How often do the systems select redundant or harmful frames?
+```text
+use the degraded observation
+            VS
+withhold the observation
+```
 
-**RQ4.**
-How often do they reject frames that would have significantly improved reconstruction?
+not:
 
-### Contribution Factors
-
-**RQ5.**
-Which geometric properties best explain measured frame contribution?
-
-### Camera Degradation
-
-**RQ6.**
-How does motion blur change the contribution of an otherwise identical frame?
-
-**RQ7.**
-How does rolling-shutter distortion change frame contribution?
-
-**RQ8.**
-Can a geometrically valuable frame become redundant or harmful under sufficiently severe degradation?
-
-**RQ9.**
-Do motion blur and rolling shutter interact nonlinearly?
-
-### Model Difference
-
-**RQ10.**
-Do VGGT-SLAM and MASt3R-SLAM exhibit different frame-selection and failure patterns?
+```text
+selected by one SLAM heuristic
+            VS
+rejected by another heuristic
+```
 
 ---
 
-## 8. Experimental Structure
+## 6. Controlled Motion Blur
 
-### Experiment 1 — Keyframe Selection Audit
+Motion blur should approximate exposure integration along a camera path rather than a generic 2D blur kernel whenever possible.
 
-Run:
+For target pose `T(t0)`, sample camera poses over the exposure interval and render/warp intermediate observations:
 
-- VGGT-SLAM
-- MASt3R-SLAM
+```text
+Fi(b) ≈ (1/M) Σ_m Warp(I, T_m)
+```
 
-on the same sequences.
+For pure rotational perturbations, image warping can be represented by a homography without depth. For translation-dominated motion, blur is depth-dependent; a renderer or known scene geometry is preferable.
 
-Record:
-
-- selected frames,
-- rejected frames,
-- selector statistics,
-- camera trajectory,
-- reconstruction output.
-
-Goal:
-
-> Observe what each system chooses.
+Blur severity must be recorded in a physically interpretable or reproducible unit, e.g. path length, angular displacement, exposure interval, or measured pixel blur.
 
 ---
 
-### Experiment 2 — Contribution Measurement
+## 7. Evaluation
 
-For selected frames:
+Do not collapse all reconstruction quality into one scalar prematurely.
 
-    leave-one-out
-
-For rejected frames:
-
-    add-one-in
-
-Measure the resulting change in reconstruction quality.
-
-Goal:
-
-> Determine whether the system's selection decisions correspond to actual reconstruction contribution.
-
----
-
-### Experiment 3 — Contribution Factor Analysis
-
-Measure geometric characteristics for each frame and compare them with measured contribution.
-
-Goal:
-
-> Determine what actually makes a frame useful.
-
----
-
-### Experiment 4 — Controlled Degradation
-
-Take geometrically identical frames or controlled synthetic renderings and systematically vary:
-
-- motion blur,
-- rolling shutter.
-
-Goal:
-
-> Determine how realistic camera degradation destroys otherwise useful geometric information.
-
----
-
-### Experiment 5 — Blur × Rolling-Shutter Interaction
-
-Use a factorial design:
-
-| Rolling Shutter / Blur | B0 | B1 | B2 | B3 |
-|---|---:|---:|---:|---:|
-| RS0 | ✓ | ✓ | ✓ | ✓ |
-| RS1 | ✓ | ✓ | ✓ | ✓ |
-| RS2 | ✓ | ✓ | ✓ | ✓ |
-| RS3 | ✓ | ✓ | ✓ | ✓ |
-
-Goal:
-
-> Determine whether the two artifacts produce additive or nonlinear degradation.
-
----
-
-## 9. Evaluation
-
-Candidate metrics include:
-
-### Camera Pose
+### Camera pose
 
 - Absolute Trajectory Error (ATE)
 - Relative Pose Error (RPE)
 - translation error
 - rotation error
 
-### Depth
+### Depth / point maps
 
+- scale-aligned depth error
 - absolute relative error
 - RMSE
-- scale-aligned depth error
 
-### 3D Geometry
+### 3D geometry
 
-- point-to-point error
-- point-to-surface error
-- Chamfer distance
-- reconstruction completeness
-- reconstruction consistency
+- point-cloud precision / recall / F1
+- Chamfer distance where appropriate
+- completeness
+- point-to-surface distance where GT geometry exists
 
-Multiple metrics should be retained rather than forcing all geometry quality into one scalar too early.
+For every metric, define the sign of utility consistently so that positive `U` means the added view helps.
 
 ---
 
-## 10. Expected Contribution
+## 8. Relation to Existing Work
 
-This project is not primarily intended to propose another keyframe-selection heuristic.
+The project must be positioned carefully.
 
-Instead, it aims to evaluate the assumptions behind existing keyframe selection.
+- **RealX3D (2026)** benchmarks reconstruction under controlled real-world degradations, including motion blur. Our difference is the **add-vs-drop marginal-utility intervention** on one fixed geometrically valid observation.
+- **Emergent Outlier View Rejection in VGGT (CVPR 2026)** studies irrelevant/non-overlapping distractor views and emergent rejection behavior. Our target is a **soft corruption of an otherwise valid view**.
+- **G-MASt3R-SfM (2026)** removes geometrically unreliable/outlier views. Our experiment does not propose a pruning algorithm; it measures how utility changes continuously with degradation severity.
+- Classical SfM/VO work has already shown that blur-aware frame filtering can improve reconstruction. Therefore “blurred frames are bad” is not a contribution.
 
-The central comparison is:
+See `literature-review.md` for the reading list and detailed summaries.
 
-    What the SLAM system selects
-                VS
-    What actually improves reconstruction
+---
 
-The desired outcome is to identify:
+## 9. Expected Contribution
 
-- useful selected frames,
-- redundant selected frames,
-- harmful selected frames,
-- useful frames that existing selectors miss.
+A successful project should contribute an empirical characterization, not merely another robustness score.
 
-The second objective is to explain these outcomes using geometric information and realistic camera degradation.
+Desired outputs:
 
-Ultimately, the project asks:
+- marginal-utility curves `U(b)`;
+- probability of negative marginal utility as a function of blur severity;
+- distribution of zero-crossing severity `b*`;
+- comparison between reconstruction backends;
+- analysis of which scene/context factors shift the transition;
+- examples where a view remains geometrically valid but becomes actively harmful.
 
-> Do modern neural SLAM systems know which frames actually matter?
+The main question is:
 
-and, more fundamentally:
-
-> What makes a frame useful—or harmful—to geometry estimation?
+> **When is more visual information worse than less?**

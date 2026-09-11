@@ -2,564 +2,237 @@
 
 ## 1. Purpose
 
-FrameUtility uses ETH3D as the primary benchmark for evaluating frame contribution and keyframe selection.
+ETH3D is used as a source of calibrated scenes, camera trajectories, and ground truth for measuring the **marginal utility of controlled degraded observations**.
 
-ETH3D is well suited to this project because it provides:
+It is no longer used primarily to audit which keyframes VGGT-SLAM or MASt3R-SLAM select.
 
-- monocular RGB sequences,
-- accurate camera calibration,
-- ground-truth camera trajectories,
-- synchronized global-shutter imagery,
-- scenes suitable for SLAM evaluation,
-- additional synthetic data involving rolling-shutter distortion.
+The benchmark question is:
 
-The benchmark will be used to answer two main questions:
-
-1. Do VGGT-SLAM and MASt3R-SLAM select frames that actually improve reconstruction?
-2. What geometric and visual properties determine the measured contribution of each frame?
+> For a fixed context of ETH3D views, how does progressively degrading one additional valid view change reconstruction, relative to dropping that view entirely?
 
 ---
 
-# 2. Role of ETH3D
+## 2. Why ETH3D
 
-ETH3D will serve as the controlled benchmark dataset before experiments on real smartphone video.
+ETH3D provides useful properties for this experiment:
 
-The overall workflow is:
+- calibrated camera imagery;
+- accurate ground-truth camera trajectories for SLAM sequences;
+- scenes with substantial geometric diversity;
+- global-shutter data suitable as a clean source;
+- ground-truth geometry/depth in parts of the benchmark ecosystem.
 
-    ETH3D RGB sequence
-            ↓
-    VGGT-SLAM / MASt3R-SLAM
-            ↓
-      Keyframe Selection
-            ↓
-    Selected / Rejected Frames
-            ↓
-    Contribution Measurement
-            ↓
-      GT Pose Evaluation
-
-Only monocular RGB images are provided to the SLAM systems.
-
-Ground-truth trajectory and geometry are used only for evaluation.
-
-This preserves the monocular setting of the experiment.
+Before finalizing a sequence, verify exactly which GT products are available for that subset and do not assume every ETH3D sequence contains all modalities.
 
 ---
 
-# 3. Why ETH3D
+## 3. Role in the Experiment
 
-## 3.1 Ground-Truth Camera Pose
+The intended workflow is:
 
-ETH3D provides accurate ground-truth camera trajectories for its SLAM benchmark sequences.
-
-This allows estimated camera trajectories to be evaluated using metrics such as:
-
-- Absolute Trajectory Error (ATE)
-- Relative Pose Error (RPE)
-- translation error
-- rotation error
-
-Without ground truth, it would be difficult to determine whether removing or adding a frame actually improves the SLAM result.
-
----
-
-## 3.2 Global-Shutter Baseline
-
-Many ETH3D sequences were captured using synchronized global-shutter cameras.
-
-This is important because the first stage of the project aims to study frame contribution while minimizing rolling-shutter distortion.
-
-The global-shutter sequences therefore provide a relatively clean baseline for analyzing geometric frame contribution.
-
----
-
-## 3.3 Monocular Evaluation
-
-Although ETH3D contains data for multiple sensor configurations, this project will use only a single RGB camera stream as input.
-
-The experiment therefore remains:
-
-    Monocular RGB
+```text
+ETH3D clean observations
         ↓
-    Neural SLAM
-
-Additional sensor information is not provided to the SLAM system.
-
----
-
-## 3.4 Rolling-Shutter Experiments
-
-ETH3D also provides synthetic SLAM data containing controlled rolling-shutter effects.
-
-Relevant conditions include variants such as:
-
-    clean
-    rolling shutter
-    asynchronous sensing
-    asynchronous + rolling shutter
-
-These data may be useful for validating the controlled degradation experiments without requiring a physical rolling-shutter simulation pipeline in the initial stage.
-
-However, the exact distortion parameters and suitability for the planned factorial experiments must be checked before using them as the sole rolling-shutter benchmark.
-
----
-
-# 4. Initial Benchmark Systems
-
-The same ETH3D RGB sequence will be processed independently by:
-
-    VGGT-SLAM
-
-and:
-
-    MASt3R-SLAM
-
-For each system, record:
-
-- selected keyframes,
-- rejected frames,
-- estimated trajectory,
-- reconstruction output,
-- keyframe-selection score or internal decision variable when accessible,
-- runtime.
-
-The original keyframe-selection logic should remain unchanged during the initial audit.
-
----
-
-# 5. Baseline Run
-
-For each sequence and SLAM system:
-
-## Step 1
-
-Provide the full monocular RGB sequence.
-
-## Step 2
-
-Run SLAM normally.
-
-Let the selected keyframe set be:
-
-    K = {F_k1, F_k2, ..., F_kn}
-
-## Step 3
-
-Save:
-
-- selected frame indices,
-- rejected frame indices,
-- estimated camera poses,
-- GT-aligned trajectory,
-- ATE,
-- RPE,
-- available reconstruction outputs.
-
-## Step 4
-
-Define the baseline reconstruction error:
-
-    E(K)
-
-This baseline is used for subsequent contribution measurements.
-
----
-
-# 6. Contribution of Selected Frames
-
-For every selected frame:
-
-    Fi ∈ K
-
-remove the frame from the selected set:
-
-    K_-i = K \ {Fi}
-
-Run the reconstruction again while keeping the remaining keyframe set fixed.
-
-Do not allow the SLAM keyframe selector to automatically replace the removed frame.
-
-Measure:
-
-    E(K_-i)
-
-Define:
-
-    C_remove(i) = E(K_-i) - E(K)
-
-Interpretation:
-
-    C_remove(i) > 0
-        Removing Fi makes the result worse.
-        Fi is beneficial.
-
-    C_remove(i) ≈ 0
-        Removing Fi changes little.
-        Fi is redundant.
-
-    C_remove(i) < 0
-        Removing Fi improves the result.
-        Fi may be harmful.
-
----
-
-# 7. Contribution of Rejected Frames
-
-For a rejected frame:
-
-    Fj ∉ K
-
-insert it into the selected frame set at its original temporal position:
-
-    K_+j = K ∪ {Fj}
-
-Run reconstruction again.
-
-Measure:
-
-    E(K_+j)
-
-Define:
-
-    C_add(j) = E(K) - E(K_+j)
-
-Interpretation:
-
-    C_add(j) > 0
-        The rejected frame improves reconstruction.
-        The selector missed a useful frame.
-
-    C_add(j) ≈ 0
-        The rejected frame is redundant.
-
-    C_add(j) < 0
-        Adding the frame makes reconstruction worse.
-        Rejecting it was appropriate.
-
----
-
-# 8. Primary Keyframe-Selection Evaluation
-
-Each frame will be classified using two pieces of information:
-
-    SLAM decision
-        +
-    measured contribution
-
-This creates the following categories:
-
-| SLAM Decision | Contribution | Interpretation |
-|---|---|---|
-| Selected | Strong positive | Useful selection |
-| Selected | Near zero | Redundant selection |
-| Selected | Negative | Harmful selection |
-| Rejected | Strong positive | Missed useful frame |
-| Rejected | Near zero | Correct rejection |
-| Rejected | Negative | Correct rejection of harmful frame |
-
-The purpose is not initially to replace the keyframe selector.
-
-The purpose is to determine whether the current selector's decisions correspond to actual reconstruction contribution.
-
----
-
-# 9. Geometric Factor Extraction
-
-For every ETH3D frame, calculate or obtain geometric descriptors such as:
-
-## Camera Motion
-
-- relative translation
-- relative rotation
-- camera baseline
-
-Ground-truth poses should be used where possible so that these measurements are not contaminated by SLAM estimation error.
-
-## Geometric Information
-
-- viewpoint change
-- parallax
-- overlap with neighboring frames
-- feature / correspondence count
-- visibility of new scene regions
-- depth variation
-
-## Image Characteristics
-
-- texture density
-- image entropy
-- sharpness / blur score
-
-These values are stored together with measured frame contribution.
-
----
-
-# 10. Why Ground-Truth Pose Should Be Used for Feature Analysis
-
-Some candidate frame properties can be estimated from the images themselves.
-
-However, image-derived measurements may introduce confounding.
-
-For example:
-
-    large camera motion
+choose context K_-i + target Fi
         ↓
-    optical flow increases
-        +
-    motion blur may increase
-
-Using ETH3D ground-truth camera poses allows camera translation, rotation, and viewpoint change to be measured independently of the performance of the SLAM system.
-
-Therefore:
-
-    GT pose
+construct drop baseline K_-i
         ↓
-    physical camera motion
-
-should be preferred over:
-
-    estimated pose
+generate Fi(b) at controlled blur levels
         ↓
-    possibly model-dependent motion estimate
+run fixed-set reconstruction
+        ↓
+measure U_i(b | K_-i)
+```
 
-for the geometric-factor analysis.
+Ground truth is used only for evaluation and for deriving context descriptors such as relative pose.
 
 ---
 
-# 11. Contribution vs Geometric Information
+## 4. Input Policy
 
-After measuring frame contribution, analyze relationships such as:
+Both reconstruction backends must receive the **same explicitly specified image sets**.
 
-    Contribution vs Translation
+Do not let each SLAM system independently choose its own keyframes in the primary experiment, because that changes the context and makes marginal utility incomparable.
 
-    Contribution vs Rotation
-
-    Contribution vs Parallax
-
-    Contribution vs Overlap
-
-    Contribution vs Depth Variation
-
-The objective is to determine which geometric properties are associated with frames that actually improve reconstruction.
-
-Initial analysis may use:
-
-- Pearson correlation
-- Spearman rank correlation
-- partial correlation
-- multiple regression
-
-The analysis should account for correlations between explanatory variables.
+If a backend has an internal image-rejection mechanism that cannot be disabled, record this behavior explicitly and treat it as part of the backend response.
 
 ---
 
-# 12. Scene Diversity
+## 5. Scene Selection
 
-Experiments should include multiple ETH3D sequences rather than relying on a single trajectory.
+Choose several sequences with varied conditions:
 
-The selected sequences should ideally contain different conditions such as:
+- translation-dominant motion;
+- rotation-dominant motion;
+- corners / viewpoint changes;
+- texture-rich surfaces;
+- texture-poor surfaces;
+- repeated structures;
+- large and small depth variation.
 
-- strong camera translation,
-- strong camera rotation,
-- small-motion sequences,
-- texture-rich scenes,
-- texture-poor scenes,
-- repeated structures,
-- large depth variation,
-- narrow spaces,
-- open spaces.
-
-This allows investigation of whether frame contribution is scene-dependent.
+Prefer scenes where enough neighboring frames are available to build multiple valid contexts around each target.
 
 ---
 
-# 13. Controlled Degradation Extension
+## 6. Target and Context Construction
 
-The clean ETH3D frame serves as a reference:
+For each target frame `Fi`, construct one or more contexts `K_-i`.
 
-    Fi(clean)
+Recommended context families:
 
-Controlled degraded variants can then be generated:
+### Local temporal context
 
-    Fi(blur_1)
-    Fi(blur_2)
-    Fi(blur_3)
+A fixed number of neighboring views around `Fi` excluding the target.
 
-while preserving the same nominal geometric content.
+### Sparse context
 
-Contribution can then be measured as:
+A lower-density subset with wider baselines.
 
-    C_i(clean)
+### Redundant context
 
-    C_i(blur_1)
+Several views close to the target pose.
 
-    C_i(blur_2)
+### Low-redundancy context
 
-    C_i(blur_3)
+Views that leave the target with more unique geometric coverage.
 
-The change:
-
-    ΔC_i(blur)
-        =
-    C_i(blur) - C_i(clean)
-
-measures how much frame contribution is lost as degradation increases.
+This permits direct testing of context dependence.
 
 ---
 
-# 14. Rolling-Shutter Extension
+## 7. Baselines
 
-ETH3D synthetic rolling-shutter data will be investigated as a first controlled RS benchmark.
+For every context:
 
-The desired comparison is:
+### Drop baseline
 
-    same scene
-    same nominal trajectory
-    same camera viewpoints
-            ↓
-    different rolling-shutter severity
+```text
+E_drop = E(K_-i)
+```
 
-If the existing ETH3D synthetic data provide sufficient control, they can be used directly.
+### Clean-add baseline
 
-Otherwise, ETH3D geometry and trajectories may be used as the basis for a custom rolling-shutter rendering experiment.
+```text
+E_clean = E(K_-i ∪ {Fi(clean)})
+U_clean = E_drop - E_clean
+```
 
-The key requirement is that geometric information remains controlled while the rolling-shutter image-formation process changes.
-
----
-
-# 15. Model Comparison
-
-VGGT-SLAM and MASt3R-SLAM must receive identical ETH3D RGB sequences.
-
-Compare:
-
-## Keyframe Density
-
-    selected frames / total frames
-
-## Selection Agreement
-
-How often do both systems select the same regions of the sequence?
-
-## Contribution Quality
-
-Compare:
-
-- average selected-frame contribution,
-- redundant selected-frame fraction,
-- harmful selected-frame fraction,
-- missed-useful-frame fraction.
-
-## Contribution Ranking
-
-Determine whether frames selected by one system have systematically larger contribution than those selected by the other.
+Only after these two runs are validated should degraded variants be introduced.
 
 ---
 
-# 16. Expected Benchmark Outputs
+## 8. Motion-Blur Generation
 
-For each sequence, produce:
+### Preferred
 
-## Keyframe Timeline
+Use GT or otherwise known camera motion to synthesize exposure integration.
 
-    Frame number →
+For translation, depth-aware rendering/warping is required for physically consistent blur because pixel motion is depth-dependent.
 
-    All frames:
-    ─────────────────────────────────
+### Minimal viable first experiment
 
-    VGGT-SLAM:
-    ●────●───●──────●────●──────────
+Select target frames where the synthetic exposure perturbation is restricted to rotation and generate blur from multiple homographic warps.
 
-    MASt3R-SLAM:
-    ●──●──────●───●───────●────────
+This preserves a clean causal intervention:
 
-## Contribution Timeline
-
-Plot measured contribution for each frame along the sequence.
-
-## Camera Trajectory
-
-Visualize the GT trajectory and mark:
-
-- useful selected frames,
-- redundant selected frames,
-- harmful selected frames,
-- useful rejected frames.
-
-## Contribution Distribution
-
-Compare contribution distributions for:
-
-    selected
-    vs
-    rejected
-
-frames.
-
-## Model Comparison
-
-Compare VGGT-SLAM and MASt3R-SLAM on identical sequences.
+```text
+same scene
+same nominal viewpoint
+same context
+only exposure-time camera motion changes
+```
 
 ---
 
-# 17. Initial Experimental Scope
+## 9. Evaluation Metrics
 
-The first milestone should be intentionally small.
+### Pose
 
-Recommended initial experiment:
+- ATE;
+- RPE;
+- translation / rotation error;
+- pairwise relative-pose accuracy if full trajectory output is not meaningful for a small view set.
 
-    1 ETH3D sequence
-        ↓
-    VGGT-SLAM
-        ↓
-    Record selected keyframes
-        ↓
-    Compute baseline ATE
-        ↓
-    Leave-one-out on selected keyframes
-        ↓
-    Compute frame contribution
-        ↓
-    Plot contribution along the trajectory
+### Depth / geometry
 
-Once this pipeline works correctly, extend to:
+Where GT is available:
 
-    rejected-frame add-one-in
-        ↓
-    MASt3R-SLAM
-        ↓
-    multiple ETH3D sequences
-        ↓
-    geometric factor analysis
-        ↓
-    degradation experiments
+- depth RMSE / AbsRel;
+- point-cloud precision, recall, F1;
+- Chamfer distance;
+- completeness;
+- point-to-surface error.
+
+For feed-forward reconstruction on sparse sets, pairwise or per-view pose/geometry metrics may be more natural than a conventional long-sequence SLAM ATE. Choose metrics to match the backend output.
 
 ---
 
-# 18. Primary Benchmark Questions
+## 10. Utility Dataset
 
-The ETH3D experiments should ultimately answer:
+Recommended schema:
 
-1. Which frames do VGGT-SLAM and MASt3R-SLAM select?
+| scene | target | context_id | n_context | backend | blur_level | E_drop | E_add | utility | overlap | baseline | texture |
+|---|---:|---|---:|---|---:|---:|---:|---:|---:|---:|---:|
 
-2. Are the selected frames actually important for trajectory and reconstruction accuracy?
+Keep each evaluation metric in a separate column or long-form `metric/value` pair rather than collapsing them too early.
 
-3. How many selected keyframes are effectively redundant?
+---
 
-4. Are there selected frames whose removal improves the result?
+## 11. Initial Milestone
 
-5. Do the systems reject frames that would have improved reconstruction?
+Start small:
 
-6. Which geometric properties characterize frames with high contribution?
+```text
+1 ETH3D scene
+    ↓
+1 backend
+    ↓
+3–5 target frames
+    ↓
+2 contexts per target
+    ↓
+clean + 5 blur levels
+    ↓
+pose/geometry evaluation
+    ↓
+plot U(b)
+```
 
-7. Do VGGT-SLAM and MASt3R-SLAM value the same frames?
+The milestone succeeds if the entire add-vs-drop pipeline is reproducible and at least some clean target views show positive utility.
 
-8. How does frame contribution change when controlled camera degradation is introduced?
+Only then expand to:
 
-The central purpose of ETH3D is to provide the ground truth needed to distinguish:
+- more targets;
+- more scenes;
+- second backend;
+- context-factor analysis;
+- additional degradation types.
 
-    "The SLAM system selected this frame."
+---
 
-from:
+## 12. Relation to RealX3D
 
-    "This frame actually improved the reconstruction."
+RealX3D is a more direct degradation benchmark than ETH3D for realistic adverse imaging conditions and should be read carefully before finalizing the dataset strategy.
+
+ETH3D remains useful because it provides a familiar calibrated benchmark and can support synthetic controlled interventions. The project should avoid claiming that ETH3D itself is a new degradation benchmark.
+
+A possible final evaluation strategy is:
+
+- **ETH3D** for controlled synthetic intervention and context sampling;
+- **RealX3D** for external validation under realistic degradations, if its release and format support the required add-vs-drop construction.
+
+---
+
+## 13. Benchmark Questions
+
+ETH3D experiments should answer:
+
+1. Is the clean target observation beneficial relative to dropping it?
+2. How does its marginal utility change with blur severity?
+3. Does utility cross zero?
+4. How does the crossing depend on context redundancy and relative pose?
+5. Are the results consistent across scenes and backends?
+
+ETH3D is therefore a controlled test bed for:
+
+> **When does adding a degraded but geometrically valid view become worse than not adding it?**

@@ -2,488 +2,231 @@
 
 ## 1. Objective
 
-FrameUtility studies two related questions:
+FrameUtility measures how the value of one observation changes as its image quality degrades while its nominal geometry and viewpoint are held fixed.
 
-1. Do modern neural SLAM systems select frames that actually contribute to reconstruction?
-2. What determines the actual contribution of a frame?
+The study does **not** audit the keyframe-selection heuristics of VGGT-SLAM or MASt3R-SLAM. The reconstruction backend receives an explicitly controlled image set.
 
-The initial systems are:
+The central estimand is
 
-- VGGT-SLAM
-- MASt3R-SLAM
+```text
+U_i(b | K_-i) = E(K_-i) - E(K_-i ∪ {Fi(b)})
+```
 
-The study deliberately separates:
-
-    keyframe selection decision
-
-from:
-
-    measured reconstruction contribution
-
-A frame is not considered important simply because a SLAM system selected it.
-
-Its contribution must be measured experimentally.
+where positive values mean that the additional observation improves reconstruction and negative values mean that it is better to omit the observation.
 
 ---
 
-# 2. Keyframe Selection as the Object of Study
+## 2. Experimental Unit
 
-For an input video:
+Each sample is defined by:
 
-    V = {F1, F2, ..., FN}
+```text
+scene
+context image set K_-i
+target observation Fi
+degradation type
+severity b
+reconstruction backend
+```
 
-a SLAM system produces a selected keyframe set:
-
-    K ⊂ V
-
-and rejected set:
-
-    R = V \ K
-
-We record this decision without modifying the original selector.
-
-The first question is:
-
-> Does membership in K correspond to high actual contribution?
+The study must sample multiple contexts because marginal utility is context-dependent.
 
 ---
 
-# 3. Contribution of Selected Frames
+## 3. Independent Variables
 
-Let:
+### Primary independent variable
 
-    E(K)
+Motion-blur severity `b`.
 
-be the reconstruction error obtained using the selected keyframe set.
+Recommended levels:
 
-For selected frame `Fi`:
+```text
+b0 = clean
+b1 = very low
+b2 = low
+b3 = medium
+b4 = high
+b5 = severe
+```
 
-    Fi ∈ K
+Use enough levels to identify a nonlinear transition. Three coarse levels are insufficient if the goal is to estimate a zero crossing.
 
-remove it:
+### Backend
 
-    K_-i = K \ {Fi}
+- VGGT / VGGT-based reconstruction
+- MASt3R-based reconstruction
 
-and measure:
+### Context factors
 
-    E(K_-i)
+Record rather than artificially fix all of the following:
 
-Define leave-one-out contribution:
-
-    C_remove(i) = E(K_-i) - E(K)
-
-Interpretation:
-
-    C_remove(i) > 0
-        useful selected frame
-
-    C_remove(i) ≈ 0
-        redundant selected frame
-
-    C_remove(i) < 0
-        potentially harmful selected frame
-
----
-
-# 4. Contribution of Rejected Frames
-
-A keyframe selector can also fail by rejecting a useful frame.
-
-For:
-
-    Fj ∈ R
-
-construct:
-
-    K_+j = K ∪ {Fj}
-
-and measure:
-
-    E(K_+j)
-
-Define add-one-in contribution:
-
-    C_add(j) = E(K) - E(K_+j)
-
-Interpretation:
-
-    C_add(j) > 0
-        rejected frame would improve reconstruction
-
-    C_add(j) ≈ 0
-        rejected frame is redundant
-
-    C_add(j) < 0
-        rejected frame would harm reconstruction
+- number of context views;
+- target-view overlap with context;
+- camera baseline;
+- relative translation and rotation;
+- target-frame redundancy;
+- texture / feature density;
+- depth variation;
+- scene type.
 
 ---
 
-# 5. Selection–Contribution Matrix
+## 4. Dependent Variables
 
-Each frame can therefore be categorized according to:
+The primary dependent variable is conditional marginal utility.
 
-1. selector decision,
-2. measured contribution.
+For error metric `E_m`:
 
-| Selector | Contribution | Category |
-|---|---|---|
-| Selected | Strong positive | Useful selection |
-| Selected | Near zero | Redundant selection |
-| Selected | Negative | Harmful selection |
-| Rejected | Strong positive | Missed useful frame |
-| Rejected | Near zero | Correct rejection |
-| Rejected | Negative | Correct rejection of harmful frame |
+```text
+U_i,m(b | K_-i) = E_m(K_-i) - E_m(K_-i ∪ {Fi(b)})
+```
 
-This matrix is one of the primary outputs of the study.
+Do this separately for pose and geometry metrics.
 
----
+Secondary outputs:
 
-# 6. Context Dependence
-
-Frame contribution is conditional on the other available frames.
-
-Formally:
-
-    C_i = C_i(K)
-
-Two nearly identical neighboring frames may each have low leave-one-out contribution because the other frame provides the same information.
-
-Therefore:
-
-    low leave-one-out contribution
-        ≠
-    intrinsically useless frame
-
-This limitation must be explicitly acknowledged.
+- absolute reconstruction error at every severity;
+- change relative to clean target view;
+- whether `U < 0`;
+- estimated zero-crossing severity `b*`;
+- model confidence where accessible.
 
 ---
 
-# 7. Extended Contribution Measurement
+## 5. Main Controlled Experiment
 
-If computational resources permit, leave-one-out analysis will be extended using random frame subsets.
+For each `(scene, K_-i, Fi)`:
 
-For many subsets:
+1. Reconstruct from `K_-i` only. This is the **drop baseline**.
+2. Reconstruct from `K_-i ∪ {Fi(clean)}`.
+3. Generate blur variants of the same observation.
+4. Reconstruct independently for every blur level.
+5. Compute utility for every evaluation metric.
+6. Fit or interpolate the utility curve only if justified by observed behavior.
 
-    S ⊂ V
-
-compare reconstruction with and without frame `i`:
-
-    Δ_i(S) = Q(S ∪ {Fi}) - Q(S)
-
-where `Q` represents reconstruction quality.
-
-Average over many contexts:
-
-    C_i ≈ E_S[Δ_i(S)]
-
-This estimates the expected marginal contribution of the frame.
-
-A more rigorous extension is an approximate Shapley value:
-
-    φ_i = E_S[Q(S ∪ {Fi}) - Q(S)]
-
-with appropriate weighting over subsets.
-
-This provides a more context-independent notion of frame contribution, but has significantly greater computational cost.
-
-The initial project therefore begins with leave-one-out and add-one-in analysis.
+The clean target should normally have positive marginal utility; otherwise that tuple is not suitable for studying a useful-to-harmful transition, though it can remain in the broader dataset as a redundant-view case.
 
 ---
 
-# 8. Experiment A — Keyframe Selection Audit
+## 6. Motion-Blur Synthesis
 
-## Question
+### Preferred method
 
-What frames do existing neural SLAM systems select?
+Physics-consistent exposure integration using known camera trajectory and scene geometry.
 
-## Systems
+```text
+I_blur(x) = (1/M) Σ I(T_m, x)
+```
 
-- VGGT-SLAM
-- MASt3R-SLAM
+where `T_m` samples the camera pose during exposure.
 
-## Procedure
+For translational camera motion, do not use a single spatially invariant 2D kernel: the blur field depends on scene depth.
 
-Run both systems on identical input sequences.
+### Simpler first-stage method
 
-Record for every frame:
+If the target perturbation is restricted to pure rotation, the view change can be warped by homographies and averaged without depth.
 
-- frame ID,
-- timestamp,
-- selected / rejected,
-- selector-specific score if accessible,
-- estimated pose,
-- tracking status.
+### Severity representation
 
-## Output
+Record both the generative parameter and a measured image-domain quantity when possible:
 
-For each system:
+- exposure-path length or angular displacement;
+- approximate mean / percentile pixel displacement;
+- sharpness score for diagnostics only.
 
-    sequence
-        ↓
-    selected/rejected decision
-        ↓
-    keyframe set K
-
-No contribution analysis is performed yet.
-
-This experiment only records the systems' decisions.
+The sharpness score is not the treatment variable.
 
 ---
 
-# 9. Experiment B — Contribution Audit
+## 7. Sampling Contexts
 
-## Question
+A single fixed image set cannot support a general claim. Use multiple contexts.
 
-Are selected frames actually useful?
+Recommended strategy:
 
-For each selected frame:
+1. choose several scenes;
+2. sample target observations with valid GT and adequate overlap;
+3. construct several context sizes around each target;
+4. include both redundant and non-redundant contexts;
+5. repeat the same blur sweep.
 
-    remove frame
-        ↓
-    rerun reconstruction
-        ↓
-    measure change in error
-
-Then evaluate rejected frames:
-
-    add rejected frame
-        ↓
-    rerun reconstruction
-        ↓
-    measure change in error
-
-## Main Outputs
-
-- distribution of selected-frame contribution,
-- fraction of redundant selected frames,
-- fraction of harmful selected frames,
-- fraction of rejected frames with positive contribution,
-- contribution ranking versus selector decision.
+This permits analysis of whether degradation becomes harmful earlier when the target view is redundant or later when it provides unique geometric coverage.
 
 ---
 
-# 10. Experiment C — Geometric Factor Analysis
+## 8. Hypotheses
 
-## Question
+**H1 — Monotonic utility loss.** Increasing blur will reduce the median marginal utility of a geometrically valid observation.
 
-What geometric properties explain measured contribution?
+**H2 — Negative marginal utility.** At sufficiently strong blur, a nonzero subset of observations will satisfy `U < 0`.
 
-Candidate variables:
+**H3 — Context dependence.** The transition severity will vary substantially with overlap, redundancy, texture, and baseline.
 
-### Camera Motion
+**H4 — Model dependence.** VGGT-based and MASt3R-based reconstruction will show different utility curves and failure frequencies.
 
-- relative translation,
-- relative rotation,
-- baseline.
-
-### Geometric Novelty
-
-- parallax,
-- viewpoint change,
-- feature/correspondence overlap,
-- visibility of previously unseen geometry.
-
-### Scene Properties
-
-- texture density,
-- feature density,
-- depth variation.
-
-## Dependent Variable
-
-Measured frame contribution.
-
-## Analysis
-
-Candidate analyses:
-
-- Pearson correlation,
-- Spearman correlation,
-- partial correlation,
-- multiple regression,
-- nonlinear regression,
-- feature-importance analysis.
-
-The objective is explanatory rather than predictive.
+**H5 — Soft-corruption distinction.** A valid but degraded view will produce failure behavior distinct from fully unrelated/no-overlap distractors studied in outlier-view rejection work.
 
 ---
 
-# 11. Confounding Problem
+## 9. Statistical Analysis
 
-Real video does not provide clean control over geometric information and image degradation.
+Primary plots:
 
-For example:
+- individual `U(b)` trajectories;
+- mean/median utility with confidence intervals;
+- `P(U < 0 | b)`;
+- distribution of `b*` for curves that cross zero.
 
-    fast camera rotation
-        ↓
-    viewpoint change ↑
-    optical flow ↑
-    overlap may decrease
-    motion blur ↑
-    rolling shutter ↑
+Model context effects with mixed-effects or hierarchical regression if sample size permits:
 
-Therefore, observing that blurry frames have low contribution does not prove that blur caused the low contribution.
+```text
+U ~ blur + overlap + baseline + redundancy + texture + backend
+    + blur:backend + blur:overlap
+    + random effect(scene)
+```
 
-Controlled experiments are required.
-
----
-
-# 12. Experiment D — Controlled Motion Blur
-
-Start from the same clean frame:
-
-    Fi
-
-Generate:
-
-    Fi(B0)
-    Fi(B1)
-    Fi(B2)
-    Fi(B3)
-
-where only blur severity changes.
-
-The nominal:
-
-- scene,
-- viewpoint,
-- geometry,
-- texture,
-
-remain fixed.
-
-Measure:
-
-    C_i(B)
-
-and contribution loss:
-
-    ΔC_i(B) = C_i(B) - C_i(B0)
-
-Main question:
-
-> How much geometric contribution is destroyed by motion blur?
+Avoid claiming a universal blur threshold unless the data support one.
 
 ---
 
-# 13. Experiment E — Controlled Rolling Shutter
+## 10. Robustness Checks
 
-Rolling shutter is a temporal image-formation effect.
-
-Different image rows correspond to different camera poses.
-
-Therefore, arbitrary 2D image warping should not be treated as a physically accurate rolling-shutter simulation.
-
-Prefer a controlled 3D environment with known:
-
-- scene geometry,
-- camera trajectory,
-- timestamps,
-- camera intrinsics.
-
-Render:
-
-    RS0 = global shutter
-    RS1 = low readout time
-    RS2 = medium readout time
-    RS3 = high readout time
-
-while keeping the nominal trajectory identical.
-
-Measure:
-
-    C_i(RS)
-
-and:
-
-    ΔC_i(RS) = C_i(RS) - C_i(RS0)
+- repeat deterministic inference to verify numerical stability;
+- fix preprocessing, resolution, and model versions;
+- verify that the clean-view benefit exceeds normal run variance;
+- repeat with multiple context sizes;
+- repeat with several error metrics;
+- inspect catastrophic-failure cases separately;
+- report missing reconstruction / solver failure as outcomes, not silently discard them.
 
 ---
 
-# 14. Experiment F — Blur × Rolling-Shutter Interaction
+## 11. Optional Extensions
 
-Use a factorial experiment:
+Only after the motion-blur experiment works:
 
-| RS / Blur | B0 | B1 | B2 | B3 |
-|---|---:|---:|---:|---:|
-| RS0 | ✓ | ✓ | ✓ | ✓ |
-| RS1 | ✓ | ✓ | ✓ | ✓ |
-| RS2 | ✓ | ✓ | ✓ | ✓ |
-| RS3 | ✓ | ✓ | ✓ | ✓ |
+- defocus blur;
+- exposure / low-light degradation;
+- sensor noise;
+- partial occlusion;
+- reflection;
+- rolling shutter.
 
-Measure:
-
-    C_i(B, RS)
-
-The null/additive expectation is approximately:
-
-    D(B, RS)
-    ≈ D(B, 0) + D(0, RS)
-
-where `D` represents degradation in reconstruction quality or contribution.
-
-A significant interaction occurs when the combined effect cannot be explained by the individual effects alone.
+The useful extension is not “more corruptions” by itself. The value is comparing whether different corruptions produce different **marginal-utility transition patterns**.
 
 ---
 
-# 15. Main Hypotheses
+## 12. Scientific Claim Boundary
 
-## H1 — Unequal Contribution
+The project can support:
 
-Selected keyframes will exhibit substantially different measured contributions.
+> Under controlled contexts, progressively degrading a geometrically valid observation changes its marginal contribution to reconstruction, and under some conditions including the observation is worse than withholding it.
 
-## H2 — Selection Imperfection
+It cannot support, without additional experiments:
 
-Existing keyframe selectors will select some frames with little or negative measured contribution.
+> A particular SLAM keyframe selector is wrong.
 
-## H3 — Missed Frames
+or
 
-Some rejected frames will exhibit positive add-one-in contribution.
-
-## H4 — Geometric Information
-
-Non-redundant geometric information such as viewpoint novelty and parallax will be positively associated with contribution.
-
-## H5 — Motion Blur
-
-Increasing motion blur will reduce contribution while geometric content is controlled.
-
-## H6 — Rolling Shutter
-
-Increasing rolling-shutter distortion will reduce contribution while geometric content is controlled.
-
-## H7 — Useful-to-Harmful Transition
-
-A geometrically useful frame may become redundant or harmful under sufficiently severe degradation.
-
-## H8 — Interaction
-
-Motion blur and rolling shutter may exhibit a nonlinear interaction.
-
-## H9 — Model Dependence
-
-VGGT-SLAM and MASt3R-SLAM will exhibit different selection and contribution patterns.
-
----
-
-# 16. Scientific Goal
-
-The study does not initially attempt to design a better keyframe-selection algorithm.
-
-Instead, it audits the relationship:
-
-    Keyframe Heuristic
-           ↓
-    Selection Decision
-           ↓
-    Actual Contribution
-           ↓
-    Reconstruction Quality
-
-and asks:
-
-> Does the heuristic identify the frames that actually matter?
-
-After measuring contribution, the study investigates why a frame is useful, redundant, or harmful.
-
-This provides the basis for understanding — rather than immediately replacing — modern neural SLAM keyframe selection.
+> A frame has an intrinsic, context-independent contribution value.
