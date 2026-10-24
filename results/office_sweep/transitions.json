@@ -1,0 +1,2829 @@
+[
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.009740154462616021,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.11722900429170083,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.04380946063401788,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -9.163074280120302e-05,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.000250915466346327,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.1407465672568691,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.1945518341423874,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.13471587024724016,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00018186670081895423,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0006966106216639567,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.10910381181016658,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.1373236420508683,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.020292530762733976,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.000748935983232165,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0004061150545827952,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.02265359694936104,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.01716573952993315,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.009380949134601175,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00017461847780049673,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -8.883956767673229e-05,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.40366032951860226,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.37185566824723953,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.07508459751157526,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.001187065422185744,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0013034734045526963,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.005698713054393454,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.028987291664348075,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.07804294003275487,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -6.917272687523637e-05,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0002751894095036067,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03422010978798939,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.018649341248064864,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.049346746842429366,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -4.2542583339428425e-05,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00026991482542179646,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0242",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.1782433959305906,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0242",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.12928668058692389,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0242",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.01940958221305977,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0242",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0006337813155496141,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0242",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0006560038036980687,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0243",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.011558904458842008,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0243",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03596400547034729,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0243",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.013823534322866184,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0243",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00013125167302876356,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0243",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.00014874303964226843,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0248",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.14818743092977,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0248",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.13698300638058863,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0248",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0880764167187876,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0248",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0002697114865391481,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0248",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 1.2788914522249284e-05,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0250",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.012475583203748985,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0250",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.001517573865780966,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0250",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.004215079493445075,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        1,
+        2
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00017901224821099612,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 4.776184891955304e-05,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0251",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.02762550061790834,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0251",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0027559987532681683,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0251",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.001694915576798505,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00013776675817363943,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -6.955225016802569e-05,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0252",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0730659428720613,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0252",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.026516930655479574,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0252",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.050667043797315264,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00014191584495178156,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0004596531146409122,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0254",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.08136512903090805,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0254",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.058954736531940895,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0254",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.013683500394012827,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0254",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0005737015846215433,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0254",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0005667169947982387,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0255",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.12416691928115847,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0255",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.08971415188270318,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0255",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.020997325335325872,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0255",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00020449950202628894,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 10,
+    "target": "DSC_0255",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 2.186084939562183e-05,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.04168861859519925,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03596901550225475,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.01885376246668181,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0003442268777449145,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.002164756407506463,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0220",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0003033557874958699,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0220",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.011939787260794308,
+    "first_observed_negative_deg": 0.5,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.25,
+        0.5
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0220",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.00539066184626988,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00020115496284141277,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00027253400305660147,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0222",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03202685146740546,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0222",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.025861821205197266,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0222",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.012786065027521755,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0222",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0007461842712599767,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0222",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0014529431468109921,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0223",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0363953403740753,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0223",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.02259985729200774,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0223",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.08404803345733068,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0223",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0004776491983354836,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0223",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0014818673681444017,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0228",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.07812299652590805,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0228",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.07523261969117236,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0228",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0393274444333918,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0228",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.002172665471752336,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0228",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.004662275462972626,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0230",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.04016091659559054,
+    "first_observed_negative_deg": 0.5,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.25,
+        0.5
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0230",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.04278197003658753,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0230",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.02923262265841988,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0230",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0002994160432378129,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0230",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00017439583962020055,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0231",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.014010973404637762,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0231",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.012292176832600673,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0231",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.027423236019455198,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0231",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00014627663009807168,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0231",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0003761116740463033,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0235",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.07605740161843715,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0235",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.08852719622198502,
+    "first_observed_negative_deg": 4,
+    "positive_to_negative_brackets_deg": [
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0235",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.08585868128408107,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0235",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0013499830010230557,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0235",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.003352613725688125,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0237",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.35131535011557646,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0237",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.20351336696774205,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0237",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.09065437114581887,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0237",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.006851410762503028,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0237",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.022773926976517533,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0238",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.07030748839002553,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0238",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.04085247305854746,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0238",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.07285290128513662,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0238",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0007279419053842634,
+    "first_observed_negative_deg": 0.5,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.25,
+        0.5
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0238",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.002889201177156908,
+    "first_observed_negative_deg": 0.5,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.25,
+        0.5
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0239",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.06679829564139181,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0239",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.03586674234199745,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0239",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.05396062317074392,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0239",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0008389672956521654,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0239",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0029282087052561745,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0240",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.034555137290394555,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0240",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.017589794578284364,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0240",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.08201699017804559,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0240",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0004626615175003512,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0240",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0009326504723621842,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0242",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.02419823895365377,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0242",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.05610438164088906,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0242",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.001315847854802947,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0242",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0006530033384966397,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0242",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0006330127922855588,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0243",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.01803281293408023,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0243",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03208400032391232,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0243",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.009175962146756119,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0243",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0006929591517116918,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0243",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0005764424283996872,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0248",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.006360208422937653,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0248",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.010497253379206425,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0248",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.03805897908996842,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0248",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -5.1520191065787535e-05,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0248",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0009636332921912905,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0250",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.01745042456921022,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0250",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.013091140702668319,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0250",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.008241431290930249,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.00034386517454584875,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0010384081327023953,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0251",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.01299091829521532,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0251",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.008135124728893328,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0251",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.00788734481599336,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.25,
+        0.5
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 9.03457969534116e-05,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.00015340711089184556,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0252",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.004780967710755959,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0252",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.005258634923505496,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0252",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.012864398617863508,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 4.218308731970821e-07,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 5.4795768159643377e-05,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0254",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03122605696028213,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0254",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.032118436076446426,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0254",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.038226207712577606,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0254",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0011634358208874249,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0254",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0030033491667793843,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0255",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03575899043148222,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0255",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.02775120281856422,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0255",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.01053824777758536,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0255",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0007973002006367719,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "vggt",
+    "size": 20,
+    "target": "DSC_0255",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0026784986427912383,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -1.5176042333947166,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -1.0693185573838684,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.2113051825232779,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0013001014914365214,
+    "first_observed_negative_deg": 4,
+    "positive_to_negative_brackets_deg": [
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.008847748774919034,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -1.788466220839139,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.7407347780004202,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.12020411896359019,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 3,
+    "planned_levels": 6,
+    "clean_utility": -0.0013574373352436067,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0220",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 3,
+    "planned_levels": 6,
+    "clean_utility": -0.0028783995879976543,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.12565696913262026,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.23417602851918137,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.7599686478951101,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0011646911127416032,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0250",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0066645935480352525,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.2643148054959805,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.24285097732937536,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.019625786882172012,
+    "first_observed_negative_deg": 1,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.5,
+        1
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.00020207778360002357,
+    "first_observed_negative_deg": 2,
+    "positive_to_negative_brackets_deg": [
+      [
+        1,
+        2
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0251",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.006240681405886739,
+    "first_observed_negative_deg": 1,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.5,
+        1
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.11832552514547472,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.027401161461356034,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.9952644833012035,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0008950676177929308,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 5,
+    "target": "DSC_0252",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.0009360909222900504,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.5,
+        1
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": -0.03663267834841327,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.04466204905422378,
+    "first_observed_negative_deg": 1,
+    "positive_to_negative_brackets_deg": [
+      [
+        0.5,
+        1
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 6,
+    "planned_levels": 6,
+    "clean_utility": 0.0888907127420596,
+    "first_observed_negative_deg": 2,
+    "positive_to_negative_brackets_deg": [
+      [
+        1,
+        2
+      ]
+    ],
+    "complete_curve": true
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 5,
+    "planned_levels": 6,
+    "clean_utility": null,
+    "first_observed_negative_deg": 2,
+    "positive_to_negative_brackets_deg": [
+      [
+        1,
+        2
+      ]
+    ],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 5,
+    "planned_levels": 6,
+    "clean_utility": null,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 4,
+    "planned_levels": 6,
+    "clean_utility": -0.04569694640717004,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 4,
+    "planned_levels": 6,
+    "clean_utility": -0.005073292233455452,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 10,
+    "target": "DSC_0220",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 4,
+    "planned_levels": 6,
+    "clean_utility": 0.024147095208781194,
+    "first_observed_negative_deg": 0.25,
+    "positive_to_negative_brackets_deg": [
+      [
+        0,
+        0.25
+      ]
+    ],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "pose_ate_normalized",
+    "observed_levels": 5,
+    "planned_levels": 6,
+    "clean_utility": -0.03550118017694592,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "pose_pair_translation_relative",
+    "observed_levels": 5,
+    "planned_levels": 6,
+    "clean_utility": 0.004817578451802664,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "pose_pair_rotation_deg",
+    "observed_levels": 5,
+    "planned_levels": 6,
+    "clean_utility": 0.0600821182913597,
+    "first_observed_negative_deg": null,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_absrel",
+    "observed_levels": 5,
+    "planned_levels": 6,
+    "clean_utility": -0.000448535387266108,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  },
+  {
+    "backend": "mast3r",
+    "size": 20,
+    "target": "DSC_0219",
+    "metric": "geometry_depth_rmse_m",
+    "observed_levels": 5,
+    "planned_levels": 6,
+    "clean_utility": -0.005352948228545595,
+    "first_observed_negative_deg": 0,
+    "positive_to_negative_brackets_deg": [],
+    "complete_curve": false
+  }
+]

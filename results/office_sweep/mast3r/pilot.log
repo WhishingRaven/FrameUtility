@@ -1,0 +1,64 @@
+Loading mast3r on mps
+Warning, cannot find cuda-compiled version of RoPE2D, using a slow pytorch version instead
+START m5_clean_repeat: 5 views
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/dust3r/dust3r/cloud_opt/base_opt.py:275: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @torch.cuda.amp.autocast(enabled=False)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:620: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:577: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  score, (xy1, xy2, confs) = torch.load(path_corres2)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:684: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, cconf), focal = torch.load(cache, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:707: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path2, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:756: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  score, (xy1, xy2, confs) = torch.load(path_corres, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:698: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path1, map_location=device)
+init focals = [301.2753  298.82288 298.51157 304.35767 310.61273]
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:457: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  loss = float(loss)
+>> final loss = 0.10347362607717514
+>> final loss = 0.4417571425437927
+Final focals = [314.5236  315.00027 311.92166 311.93668 312.19098]
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:78: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, conf), focal = torch.load(canon_path, map_location=device)
+DONE m5_clean_repeat: 44.8s
+START m5_drop_DSC_0219: 4 views
+init focals = [296.06824 295.2487  302.18    309.85944]
+>> final loss = 0.1067008450627327
+>> final loss = 0.44578638672828674
+Final focals = [311.57248 308.13672 308.1695  308.26886]
+DONE m5_drop_DSC_0219: 8.7s
+START m5_add_DSC_0219_b0.25: 5 views
+init focals = [302.16272 299.3183  298.84268 304.54086 310.64825]
+>> final loss = 0.10411231964826584
+>> final loss = 0.4464137852191925
+Final focals = [314.97983 315.11053 311.88388 311.84433 312.0871 ]
+DONE m5_add_DSC_0219_b0.25: 27.0s
+START m5_add_DSC_0219_b0.5: 5 views
+init focals = [301.88016 298.94858 298.58273 304.20328 310.4044 ]
+>> final loss = 0.10611758381128311
+>> final loss = 0.45052239298820496
+Final focals = [314.10394 313.86005 311.49225 311.52316 311.78546]
+DONE m5_add_DSC_0219_b0.5: 24.6s
+START m5_add_DSC_0219_b1: 5 views
+init focals = [300.91064 298.25348 297.79517 303.65894 310.00104]
+>> final loss = 0.1120401993393898
+>> final loss = 0.45789849758148193
+Final focals = [312.89816 312.14752 310.6985  310.79984 311.12396]
+DONE m5_add_DSC_0219_b1: 24.6s
+START m5_add_DSC_0219_b2: 5 views
+init focals = [298.12692 297.09125 295.80463 301.6649  309.29657]
+>> final loss = 0.10969283431768417
+>> final loss = 0.46763166785240173
+Final focals = [311.59106 310.28024 308.09927 308.34927 308.5643 ]
+DONE m5_add_DSC_0219_b2: 27.3s
+START m5_add_DSC_0219_b4: 5 views
+init focals = [296.8004  296.33856 295.07178 300.86157 308.4581 ]
+>> final loss = 0.11366578191518784
+>> final loss = 0.4891185164451599
+Final focals = [314.2308  312.47025 307.2668  307.4207  307.615  ]
+DONE m5_add_DSC_0219_b4: 30.7s
+Saved 30 metric rows; new reconstructions 7; elapsed 192.1s

@@ -1,0 +1,16 @@
+{
+  "device": "cpu",
+  "threads": 1,
+  "size": 10,
+  "iterations": 60,
+  "profile": false,
+  "stages": {
+    "forward_mast3r": 0.009349458996439353,
+    "prepare_canonical_data": 3.147424417002185,
+    "condense_data": 0.026604375001625158,
+    "sparse_scene_optimizer": 6.2668875840026885,
+    "dense": 0.07416145900060656
+  },
+  "status": "ok",
+  "seconds": 9.748012374999234
+}

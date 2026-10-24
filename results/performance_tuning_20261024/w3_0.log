@@ -1,0 +1,28 @@
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/dust3r/dust3r/cloud_opt/base_opt.py:275: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @torch.cuda.amp.autocast(enabled=False)
+forward_mast3r: 0.020s
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:684: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, cconf), focal = torch.load(cache, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:707: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path2, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:756: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  score, (xy1, xy2, confs) = torch.load(path_corres, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:698: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path1, map_location=device)
+prepare_canonical_data: 20.574s
+condense_data: 0.151s
+init focals = [296.4693  296.28796 299.14978 308.49265 306.028   306.29752 310.03915
+ 298.89868 312.6057  308.60858 305.84158 312.4014  310.05527 295.11893
+ 304.35434 300.6364  300.06412 306.9414  301.00092 299.78568]
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:457: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  loss = float(loss)
+>> final loss = 0.12666583061218262
+>> final loss = 0.6309974193572998
+Final focals = [308.48898 309.13513 325.80878 307.43652 323.5819  308.5059  309.02356
+ 282.47214 319.67456 327.9859  311.6811  268.06052 307.31458 309.23465
+ 308.40735 308.76654 308.82132 309.36044 314.94696 310.28482]
+sparse_scene_optimizer: 57.610s
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:78: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, conf), focal = torch.load(canon_path, map_location=device)
+{"device": "cpu", "threads": 8, "size": 20, "iterations": 60, "profile": false, "label": "w3_0", "stages": {"forward_mast3r": 0.019699874996149447, "prepare_canonical_data": 20.574271957993915, "condense_data": 0.15099449999979697, "sparse_scene_optimizer": 57.61041566699714, "dense": 0.12469679200148676}, "status": "ok", "seconds": 78.92811883399554}

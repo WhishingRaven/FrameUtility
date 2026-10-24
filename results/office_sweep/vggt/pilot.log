@@ -1,0 +1,20 @@
+Loading vggt on mps
+START m5_clean: 5 views
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/vggt/vggt/models/vggt.py:65: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+DONE m5_clean: 5.1s
+START m5_clean_repeat: 5 views
+DONE m5_clean_repeat: 3.9s
+START m5_drop_DSC_0219: 4 views
+DONE m5_drop_DSC_0219: 3.8s
+START m5_add_DSC_0219_b0.25: 5 views
+DONE m5_add_DSC_0219_b0.25: 3.8s
+START m5_add_DSC_0219_b0.5: 5 views
+DONE m5_add_DSC_0219_b0.5: 3.7s
+START m5_add_DSC_0219_b1: 5 views
+DONE m5_add_DSC_0219_b1: 3.8s
+START m5_add_DSC_0219_b2: 5 views
+DONE m5_add_DSC_0219_b2: 3.8s
+START m5_add_DSC_0219_b4: 5 views
+DONE m5_add_DSC_0219_b4: 3.8s
+Saved 30 metric rows; new reconstructions 8; elapsed 43.6s

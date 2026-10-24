@@ -1,0 +1,17 @@
+{
+  "device": "mps",
+  "threads": 8,
+  "size": 20,
+  "iterations": 60,
+  "profile": false,
+  "label": "gpu_w3_2",
+  "stages": {
+    "forward_mast3r": 0.019151958003931213,
+    "prepare_canonical_data": 5.8237499999959255,
+    "condense_data": 0.14955320800072514,
+    "sparse_scene_optimizer": 22.629158666997682,
+    "dense": 0.13940933300182223
+  },
+  "status": "ok",
+  "seconds": 29.254678334000346
+}

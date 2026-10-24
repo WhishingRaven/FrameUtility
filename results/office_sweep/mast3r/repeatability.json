@@ -1,0 +1,122 @@
+[
+  {
+    "size": 20,
+    "target": "DSC_0219",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 6.20106110986729e-05,
+      "pose_pair_translation_relative": 0.0002946091365677028,
+      "pose_pair_rotation_deg": 0.006399893171498805,
+      "geometry_depth_absrel": 0.0007116421969888681,
+      "geometry_depth_rmse_m": 0.0008815416932991815
+    }
+  },
+  {
+    "size": 5,
+    "target": "DSC_0219",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 0.0,
+      "pose_pair_translation_relative": 0.0,
+      "pose_pair_rotation_deg": 0.0,
+      "geometry_depth_absrel": 0.0,
+      "geometry_depth_rmse_m": 0.0
+    },
+    "errors": {
+      "clean": {},
+      "repeat": {}
+    }
+  },
+  {
+    "size": 5,
+    "target": "DSC_0220",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 0.0,
+      "pose_pair_translation_relative": 0.0,
+      "pose_pair_rotation_deg": 0.0,
+      "geometry_depth_absrel": 0.0,
+      "geometry_depth_rmse_m": 0.0
+    },
+    "errors": {
+      "clean": {},
+      "repeat": {}
+    }
+  },
+  {
+    "size": 5,
+    "target": "DSC_0250",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 0.0,
+      "pose_pair_translation_relative": 0.0,
+      "pose_pair_rotation_deg": 0.0,
+      "geometry_depth_absrel": 0.0,
+      "geometry_depth_rmse_m": 0.0
+    },
+    "errors": {
+      "clean": {},
+      "repeat": {}
+    }
+  },
+  {
+    "size": 5,
+    "target": "DSC_0251",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 0.0,
+      "pose_pair_translation_relative": 0.0,
+      "pose_pair_rotation_deg": 0.0,
+      "geometry_depth_absrel": 0.0,
+      "geometry_depth_rmse_m": 0.0
+    },
+    "errors": {
+      "clean": {},
+      "repeat": {}
+    }
+  },
+  {
+    "size": 5,
+    "target": "DSC_0252",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 0.0,
+      "pose_pair_translation_relative": 0.0,
+      "pose_pair_rotation_deg": 0.0,
+      "geometry_depth_absrel": 0.0,
+      "geometry_depth_rmse_m": 0.0
+    },
+    "errors": {
+      "clean": {},
+      "repeat": {}
+    }
+  },
+  {
+    "size": 10,
+    "target": "DSC_0219",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 1.829625466715206e-05,
+      "pose_pair_translation_relative": 1.9403890371617015e-05,
+      "pose_pair_rotation_deg": 0.000583177454115319
+    },
+    "errors": {
+      "clean": {
+        "geometry": "Invalid predicted depth on fixed evaluation mask"
+      },
+      "repeat": {
+        "geometry": "Invalid predicted depth on fixed evaluation mask"
+      }
+    }
+  },
+  {
+    "size": 10,
+    "target": "DSC_0220",
+    "absolute_metric_delta": {
+      "pose_ate_normalized": 2.6793178613438058e-05,
+      "pose_pair_translation_relative": 3.276038432589723e-05,
+      "pose_pair_rotation_deg": 0.00039783469221224554
+    },
+    "errors": {
+      "clean": {
+        "geometry": "Invalid predicted depth on fixed evaluation mask"
+      },
+      "repeat": {
+        "geometry": "Invalid predicted depth on fixed evaluation mask"
+      }
+    }
+  }
+]

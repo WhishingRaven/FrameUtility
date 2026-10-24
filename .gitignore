@@ -1,2 +1,15 @@
 ~$*
 .DS_Store
+data/
+.venv/
+.cache/
+vendor/
+checkpoints/
+__pycache__/
+results/**/predictions/
+results/**/mast3r_cache/
+results/**/benchmark_cache/
+results/**/*.lock
+results/performance_tuning_*/*.npz
+results/performance_tuning_*/*.prof
+.codegraph/

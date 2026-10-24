@@ -1,0 +1,8 @@
+{
+  "vggt_results": "/Users/whishingraven/Documents/Github/FrameUtility/results/office_sweep/vggt",
+  "vggt_reused_without_reconstruction": true,
+  "mast3r_previous_results_preserved": "/Users/whishingraven/Documents/Github/FrameUtility/results/office_sweep/mast3r",
+  "mast3r_alignment_device": "mps",
+  "reuse": "Only compatible pretrained pair inference; all MASt3R clean/DROP/ADD alignment recomputed on MPS",
+  "benchmarks": "/Users/whishingraven/Documents/Github/FrameUtility/results/performance_tuning_20261024"
+}

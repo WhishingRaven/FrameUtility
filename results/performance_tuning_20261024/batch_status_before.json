@@ -1,0 +1,45 @@
+{
+  "pid": 13241,
+  "device": "mps",
+  "started_unix": 1792833227.083963,
+  "status": "running",
+  "phases": [
+    {
+      "backend": "vggt",
+      "size": 5,
+      "returncode": 0
+    },
+    {
+      "backend": "vggt",
+      "size": 10,
+      "returncode": 0
+    },
+    {
+      "backend": "vggt",
+      "size": 20,
+      "returncode": 0
+    },
+    {
+      "backend": "mast3r",
+      "size": 5,
+      "returncode": 0
+    }
+  ],
+  "requested_sizes": [
+    5,
+    10,
+    20
+  ],
+  "planned_conditions": 420,
+  "current": {
+    "backend": "mast3r",
+    "size": 10,
+    "pid": 13628,
+    "log": "mast3r/sweep_m10.log"
+  },
+  "updated_unix": 1792833681.4933498,
+  "completed_conditions": 247,
+  "attempted_conditions": 255,
+  "partial_conditions": 8,
+  "failed_conditions": 0
+}

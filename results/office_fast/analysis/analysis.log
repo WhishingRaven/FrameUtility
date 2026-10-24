@@ -1,0 +1,12 @@
+{"rows": 2100, "conditions": {"attempted": 420, "ok": 356, "partial": 64, "failed": 0}, "expected_rows": 2100, "unique_targets": 20, "scenes": ["office"]}
+{"by_backend_size": {"vggt_5": 0, "vggt_10": 0, "vggt_20": 0, "mast3r_5": 3, "mast3r_10": 49, "mast3r_20": 12}, "drop_involved": 60, "add_only": 4, "failed_drop_contexts": 10, "errors": {"ADD geometry: Invalid predicted depth on fixed evaluation mask": 4, "DROP geometry: Invalid predicted depth on fixed evaluation mask; ADD geometry: Invalid predicted depth on fixed evaluation mask": 51, "DROP geometry: Invalid predicted depth on fixed evaluation mask": 9}}
+vggt pose_ate_normalized complete 35 clean+ 9 cross 1 endcross 0 screen3 {'n': 35, 'clean_positive': 9, 'any_transition': 1, 'endpoint_transition': 0}
+vggt pose_pair_translation_relative complete 35 clean+ 11 cross 2 endcross 1 screen3 {'n': 35, 'clean_positive': 11, 'any_transition': 2, 'endpoint_transition': 1}
+vggt pose_pair_rotation_deg complete 35 clean+ 10 cross 0 endcross 0 screen3 {'n': 35, 'clean_positive': 10, 'any_transition': 0, 'endpoint_transition': 0}
+vggt geometry_depth_absrel complete 35 clean+ 19 cross 17 endcross 16 screen3 {'n': 35, 'clean_positive': 19, 'any_transition': 17, 'endpoint_transition': 16}
+vggt geometry_depth_rmse_m complete 35 clean+ 17 cross 15 endcross 13 screen3 {'n': 35, 'clean_positive': 17, 'any_transition': 15, 'endpoint_transition': 13}
+mast3r pose_ate_normalized complete 35 clean+ 19 cross 4 endcross 3 screen3 {'n': 35, 'clean_positive': 18, 'any_transition': 3, 'endpoint_transition': 2}
+mast3r pose_pair_translation_relative complete 35 clean+ 19 cross 7 endcross 4 screen3 {'n': 35, 'clean_positive': 17, 'any_transition': 6, 'endpoint_transition': 4}
+mast3r pose_pair_rotation_deg complete 35 clean+ 23 cross 12 endcross 8 screen3 {'n': 35, 'clean_positive': 22, 'any_transition': 11, 'endpoint_transition': 7}
+mast3r geometry_depth_absrel complete 23 clean+ 9 cross 7 endcross 7 screen3 {'n': 23, 'clean_positive': 8, 'any_transition': 5, 'endpoint_transition': 4}
+mast3r geometry_depth_rmse_m complete 23 clean+ 6 cross 4 endcross 4 screen3 {'n': 23, 'clean_positive': 5, 'any_transition': 4, 'endpoint_transition': 4}

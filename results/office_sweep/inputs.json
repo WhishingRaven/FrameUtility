@@ -1,0 +1,2975 @@
+{
+  "scene": "office",
+  "dataset": "ETH3D high-res multi-view training",
+  "seed": 2026,
+  "sets": {
+    "20": [
+      "DSC_0219",
+      "DSC_0220",
+      "DSC_0222",
+      "DSC_0223",
+      "DSC_0228",
+      "DSC_0230",
+      "DSC_0231",
+      "DSC_0235",
+      "DSC_0237",
+      "DSC_0238",
+      "DSC_0239",
+      "DSC_0240",
+      "DSC_0242",
+      "DSC_0243",
+      "DSC_0248",
+      "DSC_0250",
+      "DSC_0251",
+      "DSC_0252",
+      "DSC_0254",
+      "DSC_0255"
+    ],
+    "10": [
+      "DSC_0219",
+      "DSC_0220",
+      "DSC_0242",
+      "DSC_0243",
+      "DSC_0248",
+      "DSC_0250",
+      "DSC_0251",
+      "DSC_0252",
+      "DSC_0254",
+      "DSC_0255"
+    ],
+    "5": [
+      "DSC_0219",
+      "DSC_0220",
+      "DSC_0250",
+      "DSC_0251",
+      "DSC_0252"
+    ]
+  },
+  "severities_deg": [
+    0,
+    0.25,
+    0.5,
+    1,
+    2,
+    4
+  ],
+  "frames": [
+    {
+      "id": "DSC_0219",
+      "filename": "DSC_0219.JPG",
+      "c2w": [
+        [
+          -0.9292212785487881,
+          0.017847591355633408,
+          0.36909250734058296,
+          -1.6126614401822181
+        ],
+        [
+          -0.3690238227525084,
+          0.007120261429086838,
+          -0.929392661967108,
+          -0.04045940634815297
+        ],
+        [
+          -0.019215455583495383,
+          -0.9998153656350677,
+          -3.0112039757224096e-05,
+          -0.18527741250721863
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0219.JPG",
+      "source_sha256": "7a409e5321a9c2ab2ba68be759871069d5aaf213d4b5c8769096036953ec5978",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0219/yaw_0.png",
+          "sha256": "b5edce5fe623a5c425b71f38cb754567b4bbf54eb65eba91e57217a04ebbfb1e"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0219/yaw_0.25.png",
+          "sha256": "02d17ed9d997526c7f451474ff2a41978c9fa2a9cdb38cfa48b428a3069e935a"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0219/yaw_0.5.png",
+          "sha256": "16ff08c7cbd1f217368ec296e4f4438c47cab5c190346581549fe379c2372572"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0219/yaw_1.png",
+          "sha256": "dd43bbdbf941911a8b69a4c33f124dc947c94b2b359977f8e94e06292a6b6ac3"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0219/yaw_2.png",
+          "sha256": "a3e72a00872e83c5f288f9cf4311e58ba973dc675a2e683a94de5db69f580636"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0219/yaw_4.png",
+          "sha256": "ebeab6fb9f17e3da96491bac2dc3fa793e418d7dd1a6208df067cdce3de625ae"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0219/laser_depth.npy",
+      "depth_sha256": "b83fcc3ff81d5cdc930f7b0de33b06d0b3273885daa8235d375f4dbde7d8e363",
+      "laser_coverage": 0.7887746244331065
+    },
+    {
+      "id": "DSC_0220",
+      "filename": "DSC_0220.JPG",
+      "c2w": [
+        [
+          -0.993380298666931,
+          0.016630175897690405,
+          -0.11366186462490967,
+          -1.4302296442499514
+        ],
+        [
+          0.11363374104563302,
+          -0.002629467875152847,
+          -0.9935192292022675,
+          0.2447706907613081
+        ],
+        [
+          -0.016821269761032667,
+          -0.9998582515278381,
+          0.0007223124816529869,
+          -0.18451874247593492
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0220.JPG",
+      "source_sha256": "604c5faa056bdd9276a1f9cdee18ba4e5fbfc5cdc1c5cf0a708bc3b5af09b0c5",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0220/yaw_0.png",
+          "sha256": "2eb60d6e7ec8aeed3893f7753ee426c58d250b4f75c7de9bd26b8e91f2b8c74e"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0220/yaw_0.25.png",
+          "sha256": "2779c1fddac4e4bea18fce179d5d39e64cc4139c86ee3ec9a5b8934d6f074c62"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0220/yaw_0.5.png",
+          "sha256": "ed2c73604e4839b95e836525a7ca496ebc1cecf4c3d1ca836d36ae253622f9b2"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0220/yaw_1.png",
+          "sha256": "469b98eec361beb36da404331d0ad864328bf6a609b173cf316c051d26229c87"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0220/yaw_2.png",
+          "sha256": "6e9bc2e92f82cf2479c001a81d1533116c96410b87db228623abaed5a699c579"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0220/yaw_4.png",
+          "sha256": "36681b8ce22a8d284dd8e50832a64baf4aa3f63aad7a98a701ff54952265dbdf"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0220/laser_depth.npy",
+      "depth_sha256": "8469f30e97eb067671bedacde2cfb99141fe1ad4124de92e07ec32fbed4eaf59",
+      "laser_coverage": 0.7895068617724867
+    },
+    {
+      "id": "DSC_0222",
+      "filename": "DSC_0222.JPG",
+      "c2w": [
+        [
+          -0.4464951982257001,
+          0.0025977406118756763,
+          -0.8947822582646048,
+          -1.027894264954097
+        ],
+        [
+          0.8946271921106158,
+          -0.01754523695428331,
+          -0.4464687579176097,
+          0.06748778159560258
+        ],
+        [
+          -0.016858976768117484,
+          -0.9998426958296647,
+          0.005509854662385516,
+          -0.18410025153372517
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0222.JPG",
+      "source_sha256": "249801437e735dd4e3fedc8c22304984586b29504d46f8a6503e2642476ea115",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0222/yaw_0.png",
+          "sha256": "43e70dd867964091e206a186b8664271da15ad5c0b999e56e9a9dcebcf601f34"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0222/yaw_0.25.png",
+          "sha256": "a8ab857dc4d9d17e318b6af8ce52541d6c37165acd6516393c11a218324307a4"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0222/yaw_0.5.png",
+          "sha256": "aa4fc96bb1de255bc4b76b539112212717bd833dc8abdd27e99d96c28852f18e"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0222/yaw_1.png",
+          "sha256": "44661b1264bc63d80355293d2aec63759ee67e1c4116696ce766b949e195ea1c"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0222/yaw_2.png",
+          "sha256": "9c64695710e8cfbef7549bf61a2cc78b7655c719c10715b8119dabcb2707c168"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0222/yaw_4.png",
+          "sha256": "3718082f74e53c748069a4ea3906a5e12ebf59fc0a18658fbb313d835e09d986"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0222/laser_depth.npy",
+      "depth_sha256": "ae6515989c1adadd49e646225dd29283d17ff7b23dc5d99e3b46652206dcc47c",
+      "laser_coverage": 0.9924679941421013
+    },
+    {
+      "id": "DSC_0223",
+      "filename": "DSC_0223.JPG",
+      "c2w": [
+        [
+          -0.12938750873441882,
+          -0.005138230336492633,
+          -0.9915807940720263,
+          -1.0061223670762582
+        ],
+        [
+          0.991427529943239,
+          -0.018999028686434744,
+          -0.129269059637719,
+          -0.18161005211204653
+        ],
+        [
+          -0.01817485774769173,
+          -0.9998062989889498,
+          0.007552420000899868,
+          -0.18380550025267886
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0223.JPG",
+      "source_sha256": "690860677837ba79102e73089841695dd7df459f174cfedf13138f3166177a6d",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0223/yaw_0.png",
+          "sha256": "8fcd5c091421e29a78087fae68cb3b3abbd432f485a7270f0152125474453ffc"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0223/yaw_0.25.png",
+          "sha256": "1307e49f8da98919fb805a8bca9bca5c584a6d338757df61762eb77eecb190cf"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0223/yaw_0.5.png",
+          "sha256": "17cae88c4e74fae044d90520493e098363555cc7e8efd91549ddc6ac571dc16a"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0223/yaw_1.png",
+          "sha256": "2136c7a5fe38e2857a5bbd0edf0c9352789b1a62761ea00b95b66b6f51d4015f"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0223/yaw_2.png",
+          "sha256": "8d32ba26b59bea26ab209ad028f41064df7fdeeb580dac384af40a1e18749dd1"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0223/yaw_4.png",
+          "sha256": "1ea473f669b5aad6f679a2ee9fef1e05d8ab40491666876f7e4acc1463af6de9"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0223/laser_depth.npy",
+      "depth_sha256": "1df8ba239a9a6a6c9c4f8a1fbb361bfad31f154c7d3daad29bbccb94b95091a2",
+      "laser_coverage": 0.8413037958238851
+    },
+    {
+      "id": "DSC_0228",
+      "filename": "DSC_0228.JPG",
+      "c2w": [
+        [
+          -0.2164531183889606,
+          0.009613648224406746,
+          0.9762456787650904,
+          -1.4951653723320426
+        ],
+        [
+          -0.9760643992251896,
+          0.019507695617092258,
+          -0.21660502851245278,
+          0.22122377417246772
+        ],
+        [
+          -0.02112666809660735,
+          -0.9997634858202855,
+          0.005161038229615639,
+          -0.18466910473891954
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0228.JPG",
+      "source_sha256": "6e09ca54fc4a39375ddbb40ce9f2ede6b85eab16b1abb0041cc1bf7d462d5f38",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0228/yaw_0.png",
+          "sha256": "3cb5b907a61a5c85c2be6be8744c92d38938ab5e5e5a6a4d14670f9eedb5aa64"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0228/yaw_0.25.png",
+          "sha256": "0f0387e42a80ec61c4f6a2a1abefd873521d6cdbe8e08c144658e4a7adb645c0"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0228/yaw_0.5.png",
+          "sha256": "31e57ea15f689eb0f00289b3614e09210c2408962c11d940f6bb6fc4c97a86f4"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0228/yaw_1.png",
+          "sha256": "eca5309380660c98f1e902a070486d0b3c04c04fc4d15ed4e4b8655b516e8be4"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0228/yaw_2.png",
+          "sha256": "1a40ed7fa9a024bc8b838aab07217814fc52366a6b0355ebdc0a4fa1f46fd1b3"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0228/yaw_4.png",
+          "sha256": "5273806bfda5790a5ca99cfbb36222472c2cb89f224f89315aa737faec829462"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0228/laser_depth.npy",
+      "depth_sha256": "c4a83e8f7eb9459c519deba4aa5aa49f592e2cd29cd9d85e7d9627f6df4c0b3c",
+      "laser_coverage": 0.7431175595238095
+    },
+    {
+      "id": "DSC_0230",
+      "filename": "DSC_0230.JPG",
+      "c2w": [
+        [
+          -0.9960493253838169,
+          0.06541070414560954,
+          0.06005981339980221,
+          -1.2529690296262261
+        ],
+        [
+          -0.07813068173991777,
+          -0.3240677146677201,
+          -0.9428020539227187,
+          0.19905492757450768
+        ],
+        [
+          -0.04220589974516835,
+          -0.9437698639462995,
+          0.3278980114814424,
+          -0.1777794231226466
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0230.JPG",
+      "source_sha256": "bf297df8aeb5b7b62a013c97da682c5a08c31b37db70611395202c300891527d",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0230/yaw_0.png",
+          "sha256": "06ac773512555ac3bc5377e907e1de956bdca969634452a1c09372fd1737235a"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0230/yaw_0.25.png",
+          "sha256": "b047ef5d2a40eb89362efaee5c5a72eebd8fb939865339b753fd934d43bbda89"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0230/yaw_0.5.png",
+          "sha256": "4ef9d280da12811dcbc133b71fa8b7b8b3c87b1496eaab827d8291814bb0b031"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0230/yaw_1.png",
+          "sha256": "5ff07b71e9a20576c926a37197c671b6da5a7b286b61b8d34276b1d422b2a841"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0230/yaw_2.png",
+          "sha256": "193d6befa00fb2ea65c5f7b471071e66b9d63ba0be857e9b1c2c7424a6c59a60"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0230/yaw_4.png",
+          "sha256": "a6b2c300cc5987b1b886164a20a92e3b646d98c2c97cfc87ee81ac55530e9bdb"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0230/laser_depth.npy",
+      "depth_sha256": "e6cd3ef06059c19c26c2b0008234cffa00c9118c252af04b9dc6642dcda93384",
+      "laser_coverage": 0.8268804917800453
+    },
+    {
+      "id": "DSC_0231",
+      "filename": "DSC_0231.JPG",
+      "c2w": [
+        [
+          -0.5523975085211489,
+          -0.2546393444846371,
+          -0.793735344318282,
+          -1.043033147018798
+        ],
+        [
+          0.83228501788267,
+          -0.22155476093448911,
+          -0.5081487350326727,
+          -0.03554061195089597
+        ],
+        [
+          -0.046461183666274,
+          -0.9413141304302702,
+          0.3343188093192381,
+          -0.1807531894856037
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0231.JPG",
+      "source_sha256": "8c884f4caab49d5c48c9e46c7f704bd2083eb5a361fccdf69562ba2ef71b375d",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0231/yaw_0.png",
+          "sha256": "f0524dddb7bf038a794085e57b6d0e3d88d80848b6e12bdea2c75802f8cbbc68"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0231/yaw_0.25.png",
+          "sha256": "8e59c5185c919c15fed9999b11a933f1b3b58772952e3d2ebef5ead87871ff5e"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0231/yaw_0.5.png",
+          "sha256": "b3fd704b29093d2529e3f3d50b9442036c0076ee4aff1362d25c73cdbb683e41"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0231/yaw_1.png",
+          "sha256": "692046b501f7b56ddc0d7dc25670e2f5259a7cdf12e5c3e68db5b0541e734c9e"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0231/yaw_2.png",
+          "sha256": "acc88142beaac72e79319edfbe2a62de0b126e0b98ada92441e0003f0fd9cdfd"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0231/yaw_4.png",
+          "sha256": "8b4cc87d645c3925cd21e288d2da78e4333d445bf7e3e1957e7ee1b1f093d317"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0231/laser_depth.npy",
+      "depth_sha256": "edd6e906af5d97e89d06ee1949c9c30eac3ab1f1b4570b3082b6d40ad0f68b24",
+      "laser_coverage": 0.9813441869803476
+    },
+    {
+      "id": "DSC_0235",
+      "filename": "DSC_0235.JPG",
+      "c2w": [
+        [
+          -0.3961084575282852,
+          0.3200530310212314,
+          0.8606184678524423,
+          -1.45043949682735
+        ],
+        [
+          -0.9170330364933509,
+          -0.09057807740458351,
+          -0.3883890084354523,
+          0.1922336021584595
+        ],
+        [
+          -0.046351913168144576,
+          -0.9430597378892877,
+          0.32937794540290766,
+          -0.17704149658881385
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0235.JPG",
+      "source_sha256": "e4d52ba02126fa76ebf78ca9a526f8e085bf194ec3e52b97608554a69ed9f404",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0235/yaw_0.png",
+          "sha256": "7c5f0513c178d0709f220ddc714704d500de502166177008a99528668df34ef4"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0235/yaw_0.25.png",
+          "sha256": "4ef98b35e57d553a3d01da3d20bcc55ebfb01e84b4d071f4b97ad2d980eb741e"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0235/yaw_0.5.png",
+          "sha256": "12ac929cd4a13988650f4b583781cfbcb7c6ec019cd4a8461faafc8ffebad867"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0235/yaw_1.png",
+          "sha256": "be26f933d51cd10cb3d9cccfddd167df406a223d982b9167a63c493e732aefba"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0235/yaw_2.png",
+          "sha256": "5116f665dfb25a9284a51a776244d17699ec39ff47991576a33ee60deeaf3851"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0235/yaw_4.png",
+          "sha256": "88b8676146010bd78f94cf8e4078b81252ab785070eefc2a0488516713354814"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0235/laser_depth.npy",
+      "depth_sha256": "2514d30f73f7ae59eb64efff2b1d151548ca8cd81a503ccdcf147e0698686e1a",
+      "laser_coverage": 0.9819066515495087
+    },
+    {
+      "id": "DSC_0237",
+      "filename": "DSC_0237.JPG",
+      "c2w": [
+        [
+          -0.6281308766167351,
+          -0.6269087923134566,
+          -0.4609088499484202,
+          -0.8992934963182324
+        ],
+        [
+          0.7749495772847326,
+          -0.5573352323852794,
+          -0.29804461311733355,
+          0.11444575613087105
+        ],
+        [
+          -0.07003395252951564,
+          -0.5443921425426067,
+          0.8359021716869526,
+          -0.21245834268713162
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0237.JPG",
+      "source_sha256": "355f543d2c9e7408bf6eec7f231913c063cba445d67bb49902ed0d12244b7b5a",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0237/yaw_0.png",
+          "sha256": "86e35a6b990f07532581aa7f4df69d76fb2571d0097b761fd3f3474c49e0f86b"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0237/yaw_0.25.png",
+          "sha256": "77bb8ebff786cef063c876525e9cf476b3baa2e32126603873875954959117c8"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0237/yaw_0.5.png",
+          "sha256": "f77a0ddccef0a3336352e14373abd54fdb4b7f5b86e1bf3fa68ead7f580f027e"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0237/yaw_1.png",
+          "sha256": "80fd4b0194df331685841fa35fe295377c62e25e958d7a176e462a9ea8e26301"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0237/yaw_2.png",
+          "sha256": "659930e8a1c35d93de0ad5f6436afd7762215443e6b26e1727ec7749dc7ee0b1"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0237/yaw_4.png",
+          "sha256": "db081d58f40bc1d6f29de5766e042a610ed6ee0a2a7a3dc20a2d24674197e533"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0237/laser_depth.npy",
+      "depth_sha256": "0a11cee34dfc6986270605aeeee897667ebe119fb1e44842bf27236ed7220b20",
+      "laser_coverage": 0.9250549178004536
+    },
+    {
+      "id": "DSC_0238",
+      "filename": "DSC_0238.JPG",
+      "c2w": [
+        [
+          0.3569994671274429,
+          -0.8031360299374832,
+          -0.47699465184316236,
+          -0.831905129368403
+        ],
+        [
+          0.9313459018421468,
+          0.2668227333207984,
+          0.24779112192541577,
+          -0.37216931723819785
+        ],
+        [
+          -0.07173696113273811,
+          -0.5327083126810356,
+          0.8432530237170597,
+          -0.21276418801808283
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0238.JPG",
+      "source_sha256": "a8960972eb67f55767f6ea23b42794845850ad9a9391333ef93da21baeca27f8",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0238/yaw_0.png",
+          "sha256": "ddd32da234ebd8e9a5fa0a6fd515ecc5718d10b2d41b0d11ddcda22184bf1d2a"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0238/yaw_0.25.png",
+          "sha256": "1b5d355e1a70eac9704541c7de9ea45bb3c382400a88266231d0d5a5ccbb33c8"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0238/yaw_0.5.png",
+          "sha256": "99834c0e46dc68242a3d9c3da419f57803b530953032770b9eca81e602983f4c"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0238/yaw_1.png",
+          "sha256": "1ecb0a0710f3ff71bfcfcfcc685e8163ce42bc51911e8dcdb200ff1ce13a76be"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0238/yaw_2.png",
+          "sha256": "a48b1ef44c2d00d926c33e299dd1e70c2b2b81748805512e2e99561e16da89fe"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0238/yaw_4.png",
+          "sha256": "3f24e3df7bbedc299e46fdb8bbffaa5461a6ac873a5d90ac448b96ecaef90d29"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0238/laser_depth.npy",
+      "depth_sha256": "e821ab731c2547dd7241cce866a5054fe0fc6b19c127014346e429552ae73d8d",
+      "laser_coverage": 0.8873653628117913
+    },
+    {
+      "id": "DSC_0239",
+      "filename": "DSC_0239.JPG",
+      "c2w": [
+        [
+          0.9391685405595005,
+          -0.3232344605298591,
+          -0.11611173906762895,
+          -1.3019375408515954
+        ],
+        [
+          0.3356845159944645,
+          0.7923581606486881,
+          0.5093961630940991,
+          -0.4179606218377076
+        ],
+        [
+          -0.07265230997635436,
+          -0.5173857639898869,
+          0.8526626607725362,
+          -0.21323051108210922
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0239.JPG",
+      "source_sha256": "f8bcc717d37aa74fd258f30f4b398feb979565987c5a73321b104d01ec1166e8",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0239/yaw_0.png",
+          "sha256": "f0231ebfbff52d0a41e92015e4405388fc2e82a8509487cf743ec7fb35663b7c"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0239/yaw_0.25.png",
+          "sha256": "04658a3e223e9537566153a0e7a15d4438806954e6f3a7a7547a4488347ffecc"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0239/yaw_0.5.png",
+          "sha256": "47aeb3d4ce66842e3433f2c3eb429fde64b91eab76c8bb9969065ddac8255186"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0239/yaw_1.png",
+          "sha256": "b4f9c6e20daabd5bda38932aaa5f4aeace86cbb850619de4caac9f3f85420629"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0239/yaw_2.png",
+          "sha256": "2e82607a1990feb989fa158476c3dc63cbb2701ebe338750a3f103e262e9ae54"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0239/yaw_4.png",
+          "sha256": "54d829164ecf576bd915343f306df870f8cb840ba421a05a9dab409c1e6fe2a4"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0239/laser_depth.npy",
+      "depth_sha256": "b6c42ad5cace97079538e8afb8b784212b85e76e8d7c663022079e9d900b70eb",
+      "laser_coverage": 0.8331930862622827
+    },
+    {
+      "id": "DSC_0240",
+      "filename": "DSC_0240.JPG",
+      "c2w": [
+        [
+          0.5051714978417617,
+          0.7196676757118812,
+          0.4763194246551037,
+          -1.5990004804929234
+        ],
+        [
+          -0.8593335137161049,
+          0.4704137086802574,
+          0.20064110967102036,
+          -0.088975766533865
+        ],
+        [
+          -0.07967226601925792,
+          -0.5106754147412464,
+          0.8560741502966972,
+          -0.21539000390712168
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0240.JPG",
+      "source_sha256": "68ca474d92389874b7607e10d753ba660e5feb82d9e59f4ab7f5bbe6182bf2ab",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0240/yaw_0.png",
+          "sha256": "0ca73e9cf785a2fcce1435888b973467d70d9b8395d6c3ad1880ab9474779ae4"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0240/yaw_0.25.png",
+          "sha256": "a71d7e65c1b87f857843d4ac4c655f44bfbc7f3ef5dccfb038f8ed720f0b4614"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0240/yaw_0.5.png",
+          "sha256": "236382f5d89c2f9187953c5d1b404609310238001af3c0d21ccb5b5394f7207b"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0240/yaw_1.png",
+          "sha256": "516f2e24c2752862bf3d018bd67c2ad8f5beb1d9072c1bffa8ced014483ec28d"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0240/yaw_2.png",
+          "sha256": "0ad19b9a16d4895c7ce5c670ef12360f7a79e045b116356e2910bfe8ae605f70"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0240/yaw_4.png",
+          "sha256": "b8cca88576a7915867e8f5bc3cfe341b7c2741543e2369b8dbaeb33c081df5f2"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0240/laser_depth.npy",
+      "depth_sha256": "37e8f9215ad9f5a0987a94beb03e3554208b3805ef9ef96825f115435268f7f8",
+      "laser_coverage": 0.9105843726379441
+    },
+    {
+      "id": "DSC_0242",
+      "filename": "DSC_0242.JPG",
+      "c2w": [
+        [
+          -0.9969837435299382,
+          -0.07512076381627071,
+          0.01950092255997992,
+          -1.1910141511421881
+        ],
+        [
+          -0.05533547030274906,
+          0.5118506196053019,
+          -0.8572904577423233,
+          0.06390883271611707
+        ],
+        [
+          0.05441875470280295,
+          -0.8557837425736299,
+          -0.5144635896574872,
+          -0.22832793135165658
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0242.JPG",
+      "source_sha256": "db1423fdaa66c06d416ac075c6a3d07b5273af5bc63b43b8d662266526913dc5",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0242/yaw_0.png",
+          "sha256": "6d073f734bf2a6533db17bc29e365db5b4923c39bd19a4da4a34721edd205119"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0242/yaw_0.25.png",
+          "sha256": "60ca7ce12aa6e6141f1384aee27006abdf55023231d6959f862c4c735da15b95"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0242/yaw_0.5.png",
+          "sha256": "ad4d4934bfac9db929445fa7c690338b453bdd459903552b4a99275c5baff3c8"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0242/yaw_1.png",
+          "sha256": "dc3af8e635e39a6bd6f4cbb245a74c40cdd7257a8719b96aa527dafd42a98dc1"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0242/yaw_2.png",
+          "sha256": "34ad97c1bb6c28caa25d1f93432c32d6e9422de5bcbe1da7ab2806c56794a28c"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0242/yaw_4.png",
+          "sha256": "a914096a9c143ea45ba9410aa709d6ce88cff7a5a057fcb23651dc787c8b83b3"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0242/laser_depth.npy",
+      "depth_sha256": "4ee90097947e6329f448cb71b7ba3d75bdf359c0b9fb0f3e8fc0cb1ff556e5d6",
+      "laser_coverage": 0.7492618575207861
+    },
+    {
+      "id": "DSC_0243",
+      "filename": "DSC_0243.JPG",
+      "c2w": [
+        [
+          -0.751772925670587,
+          0.30501072209232327,
+          -0.5846417087733358,
+          -0.9962593356668736
+        ],
+        [
+          0.6575451039683194,
+          0.41358365256384694,
+          -0.6297483613152474,
+          0.047349339757014185
+        ],
+        [
+          0.049718250934424224,
+          -0.8578560612018004,
+          -0.5114792994670996,
+          -0.22943530433770368
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0243.JPG",
+      "source_sha256": "2a45bee477de60e6a6050c86ea0ba3f51f4b7086df82c3e53a10b12fad41b77d",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0243/yaw_0.png",
+          "sha256": "ccd2c94596e6514f1514fdff98d6c1729d5ed96ea425fdc6893f2482001503be"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0243/yaw_0.25.png",
+          "sha256": "2a178e69d491326f648b8820ec8e6f0cd236554ec989c08867b5aea5c0c7244d"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0243/yaw_0.5.png",
+          "sha256": "68d045d917e0a3cf92b3de5a148cf12d1e2488672ceee46632333abadb922a3a"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0243/yaw_1.png",
+          "sha256": "d02fb4b4353cdf5fb5bd7b082f682ec1b4af3152df80c1eb23803eb00001cfb2"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0243/yaw_2.png",
+          "sha256": "4cd8c31d6335ad16736ee56fee52e731c8316fd6c365e54041e99b8c3db3b3d9"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0243/yaw_4.png",
+          "sha256": "e834749e246b5de2f44c70d9b0611c51c2ac30e3dc893e840213938eb1725270"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0243/laser_depth.npy",
+      "depth_sha256": "3b347c84fed95a0d463b95afff3f0459ddb98f9eec104b12a285f1d396b31b41",
+      "laser_coverage": 0.70736931925548
+    },
+    {
+      "id": "DSC_0248",
+      "filename": "DSC_0248.JPG",
+      "c2w": [
+        [
+          -0.7829315985035505,
+          -0.3671830128180764,
+          0.5021899512759248,
+          -1.488757242532355
+        ],
+        [
+          -0.6202521885435439,
+          0.3984244902313484,
+          -0.6756812474760822,
+          0.23044717458972688
+        ],
+        [
+          0.04801390081652809,
+          -0.8404966155087902,
+          -0.5396851903162159,
+          -0.23159383235974054
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0248.JPG",
+      "source_sha256": "956c79981c50e46bd013d6e0bd9d5b5e685dfac0d30475c863d267b0f68a0043",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0248/yaw_0.png",
+          "sha256": "086b49dd9e4afc86e001aa739d4db8846d5596a512f08449307c037972719e01"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0248/yaw_0.25.png",
+          "sha256": "a755d32e38160965a4e4cacd67ffd241bf00081af6cc2dfc96f490288bc7cd5e"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0248/yaw_0.5.png",
+          "sha256": "2d9c78c7195a77cbaa128d3a6598397e8bd8ad7abe3bf722ffe1e0e4280f28ae"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0248/yaw_1.png",
+          "sha256": "9d43700f609fcaee2cac643dd934599856a813f3ca9c982d50f2d7ab4246035d"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0248/yaw_2.png",
+          "sha256": "da4ead33b523a3e1f9debc889b02881a35197909946fcdbc797c794d8f321b50"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0248/yaw_4.png",
+          "sha256": "dbb39dce905924f01e78da164a89c9f0c020571a3328b554fe7af8748819d7db"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0248/laser_depth.npy",
+      "depth_sha256": "eb5516623cdb72dd481376911f69e27612367c2c746af87c27eef7135acda220",
+      "laser_coverage": 0.5605321121504158
+    },
+    {
+      "id": "DSC_0250",
+      "filename": "DSC_0250.JPG",
+      "c2w": [
+        [
+          -0.9942474644179677,
+          -0.03657200360230648,
+          0.10067009511743971,
+          -1.1706352469530332
+        ],
+        [
+          -0.10656954908214547,
+          0.2437150753614303,
+          -0.9639740106714496,
+          -0.35246948478918494
+        ],
+        [
+          0.010719641172616916,
+          -0.9691570825176303,
+          -0.2462105576514644,
+          -0.20277172207104255
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0250.JPG",
+      "source_sha256": "8dbada2a4fc9295f7553feeea1823d013ceb587c542fd059c462109f27cb215f",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0250/yaw_0.png",
+          "sha256": "069814bd10b8c024ff4e235a69ad5c5d10ddda6d0774d8932408e02f3d10277a"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0250/yaw_0.25.png",
+          "sha256": "e7c7392ab8a0447e46781fb8e08c66b7c09666431813c874c3cb3d0a6a333713"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0250/yaw_0.5.png",
+          "sha256": "499962570d95e8d60be277c9525a26814a5ad95ca342b1efc30237cdaa6cdd73"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0250/yaw_1.png",
+          "sha256": "8a81e34b91c9252205d686b6e11fc7fbff03cb51ca65ef5723078a747ce89f99"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0250/yaw_2.png",
+          "sha256": "66dd18e37e88f61a3d0b49671adc3996006fa88e3ddca31221ce2a3950ab8537"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0250/yaw_4.png",
+          "sha256": "67d4b557da9b3214af962a877ecdaa946991702ff827eeb5caa415e48cf564f7"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0250/laser_depth.npy",
+      "depth_sha256": "a0cdd024795322a10f62dafa7b2a94f717d85f003dfd574074badffa4af6ed91",
+      "laser_coverage": 0.7948126299130763
+    },
+    {
+      "id": "DSC_0251",
+      "filename": "DSC_0251.JPG",
+      "c2w": [
+        [
+          -0.9686566775296213,
+          -0.0673292561317283,
+          0.2391046054471211,
+          -1.4620278058953242
+        ],
+        [
+          -0.24831022061609992,
+          0.2360938841198037,
+          -0.9394688457946908,
+          -0.3990862333710831
+        ],
+        [
+          0.006802603535345897,
+          -0.9693948881389735,
+          -0.24541245982053983,
+          -0.20289107847274923
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0251.JPG",
+      "source_sha256": "5b066642cefef327356df2cc181d43f27f4e85c2b7c466d30c0e93c2113e9216",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0251/yaw_0.png",
+          "sha256": "5b5f97cc4130564a058f4149c7b5f1972ac5572d8508703d0711e2c23cc4440f"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0251/yaw_0.25.png",
+          "sha256": "3ac86a3380e22795a600c895c4cd0c3ad58f483e45b35c901d0f6d2b65b8cf40"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0251/yaw_0.5.png",
+          "sha256": "3dd69db2bb2f0dc99c80ff182e9f37ec2c34279576205fb9d8bc17303c4382d7"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0251/yaw_1.png",
+          "sha256": "93a745cd952a51af3ed8e10b4f8da755561b86de3994f4f5cd06c875d754c0cf"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0251/yaw_2.png",
+          "sha256": "043cfd71bb94635422578b4c686e1295cfaee856439465f22da46d5b9e34ab2c"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0251/yaw_4.png",
+          "sha256": "735d98df62b18d599b0d3df3b4e6e9855d26d19102b9a8401f84b33e45fd0338"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0251/laser_depth.npy",
+      "depth_sha256": "4eeecf4ac5a774fb657a4e615f0def32805ce03ff0afe2b89e34c6a724ddddd3",
+      "laser_coverage": 0.7968159486016629
+    },
+    {
+      "id": "DSC_0252",
+      "filename": "DSC_0252.JPG",
+      "c2w": [
+        [
+          -0.9918437765530427,
+          -0.035142381127228645,
+          0.12251912488140984,
+          -1.7744640189523624
+        ],
+        [
+          -0.1273909457416727,
+          0.24179694664146636,
+          -0.9619281592395068,
+          -0.4599040015513274
+        ],
+        [
+          0.004179695687498826,
+          -0.9696902854229139,
+          -0.2443016178832785,
+          -0.2030529700386257
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0252.JPG",
+      "source_sha256": "7c7a1cb1cf941e374ca00101e9501a06fc9b252d340c17f582d927fe87e1a1f5",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0252/yaw_0.png",
+          "sha256": "59a6b74642dc82c860235432aca9b2770d23db2734185de57ec18df17304e9cc"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0252/yaw_0.25.png",
+          "sha256": "46d2531431e8835ab865f508c4ce122c14d88dc368a918cfef7ea0b19f25b232"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0252/yaw_0.5.png",
+          "sha256": "2cfc23c2c3a6d848f69a2e2ccaa001cfbe29b332dcb7b8c90c11d6bbe04f12a2"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0252/yaw_1.png",
+          "sha256": "606b9dd22ed71958868a346c5eabf4aac48f31bdf7ed78c115c549eb359eb707"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0252/yaw_2.png",
+          "sha256": "163cc3692f44994bb15bc3db8bef318eef392680e008ea3f1790892d800a9212"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0252/yaw_4.png",
+          "sha256": "dfa752ec212a45edb7a4ecfc5217dda954557341be9e3a746af03ae3165276a4"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0252/laser_depth.npy",
+      "depth_sha256": "fbccba8e83468ef29c70264c36665687f2abae5e019fd57d196b9933653addcb",
+      "laser_coverage": 0.7692404218631897
+    },
+    {
+      "id": "DSC_0254",
+      "filename": "DSC_0254.JPG",
+      "c2w": [
+        [
+          -0.599931477641573,
+          0.19351863736786024,
+          -0.7762942477734105,
+          -0.1024910016540186
+        ],
+        [
+          0.8000245876835859,
+          0.15305011755723516,
+          -0.580117505870513,
+          -0.9991030484403026
+        ],
+        [
+          0.006548376631422659,
+          -0.9690852379987029,
+          -0.2466392512486403,
+          -0.2019697033073525
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0254.JPG",
+      "source_sha256": "fb18ae409a40b688be08da488f4d87c4126c0d66a8e9f5296e6f6e9102bab777",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0254/yaw_0.png",
+          "sha256": "e1d973808cfb5ed9b9e2a20094e935a5d3de1d6518b71a870b01ebeb9d350bfc"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0254/yaw_0.25.png",
+          "sha256": "1d02cac80285a9fe43216519cb768a04a628511da4411b0be7af4682acfe7100"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0254/yaw_0.5.png",
+          "sha256": "24b4d109919f1f0e7582cc392c656dbecc1f16e1ae19c67dcf11b940401d635c"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0254/yaw_1.png",
+          "sha256": "573ab79283e594b9a2bc163b370620b02217ce26121f11239f00b7cc7750469b"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0254/yaw_2.png",
+          "sha256": "5657601f0e1a8ff53651e315e07938ff3710380212fd0acbf3dd8f84820b4771"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0254/yaw_4.png",
+          "sha256": "bb82423cb4ed466e29aedd731705169d3534bd9a80d9272ca01e908388ccb00b"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0254/laser_depth.npy",
+      "depth_sha256": "9e60dca20b37359d3b9060670ff7a5bad6babdf74513f341c8a34123eae20378",
+      "laser_coverage": 0.7664399092970522
+    },
+    {
+      "id": "DSC_0255",
+      "filename": "DSC_0255.JPG",
+      "c2w": [
+        [
+          -0.8122105459822602,
+          -0.14735492283002588,
+          0.5644471239300956,
+          -1.554173769122441
+        ],
+        [
+          -0.5833431922257475,
+          0.19690153950572167,
+          -0.787997781611187,
+          -0.919378566446308
+        ],
+        [
+          0.004974844628135355,
+          -0.9692864955512558,
+          -0.2458839979805356,
+          -0.20293164117228998
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source": "data/prepared/eth3d/office/images/dslr_images_undistorted/DSC_0255.JPG",
+      "source_sha256": "68c4356f1f5336a60d033ebf11b9eff5ba6fa87afb1e341c7f64941bb07944e0",
+      "intrinsics": [
+        [
+          618.932776081016,
+          0.0,
+          507.0047902266517
+        ],
+        [
+          0.0,
+          618.2389532079112,
+          334.9168065605403
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "variants": {
+        "0": {
+          "path": "data/experiments/office/DSC_0255/yaw_0.png",
+          "sha256": "93e94dbd2685a2b077b48dda2948f64d21df2ad2e07b433a42f9a131d2a99d60"
+        },
+        "0.25": {
+          "path": "data/experiments/office/DSC_0255/yaw_0.25.png",
+          "sha256": "51be5d55c56dc123d91a78c56db7196d2718ebeaea5a2cd39c33f79777ae485b"
+        },
+        "0.5": {
+          "path": "data/experiments/office/DSC_0255/yaw_0.5.png",
+          "sha256": "133a29f338ed6fe93ed8036f4de86ef85c508fea149d8e790db948d4b93c3805"
+        },
+        "1": {
+          "path": "data/experiments/office/DSC_0255/yaw_1.png",
+          "sha256": "e7c90bdf1a2e1bb4add27955b0fd26fec79d597a7770a5d2e215539e01c56f48"
+        },
+        "2": {
+          "path": "data/experiments/office/DSC_0255/yaw_2.png",
+          "sha256": "6d4699a7abbd88e6aff7b0ac3789a646f1f24d78bd01c74df98abe98bf8a5a94"
+        },
+        "4": {
+          "path": "data/experiments/office/DSC_0255/yaw_4.png",
+          "sha256": "5a4eb8bd515f8cbd50e48621bf1e8f8fce845cda7d9ff6f60f2cd7154a9a6caf"
+        }
+      },
+      "depth": "data/experiments/office/DSC_0255/laser_depth.npy",
+      "depth_sha256": "bd834480e5abce4f5c393c25adcfcf693750b7aa6ab4d02b4a6b5962ff551a08",
+      "laser_coverage": 0.7237103174603174
+    }
+  ],
+  "blur": {
+    "axis": "camera y",
+    "path": "symmetric constant angular velocity",
+    "samples": 33,
+    "integration": "linear sRGB radiance",
+    "size": [
+      1008,
+      672
+    ],
+    "nominal_pose": "mid exposure",
+    "fixed_overscan_crop": [
+      56,
+      37,
+      1008,
+      672
+    ]
+  },
+  "geometry_reference": "Aligned ETH3D laser scans rasterized by nearest-depth z-buffer; no benchmark occlusion masks",
+  "planned_utilities_per_backend": 210,
+  "pair_geometry": [
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0220",
+      "baseline_m": 0.3385825512993267,
+      "rotation_deg": 28.1865188764668,
+      "laser_visibility_overlap": 0.5140767795634752
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0222",
+      "baseline_m": 0.5946483249090997,
+      "rotation_deg": 85.14281408865644,
+      "laser_visibility_overlap": 0.04520957549861829
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0223",
+      "baseline_m": 0.6227481983349982,
+      "rotation_deg": 104.23296860077897,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0228",
+      "baseline_m": 0.2868514998496291,
+      "rotation_deg": 55.83157049434011,
+      "laser_visibility_overlap": 0.294282305905928
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0230",
+      "baseline_m": 0.4322059303281333,
+      "rotation_deg": 26.100988675885336,
+      "laser_visibility_overlap": 0.4814425193736116
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0231",
+      "baseline_m": 0.5696674955660919,
+      "rotation_deg": 80.75318880527378,
+      "laser_visibility_overlap": 0.10537200206468311
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0235",
+      "baseline_m": 0.2837777747194158,
+      "rotation_deg": 48.16687203199143,
+      "laser_visibility_overlap": 0.29794106690563693
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0237",
+      "baseline_m": 0.7304986212586776,
+      "rotation_deg": 91.86143179713854,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0238",
+      "baseline_m": 0.8487446050999469,
+      "rotation_deg": 141.27165089777145,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0239",
+      "baseline_m": 0.4897324627092385,
+      "rotation_deg": 175.68180856585607,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0240",
+      "baseline_m": 0.058713092118536855,
+      "rotation_deg": 108.50243509946479,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0242",
+      "baseline_m": 0.4365003010914867,
+      "rotation_deg": 36.50089913716672,
+      "laser_visibility_overlap": 0.34105685522409596
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0243",
+      "baseline_m": 0.6241889535664823,
+      "rotation_deg": 69.80121888208097,
+      "laser_visibility_overlap": 0.16248873024554167
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0248",
+      "baseline_m": 0.3014760961314569,
+      "rotation_deg": 36.60884232114184,
+      "laser_visibility_overlap": 0.32214341943686775
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0250",
+      "baseline_m": 0.5413349198200487,
+      "rotation_deg": 21.082115585001727,
+      "laser_visibility_overlap": 0.6202160576465019
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0251",
+      "baseline_m": 0.3893763398920865,
+      "rotation_deg": 15.982891419515664,
+      "laser_visibility_overlap": 0.6780428556418774
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0252",
+      "baseline_m": 0.44992200811626887,
+      "rotation_deg": 20.081090580333957,
+      "laser_visibility_overlap": 0.5009268129648906
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0254",
+      "baseline_m": 1.7888239204852756,
+      "rotation_deg": 75.87119855811852,
+      "laser_visibility_overlap": 0.35703438930941034
+    },
+    {
+      "a": "DSC_0219",
+      "b": "DSC_0255",
+      "baseline_m": 0.8810399363498806,
+      "rotation_deg": 20.076118850769593,
+      "laser_visibility_overlap": 0.6274982546985712
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0222",
+      "baseline_m": 0.4396625552057663,
+      "rotation_deg": 56.956365530643254,
+      "laser_visibility_overlap": 0.426710055037855
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0223",
+      "baseline_m": 0.6013884178793159,
+      "rotation_deg": 76.04654680900745,
+      "laser_visibility_overlap": 0.2989250958041243
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0228",
+      "baseline_m": 0.06907335717339379,
+      "rotation_deg": 84.01790813464517,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0230",
+      "baseline_m": 0.18318481084925695,
+      "rotation_deg": 21.80045472454002,
+      "laser_visibility_overlap": 0.45803434311814434
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0231",
+      "baseline_m": 0.4780269169049066,
+      "rotation_deg": 53.9514535786391,
+      "laser_visibility_overlap": 0.35956200248372244
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0235",
+      "baseline_m": 0.05678461962644656,
+      "rotation_deg": 74.72699087929608,
+      "laser_visibility_overlap": 0.08316129284004428
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0237",
+      "baseline_m": 0.5474106347404674,
+      "rotation_deg": 72.61233259309863,
+      "laser_visibility_overlap": 0.010897972121870348
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0238",
+      "baseline_m": 0.8598866226268118,
+      "rotation_deg": 117.39944453604595,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0239",
+      "baseline_m": 0.6756448935277194,
+      "rotation_deg": 159.71937108627404,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0240",
+      "baseline_m": 0.375264343770606,
+      "rotation_deg": 131.66943889884823,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0242",
+      "baseline_m": 0.30307475788705635,
+      "rotation_deg": 32.57395972868502,
+      "laser_visibility_overlap": 0.37713690174846337
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0243",
+      "baseline_m": 0.4788767232738865,
+      "rotation_deg": 46.60107080960276,
+      "laser_visibility_overlap": 0.342695199081271
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0248",
+      "baseline_m": 0.07646376242242035,
+      "rotation_deg": 54.77716948986533,
+      "laser_visibility_overlap": 0.22181963878721284
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0250",
+      "baseline_m": 0.6514739055891904,
+      "rotation_deg": 19.156390000766372,
+      "laser_visibility_overlap": 0.5483848313840891
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0251",
+      "baseline_m": 0.6449034071605056,
+      "rotation_deg": 25.347451616970776,
+      "laser_visibility_overlap": 0.5391937524193653
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0252",
+      "baseline_m": 0.784478963582844,
+      "rotation_deg": 19.893255936621745,
+      "laser_visibility_overlap": 0.6678368138377564
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0254",
+      "baseline_m": 1.8194549508442979,
+      "rotation_deg": 48.58798791178423,
+      "laser_visibility_overlap": 0.6319250635454952
+    },
+    {
+      "a": "DSC_0220",
+      "b": "DSC_0255",
+      "baseline_m": 1.1708734662575004,
+      "rotation_deg": 44.553111164684914,
+      "laser_visibility_overlap": 0.3574198014542837
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0223",
+      "baseline_m": 0.25004766180343363,
+      "rotation_deg": 19.090223066052257,
+      "laser_visibility_overlap": 0.8235363540884405
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0228",
+      "baseline_m": 0.491911950249,
+      "rotation_deg": 140.97373903018183,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0230",
+      "baseline_m": 0.26078442527315765,
+      "rotation_deg": 69.69545786547339,
+      "laser_visibility_overlap": 0.18375570774663602
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0231",
+      "baseline_m": 0.10418847561652432,
+      "rotation_deg": 20.33632207148968,
+      "laser_visibility_overlap": 0.5790166258674723
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0235",
+      "baseline_m": 0.44063115952925297,
+      "rotation_deg": 130.25106957663243,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0237",
+      "baseline_m": 0.1398119823193098,
+      "rotation_deg": 57.40236591249193,
+      "laser_visibility_overlap": 0.024203916262214395
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0238",
+      "baseline_m": 0.4822154363739935,
+      "rotation_deg": 74.87959975246234,
+      "laser_visibility_overlap": 0.007624419048728704
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0239",
+      "baseline_m": 0.5582189906138437,
+      "rotation_deg": 111.53290523347013,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0240",
+      "baseline_m": 0.5929774025407134,
+      "rotation_deg": 179.30019774352678,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0242",
+      "baseline_m": 0.16904731233348622,
+      "rotation_deg": 72.43216297367255,
+      "laser_visibility_overlap": 0.13031310324488293
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0243",
+      "baseline_m": 0.05883530065728693,
+      "rotation_deg": 38.00977628627491,
+      "laser_visibility_overlap": 0.37150212849520037
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0248",
+      "baseline_m": 0.49112736442494087,
+      "rotation_deg": 105.19952374966486,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0250",
+      "baseline_m": 0.44394562430936285,
+      "rotation_deg": 70.97414911357387,
+      "laser_visibility_overlap": 0.103874569957467
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0251",
+      "baseline_m": 0.637586337674635,
+      "rotation_deg": 79.06732823129227,
+      "laser_visibility_overlap": 0.07410662987933866
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0252",
+      "baseline_m": 0.9142580030027929,
+      "rotation_deg": 72.16611915976345,
+      "laser_visibility_overlap": 0.23736832086241216
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0254",
+      "baseline_m": 1.4121991770815494,
+      "rotation_deg": 17.96503846152222,
+      "laser_visibility_overlap": 0.33360932660665893
+    },
+    {
+      "a": "DSC_0222",
+      "b": "DSC_0255",
+      "baseline_m": 1.118583893429981,
+      "rotation_deg": 100.03820320580189,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0228",
+      "baseline_m": 0.6335920599260537,
+      "rotation_deg": 160.06366524209812,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0230",
+      "baseline_m": 0.4537349613787762,
+      "rotation_deg": 88.09777874611167,
+      "laser_visibility_overlap": 0.031479200322689554
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0231",
+      "baseline_m": 0.15069175035806484,
+      "rotation_deg": 31.821863048930748,
+      "laser_visibility_overlap": 0.5115480329245232
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0235",
+      "baseline_m": 0.5807086544680894,
+      "rotation_deg": 149.02605674536088,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0237",
+      "baseline_m": 0.3160418241330975,
+      "rotation_deg": 62.90875947706809,
+      "laser_visibility_overlap": 0.0350895953208845
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0238",
+      "baseline_m": 0.259813558224101,
+      "rotation_deg": 64.61324596755247,
+      "laser_visibility_overlap": 0.003812703041465224
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0239",
+      "baseline_m": 0.3797815689415293,
+      "rotation_deg": 96.53938476660133,
+      "laser_visibility_overlap": 0.00016804175077575955
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0240",
+      "baseline_m": 0.6009019463308317,
+      "rotation_deg": 162.71921281184413,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0242",
+      "baseline_m": 0.31055875690972023,
+      "rotation_deg": 89.7987388051657,
+      "laser_visibility_overlap": 0.012876351861942466
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0243",
+      "baseline_m": 0.2336701982163544,
+      "rotation_deg": 51.17810091371663,
+      "laser_visibility_overlap": 0.3135490703475905
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0248",
+      "baseline_m": 0.6364049856571313,
+      "rotation_deg": 123.18021635272365,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0250",
+      "baseline_m": 0.23794358774753138,
+      "rotation_deg": 89.70637770696949,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0251",
+      "baseline_m": 0.5054798886759124,
+      "rotation_deg": 97.85711851351044,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0252",
+      "baseline_m": 0.817414754818736,
+      "rotation_deg": 90.91501449904024,
+      "laser_visibility_overlap": 0.02724467190295104
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0254",
+      "baseline_m": 1.2186773083524707,
+      "rotation_deg": 32.936180936347334,
+      "laser_visibility_overlap": 0.27553990764645886
+    },
+    {
+      "a": "DSC_0223",
+      "b": "DSC_0255",
+      "baseline_m": 0.9192543333018599,
+      "rotation_deg": 118.91150334394602,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0230",
+      "baseline_m": 0.2433063786511377,
+      "rotation_deg": 75.66608860184326,
+      "laser_visibility_overlap": 0.11315638369559378
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0231",
+      "baseline_m": 0.5199681081953831,
+      "rotation_deg": 135.258526774001,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0235",
+      "baseline_m": 0.053842496405298756,
+      "rotation_deg": 22.184155388940297,
+      "laser_visibility_overlap": 0.6286665430267744
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0237",
+      "baseline_m": 0.6060008906815662,
+      "rotation_deg": 137.42074510335078,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0238",
+      "baseline_m": 0.8904037536615375,
+      "rotation_deg": 170.01891043654956,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0239",
+      "baseline_m": 0.6683632551942316,
+      "rotation_deg": 127.55619441551852,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0240",
+      "baseline_m": 0.3285563245273243,
+      "rotation_deg": 70.00991031734685,
+      "laser_visibility_overlap": 0.030415557054028944
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0242",
+      "baseline_m": 0.3451985650287322,
+      "rotation_deg": 80.34060186908629,
+      "laser_visibility_overlap": 0.060557853607443514
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0243",
+      "baseline_m": 0.5302297285052574,
+      "rotation_deg": 121.61664715267418,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0248",
+      "baseline_m": 0.04825002906812578,
+      "rotation_deg": 51.23588048620628,
+      "laser_visibility_overlap": 0.3152748077002436
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0250",
+      "baseline_m": 0.6593720212526695,
+      "rotation_deg": 72.59823154172176,
+      "laser_visibility_overlap": 0.06746357551299274
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0251",
+      "baseline_m": 0.6214616996201652,
+      "rotation_deg": 64.51125041000944,
+      "laser_visibility_overlap": 0.09252904687146288
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0252",
+      "baseline_m": 0.7363971397077426,
+      "rotation_deg": 71.35257042348941,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0254",
+      "baseline_m": 1.8517663911634308,
+      "rotation_deg": 130.9547347022679,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0228",
+      "b": "DSC_0255",
+      "baseline_m": 1.1422737021194977,
+      "rotation_deg": 44.06852451387495,
+      "laser_visibility_overlap": 0.20062073599984012
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0231",
+      "baseline_m": 0.31482850134280504,
+      "rotation_deg": 60.93148961038366,
+      "laser_visibility_overlap": 0.3506923557610707
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0235",
+      "baseline_m": 0.1975896263284869,
+      "rotation_deg": 62.14947866969516,
+      "laser_visibility_overlap": 0.31650726910729793
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0237",
+      "baseline_m": 0.3653049715172687,
+      "rotation_deg": 68.01115371314138,
+      "laser_visibility_overlap": 0.16752742966704795
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0238",
+      "baseline_m": 0.7105039618024411,
+      "rotation_deg": 121.57880248024553,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0239",
+      "baseline_m": 0.6199700661690019,
+      "rotation_deg": 167.94480302466323,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0240",
+      "baseline_m": 0.45178977580774005,
+      "rotation_deg": 117.90250221534343,
+      "laser_visibility_overlap": 5.7182067703568164e-05
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0242",
+      "baseline_m": 0.15702874134254316,
+      "rotation_deg": 50.48050826612518,
+      "laser_visibility_overlap": 0.11974275540557315
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0243",
+      "baseline_m": 0.30262647341542964,
+      "rotation_deg": 66.99035514801001,
+      "laser_visibility_overlap": 0.05993408577620152
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0248",
+      "baseline_m": 0.24388018607436704,
+      "rotation_deg": 61.425330393906776,
+      "laser_visibility_overlap": 0.0429189895858327
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0250",
+      "baseline_m": 0.5581958833681229,
+      "rotation_deg": 33.61083004533335,
+      "laser_visibility_overlap": 0.3245583589617473
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0251",
+      "baseline_m": 0.6341206632707171,
+      "rotation_deg": 35.03824154586577,
+      "laser_visibility_overlap": 0.31849876112016157
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0252",
+      "baseline_m": 0.8407274506881814,
+      "rotation_deg": 33.572704467885174,
+      "laser_visibility_overlap": 0.33329223196510194
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0254",
+      "baseline_m": 1.6612547661301504,
+      "rotation_deg": 65.42176004414354,
+      "laser_visibility_overlap": 0.24519506119388895
+    },
+    {
+      "a": "DSC_0230",
+      "b": "DSC_0255",
+      "baseline_m": 1.1585553114613947,
+      "rotation_deg": 45.89680007225435,
+      "laser_visibility_overlap": 0.2585346740098906
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0235",
+      "baseline_m": 0.4667706108375107,
+      "rotation_deg": 123.07973511693444,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0237",
+      "baseline_m": 0.21014807763434867,
+      "rotation_deg": 37.46175121399012,
+      "laser_visibility_overlap": 0.3092896475469138
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0238",
+      "baseline_m": 0.3986459946963433,
+      "rotation_deg": 67.58202642334906,
+      "laser_visibility_overlap": 0.16966479219913938
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0239",
+      "baseline_m": 0.4629593130350012,
+      "rotation_deg": 111.21937048629266,
+      "laser_visibility_overlap": 0.008974470744013393
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0240",
+      "baseline_m": 0.5596022699640397,
+      "rotation_deg": 174.61152050713852,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0242",
+      "baseline_m": 0.1845316387223765,
+      "rotation_deg": 76.65603578415069,
+      "laser_visibility_overlap": 0.035025989608996624
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0243",
+      "baseline_m": 0.10690407770051678,
+      "rotation_deg": 52.71699630172306,
+      "laser_visibility_overlap": 0.10082873048382508
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0248",
+      "baseline_m": 0.5215402600739601,
+      "rotation_deg": 105.22606860969539,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0250",
+      "baseline_m": 0.34236095297710417,
+      "rotation_deg": 70.87539994003583,
+      "laser_visibility_overlap": 0.0874619034845507
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0251",
+      "baseline_m": 0.5551684691601766,
+      "rotation_deg": 78.14114821061979,
+      "laser_visibility_overlap": 0.06727425892998176
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0252",
+      "baseline_m": 0.8459152954423834,
+      "rotation_deg": 71.94941758996025,
+      "laser_visibility_overlap": 0.14894757955064425
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0254",
+      "baseline_m": 1.3466707974406855,
+      "rotation_deg": 34.18404686792647,
+      "laser_visibility_overlap": 0.2714819442915547
+    },
+    {
+      "a": "DSC_0231",
+      "b": "DSC_0255",
+      "baseline_m": 1.021237557618379,
+      "rotation_deg": 97.486353337609,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0237",
+      "baseline_m": 0.5577340009846629,
+      "rotation_deg": 123.39958115714856,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0238",
+      "baseline_m": 0.8380999521741187,
+      "rotation_deg": 179.97304103443042,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0239",
+      "baseline_m": 0.629046474194797,
+      "rotation_deg": 133.65778461179752,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0240",
+      "baseline_m": 0.3203430706626269,
+      "rotation_deg": 64.05800544565042,
+      "laser_visibility_overlap": 0.22057896452791798
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0242",
+      "baseline_m": 0.29393716135762654,
+      "rotation_deg": 79.62797037234562,
+      "laser_visibility_overlap": 0.026796631148813664
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0243",
+      "baseline_m": 0.4796000201978673,
+      "rotation_deg": 115.63839932003398,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0248",
+      "baseline_m": 0.07684064088707926,
+      "rotation_deg": 58.91612289102941,
+      "laser_visibility_overlap": 0.05764239988159436
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0250",
+      "baseline_m": 0.6129061230575108,
+      "rotation_deg": 67.93882501035766,
+      "laser_visibility_overlap": 0.10885744238775054
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0251",
+      "baseline_m": 0.5919980047950453,
+      "rotation_deg": 60.91629715420467,
+      "laser_visibility_overlap": 0.12482368637077278
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0252",
+      "baseline_m": 0.7286644919726197,
+      "rotation_deg": 66.75243565264803,
+      "laser_visibility_overlap": 0.05007501694411862
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0254",
+      "baseline_m": 1.7991302276906271,
+      "rotation_deg": 121.94991539093334,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0235",
+      "b": "DSC_0255",
+      "baseline_m": 1.116742007907529,
+      "rotation_deg": 44.91252229497323,
+      "laser_visibility_overlap": 0.1981776539665823
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0238",
+      "baseline_m": 0.4912591120493498,
+      "rotation_deg": 60.05990332239712,
+      "laser_visibility_overlap": 0.5895476973096689
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0239",
+      "baseline_m": 0.667517321231319,
+      "rotation_deg": 109.49858597371188,
+      "laser_visibility_overlap": 0.34273811148017097
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0240",
+      "baseline_m": 0.7286829037541569,
+      "rotation_deg": 171.25625765665555,
+      "laser_visibility_overlap": 0.17888777008087958
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0242",
+      "baseline_m": 0.2964907501483435,
+      "rotation_deg": 100.84403010040403,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0243",
+      "baseline_m": 0.11913236469442491,
+      "rotation_deg": 88.47579365241624,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0248",
+      "baseline_m": 0.6010740421530983,
+      "rotation_deg": 120.25683068118357,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0250",
+      "baseline_m": 0.5401203740463346,
+      "rotation_deg": 90.2584574948548,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0251",
+      "baseline_m": 0.7618901101612944,
+      "rotation_deg": 95.20522888219523,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0252",
+      "baseline_m": 1.0468474334266447,
+      "rotation_deg": 90.99787342809667,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0254",
+      "baseline_m": 1.3693046290804116,
+      "rotation_deg": 71.28158788114148,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0237",
+      "b": "DSC_0255",
+      "baseline_m": 1.2238266460990423,
+      "rotation_deg": 109.3525788828627,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0239",
+      "baseline_m": 0.47225790504641657,
+      "rotation_deg": 49.4437726321235,
+      "laser_visibility_overlap": 0.6534808547830183
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0240",
+      "baseline_m": 0.8177045675465326,
+      "rotation_deg": 128.69341413103746,
+      "laser_visibility_overlap": 0.32768921252025907
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0242",
+      "baseline_m": 0.5651244752206864,
+      "rotation_deg": 134.99653585998,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0243",
+      "baseline_m": 0.4508726370211536,
+      "rotation_deg": 108.83395534716297,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0248",
+      "baseline_m": 0.8916029891700553,
+      "rotation_deg": 159.53194661754236,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0250",
+      "baseline_m": 0.33944959174098205,
+      "rotation_deg": 132.0203865215703,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0251",
+      "baseline_m": 0.6307745921798451,
+      "rotation_deg": 138.49840704146862,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0252",
+      "baseline_m": 0.9466831269859602,
+      "rotation_deg": 133.09953777068833,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0254",
+      "baseline_m": 0.9618770160101028,
+      "rotation_deg": 91.41332058689807,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0238",
+      "b": "DSC_0255",
+      "baseline_m": 0.9062045185103232,
+      "rotation_deg": 155.38255311172867,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0240",
+      "baseline_m": 0.4432630015429878,
+      "rotation_deg": 79.25322325882412,
+      "laser_visibility_overlap": 0.48244122748743035
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0242",
+      "baseline_m": 0.4947020332638839,
+      "rotation_deg": 169.0931754411969,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0243",
+      "baseline_m": 0.5569695869692446,
+      "rotation_deg": 138.80713818145557,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0248",
+      "baseline_m": 0.6750344309532031,
+      "rotation_deg": 165.98077732753995,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0250",
+      "baseline_m": 0.14710121577509408,
+      "rotation_deg": 171.23205750475248,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0251",
+      "baseline_m": 0.16153030479895678,
+      "rotation_deg": 177.99335932867262,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0252",
+      "baseline_m": 0.4744935215045694,
+      "rotation_deg": 172.4057535873209,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0254",
+      "baseline_m": 1.3328635812349052,
+      "rotation_deg": 125.13185165133306,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0239",
+      "b": "DSC_0255",
+      "baseline_m": 0.5613814538700357,
+      "rotation_deg": 164.84449458636107,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0242",
+      "baseline_m": 0.43588293794489635,
+      "rotation_deg": 136.04715574317032,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0243",
+      "baseline_m": 0.6181251432643895,
+      "rotation_deg": 165.8516294189052,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0248",
+      "baseline_m": 0.3383003855874215,
+      "rotation_deg": 115.8590723272466,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0250",
+      "baseline_m": 0.5030754753535431,
+      "rotation_deg": 126.31772778237632,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0251",
+      "baseline_m": 0.3392436268604484,
+      "rotation_deg": 120.11724930335927,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0252",
+      "baseline_m": 0.41052090235035443,
+      "rotation_deg": 125.17132416027242,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0254",
+      "baseline_m": 1.751585679889305,
+      "rotation_deg": 172.35546853920326,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0240",
+      "b": "DSC_0255",
+      "baseline_m": 0.8317051490502809,
+      "rotation_deg": 105.29532765340785,
+      "laser_visibility_overlap": 0.0
+    },
+    {
+      "a": "DSC_0242",
+      "b": "DSC_0243",
+      "baseline_m": 0.19546068973790254,
+      "rotation_deg": 44.34209687222746,
+      "laser_visibility_overlap": 0.55181237705936
+    },
+    {
+      "a": "DSC_0242",
+      "b": "DSC_0248",
+      "baseline_m": 0.34116950903323584,
+      "rotation_deg": 35.1646017650295,
+      "laser_visibility_overlap": 0.5653418473536624
+    },
+    {
+      "a": "DSC_0242",
+      "b": "DSC_0250",
+      "baseline_m": 0.41765933828575097,
+      "rotation_deg": 17.28799847909025,
+      "laser_visibility_overlap": 0.5592218522788207
+    },
+    {
+      "a": "DSC_0242",
+      "b": "DSC_0251",
+      "baseline_m": 0.5370845983344953,
+      "rotation_deg": 20.637611728140325,
+      "laser_visibility_overlap": 0.5127783558762198
+    },
+    {
+      "a": "DSC_0242",
+      "b": "DSC_0252",
+      "baseline_m": 0.7844950332923581,
+      "rotation_deg": 17.720696683842153,
+      "laser_visibility_overlap": 0.4911770010326954
+    },
+    {
+      "a": "DSC_0242",
+      "b": "DSC_0254",
+      "baseline_m": 1.5217002538729465,
+      "rotation_deg": 58.11557289453407,
+      "laser_visibility_overlap": 0.3341791422389726
+    },
+    {
+      "a": "DSC_0242",
+      "b": "DSC_0255",
+      "baseline_m": 1.04851513534047,
+      "rotation_deg": 37.02656438041444,
+      "laser_visibility_overlap": 0.35698081912832136
+    },
+    {
+      "a": "DSC_0243",
+      "b": "DSC_0248",
+      "baseline_m": 0.525436641880379,
+      "rotation_deg": 79.48784749068584,
+      "laser_visibility_overlap": 0.29599037300638903
+    },
+    {
+      "a": "DSC_0243",
+      "b": "DSC_0250",
+      "baseline_m": 0.4370045737949134,
+      "rotation_deg": 50.46560185209077,
+      "laser_visibility_overlap": 0.2732482197309215
+    },
+    {
+      "a": "DSC_0243",
+      "b": "DSC_0251",
+      "baseline_m": 0.645716334577292,
+      "rotation_deg": 58.28649190533432,
+      "laser_visibility_overlap": 0.25807120109526216
+    },
+    {
+      "a": "DSC_0243",
+      "b": "DSC_0252",
+      "baseline_m": 0.9293032384098384,
+      "rotation_deg": 51.5990673435719,
+      "laser_visibility_overlap": 0.3572705084517233
+    },
+    {
+      "a": "DSC_0243",
+      "b": "DSC_0254",
+      "baseline_m": 1.376458787936617,
+      "rotation_deg": 20.24997999481917,
+      "laser_visibility_overlap": 0.33494561775791015
+    },
+    {
+      "a": "DSC_0243",
+      "b": "DSC_0255",
+      "baseline_m": 1.116482782604144,
+      "rotation_deg": 78.83485723268132,
+      "laser_visibility_overlap": 0.11382827982818604
+    },
+    {
+      "a": "DSC_0248",
+      "b": "DSC_0250",
+      "baseline_m": 0.6646985406139645,
+      "rotation_deg": 36.63447167883187,
+      "laser_visibility_overlap": 0.3720300925292077
+    },
+    {
+      "a": "DSC_0248",
+      "b": "DSC_0251",
+      "baseline_m": 0.6307540111663039,
+      "rotation_deg": 29.911276511762182,
+      "laser_visibility_overlap": 0.37963227830402324
+    },
+    {
+      "a": "DSC_0248",
+      "b": "DSC_0252",
+      "baseline_m": 0.7476815427129934,
+      "rotation_deg": 35.739866610218485,
+      "laser_visibility_overlap": 0.24556298608347332
+    },
+    {
+      "a": "DSC_0248",
+      "b": "DSC_0254",
+      "baseline_m": 1.8532148905548598,
+      "rotation_deg": 92.47960007455077,
+      "laser_visibility_overlap": 0.23369505552347264
+    },
+    {
+      "a": "DSC_0248",
+      "b": "DSC_0255",
+      "baseline_m": 1.1520416997243825,
+      "rotation_deg": 18.755579733702763,
+      "laser_visibility_overlap": 0.40072390822591464
+    },
+    {
+      "a": "DSC_0250",
+      "b": "DSC_0251",
+      "baseline_m": 0.29509788020457733,
+      "rotation_deg": 8.26352488713411,
+      "laser_visibility_overlap": 0.8395357985440606
+    },
+    {
+      "a": "DSC_0250",
+      "b": "DSC_0252",
+      "baseline_m": 0.6133118622581436,
+      "rotation_deg": 1.2639763480031159,
+      "laser_visibility_overlap": 0.6806667735862033
+    },
+    {
+      "a": "DSC_0250",
+      "b": "DSC_0254",
+      "baseline_m": 1.248626340279446,
+      "rotation_deg": 59.2527012499114,
+      "laser_visibility_overlap": 0.46296410762124535
+    },
+    {
+      "a": "DSC_0250",
+      "b": "DSC_0255",
+      "baseline_m": 0.684461635467858,
+      "rotation_deg": 29.570538462059083,
+      "laser_visibility_overlap": 0.527661194819298
+    },
+    {
+      "a": "DSC_0251",
+      "b": "DSC_0252",
+      "baseline_m": 0.31830050952634054,
+      "rotation_deg": 7.060509617776403,
+      "laser_visibility_overlap": 0.6760372180395955
+    },
+    {
+      "a": "DSC_0251",
+      "b": "DSC_0254",
+      "baseline_m": 1.486055634686894,
+      "rotation_deg": 67.51249026805803,
+      "laser_visibility_overlap": 0.44233776689760795
+    },
+    {
+      "a": "DSC_0251",
+      "b": "DSC_0255",
+      "baseline_m": 0.5283890536728089,
+      "rotation_deg": 21.308766283284996,
+      "laser_visibility_overlap": 0.5805493760163211
+    },
+    {
+      "a": "DSC_0252",
+      "b": "DSC_0254",
+      "baseline_m": 1.7567670751145466,
+      "rotation_deg": 60.454027143304316,
+      "laser_visibility_overlap": 0.5525453452029779
+    },
+    {
+      "a": "DSC_0252",
+      "b": "DSC_0255",
+      "baseline_m": 0.5095534169017559,
+      "rotation_deg": 28.367382875427378,
+      "laser_visibility_overlap": 0.41562337324310256
+    },
+    {
+      "a": "DSC_0254",
+      "b": "DSC_0255",
+      "baseline_m": 1.4538706186309858,
+      "rotation_deg": 88.82093107653229,
+      "laser_visibility_overlap": 0.29079365079365077
+    }
+  ],
+  "selection": {
+    "max_set": "20 uniformly spaced filenames among 26 calibrated views",
+    "nested_sets": "Greedily remove the lowest mean-overlap view while preserving connectivity after every single-view DROP",
+    "overlap_edge_threshold": 0.1,
+    "uses_model_outputs": false
+  }
+}

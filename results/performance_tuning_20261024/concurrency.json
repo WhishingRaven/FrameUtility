@@ -1,0 +1,18 @@
+[
+  {
+    "workers": 2,
+    "threads_per_worker": 8,
+    "case_size": 20,
+    "iterations": 60,
+    "elapsed": 70.43287908300408,
+    "seconds_per_condition": 35.21643954150204
+  },
+  {
+    "workers": 3,
+    "threads_per_worker": 8,
+    "case_size": 20,
+    "iterations": 60,
+    "elapsed": 81.1040155419978,
+    "seconds_per_condition": 27.0346718473326
+  }
+]

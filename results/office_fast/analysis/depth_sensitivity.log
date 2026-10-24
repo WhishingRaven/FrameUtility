@@ -1,0 +1,7 @@
+vggt post-hoc sensitivity scored
+mast3r post-hoc sensitivity scored
+Unchanged valid primary geometry rows: 712
+{'backend': 'vggt', 'size': 'all', 'metric': 'geometry_depth_absrel', 'n': 35, 'clean_positive': 19, 'any_transition': 17, 'endpoint_transition': 16, 'noise_screen3': {'clean_positive': 19, 'any_transition': 17, 'endpoint_transition': 16}}
+{'backend': 'vggt', 'size': 'all', 'metric': 'geometry_depth_rmse_m', 'n': 35, 'clean_positive': 17, 'any_transition': 15, 'endpoint_transition': 13, 'noise_screen3': {'clean_positive': 17, 'any_transition': 15, 'endpoint_transition': 13}}
+{'backend': 'mast3r', 'size': 'all', 'metric': 'geometry_depth_absrel', 'n': 35, 'clean_positive': 17, 'any_transition': 14, 'endpoint_transition': 14, 'noise_screen3': {'clean_positive': 15, 'any_transition': 11, 'endpoint_transition': 10}}
+{'backend': 'mast3r', 'size': 'all', 'metric': 'geometry_depth_rmse_m', 'n': 35, 'clean_positive': 12, 'any_transition': 6, 'endpoint_transition': 6, 'noise_screen3': {'clean_positive': 10, 'any_transition': 5, 'endpoint_transition': 5}}

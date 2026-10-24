@@ -1,0 +1,37 @@
+Warning, cannot find cuda-compiled version of RoPE2D, using a slow pytorch version instead
+START repeat drop
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/dust3r/dust3r/cloud_opt/base_opt.py:275: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @torch.cuda.amp.autocast(enabled=False)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:684: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, cconf), focal = torch.load(cache, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:707: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path2, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:756: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  score, (xy1, xy2, confs) = torch.load(path_corres, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:698: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path1, map_location=device)
+init focals = [296.769   296.862   299.41794 308.63773 306.19208 307.08533 310.04596
+ 298.99905 311.7575  300.30002 314.26843 310.1211  295.4225  304.50922
+ 300.85196 300.32407 307.13834 301.01773 299.96542]
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:457: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  loss = float(loss)
+>> final loss = 0.10933947563171387
+>> final loss = 0.5454576015472412
+Final focals = [312.8212  312.28348 312.47574 316.2909  315.10544 311.83945 311.13318
+ 305.55414 301.24573 311.86337 420.24075 311.94934 311.55197 312.17
+ 312.34348 311.96063 312.1998  313.8909  312.10214]
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:78: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, conf), focal = torch.load(canon_path, map_location=device)
+DONE drop {'seconds': 77.75053787231445, 'metrics': {'pose_ate_m': 0.290060181351895, 'pose_ate_normalized': 0.5645218870191432, 'pose_pair_translation_relative': 0.7069193251765458, 'pose_pair_rotation_deg': 12.57471823304839, 'alignment_pose_scale': 0.600710190302514, 'geometry_depth_absrel': 0.07382362961321241, 'geometry_depth_rmse_m': 0.36884676108653525, 'alignment_depth_scale': 0.8988618714796927, 'evaluation_pixels': 2666128}, 'errors': {}, 'original_metrics': {'pose_ate_m': 0.29063275587326487, 'pose_ate_normalized': 0.5656362449008638, 'pose_pair_translation_relative': 0.7083825323810785, 'pose_pair_rotation_deg': 12.681919749933481, 'alignment_pose_scale': 0.5992808319470756, 'geometry_depth_absrel': 0.07405068101662925, 'geometry_depth_rmse_m': 0.36951356450822015, 'alignment_depth_scale': 0.8986781241571287, 'evaluation_pixels': 2666128}, 'original_errors': {}, 'absolute_delta': {'pose_ate_normalized': 0.0011143578817206512, 'pose_pair_translation_relative': 0.001463207204532746, 'pose_pair_rotation_deg': 0.10720151688509105, 'geometry_depth_absrel': 0.0002270514034168336, 'geometry_depth_rmse_m': 0.0006668034216849028}}
+START repeat add4
+init focals = [296.64053 296.64194 299.35587 308.62698 306.11194 306.87555 310.02188
+ 299.00635 312.68234 347.2332  304.1923  314.71832 310.1372  295.31238
+ 304.49442 300.73865 300.25992 307.1035  301.00696 299.90594]
+>> final loss = 0.11056245118379593
+>> final loss = 0.5462043881416321
+Final focals = [312.83505 312.293   312.33066 316.86697 314.8003  311.8522  311.3019
+ 305.5243  302.19254 448.06232 282.99362 447.6286  311.9822  311.578
+ 312.19055 312.36374 311.97418 312.20468 313.91245 312.10452]
+DONE add4 {'seconds': 85.86791968345642, 'metrics': {'pose_ate_m': 0.30002973725070087, 'pose_ate_normalized': 0.5839248691261871, 'pose_pair_translation_relative': 0.7393172261054042, 'pose_pair_rotation_deg': 17.920593793255993, 'alignment_pose_scale': 0.5783197201864843, 'geometry_depth_absrel': 0.0828050612523958, 'geometry_depth_rmse_m': 0.4237336928509496, 'alignment_depth_scale': 0.8980307156307414, 'evaluation_pixels': 2666128}, 'errors': {}, 'original_metrics': {'pose_ate_m': 0.2997657404906963, 'pose_ate_normalized': 0.5834110724774016, 'pose_pair_translation_relative': 0.7394077774951043, 'pose_pair_rotation_deg': 17.919032153781252, 'alignment_pose_scale': 0.5791041089560545, 'geometry_depth_absrel': 0.08309651292525283, 'geometry_depth_rmse_m': 0.4229748128218956, 'alignment_depth_scale': 0.8977965223623635, 'evaluation_pixels': 2666128}, 'original_errors': {}, 'absolute_delta': {'pose_ate_normalized': 0.0005137966487854806, 'pose_pair_translation_relative': 9.05513897001553e-05, 'pose_pair_rotation_deg': 0.0015616394747404172, 'geometry_depth_absrel': 0.0002914516728570321, 'geometry_depth_rmse_m': 0.0007588800290539988}}
+SIGN STABILITY {'pose_ate_normalized': {'clean_raw_u_range': [0.22942402526686823, 0.23073557551781676], 'blur4_raw_u_range': [-0.019402982107043942, -0.01777482757653781], 'all_clean_combinations_positive': True, 'all_blur4_combinations_negative': True}, 'pose_pair_translation_relative': {'clean_raw_u_range': [0.38054036679691605, 0.3839283867667505], 'blur4_raw_u_range': [-0.03248845231855857, -0.030934693724325668], 'all_clean_combinations_positive': True, 'all_blur4_combinations_negative': True}, 'pose_pair_rotation_deg': {'clean_raw_u_range': [11.150029225359486, 11.25894703578979], 'blur4_raw_u_range': [-5.3458755602076025, -5.237112403847771], 'all_clean_combinations_positive': True, 'all_blur4_combinations_negative': True}, 'geometry_depth_absrel': {'clean_raw_u_range': [0.011928407300002074, 0.012461966217190888], 'blur4_raw_u_range': [-0.009272883312040417, -0.008754380235766551], 'all_clean_combinations_positive': True, 'all_blur4_combinations_negative': True}, 'geometry_depth_rmse_m': {'clean_raw_u_range': [0.07135113058854292, 0.07221486132600702], 'blur4_raw_u_range': [-0.05488693176441434, -0.053461248313675436], 'all_clean_combinations_positive': True, 'all_blur4_combinations_negative': True}}

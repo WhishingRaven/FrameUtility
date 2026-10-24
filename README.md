@@ -220,3 +220,9 @@ Desired outputs:
 The main question is:
 
 > **When is more visual information worse than less?**
+
+---
+
+## Running the Experiment
+
+The fixed-set VGGT/MASt3R runner, input preparation, evaluation definitions, and local/CUDA instructions are in [experiments/README.md](experiments/README.md). It implements the 20/10/5-view, six-severity add-vs-drop sweep from `실험 순서.txt`, preserving separate pose and geometry metrics and recording reproducibility information. The current GPU parallel run writes progress and results to `results/office_fast/report.md`; the original CPU-alignment reference is preserved in `results/office_sweep`.

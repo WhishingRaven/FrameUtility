@@ -1,0 +1,33 @@
+{
+  "key": "m20_add_DSC_0252_b4",
+  "ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0222",
+    "DSC_0223",
+    "DSC_0228",
+    "DSC_0230",
+    "DSC_0231",
+    "DSC_0235",
+    "DSC_0237",
+    "DSC_0238",
+    "DSC_0239",
+    "DSC_0240",
+    "DSC_0242",
+    "DSC_0243",
+    "DSC_0248",
+    "DSC_0250",
+    "DSC_0251",
+    "DSC_0252",
+    "DSC_0254",
+    "DSC_0255"
+  ],
+  "target": "DSC_0252",
+  "severity_deg": 4,
+  "start_unix": 1792848761.161819,
+  "status": "ok",
+  "pid": 36887,
+  "shard_index": 2,
+  "seconds": 178.8561189174652,
+  "process_peak_rss_bytes": 5397299200
+}
