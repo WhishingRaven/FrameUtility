@@ -1,7 +1,7 @@
 {
   "analysis_version": "1.0.0",
-  "started_utc": "2026-10-25T15:02:41.333327+00:00",
-  "finished_utc": "2026-10-25T15:03:00.647562+00:00",
+  "started_utc": "2026-10-25T16:01:24.232187+00:00",
+  "finished_utc": "2026-10-25T16:01:44.940044+00:00",
   "requested_scenes": [
     "courtyard",
     "electro",
@@ -18,7 +18,7 @@
     "office"
   ],
   "scope_complete": false,
-  "definition_sha256": "e0472560a0a39b4f181f52d7e7227d561a9f769b7f35f688b570ba37c41a9978",
+  "definition_sha256": "f2b12d7f3f1d8714979cc01425a919b6bb74e59f2764455aad63fd3f6dccf1ca",
   "analysis_source_sha256": {
     "experiments/analyze_study.py": "0aec6cc0a5f8734bb9367f822a361d413dca81b83f099dac35f7fd8ceabf83db",
     "experiments/metrics.py": "347c71e2b61861276b526d856b59a706b8f8dac85ea259eb93681bf0794b2499",
@@ -26,8 +26,8 @@
     "experiments/analysis/audit.py": "17da690696b5bccf3b8f309dc621fa650faa25257821a9a6a1e63a5256a14c29",
     "experiments/analysis/context.py": "a5115cba1625ae46154cab693571c14932c9d3e3a186118a51f9b901a0fc0d07",
     "experiments/analysis/core.py": "2bbdfe61ebc7e4654a934ceb5e90b9dce4bdda6d4d47be7e9113898651d8e60d",
-    "experiments/analysis/pipeline.py": "0d1bded02503acae835748ccde51558dce3289f509f4ed17672190b737f2bbb0",
-    "experiments/analysis/plots.py": "9a934423adea23103a055dc33cf623d911359a079cccb036eb4808a9444de504",
+    "experiments/analysis/pipeline.py": "14b018e704a191b6c0a08630a842ff4a92d7b72ade4ee73eedf828b008637e46",
+    "experiments/analysis/plots.py": "651db58bcae3436b78727e88335a6914e6336105e498e67f2154a60a6b798ad9",
     "experiments/analysis/report.py": "856a86c5b43caf434c4e92d2c1b0d168590954959ab44cb15e8d7b6cf4945c1a"
   },
   "packages": {
@@ -1204,14 +1204,14 @@
       "mtime_ns": 1792940272214311450
     },
     "experiments/analysis/pipeline.py": {
-      "sha256": "0d1bded02503acae835748ccde51558dce3289f509f4ed17672190b737f2bbb0",
-      "bytes": 15581,
-      "mtime_ns": 1792940530475148769
+      "sha256": "14b018e704a191b6c0a08630a842ff4a92d7b72ade4ee73eedf828b008637e46",
+      "bytes": 15796,
+      "mtime_ns": 1792944064758057993
     },
     "experiments/analysis/plots.py": {
-      "sha256": "9a934423adea23103a055dc33cf623d911359a079cccb036eb4808a9444de504",
-      "bytes": 11370,
-      "mtime_ns": 1792940272255208127
+      "sha256": "651db58bcae3436b78727e88335a6914e6336105e498e67f2154a60a6b798ad9",
+      "bytes": 11491,
+      "mtime_ns": 1792944064738122424
     },
     "experiments/analysis/report.py": {
       "sha256": "856a86c5b43caf434c4e92d2c1b0d168590954959ab44cb15e8d7b6cf4945c1a",
@@ -4980,9 +4980,9 @@
     }
   },
   "output_files_sha256": {
-    "analysis_definition.json": "e0472560a0a39b4f181f52d7e7227d561a9f769b7f35f688b570ba37c41a9978",
-    "figures/cohort_harmful_fraction.pdf": "b2be98a2eedc04edd63b0f1f326b499c58ceae2d634fb4887460b288ef6a1fc6",
-    "figures/cohort_harmful_fraction.png": "c7223d7408766429fee520420ef4007ef6cd07c9c7bf0a9c71f8c822bc1ba19f",
+    "analysis_definition.json": "f2b12d7f3f1d8714979cc01425a919b6bb74e59f2764455aad63fd3f6dccf1ca",
+    "figures/cohort_harmful_fraction.pdf": "f40759c29b273388d3548b495c2d8556b41b8fe905fcdde65a0ea996cdcf5078",
+    "figures/cohort_harmful_fraction.png": "60ee5280563d5ff1466d65a6ec6cf87e1d8a01dbc69559e6aa69fb345867418f",
     "protocol.json": "0410dfd5143bea9262c09c41f6cfaa01ef5b75659cf49d74906100b64f2d1815",
     "report.md": "77899dc816fcd2e061f9d305244dcd71c8d0842d24bbdc0e36b206ba4c9ee588",
     "scenes/office/audit.json": "c6ff31588cea9d07c76d2ce229c1d318a6fba658d321a06b64a2b920a6fb71c4",
@@ -4991,18 +4991,18 @@
     "scenes/office/curves.csv": "d509ca6f3e579c542eef1d4e7464f74356242e712539e1e29cfbfdf87e391ed6",
     "scenes/office/curves.json": "1c5840b09a32168c99c90ea439d3ac46a0cfb56f95b8a6715b27ac987443e737",
     "scenes/office/depth_diagnostics.csv": "8f195193876bc9db59439f32049d532f9a9b5bec0b7d614405e6ab05f720d574",
-    "scenes/office/figures/context_exploration.pdf": "23af934f1e5181399f7937432aa486fde9a733c9822caf6bd38709156f777956",
+    "scenes/office/figures/context_exploration.pdf": "0f79c88f3fdc66a07d4118dbec77ca02539bb610383546c34d3ce1d88c09adfc",
     "scenes/office/figures/context_exploration.png": "eedffcaea7594718bab2ba71ce4c1c7a39d2f21321c54a5c64fd66d53310f5cf",
-    "scenes/office/figures/depth_classification.pdf": "034c313a3ecc688a38ff7e120ea07dd98a54b7764446ef2c361c7fc6edfbf97c",
-    "scenes/office/figures/depth_classification.png": "997f38f097e3beaa4bffbd5542ab3d8234e2934b8f2a31503c04ec591a5f89fd",
-    "scenes/office/figures/depth_errors.pdf": "0ef391e6758e769923774b684320d6a56217b889f83ccf693b18a0bf448fbbcd",
-    "scenes/office/figures/depth_errors.png": "aaa88b7867d403dc59ab45190bfbf64b68c367b4471264d3cad56bb5a8a8899f",
-    "scenes/office/figures/depth_utility.pdf": "f3c3a193c347aaf86a79c86641c14fb05885a9a91b18165ceff9dce9fdfc0f59",
-    "scenes/office/figures/depth_utility.png": "5dc13ea627ef35ae979f04e5c8e8529b849e489ee18971866ced45ddeef01ac1",
-    "scenes/office/figures/representative_targets.pdf": "83a3532e4447fc16539088aa74c6cce2ccb5615d726b6bce76f41e2229b06559",
-    "scenes/office/figures/representative_targets.png": "84834fce0e37652925cd616f2a50c7e3206d36779de63df7d17d8a28ffc3462f",
-    "scenes/office/figures/secondary_metrics.pdf": "bb4b10e2f7156525505809e31f8b7efaaea79147efe79c1b84f9b1750320034c",
-    "scenes/office/figures/secondary_metrics.png": "565dfbcb48ae046860c119c4d6da8db31d57a04ad09a9a6603f0ad1efc43fe3c",
+    "scenes/office/figures/depth_classification.pdf": "be7a24f064a78b93edc7f2a18ef68c3cd85682b9b80c3f4f292a034a1d4c17e0",
+    "scenes/office/figures/depth_classification.png": "a5af40a227bd6e28ff76528b8cf37aa0f626dc8e3ade73df060493a0a8242600",
+    "scenes/office/figures/depth_errors.pdf": "7bb1d19aa366723751a1fba51bd5e3c49a95852eda260407c78413183c20c97b",
+    "scenes/office/figures/depth_errors.png": "e301e0cddc0837b6c08805f8a3ae3694925b96a41846bbb423a2c0fb7949b841",
+    "scenes/office/figures/depth_utility.pdf": "2b0c4e70f98f7d7b092459eb195dc91417fb15b3110f6a7245c74e347c15d87e",
+    "scenes/office/figures/depth_utility.png": "4d376e37d28be66baede0a64b32814cc5563c74247a3d998cc58e255e91fff55",
+    "scenes/office/figures/representative_targets.pdf": "39af236b88dc3c913fe2385dc004e6a91e92a85eda683be3ab602d3e50130655",
+    "scenes/office/figures/representative_targets.png": "94a83ddb0174fc6a110eb59840e681583159db66194b88776244f88264e59ef5",
+    "scenes/office/figures/secondary_metrics.pdf": "acdee7e5976bdf8a8d279088ecab8e0f5562a36f6710110c4d885ccd739cca83",
+    "scenes/office/figures/secondary_metrics.png": "302c20b036e78a7db802b748c4f9daad33a5a17bd44520bd90688e1e0b33a331",
     "scenes/office/metrics.csv": "090d08a223460aa3b87ee860b276d73b3d078147d7acdfc722de698682ce25e5",
     "scenes/office/paired_comparisons.csv": "d666a7b06682371f8667c62fde9a5657b2ed8a241073f697436763c0d038a27d",
     "scenes/office/reference_pixels.csv": "493cbb9454cfdb5d39c25d08d36301d3afb58732b67803b050afaeac6604599f",
@@ -5015,8 +5015,8 @@
     "source/analysis/audit.py": "17da690696b5bccf3b8f309dc621fa650faa25257821a9a6a1e63a5256a14c29",
     "source/analysis/context.py": "a5115cba1625ae46154cab693571c14932c9d3e3a186118a51f9b901a0fc0d07",
     "source/analysis/core.py": "2bbdfe61ebc7e4654a934ceb5e90b9dce4bdda6d4d47be7e9113898651d8e60d",
-    "source/analysis/pipeline.py": "0d1bded02503acae835748ccde51558dce3289f509f4ed17672190b737f2bbb0",
-    "source/analysis/plots.py": "9a934423adea23103a055dc33cf623d911359a079cccb036eb4808a9444de504",
+    "source/analysis/pipeline.py": "14b018e704a191b6c0a08630a842ff4a92d7b72ade4ee73eedf828b008637e46",
+    "source/analysis/plots.py": "651db58bcae3436b78727e88335a6914e6336105e498e67f2154a60a6b798ad9",
     "source/analysis/report.py": "856a86c5b43caf434c4e92d2c1b0d168590954959ab44cb15e8d7b6cf4945c1a",
     "source/analyze_study.py": "0aec6cc0a5f8734bb9367f822a361d413dca81b83f099dac35f7fd8ceabf83db",
     "source/metrics.py": "347c71e2b61861276b526d856b59a706b8f8dac85ea259eb93681bf0794b2499",

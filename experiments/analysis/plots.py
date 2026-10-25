@@ -22,6 +22,8 @@ def save(fig, folder, name):
 
 def axis(ax, levels, ylabel=None):
     ax.set_xticks(range(len(levels)), [f"{b:g}" for b in levels], rotation=50, fontsize=8)
+    # Shared x axes otherwise hide the numbers on all but the bottom row.
+    ax.tick_params(axis="x", labelbottom=True)
     ax.set_xlabel("Yaw span (deg)")
     if ylabel:
         ax.set_ylabel(ylabel)

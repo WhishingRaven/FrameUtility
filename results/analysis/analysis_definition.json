@@ -30,6 +30,11 @@
   "seeds": [
     2026
   ],
+  "plot_x_axis": {
+    "positions": "equally spaced observed stages",
+    "labels": "actual yaw span in degrees on every panel",
+    "spacing_proportional_to_angle": false
+  },
   "utility": "E_DROP - E_ADD in original metric units; never the stored relative pose utility",
   "primary_effect_floor": 0.0005,
   "sensitivity_effect_floors": [

@@ -11,6 +11,7 @@ from analysis.audit import diagnostic, expected_predictions, runtime_summary
 from analysis.core import (PRIMARY, classify, cohort_summaries, normalize_rows,
                            representative_ids, transition_details, curve_summaries, transition_summaries)
 from analysis.pipeline import analyze, publish
+from analysis.plots import axis, plt
 
 
 class AnalysisRulesTests(unittest.TestCase):
@@ -121,6 +122,19 @@ class AnalysisRulesTests(unittest.TestCase):
 
     def test_representatives_are_fixed_by_name(self):
         self.assertEqual(representative_ids(["e", "b", "d", "c", "a", "a"]), ["a", "c", "e"])
+
+    def test_shared_yaw_axes_show_actual_numbers_on_every_panel(self):
+        levels = [0, .025, .05, .075, .1, .15, .2, .25, .5, 1, 2, 4]
+        fig, axes = plt.subplots(3, 1, sharex=True)
+        try:
+            for ax in axes:
+                axis(ax, levels)
+            fig.canvas.draw()
+            for ax in axes:
+                self.assertEqual([tick.get_text() for tick in ax.get_xticklabels()], [f"{b:g}" for b in levels])
+                np.testing.assert_array_equal(ax.get_xticks(), np.arange(len(levels)))
+        finally:
+            plt.close(fig)
 
     def test_failed_publication_restores_previous_successful_report(self):
         with tempfile.TemporaryDirectory() as directory:
