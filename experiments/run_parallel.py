@@ -13,7 +13,7 @@ import time
 
 from filelock import FileLock
 from metrics import condition_counts
-from run import atomic_json, resolve_device, sha256
+from run import atomic_json, load_official_ground_truth, resolve_device, sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -114,6 +114,8 @@ def run(args):
     require_approval(protocol)
     manifest = json.loads(manifest_path.read_text())
     validate_protocol(protocol, manifest, args.seed)
+    # Verify the official depth/mask snapshot before resolving a device or creating outputs.
+    load_official_ground_truth(manifest_path, manifest)
     device = resolve_device(args.device)
     cohort = ROOT/args.cohort
     cohort.mkdir(parents=True, exist_ok=True)

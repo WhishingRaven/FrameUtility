@@ -1,6 +1,6 @@
 {
   "protocol_id": "eth3d_multi_view",
-  "status": "awaiting_approval",
+  "status": "approved",
   "implementation_ready": false,
   "plan": "EXPERIMENT_PLAN.md",
   "excluded_scenes": {
@@ -212,5 +212,6 @@
     "minimum_required": 5,
     "minimum_met": true,
     "report": "experiments/official_selection_summary.md"
-  }
+  },
+  "approved_plan_sha256": "f3e29d12a3efcfc849201e153e070ccfabde838906c8f453e8f2c0b5d807055a"
 }

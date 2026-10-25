@@ -1,6 +1,6 @@
 # 로컬과 CUDA 서버의 공통 실험 인터페이스
 
-승인 대상은 [실험 계획과 분석 절차](../EXPERIMENT_PLAN.md)다. 현재는 **승인 대기 / 새 과학적 방법 구현 검증 미완료**이며 새 모델 추론은 시작하지 않았다.
+실험 계획과 분석 절차는 승인됐다. **새 과학적 방법의 구현 검증은 아직 끝나지 않아 모델 추론은 시작하지 않았다.**
 
 첫 대상은 **office 초기 주실험**이다. office도 전체 주 분석에 포함한다. 5·10·15장, 타깃 전부, 블러 12단계, 단일 seed 2026, 두 모델을 적용한다. 공식 사진 선정에 통과한 확장 9개 장면도 같은 방법을 적용한다. 모든 장면의 실행 위치는 --target local|cuda-server로 선택하며 기본값은 local이다.
 
@@ -31,6 +31,16 @@
 --remaining은 공식 선정 통과 office 외 9개 장면을 고르는 옵션이며 실행 위치와 무관하다. --device는 실행 호스트의 GPU를 지정하는 전문가용 옵션이고, 실행 위치는 --target으로 고른다.
 
 prepare/run/analyze는 승인·구현 준비 검사를 통과해야 하며 서버에서도 다시 검사한다. status는 읽기 전용으로 선택한 위치의 기록을 읽고 GPU나 결과 폴더를 만들지 않는다. 서버 연결 실패 시 local로 변경하지 않는다.
+
+## 공식 깊이 GT 스냅샷
+
+공식 ETH3D 깊이 아카이브에서 주 분석 10개 장면의 공식 선정 15장 사진별 깊이와 유효 마스크를 만들려면 다음 명령을 실행한다.
+
+~~~sh
+.venv/bin/python experiments/prepare_official_gt.py
+~~~
+
+결과는 `data/experiments/eth3d_multi_view/<scene>/<image-id>/` 안의 `official_depth_m.npy`, `official_valid_mask.npy`, `official_gt_metadata.json`이다. 깊이 배열은 계획에서 고정한 252×160 평가 격자이며, 마스크는 공식 GT의 유효한 양수 깊이 위치만 표시한다. 격자·마스크는 공식 선정 기록과 대조된다. 장면별 `official_ground_truth_manifest.json`은 파일 해시와 출처를 기록한다. `laser_depth.npy`는 기존 레이저 투영 참고 자료로 그대로 둔다.
 
 ## 구현된 가속 실행부
 
@@ -74,11 +84,11 @@ office도 선택한 실행 위치와 관계없이 주 분석에 포함한다. �
 
 ## 승인 후 완성하고 검증할 부분
 
-[study_v1.json](study_v1.json)의 status는 awaiting_approval, implementation_ready는 false다.
+[study_v1.json](study_v1.json)의 status는 approved, implementation_ready는 false다.
 
-공식 GT와 보정 파일을 이용한 정식 사진 선정은 [선정 스크립트](select_official_scenes.py)로 완료했다. 정식 명단과 장면별 통과·실패는 [선정 요약](official_selection_summary.md) 및 결과 JSON에 고정했다. 다만 추론 준비·채점 흐름에 공식 GT 좌표 연결, 사진별 CAMERA_ID 처리, 공통 평가 격자, 마스크 생성·잠금을 통합하는 일은 아직 남아 있다. prepare_study.py는 기존 준비 루트의 입력·manifest 검증과 완성을 담당할 예정이며 현재 전체 추론 준비 완료를 뜻하지 않는다. analyze_study.py는 실험 결과가 나온 뒤 구현한다.
+공식 GT와 보정 파일을 이용한 정식 사진 선정은 [선정 스크립트](select_official_scenes.py)로 완료했고, 선정된 사진들의 공식 깊이·마스크 스냅샷도 준비했다. `run.py`는 해당 GT를 해시·선정 명단과 대조하고, 두 모델의 깊이 예측을 동일 공통 격자로 표본화해 고정 마스크에서 채점한다. 다만 `prepare_study.py`가 없어 공식 사진 명단에 맞춘 RGB·블러 입력 manifest 생성 및 전체 실행 전 검증은 남아 있으므로, 현재 전체 추론 준비가 끝난 것은 아니다. `analyze_study.py`는 실험 결과가 나온 뒤 구현한다.
 
-데이터 준비는 승인 후에, 모델 실행은 승인과 구현 검증 이후에 가능하다. 가속 실행부가 준비됐다는 것과 새 실험의 전체 과학적 구현이 완료됐다는 것을 구분한다.
+모델 실행은 승인과 구현 검증 이후에 가능하다. 가속 실행부가 준비됐다는 것과 새 실험의 전체 과학적 구현이 완료됐다는 것을 구분한다.
 
 옛 단일 카메라·단순 laser raster 전처리와 일회성 office 분석 CLI는 퇴역 처리했다. 순수 함수는 기존 검증에 남아 있지만 이 CLI로 옛 실험을 다시 만들 수 없다. 내부 파라미터가 여러 개면 옛 파서는 첫 카메라를 복사하는 대신 오류를 낸다.
 

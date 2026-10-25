@@ -19,7 +19,7 @@ import numpy as np
 import torch
 from filelock import FileLock
 
-from backends import ROOT, load_backend, reference_depth
+from backends import ROOT, load_backend, project_depth_to_common_grid, reference_depth
 from metrics import METRICS, evaluate_available, utility
 
 
@@ -29,6 +29,94 @@ def sha256(path):
         for chunk in iter(lambda: stream.read(8*1024*1024), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def load_official_ground_truth(manifest_path, manifest):
+    """Load and verify the scene's fixed official depth/mask snapshot."""
+    gt_manifest_path = manifest_path.parent / "official_ground_truth_manifest.json"
+    if not gt_manifest_path.is_file():
+        raise FileNotFoundError(f"Official ground-truth manifest is required: {gt_manifest_path}")
+    gt_manifest = json.loads(gt_manifest_path.read_text())
+    protocol = json.loads((ROOT / "experiments/study_v1.json").read_text())
+    if manifest.get("protocol_id") != protocol["protocol_id"]:
+        raise ValueError("Input manifest does not identify the approved study protocol")
+    if gt_manifest.get("protocol_id") != protocol["protocol_id"]:
+        raise ValueError("Official ground truth belongs to a different protocol")
+    if gt_manifest.get("scene") != manifest.get("scene"):
+        raise ValueError("Official ground-truth scene does not match the input manifest")
+    selection_path = manifest_path.parent.parent / "official_selection.json"
+    if not selection_path.is_file():
+        raise FileNotFoundError(f"Official selection snapshot is required: {selection_path}")
+    selection = json.loads(selection_path.read_text())
+    selected_scene = selection["scenes"].get(manifest["scene"], {})
+    if selected_scene.get("status") != "pass":
+        raise ValueError("Scene has no passing official ETH3D selection")
+    if gt_manifest.get("official_selection_sha256") != sha256(selection_path):
+        raise ValueError("Official GT was generated from a different selection snapshot")
+    if gt_manifest.get("source_archive_sha256") != selected_scene.get("depth_archive_sha256"):
+        raise ValueError("Official GT depth archive differs from the selection record")
+    if gt_manifest.get("selected_sets") != selected_scene.get("sets"):
+        raise ValueError("Official GT and selection snapshot have different view sets")
+    for size in protocol["sizes"]:
+        if manifest["sets"][str(size)] != gt_manifest["selected_sets"][str(size)]:
+            raise ValueError(f"Input and official GT selected-view lists differ for size {size}")
+
+    rows = {row["image_id"]: row for row in gt_manifest["images"]}
+    selected_ids = set().union(*(set(manifest["sets"][str(size)]) for size in protocol["sizes"]))
+    frame_ids = {frame["id"] for frame in manifest["frames"]}
+    if frame_ids != selected_ids:
+        raise ValueError("Input manifest frames must exactly match the official 15-view set")
+    if len(rows) != len(gt_manifest["images"]) or rows.keys() != selected_ids:
+        raise ValueError("Official GT records must exactly match the selected 15-view set")
+    official_validity = {row["image_id"]: row for row in selected_scene["photo_validity"]}
+    depths, masks, file_records = {}, {}, []
+    grid_width, grid_height = gt_manifest["grid_size"]
+    for image_id in selected_ids:
+        row = rows[image_id]
+        paths = {key: manifest_path.parent / row[key]
+                 for key in ("depth_file", "mask_file", "metadata_file")}
+        hashes = {"depth_file": "depth_sha256", "mask_file": "mask_sha256",
+                  "metadata_file": "metadata_sha256"}
+        for key, path in paths.items():
+            if not path.resolve().is_relative_to(manifest_path.parent.resolve()):
+                raise ValueError(f"Official GT path escapes its scene directory: {path}")
+            if not path.is_file() or sha256(path) != row[hashes[key]]:
+                raise ValueError(f"Official ground-truth input missing or changed: {path}")
+        depth = np.load(paths["depth_file"], allow_pickle=False)
+        mask = np.load(paths["mask_file"], allow_pickle=False)
+        metadata = json.loads(paths["metadata_file"].read_text())
+        if depth.shape != (grid_height, grid_width) or depth.dtype.kind != "f" or depth.dtype.itemsize != 4:
+            raise ValueError(f"Invalid official depth array shape or dtype: {paths['depth_file']}")
+        if mask.shape != depth.shape or mask.dtype != np.bool_:
+            raise ValueError(f"Invalid official validity mask shape or dtype: {paths['mask_file']}")
+        if not np.array_equal(np.isfinite(depth) & (depth > 0), mask):
+            raise ValueError(f"Official depth and validity mask disagree: {image_id}")
+        depth_hash = hashlib.sha256(np.ascontiguousarray(depth).tobytes()).hexdigest()
+        mask_hash = hashlib.sha256(np.packbits(mask).tobytes()).hexdigest()
+        if depth_hash != row["depth_array_sha256"] or mask_hash != row["valid_mask_sha256"]:
+            raise ValueError(f"Official depth or mask array hash mismatch: {image_id}")
+        if int(mask.sum()) != row["valid_pixel_count"] or int(mask.sum()) < protocol["preparation"]["minimum_gt_pixels_per_image"]:
+            raise ValueError(f"Official GT has an invalid pixel count: {image_id}")
+        if (metadata.get("scene") != manifest["scene"] or metadata.get("image_id") != image_id
+                or metadata.get("source_archive_sha256") != gt_manifest["source_archive_sha256"]
+                or metadata.get("official_selection_sha256") != gt_manifest["official_selection_sha256"]):
+            raise ValueError(f"Per-image official GT metadata disagrees with its manifest: {image_id}")
+        selection_row = official_validity.get(image_id)
+        if (not selection_row or selection_row["valid_gt_samples"] != row["valid_pixel_count"]
+                or selection_row["valid_grid_mask_sha256"] != row["valid_mask_sha256"]):
+            raise ValueError(f"Official GT mask differs from the selection record: {image_id}")
+        depths[image_id], masks[image_id] = depth, mask
+        file_records.append({"image_id": image_id, **{
+            key: {"path": row[key], "sha256": row[hashes[key]]} for key in paths
+        }})
+
+    manifest["evaluation_ground_truth"] = "official_eth3d_occlusion_aware_depth"
+    manifest["official_ground_truth"] = {
+        "manifest": gt_manifest_path.relative_to(ROOT).as_posix(),
+        "manifest_sha256": sha256(gt_manifest_path),
+        "images": sorted(file_records, key=lambda row: row["image_id"]),
+    }
+    return depths, masks, gt_manifest, gt_manifest_path
 
 
 def resolve_device(device):
@@ -121,7 +209,7 @@ def environment(args, manifest_path):
             "platform": platform.platform(), "python": platform.python_version(),
             "mast3r": {"graph": "complete symmetrized", "optimizer_device": getattr(args, "optimizer_device", None) or args.device,
                        "niter1": 300, "niter2": 300},
-            "evaluation": "common context only; Sim(3) poses; one median depth scale per common context",
+            "evaluation": "official ETH3D depth, fixed common-grid mask, Sim(3) poses, one positive median depth scale per common context",
             "torch_threads": torch.get_num_threads()}
 
 
@@ -129,9 +217,17 @@ def run(args):
     manifest_path = ROOT / args.manifest
     manifest = json.loads(manifest_path.read_text())
     frames = {f["id"]: f for f in manifest["frames"]}
+    study_protocol = json.loads((ROOT / "experiments/study_v1.json").read_text())
+    official_study = manifest.get("protocol_id") == study_protocol["protocol_id"]
+    gt_masks = None
+    gt_manifest_path = None
+    if official_study:
+        refs, gt_masks, gt_manifest, gt_manifest_path = load_official_ground_truth(manifest_path, manifest)
+    else:
+        refs = {}
     for f in frames.values():
-        if sha256(ROOT / f["depth"]) != f["depth_sha256"]:
-            raise ValueError(f"Geometry reference changed: {f['depth']}")
+        if not official_study and sha256(ROOT / f["depth"]) != f["depth_sha256"]:
+            raise ValueError(f"Legacy geometry reference changed: {f['depth']}")
         for variant in f["variants"].values():
             if sha256(ROOT / variant["path"]) != variant["sha256"]:
                 raise ValueError(f"Input image changed: {variant['path']}")
@@ -151,6 +247,19 @@ def run(args):
     predictions = out / "predictions"
     predictions.mkdir(parents=True, exist_ok=True)
     fingerprint = environment(args, manifest_path)
+    if official_study:
+        fingerprint["official_ground_truth_manifest_sha256"] = sha256(gt_manifest_path)
+        fingerprint["official_ground_truth_files"] = manifest["official_ground_truth"]["images"]
+        fingerprint["study_protocol_sha256"] = sha256(ROOT / "experiments/study_v1.json")
+        fingerprint["official_gt_preparation_code_sha256"] = sha256(ROOT / "experiments/prepare_official_gt.py")
+        fingerprint["official_selection_code_sha256"] = sha256(ROOT / "experiments/select_official_scenes.py")
+        fingerprint["evaluation_coordinate_map"] = {
+            "source_image_size": [study_protocol["preparation"]["crop_width"],
+                                  study_protocol["preparation"]["crop_height"]],
+            "roi": study_protocol["preparation"]["evaluation_roi"],
+            "grid": study_protocol["preparation"]["evaluation_grid"],
+            "sampling": "nearest model-output pixel after exact backend resize/crop mapping",
+        }
     pair_cache = None
     if args.backend == "mast3r" and getattr(args, "pair_cache_source", None):
         source = ROOT / args.pair_cache_source / "mast3r"
@@ -168,7 +277,8 @@ def run(args):
         if envpath.exists() and json.loads(envpath.read_text()) != fingerprint:
             raise ValueError("Environment/code/inputs changed; use a new --output directory")
         atomic_json(envpath, fingerprint)
-    refs = {i: reference_depth(ROOT / f["depth"], args.backend) for i, f in frames.items()}
+    if not official_study:
+        refs = {i: reference_depth(ROOT / f["depth"], args.backend) for i, f in frames.items()}
     poses = {i: f["c2w"] for i, f in frames.items()}
     model = None
     executions = 0
@@ -184,7 +294,10 @@ def run(args):
         nonlocal model, executions
         if path.exists():
             with np.load(path, allow_pickle=False) as loaded:
-                return {k: loaded[k] for k in loaded.files}
+                result = {k: loaded[k] for k in loaded.files}
+            if official_study and "depth_common_grid" not in result:
+                raise ValueError("Cached prediction lacks official-grid depths; start with a fresh results directory")
+            return result
         if getattr(args, "stop_file", None) and (ROOT / args.stop_file).exists():
             raise StopIteration
         if args.max_new_runs is not None and executions >= args.max_new_runs:
@@ -207,6 +320,14 @@ def run(args):
             result = model.predict(ids, paths, key)
             if list(result["ids"]) != ids:
                 raise ValueError("Backend changed the requested image set/order")
+            if official_study:
+                result["depth_common_grid"] = project_depth_to_common_grid(
+                    result, args.backend,
+                    [study_protocol["preparation"]["crop_width"],
+                     study_protocol["preparation"]["crop_height"]],
+                    study_protocol["preparation"]["evaluation_roi"],
+                    study_protocol["preparation"]["evaluation_grid"],
+                )
             temp = path.with_suffix(".tmp.npz")
             np.savez_compressed(temp, **result)
             temp.replace(path)
@@ -245,10 +366,15 @@ def run(args):
             targets = [i for i in targets if list(frames).index(i) % args.shard_count == args.shard_index]
             for target in targets:
                 common = [i for i in ids if i != target]
-                pixels = sum(int(np.count_nonzero((refs[i] > 0) & np.isfinite(refs[i]))) for i in common)
+                pixels = sum(int(gt_masks[i].sum()) if official_study else
+                             int(np.count_nonzero((refs[i] > 0) & np.isfinite(refs[i]))) for i in common)
                 if clean is not None and repeated is not None:
-                    first_metrics, first_errors = evaluate_available(clean, common, poses, refs)
-                    repeat_metrics, repeat_errors = evaluate_available(repeated, common, poses, refs)
+                    first_metrics, first_errors = evaluate_available(
+                        clean, common, poses, refs, gt_masks,
+                        study_protocol["evaluation"]["minimum_positive_predictions_for_scale"])
+                    repeat_metrics, repeat_errors = evaluate_available(
+                        repeated, common, poses, refs, gt_masks,
+                        study_protocol["evaluation"]["minimum_positive_predictions_for_scale"])
                     variance_row = {"size": size, "target": target,
                                      "absolute_metric_delta": {m: abs(first_metrics[m]-repeat_metrics[m]) for m in METRICS
                                                                if m in first_metrics and m in repeat_metrics},
@@ -258,12 +384,16 @@ def run(args):
                         variance = [r for r in variance if (r["size"], r["target"]) != (size, target)] + [variance_row]
                         atomic_json(variance_path, variance)
                 drop = predict(common, 0, None, f"m{size}_drop_{target}")
-                drop_metrics = evaluate_available(drop, common, poses, refs)
+                drop_metrics = evaluate_available(
+                    drop, common, poses, refs, gt_masks,
+                    study_protocol["evaluation"]["minimum_positive_predictions_for_scale"])
                 for severity in manifest["severities_deg"]:
                     if all((size, target, severity, metric) in seen for metric in METRICS):
                         continue
                     add = clean if severity == 0 else predict(ids, severity, target, f"m{size}_add_{target}_b{severity:g}")
-                    add_metrics = evaluate_available(add, common, poses, refs)
+                    add_metrics = evaluate_available(
+                        add, common, poses, refs, gt_masks,
+                        study_protocol["evaluation"]["minimum_positive_predictions_for_scale"])
                     rows = utility_records(args.backend, manifest["scene"], size, target, severity,
                                            common, drop_metrics, add_metrics, pixels)
                     records = save_condition(records_path, rows)

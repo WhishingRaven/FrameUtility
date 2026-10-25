@@ -47,9 +47,50 @@ def evaluate_pose(prediction, common_ids, gt_poses):
             "pose_pair_rotation_deg": float(np.mean(rpe_r)), "alignment_pose_scale": float(scale)}
 
 
-def evaluate_geometry(prediction, common_ids, gt_depths):
+def evaluate_geometry(prediction, common_ids, gt_depths, gt_masks=None,
+                      minimum_positive_predictions=100):
     ids = list(prediction["ids"])
     ix = [ids.index(i) for i in common_ids]
+    if gt_masks is not None:
+        if "depth_common_grid" not in prediction:
+            raise ValueError("Prediction has not been sampled on the official common evaluation grid")
+        predicted = prediction["depth_common_grid"][ix].astype(np.float64)
+        predicted_parts, reference_parts, scale_predicted, scale_reference = [], [], [], []
+        pixel_count = 0
+        for index, frame in enumerate(common_ids):
+            ref = np.asarray(gt_depths[frame], dtype=np.float64)
+            mask = np.asarray(gt_masks[frame], dtype=bool)
+            pred = predicted[index]
+            if pred.shape != ref.shape or mask.shape != ref.shape:
+                raise ValueError(f"Official depth, mask and prediction grids differ for {frame}")
+            if not mask.any() or not np.isfinite(ref[mask]).all() or np.any(ref[mask] <= 0):
+                raise ValueError(f"Invalid official ground truth on its fixed mask for {frame}")
+            if not np.isfinite(pred[mask]).all():
+                raise ValueError(f"Non-finite prediction on fixed official mask for {frame}")
+            positive = mask & (pred > 0)
+            scale_predicted.append(pred[positive])
+            scale_reference.append(ref[positive])
+            predicted_parts.append(pred[mask])
+            reference_parts.append(ref[mask])
+            pixel_count += int(mask.sum())
+
+        positive_predictions = np.concatenate(scale_predicted)
+        positive_reference = np.concatenate(scale_reference)
+        if len(positive_predictions) < minimum_positive_predictions:
+            raise ValueError("Insufficient positive predictions to estimate the shared depth scale")
+        depth_scale = float(np.median(positive_reference / positive_predictions))
+        if not np.isfinite(depth_scale) or depth_scale <= 0:
+            raise ValueError("Invalid positive median scale from official ground truth")
+        pd = np.concatenate(predicted_parts) * depth_scale
+        gd = np.concatenate(reference_parts)
+        difference = pd - gd
+        return {"geometry_depth_absrel": float(np.mean(np.abs(difference) / gd)),
+                "geometry_depth_rmse_m": float(np.sqrt(np.mean(difference**2))),
+                "alignment_depth_scale": depth_scale,
+                "evaluation_pixels": pixel_count}
+
+    # Legacy diagnostic path for historical analyses; the approved study always
+    # supplies the official fixed mask above.
     # One scale for the entire common context, never a separate fit per image.
     pd, gd = [], []
     for idx, frame in zip(ix, common_ids):
@@ -72,13 +113,14 @@ def evaluate_geometry(prediction, common_ids, gt_depths):
             "evaluation_pixels": int(len(gd))}
 
 
-def evaluate(prediction, common_ids, gt_poses, gt_depths):
+def evaluate(prediction, common_ids, gt_poses, gt_depths, gt_masks=None):
     """Strict combined evaluation; any invalid family raises as before."""
     return {**evaluate_pose(prediction, common_ids, gt_poses),
-            **evaluate_geometry(prediction, common_ids, gt_depths)}
+            **evaluate_geometry(prediction, common_ids, gt_depths, gt_masks)}
 
 
-def evaluate_available(prediction, common_ids, gt_poses, gt_depths):
+def evaluate_available(prediction, common_ids, gt_poses, gt_depths, gt_masks=None,
+                       minimum_positive_predictions=100):
     """Keep valid metrics while recording invalid pose/geometry as separate outcomes."""
     values, errors = {}, {}
     if prediction is None:
@@ -86,7 +128,11 @@ def evaluate_available(prediction, common_ids, gt_poses, gt_depths):
     for family, evaluator, reference in [("pose", evaluate_pose, gt_poses),
                                           ("geometry", evaluate_geometry, gt_depths)]:
         try:
-            values.update(evaluator(prediction, common_ids, reference))
+            if family == "geometry":
+                values.update(evaluator(prediction, common_ids, reference, gt_masks,
+                                        minimum_positive_predictions))
+            else:
+                values.update(evaluator(prediction, common_ids, reference))
         except ValueError as error:
             errors[family] = str(error)
     return values, errors

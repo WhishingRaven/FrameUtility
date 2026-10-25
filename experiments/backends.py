@@ -12,6 +12,53 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def project_depth_to_common_grid(prediction, backend, source_size, evaluation_roi, grid_size):
+    """Sample model depth at the protocol's shared prepared-image pixel centers."""
+    source_width, source_height = map(int, source_size)
+    roi_x, roi_y, roi_width, roi_height = map(int, evaluation_roi)
+    grid_width, grid_height = map(int, grid_size)
+    if (roi_width % grid_width or roi_height % grid_height):
+        raise ValueError("Evaluation ROI must divide evenly into the fixed grid")
+
+    if backend == "vggt":
+        output_width = 518
+        output_height = round(source_height * output_width / source_width / 14) * 14
+        crop_left = 0
+        crop_top = max(0, (output_height - 518) // 2)
+        expected_height = min(output_height, 518)
+        expected_width = output_width
+    elif backend == "mast3r":
+        scale = 512 / max(source_width, source_height)
+        resized_width = round(source_width * scale)
+        resized_height = round(source_height * scale)
+        center_x, center_y = resized_width // 2, resized_height // 2
+        half_width = (2 * center_x) // 16 * 8
+        half_height = (2 * center_y) // 16 * 8
+        crop_left, crop_top = center_x - half_width, center_y - half_height
+        output_width, output_height = resized_width, resized_height
+        expected_width, expected_height = half_width * 2, half_height * 2
+    else:
+        raise ValueError(f"Unknown backend: {backend}")
+
+    depth = np.asarray(prediction["depth"])
+    if depth.ndim != 3 or depth.shape[1:] != (expected_height, expected_width):
+        raise ValueError(
+            f"{backend} depth shape {depth.shape} does not match its recorded preprocessing "
+            f"transform {(expected_height, expected_width)}"
+        )
+
+    # Grid coordinates are corner-origin pixel centers; resizing uses the same
+    # half-pixel convention as PIL, then the model's exact center crop is removed.
+    grid_x = roi_x + (np.arange(grid_width, dtype=np.float64) + 0.5) * (roi_width / grid_width)
+    grid_y = roi_y + (np.arange(grid_height, dtype=np.float64) + 0.5) * (roi_height / grid_height)
+    sample_x = np.floor(grid_x * output_width / source_width).astype(np.intp) - crop_left
+    sample_y = np.floor(grid_y * output_height / source_height).astype(np.intp) - crop_top
+    if (sample_x.min() < 0 or sample_x.max() >= expected_width or
+            sample_y.min() < 0 or sample_y.max() >= expected_height):
+        raise ValueError(f"{backend} preprocessing crop does not contain the full common evaluation grid")
+    return depth[:, sample_y[:, None], sample_x[None, :]]
+
+
 def reference_depth(path, backend):
     ref = np.load(path)
     h, w = ref.shape
