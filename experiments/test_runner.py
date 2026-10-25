@@ -1,5 +1,7 @@
 """GPU defaults, shared entrypoint, approval gate and protocol consistency."""
 import json
+import contextlib
+import io
 from pathlib import Path
 from types import SimpleNamespace
 import tempfile
@@ -15,7 +17,8 @@ from prepare import read_calibration
 class RunnerTests(unittest.TestCase):
     def protocol(self):
         return {"status": "approved", "implementation_ready": True, "protocol_id": "fixture",
-                "confirmatory_scenes": ["new_scene"], "control_scenes": ["office"],
+                "primary_scenes": ["new_scene", "office"], "initial_scenes": ["office"],
+                "expansion_scenes": ["new_scene"],
                 "seeds": [2026, 2027, 2028], "sizes": [5], "blur_degrees": [0, .025, .25],
                 "backends": ["vggt", "mast3r"], "execution": {"workers": 3, "threads_per_worker": 8}}
 
@@ -24,8 +27,13 @@ class RunnerTests(unittest.TestCase):
                 "sets": {"5": list("abcde")}}
 
     def test_entrypoints_share_the_accelerated_driver(self):
-        self.assertIs(run_all.run, run_parallel.run)
-        self.assertIs(run_all.build_parser, run_parallel.build_parser)
+        self.assertIs(run_all.run_worker_group, run_parallel.run)
+        local = run_all.build_parser().parse_args(["run", "--scene", "office"])
+        server = run_all.build_parser().parse_args(["run", "--scene", "courtyard"])
+        self.assertEqual(local.device, "auto")
+        self.assertEqual(server.device, "auto")
+        self.assertIsNone(local.seed)
+        self.assertIsNone(server.seed)
 
     def test_auto_prefers_cuda_then_mps_and_rejects_silent_cpu_fallback(self):
         with patch.object(run.torch.cuda, "is_available", return_value=True):
@@ -91,7 +99,7 @@ class RunnerTests(unittest.TestCase):
             protocol = self.protocol()
             protocol.update(plan="plan.md", approved_plan_sha256=run.sha256(root/"plan.md"))
             (root/"protocol.json").write_text(json.dumps(protocol))
-            (root/"manifest.json").write_text(json.dumps(self.manifest()))
+            (root/"manifest.json").write_text(json.dumps({**self.manifest(), "scene": "office"}))
             args = SimpleNamespace(protocol="protocol.json", manifest="manifest.json", cohort="outputs",
                                    device="mps", seed=2026)
             with (
@@ -150,6 +158,137 @@ class RunnerTests(unittest.TestCase):
             self.assertEqual(state["planned_conditions"], 30)
             self.assertEqual(state["attempted_conditions"], 30)
             self.assertEqual(state["status"], "complete")
+
+
+class InterfaceTests(unittest.TestCase):
+    def make_fixture(self, root):
+        (root/"plan.md").write_text("approved interface fixture")
+        protocol = {"protocol_id": "fixture", "status": "approved", "implementation_ready": True,
+                    "plan": "plan.md", "approved_plan_sha256": run.sha256(root/"plan.md"),
+                    "primary_scenes": ["office", "courtyard"], "initial_scenes": ["office"],
+                    "expansion_scenes": ["courtyard"], "sizes": [5], "blur_degrees": [0, .25],
+                    "seeds": [2026], "backends": ["vggt", "mast3r"],
+                    "execution": {"workers": 3, "threads_per_worker": 8}}
+        (root/"protocol.json").write_text(json.dumps(protocol))
+        scripts = root/"experiments"
+        scripts.mkdir()
+        (scripts/"prepare_study.py").touch()
+        (scripts/"analyze_study.py").touch()
+        folder = root/"data/experiments/fixture/office"
+        folder.mkdir(parents=True)
+        (folder/"manifest.json").write_text(json.dumps(
+            {"protocol_id": "fixture", "scene": "office", "sets": {"5": list("abcde")},
+             "severities_deg": [0, .25]}))
+        return protocol
+
+    def test_same_user_command_selects_mps_or_cuda_and_runs_one_seed(self):
+        for device in ("mps", "cuda"):
+            with self.subTest(device=device), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                self.make_fixture(root)
+                args = run_all.build_parser().parse_args(["run", "--protocol", "protocol.json", "--scene", "office"])
+                scientific = {key: "fixed" for key in
+                              ("protocol_sha256", "plan_sha256", "precision", "workers", "threads_per_worker",
+                               "seeds", "vendor_versions", "mast3r_model_config_sha256", "source_sha256")}
+                with (
+                    patch.object(run_all, "ROOT", root),
+                    patch.object(run_parallel, "ROOT", root),
+                    patch.object(run_all, "resolve_device", return_value=device),
+                    patch.object(run_all, "cohort_configuration", return_value=scientific),
+                    patch.object(run_all, "run_worker_group") as launch,
+                    patch.object(run_all.subprocess, "run") as analyze,
+                ):
+                    run_all.run(args)
+                calls = [item.args[0] for item in launch.call_args_list]
+                self.assertEqual([c.seed for c in calls], [2026])
+                self.assertTrue(all(c.device == device for c in calls))
+                self.assertTrue(all(c.manifest.endswith("fixture/office/manifest.json") for c in calls))
+                self.assertTrue(all(f"/{device}-" in c.cohort for c in calls))
+                self.assertEqual(analyze.call_count, 1)
+                assignments = json.loads((root/"results/fixture/scene_assignments.json").read_text())
+                self.assertTrue(assignments["office"].startswith(device+"-"))
+
+    def test_human_entrypoint_blocks_unapproved_work_before_gpu_or_outputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            protocol = self.make_fixture(root)
+            protocol["status"] = "awaiting_approval"
+            (root/"protocol.json").write_text(json.dumps(protocol))
+            for action in ("prepare", "run", "analyze"):
+                args = run_all.build_parser().parse_args([action, "--protocol", "protocol.json", "--scene", "office"])
+                with patch.object(run_all, "ROOT", root), patch.object(run_all, "resolve_device") as gpu:
+                    with self.assertRaisesRegex(RuntimeError, "approval"):
+                        run_all.run(args)
+                    gpu.assert_not_called()
+            self.assertFalse((root/"results").exists())
+
+    def test_status_is_read_only_and_does_not_require_gpu(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.make_fixture(root)
+            args = run_all.build_parser().parse_args(["status", "--protocol", "protocol.json", "--scene", "office"])
+            with (
+                patch.object(run_all, "ROOT", root),
+                patch.object(run_all, "resolve_device") as gpu,
+                contextlib.redirect_stdout(io.StringIO()),
+            ):
+                result = run_all.run(args)
+                gpu.assert_not_called()
+            self.assertEqual(result["runs"], [{"scene": "office", "status": "not_started"}])
+            self.assertFalse((root/"results").exists())
+
+    def test_expansion_does_not_silently_run_on_local_mps(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.make_fixture(root)
+            args = run_all.build_parser().parse_args(["run", "--protocol", "protocol.json", "--remaining"])
+            with (
+                patch.object(run_all, "ROOT", root),
+                patch.object(run_parallel, "ROOT", root),
+                patch.object(run_all, "resolve_device", return_value="mps"),
+                patch.object(run_all, "run_worker_group") as launch,
+            ):
+                with self.assertRaisesRegex(RuntimeError, "CUDA"):
+                    run_all.run(args)
+                launch.assert_not_called()
+            self.assertFalse((root/"results").exists())
+
+    def test_server_expansion_keeps_office_in_primary_analysis(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            protocol = self.make_fixture(root)
+            data = root/"data/experiments/fixture/courtyard"
+            data.mkdir()
+            (data/"manifest.json").write_text(json.dumps(
+                {"protocol_id": "fixture", "scene": "courtyard", "sets": {"5": list("abcde")},
+                 "severities_deg": [0, .25]}))
+            results = root/"results/fixture"
+            for seed in protocol["seeds"]:
+                state = results/"executions/mps-local/office"/f"seed_{seed}"
+                state.mkdir(parents=True)
+                (state/"batch_status.json").write_text(json.dumps({"status": "complete", "seed": seed}))
+            (results/"scene_assignments.json").write_text(json.dumps({"office": "mps-local"}))
+            scientific = {key: "fixed" for key in
+                          ("protocol_sha256", "plan_sha256", "precision", "workers", "threads_per_worker",
+                           "seeds", "vendor_versions", "mast3r_model_config_sha256", "source_sha256")}
+            (results/"study_configuration.json").write_text(json.dumps(scientific))
+            args = run_all.build_parser().parse_args(["run", "--protocol", "protocol.json", "--remaining"])
+            with (
+                patch.object(run_all, "ROOT", root),
+                patch.object(run_parallel, "ROOT", root),
+                patch.object(run_all, "resolve_device", return_value="cuda"),
+                patch.object(run_all, "cohort_configuration", return_value=scientific),
+                patch.object(run_all, "run_worker_group") as launch,
+                patch.object(run_all.subprocess, "run") as analyze,
+            ):
+                run_all.run(args)
+            self.assertEqual(launch.call_count, 1)
+            self.assertTrue(all(call.args[0].device == "cuda" for call in launch.call_args_list))
+            assignments = json.loads((results/"scene_assignments.json").read_text())
+            self.assertEqual(assignments["office"], "mps-local")
+            self.assertTrue(assignments["courtyard"].startswith("cuda-"))
+            command = analyze.call_args.args[0]
+            self.assertEqual(command[command.index("--scenes")+1:], ["office", "courtyard"])
 
 
 if __name__ == "__main__":

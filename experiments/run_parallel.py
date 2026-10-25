@@ -29,6 +29,15 @@ def build_parser():
     return parser
 
 
+def require_approval(protocol, *, require_implementation=True):
+    if protocol.get("status") != "approved":
+        raise RuntimeError("Experimental plan awaits user approval; no experiment was started")
+    if require_implementation and not protocol.get("implementation_ready", False):
+        raise RuntimeError("Approved procedure is not yet fully implemented and verified; no experiment was started")
+    if protocol.get("approved_plan_sha256") != sha256(ROOT/protocol["plan"]):
+        raise ValueError("Plan text differs from the approved document")
+
+
 def validate_protocol(protocol, manifest, seed):
     if protocol.get("status") != "approved":
         raise RuntimeError("Experimental plan awaits user approval; no experiment was started")
@@ -40,9 +49,11 @@ def validate_protocol(protocol, manifest, seed):
         raise ValueError("Blur ladder differs from the approved protocol")
     if seed not in protocol["seeds"]:
         raise ValueError("Seed is outside the approved repeat plan")
-    if manifest["scene"] not in protocol["confirmatory_scenes"] + protocol["control_scenes"]:
+    if manifest["scene"] not in protocol["primary_scenes"]:
         raise ValueError("Scene is outside the approved cohort")
     for size in protocol["sizes"]:
+        if str(size) not in manifest["sets"]:
+            raise ValueError("Manifest is missing an approved context size")
         ids = manifest["sets"][str(size)]
         if len(ids) != size or len(set(ids)) != size:
             raise ValueError("Manifest subset size/order is invalid")
@@ -87,15 +98,12 @@ def run(args):
     protocol_path, manifest_path = ROOT/args.protocol, ROOT/args.manifest
     protocol = json.loads(protocol_path.read_text())
     # Approval/readiness is checked before touching inputs, GPU or output folders.
-    if protocol.get("status") != "approved":
-        raise RuntimeError("Experimental plan awaits user approval; no experiment was started")
-    if not protocol.get("implementation_ready", False):
-        raise RuntimeError("Approved procedure is not yet fully implemented and verified; no experiment was started")
-    if protocol.get("approved_plan_sha256") != sha256(ROOT/protocol["plan"]):
-        raise ValueError("Plan text differs from the approved document")
+    require_approval(protocol)
     manifest = json.loads(manifest_path.read_text())
     validate_protocol(protocol, manifest, args.seed)
     device = resolve_device(args.device)
+    if manifest["scene"] in protocol.get("expansion_scenes", []) and device != "cuda":
+        raise ValueError("Expansion scenes must run on the configured CUDA server")
     cohort = ROOT/args.cohort
     cohort.mkdir(parents=True, exist_ok=True)
     frozen = cohort_configuration(protocol_path, device, protocol)

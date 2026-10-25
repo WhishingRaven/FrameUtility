@@ -7,7 +7,7 @@
       "name": "courtyard",
       "calibrated_images": 38,
       "intrinsics_blocks": 4,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "1afcc917c0538cf7168ca9c045574a786402553712be0ad2ae5affdc52b87f02",
       "cameras_txt_sha256": "0cf9d1f1615b89eed8e48a92ef0ee44352f0fbadbb1be0c00b12f15d01c1f83c"
     },
@@ -15,7 +15,7 @@
       "name": "delivery_area",
       "calibrated_images": 44,
       "intrinsics_blocks": 1,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "55e67f9b4ef5092bb1c38cf5b500e39370d56d828fdc71ace91710acb427844c",
       "cameras_txt_sha256": "2119d96da9bf30228138d5e86c174e0b87e446e2de7aef7409115a769b8e6a83"
     },
@@ -23,7 +23,7 @@
       "name": "electro",
       "calibrated_images": 45,
       "intrinsics_blocks": 6,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "b941bec871d6149ff2b55f5693fbded2b0206baab5969621cb351006a05bd942",
       "cameras_txt_sha256": "4e8dc767b98904b36aa16b700c25c597647f601e99dd114e696fef57d62db2a1"
     },
@@ -31,7 +31,7 @@
       "name": "facade",
       "calibrated_images": 76,
       "intrinsics_blocks": 5,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "87a937f712de8173979fadff7b844d45f61b62927b85ebd5fbf81eb0d41718be",
       "cameras_txt_sha256": "d9efd7eabb12dcd410d6187536845583bddf852e7e9f402c7d99d1fb156e5dd2"
     },
@@ -39,7 +39,7 @@
       "name": "kicker",
       "calibrated_images": 31,
       "intrinsics_blocks": 1,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "b1237afb257f20e277591f0ccc29b2d0048443aa8991c8c9953ae28c5139c2c6",
       "cameras_txt_sha256": "beef38e6f4c9881ec27c3ef482e3a466604548ff8a1a088e7e9f737c9d3efe40"
     },
@@ -47,7 +47,7 @@
       "name": "meadow",
       "calibrated_images": 15,
       "intrinsics_blocks": 1,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "250520e9a40f6de208af1be11f8911b81e5a81232eabe68629eed42bac0f697d",
       "cameras_txt_sha256": "47a0e243dc460e2e994ba313d7cce480066e9d7fe868e1431c7d64ac09fd4a25"
     },
@@ -55,7 +55,7 @@
       "name": "office",
       "calibrated_images": 26,
       "intrinsics_blocks": 1,
-      "role": "control",
+      "role": "initial_primary",
       "images_txt_sha256": "7b78519282090cbb920286d661c609724a86888b6b2abcf2c1f70392bf0a5dd0",
       "cameras_txt_sha256": "de1e94b7bb93b3e9a84d1a184ad6f62122695edad531a89d0dd86823fea580c4"
     },
@@ -71,7 +71,7 @@
       "name": "playground",
       "calibrated_images": 38,
       "intrinsics_blocks": 5,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "d0aba7b4fc06109a1c05aa22a34e08ef59b70241457efd48ae8b666ff3e34fc4",
       "cameras_txt_sha256": "10b48ff7b46ebd050c32531135811ba5dcdfe0396ddef25208312ae344fa791d"
     },
@@ -79,7 +79,7 @@
       "name": "relief",
       "calibrated_images": 31,
       "intrinsics_blocks": 1,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "44416b46bd0b9fccacfb683128dd64b495bc4806e3d215e68cbea5eaf91ec6e7",
       "cameras_txt_sha256": "c81c013fbcff9356b9986f5a825759898eefd7469fb2634f2b45061cc433e742"
     },
@@ -87,7 +87,7 @@
       "name": "relief_2",
       "calibrated_images": 31,
       "intrinsics_blocks": 1,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "1d6e30e5bde2b2501c114a71eeec6046494f2db398bd39ff68c29ee53d70373b",
       "cameras_txt_sha256": "074b3eafc267e9fe40cacbb2afba828402f6ea7463530fe48425288cd9d7ddf7"
     },
@@ -95,7 +95,7 @@
       "name": "terrace",
       "calibrated_images": 23,
       "intrinsics_blocks": 4,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "48ed5ec4af850b8b857d0dbb0a38957495716a9d0ae8e2d54e9be5835b773636",
       "cameras_txt_sha256": "20b377825dac44a3fc4cdcb46715b6bb8be71eff7d76bac900e94c2b8423cbfd"
     },
@@ -103,7 +103,7 @@
       "name": "terrains",
       "calibrated_images": 42,
       "intrinsics_blocks": 2,
-      "role": "confirmatory_candidate",
+      "role": "expansion_primary_candidate",
       "images_txt_sha256": "48067ff68c21c031cde33c7828b104f1172c56c67509a5ba767a1996924c1cdb",
       "cameras_txt_sha256": "e26f1c64502b91a186de7b262065dec96bb50e2bef98e7d54bbfb43f403db937"
     }

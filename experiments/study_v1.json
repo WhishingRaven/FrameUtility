@@ -3,26 +3,9 @@
   "status": "awaiting_approval",
   "implementation_ready": false,
   "plan": "EXPERIMENT_PLAN.md",
-  "confirmatory_scenes": [
-    "courtyard",
-    "delivery_area",
-    "electro",
-    "facade",
-    "kicker",
-    "meadow",
-    "playground",
-    "relief",
-    "relief_2",
-    "terrace",
-    "terrains"
-  ],
-  "control_scenes": [
-    "office"
-  ],
   "excluded_scenes": {
     "pipes": "14 calibrated images; fewer than the required 15"
   },
-  "minimum_eligible_confirmatory_scenes": 5,
   "backends": [
     "vggt",
     "mast3r"
@@ -47,9 +30,7 @@
     4
   ],
   "seeds": [
-    2026,
-    2027,
-    2028
+    2026
   ],
   "preparation": {
     "intrinsics": "Per-image CAMERA_ID; never the first camera for the whole scene",
@@ -75,7 +56,25 @@
       160
     ],
     "minimum_gt_pixels_per_image": 500,
-    "minimum_gt_camera_center_rank": 2
+    "minimum_gt_camera_center_rank": 2,
+    "validation": {
+      "resize_crop_roundtrip_max_prepared_px": 1e-06,
+      "camera_distortion_roundtrip_max_original_px": 0.001,
+      "synthetic_reference_depth_max_relative_error": 1e-06,
+      "synthetic_score_absrel_max_absolute_error": 5e-05,
+      "synthetic_sampling_utility_max_absolute_error": 5e-05,
+      "identical_context_max_absolute_utility": 1e-10,
+      "mask_hash_agreement": "exact",
+      "blur_integration_reference_samples": [
+        33,
+        65,
+        129
+      ],
+      "blur_integration_check_deg": 4,
+      "blur_integration_linear_rgb_mean_absolute_error_max": 0.001,
+      "blur_integration_linear_rgb_absolute_error_p99_max": 0.01,
+      "validation_runs_model_inference": false
+    }
   },
   "selection": {
     "method": "largest_biconnected_component_then_greedy_lowest_overlap_removal_v1",
@@ -108,9 +107,9 @@
     "nonfinite_depth": "geometry_failure_only",
     "legacy_strict_geometry_scores": "diagnostic_only",
     "primary_absrel_effect_floor": 0.0005,
-    "repeat_comparison": "all_3_by_3_drop_add_combinations",
-    "crossing": "first_observed_positive_to_negative_grid_bracket_no_interpolation",
-    "scene_aggregation": "equal_weight_per_scene_separately_for_each_backend_and_context_size",
+    "repeat_comparison": "none_single_run_fixed_seed_2026",
+    "crossing": "first_observed_single_run_positive_to_negative_grid_bracket_no_interpolation",
+    "scene_aggregation": "equal_weight_all_eligible_primary_scenes_including_office_with_runtime_stratification",
     "confidence_intervals": false,
     "p_values": false,
     "sensitivity_absrel_effect_floors": [
@@ -120,10 +119,11 @@
       0.001
     ],
     "pose_sign_definition": "raw_error_difference",
-    "reference_pixel_weights": "identical_across_backends_and_add_drop"
+    "reference_pixel_weights": "identical_across_backends_and_add_drop",
+    "platform_equivalence": "assumed_no_material_effect_on_conclusions_not_empirically_tested"
   },
   "execution": {
-    "device": "one_gpu_platform_and_host_per_cohort",
+    "device": "auto_per_runtime_group_local_mps_then_server_cuda",
     "optimizer_device": "same_as_inference",
     "workers": 3,
     "threads_per_worker": 8,
@@ -137,7 +137,7 @@
     "pair_cache": "share_only_within_one_scene_and_seed_never_across_seeds_or_old_runs",
     "canonical_and_alignment_state": "always_fresh_per_input_set",
     "resource_error_policy": "stop_no_device_precision_worker_count_or_iteration_fallback",
-    "numerical_failure_policy": "record_original_failure_no_retry_until_success",
+    "numerical_failure_policy": "same_condition_up_to_3_attempts_then_stop_diagnose_fix_and_recompute_affected_conditions",
     "old_predictions_or_caches": "forbidden",
     "preferred_platform": "cuda",
     "maximum_active_scene_seed_runs": 1,
@@ -148,18 +148,58 @@
     "mast3r_shared_intrinsics": false,
     "mast3r_clean_depth": false,
     "vggt_point_head": false,
-    "vggt_track_head": false
+    "vggt_track_head": false,
+    "initial_scene_device": "auto",
+    "expansion_scene_device": "cuda",
+    "interface": "same_scene_prepare_run_status_analyze_commands_on_local_and_server",
+    "maximum_attempts_per_condition_before_diagnosis": 3,
+    "accepted_attempt": "first_valid_never_best_error_all_attempts_logged",
+    "bugfix_policy": "preserve_attempts_revalidate_recompute_all_affected_results_no_mixed_code_versions",
+    "unresolved_failure_policy": "stop_and_report_unresolved_never_fabricate_valid_values_or_declare_full_success"
   },
   "planned_counts_if_all_12_scenes_eligible": {
     "target_context_curves_per_backend_per_scene": 30,
-    "utility_comparisons_per_scene_all_seeds": 2160,
-    "metric_rows_per_scene_all_seeds": 10800,
+    "utility_comparisons_per_scene_all_seeds": 720,
+    "metric_rows_per_scene_all_seeds": 3600,
     "unique_reconstructions_per_backend_per_scene_per_seed": 363,
-    "unique_reconstructions_per_scene_all_seeds": 2178,
-    "confirmatory_unique_reconstructions": 23958,
-    "control_unique_reconstructions": 2178,
-    "total_unique_reconstructions": 26136,
-    "total_utility_comparisons": 25920,
-    "total_metric_rows": 129600
-  }
+    "unique_reconstructions_per_scene_all_seeds": 726,
+    "initial_office_unique_reconstructions": 726,
+    "expansion_11_scenes_unique_reconstructions": 7986,
+    "all_primary_unique_reconstructions": 8712,
+    "total_unique_reconstructions": 8712,
+    "total_utility_comparisons": 8640,
+    "total_metric_rows": 43200
+  },
+  "primary_scenes": [
+    "courtyard",
+    "delivery_area",
+    "electro",
+    "facade",
+    "kicker",
+    "meadow",
+    "office",
+    "playground",
+    "relief",
+    "relief_2",
+    "terrace",
+    "terrains"
+  ],
+  "initial_scenes": [
+    "office"
+  ],
+  "expansion_scenes": [
+    "courtyard",
+    "delivery_area",
+    "electro",
+    "facade",
+    "kicker",
+    "meadow",
+    "playground",
+    "relief",
+    "relief_2",
+    "terrace",
+    "terrains"
+  ],
+  "minimum_scenes_for_multi_scene_summary": 5,
+  "planned_counts_exclude_recovery_attempts_and_bugfix_recomputations": true
 }

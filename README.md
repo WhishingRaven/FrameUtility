@@ -225,6 +225,8 @@ The main question is:
 
 ## Running the Experiment
 
-The restart protocol is in [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md), with a beginner-readable explanation of the question, all named image sets, selection, blur generation, repeats, failure handling and analysis. Its status is **awaiting user approval**. Previous experiment results and inference caches have been deleted from the working tree.
+The restart plan is in [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md). The initial primary experiment is **office**, using **5/10/15 views**, with one execution per condition at seed 2026. Office remains part of the main analysis. The other eleven eligible-size scene candidates are planned for the CUDA server after setup. The plan contains 726 reconstructions for office and at most 8,712 across all scenes, excluding recovery attempts and recomputations after fixes.
 
-The common accelerated execution path and readiness status are documented in [experiments/README.md](experiments/README.md). The canonical entry point is experiments/run_all.py: VGGT runs in one worker, MASt3R in three, with inference and alignment on the same GPU. The new experiment is blocked until its plan is approved and the exact procedure has been implemented and verified.
+[experiments/run_all.py](experiments/run_all.py) provides the same prepare/run/status/analyze interface on Mac and CUDA servers. GPU selection and runtime paths are automatic; VGGT uses one worker and MASt3R uses three, with inference and alignment on the same GPU. See [the interface and readiness documentation](experiments/README.md).
+
+The plan is **awaiting user approval**. Previous results and inference caches have been deleted from the working tree. The new experiment will not start until the plan is approved and its preparation, evaluation and analysis implementation is verified.
