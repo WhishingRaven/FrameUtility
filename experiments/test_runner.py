@@ -2,6 +2,7 @@
 import json
 import contextlib
 import io
+import shlex
 from pathlib import Path
 from types import SimpleNamespace
 import tempfile
@@ -34,6 +35,8 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(server.device, "auto")
         self.assertIsNone(local.seed)
         self.assertIsNone(server.seed)
+        self.assertEqual(local.target, "local")
+        self.assertEqual(server.target, "local")
 
     def test_auto_prefers_cuda_then_mps_and_rejects_silent_cpu_fallback(self):
         with patch.object(run.torch.cuda, "is_available", return_value=True):
@@ -99,7 +102,7 @@ class RunnerTests(unittest.TestCase):
             protocol = self.protocol()
             protocol.update(plan="plan.md", approved_plan_sha256=run.sha256(root/"plan.md"))
             (root/"protocol.json").write_text(json.dumps(protocol))
-            (root/"manifest.json").write_text(json.dumps({**self.manifest(), "scene": "office"}))
+            (root/"manifest.json").write_text(json.dumps(self.manifest()))
             args = SimpleNamespace(protocol="protocol.json", manifest="manifest.json", cohort="outputs",
                                    device="mps", seed=2026)
             with (
@@ -215,11 +218,18 @@ class InterfaceTests(unittest.TestCase):
             protocol["status"] = "awaiting_approval"
             (root/"protocol.json").write_text(json.dumps(protocol))
             for action in ("prepare", "run", "analyze"):
-                args = run_all.build_parser().parse_args([action, "--protocol", "protocol.json", "--scene", "office"])
-                with patch.object(run_all, "ROOT", root), patch.object(run_all, "resolve_device") as gpu:
-                    with self.assertRaisesRegex(RuntimeError, "approval"):
-                        run_all.run(args)
-                    gpu.assert_not_called()
+                for target in ("local", "cuda-server"):
+                    args = run_all.build_parser().parse_args(
+                        [action, "--protocol", "protocol.json", "--scene", "office", "--target", target])
+                    with (
+                        patch.object(run_all, "ROOT", root),
+                        patch.object(run_all, "resolve_device") as gpu,
+                        patch.object(run_all.subprocess, "run") as remote,
+                    ):
+                        with self.assertRaisesRegex(RuntimeError, "approval"):
+                            run_all.run(args)
+                        gpu.assert_not_called()
+                        remote.assert_not_called()
             self.assertFalse((root/"results").exists())
 
     def test_status_is_read_only_and_does_not_require_gpu(self):
@@ -237,20 +247,114 @@ class InterfaceTests(unittest.TestCase):
             self.assertEqual(result["runs"], [{"scene": "office", "status": "not_started"}])
             self.assertFalse((root/"results").exists())
 
-    def test_expansion_does_not_silently_run_on_local_mps(self):
+    def test_any_scene_can_run_locally_without_office_results(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             self.make_fixture(root)
+            data = root/"data/experiments/fixture/courtyard"
+            data.mkdir()
+            (data/"manifest.json").write_text(json.dumps(
+                {"protocol_id": "fixture", "scene": "courtyard", "sets": {"5": list("abcde")},
+                 "severities_deg": [0, .25]}))
             args = run_all.build_parser().parse_args(["run", "--protocol", "protocol.json", "--remaining"])
+            scientific = {key: "fixed" for key in
+                          ("protocol_sha256", "plan_sha256", "precision", "workers", "threads_per_worker",
+                           "seeds", "vendor_versions", "mast3r_model_config_sha256", "source_sha256")}
             with (
                 patch.object(run_all, "ROOT", root),
                 patch.object(run_parallel, "ROOT", root),
                 patch.object(run_all, "resolve_device", return_value="mps"),
+                patch.object(run_all, "cohort_configuration", return_value=scientific),
                 patch.object(run_all, "run_worker_group") as launch,
+                patch.object(run_all.subprocess, "run"),
             ):
-                with self.assertRaisesRegex(RuntimeError, "CUDA"):
+                run_all.run(args)
+            self.assertEqual(launch.call_count, 1)
+            self.assertEqual(launch.call_args.args[0].device, "mps")
+            self.assertTrue(launch.call_args.args[0].manifest.endswith("courtyard/manifest.json"))
+            assignments = json.loads((root/"results/fixture/scene_assignments.json").read_text())
+            self.assertNotIn("office", assignments)
+
+    def test_remote_target_dispatches_all_actions_and_scenes_without_local_gpu(self):
+        for action in ("prepare", "run", "status", "analyze"):
+            for scene in ("office", "courtyard"):
+                with self.subTest(action=action, scene=scene), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    protocol = self.make_fixture(root)
+                    profile = {"host": "user@gpu-server", "project_dir": "/srv/Frame Utility's; $work",
+                               "python": ".venv/bin/python", "port": 2222}
+                    (root/"server.json").write_text(json.dumps(profile))
+                    if action == "status":
+                        protocol["status"] = "awaiting_approval"
+                        (root/"protocol.json").write_text(json.dumps(protocol))
+                    args = run_all.build_parser().parse_args(
+                        [action, "--protocol", "protocol.json", "--scene", scene,
+                         "--target", "cuda-server", "--server-config", "server.json"])
+                    with (
+                        patch.object(run_all, "ROOT", root),
+                        patch.object(run_parallel, "ROOT", root),
+                        patch.object(run_all, "resolve_device") as gpu,
+                        patch.object(run_all, "run_worker_group") as launch,
+                        patch.object(run_all.subprocess, "run") as remote,
+                    ):
+                        run_all.run(args)
+                    remote.assert_called_once()
+                    command = remote.call_args.args[0]
+                    self.assertEqual(command[0], "ssh")
+                    self.assertIn("user@gpu-server", command)
+                    self.assertEqual(command[command.index("-p")+1], "2222")
+                    tokens = shlex.split(command[-1])
+                    self.assertEqual(tokens[:5], ["cd", "--", profile["project_dir"], "&&", "exec"])
+                    self.assertEqual(tokens[5:7], [profile["python"], "experiments/run_all.py"])
+                    child = run_all.build_parser().parse_args(tokens[7:])
+                    self.assertEqual((child.action, child.scenes, child.target, child.device),
+                                     (action, [scene], "local", "cuda"))
+                    gpu.assert_not_called()
+                    launch.assert_not_called()
+                    self.assertFalse((root/"results").exists())
+
+    def test_missing_remote_profile_never_falls_back_to_local(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.make_fixture(root)
+            args = run_all.build_parser().parse_args(
+                ["status", "--protocol", "protocol.json", "--target", "cuda-server"])
+            with (
+                patch.object(run_all, "ROOT", root),
+                patch.object(run_all, "resolve_device") as gpu,
+                patch.object(run_all.subprocess, "run") as remote,
+            ):
+                with self.assertRaisesRegex(RuntimeError, "server.*config|profile"):
                     run_all.run(args)
-                launch.assert_not_called()
+                gpu.assert_not_called()
+                remote.assert_not_called()
+
+    def test_remote_forwards_remaining_paths_seed_and_propagates_ssh_failure(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.make_fixture(root)
+            (root/"server.json").write_text(json.dumps(
+                {"host": "gpu-server", "project_dir": "/srv/FrameUtility", "python": ".venv/bin/python"}))
+            args = run_all.build_parser().parse_args(
+                ["run", "--protocol", "protocol.json", "--remaining", "--target", "cuda-server",
+                 "--server-config", "server.json", "--seed", "2026",
+                 "--input-root", "/data/prepared images", "--results-root", "/data/results; keep"])
+            error = run_all.subprocess.CalledProcessError(255, "ssh")
+            with (
+                patch.object(run_all, "ROOT", root),
+                patch.object(run_parallel, "ROOT", root),
+                patch.object(run_all, "resolve_device") as gpu,
+                patch.object(run_all.subprocess, "run", side_effect=error) as remote,
+            ):
+                with self.assertRaises(run_all.subprocess.CalledProcessError):
+                    run_all.run(args)
+                gpu.assert_not_called()
+            tokens = shlex.split(remote.call_args.args[0][-1])
+            child = run_all.build_parser().parse_args(tokens[7:])
+            self.assertTrue(child.remaining)
+            self.assertEqual(child.seed, 2026)
+            self.assertEqual(child.input_root, "/data/prepared images")
+            self.assertEqual(child.results_root, "/data/results; keep")
             self.assertFalse((root/"results").exists())
 
     def test_server_expansion_keeps_office_in_primary_analysis(self):

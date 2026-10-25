@@ -3,6 +3,8 @@ import argparse
 import hashlib
 import json
 import platform
+from pathlib import PurePosixPath
+import shlex
 import subprocess
 import sys
 from types import SimpleNamespace
@@ -17,11 +19,15 @@ def build_parser():
     parser.add_argument("action", nargs="?", default="run", choices=("prepare", "run", "status", "analyze"))
     selection = parser.add_mutually_exclusive_group()
     selection.add_argument("--scene", "--scenes", nargs="+", dest="scenes")
-    selection.add_argument("--remaining", action="store_true", help="The planned expansion scenes after the initial office run")
+    selection.add_argument("--remaining", action="store_true", help="The planned expansion scene list; independent of execution target")
+    parser.add_argument("--target", default="local", choices=("local", "cuda-server"),
+                        help="Execution location for every scene and action (default: local)")
+    parser.add_argument("--server-config", default="experiments/cuda_server.json",
+                        help="SSH profile used only by --target cuda-server")
     parser.add_argument("--protocol", default="experiments/study_v1.json")
     parser.add_argument("--seed", type=int, help="Default: all seeds in the approved protocol")
     parser.add_argument("--device", default="auto", choices=("auto", "mps", "cuda"),
-                        help="Same default everywhere: CUDA if available, otherwise MPS; never implicit CPU")
+                        help="GPU override on the execution host; auto prefers CUDA then MPS, never implicit CPU")
     parser.add_argument("--input-root", help="Default: data/experiments/<protocol_id>")
     parser.add_argument("--results-root", help="Default: results/<protocol_id>")
     return parser
@@ -52,10 +58,49 @@ def scientific_configuration(runtime):
     return {key: runtime[key] for key in keys}
 
 
+def run_remote(args):
+    if args.device not in ("auto", "cuda"):
+        raise ValueError("--target cuda-server requires CUDA; --device mps is incompatible")
+    profile_path = ROOT/args.server_config
+    if not profile_path.exists():
+        raise RuntimeError("CUDA server config is missing; copy experiments/cuda_server.example.json "
+                           "to experiments/cuda_server.json and configure the SSH host and project path")
+    profile = json.loads(profile_path.read_text())
+    host, directory, python = (profile.get(key) for key in ("host", "project_dir", "python"))
+    if (not isinstance(host, str) or not host or host.startswith("-")
+            or any(c.isspace() or c in "\x00'\";`$" for c in host)):
+        raise ValueError("Server profile host must be an SSH host alias or user@host")
+    if not isinstance(directory, str) or "\x00" in directory or not PurePosixPath(directory).is_absolute():
+        raise ValueError("Server profile project_dir must be an absolute server path")
+    if not isinstance(python, str) or not python or python.startswith("-") or "\x00" in python:
+        raise ValueError("Server profile python must name the server Python executable")
+    port = profile.get("port", 22)
+    if type(port) is not int or not 1 <= port <= 65535:
+        raise ValueError("Server profile port must be an integer from 1 to 65535")
+    child = [python, "experiments/run_all.py", args.action, "--target", "local", "--device", "cuda",
+             "--protocol", args.protocol]
+    if args.remaining:
+        child.append("--remaining")
+    elif args.scenes:
+        child.extend(["--scenes", *args.scenes])
+    for name in ("seed", "input_root", "results_root"):
+        value = getattr(args, name)
+        if value is not None:
+            child.extend(["--"+name.replace("_", "-"), str(value)])
+    # Quote remote arguments once for the remote shell; never invoke a local shell.
+    command = shlex.join(["cd", "--", directory])+" && exec "+shlex.join(child)
+    return subprocess.run(["ssh", "-T", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10",
+                           "-p", str(port), host, command], check=True, cwd=ROOT)
+
+
 def run(args):
     protocol_path = ROOT/args.protocol
     protocol = json.loads(protocol_path.read_text())
     scenes = select_scenes(args, protocol)
+    if args.target == "cuda-server":
+        if args.action != "status":
+            require_approval(protocol, require_implementation=args.action != "prepare")
+        return run_remote(args)
     input_root = ROOT/args.input_root if args.input_root else ROOT/"data/experiments"/protocol["protocol_id"]
     results_root = ROOT/args.results_root if args.results_root else ROOT/"results"/protocol["protocol_id"]
     if args.action == "status":
@@ -87,23 +132,6 @@ def run(args):
                         "--results-root", str(results_root), "--scenes", *scenes], check=True, cwd=ROOT)
         return
     device = resolve_device(args.device)
-    expansion = any(scene in protocol["expansion_scenes"] for scene in scenes)
-    if expansion and device != "cuda":
-        raise RuntimeError("Expansion scenes await the CUDA server; they were not assigned to local MPS")
-    if expansion:
-        # The local study records are transferred with the prepared inputs;
-        # an expansion invocation never silently starts a different study.
-        assignment_file = results_root/"scene_assignments.json"
-        if not (results_root/"study_configuration.json").exists() or not assignment_file.exists():
-            raise RuntimeError("The office scientific lock and scene assignments were not transferred")
-        assignments = json.loads(assignment_file.read_text())
-        for initial in protocol["initial_scenes"]:
-            if initial not in assignments:
-                raise RuntimeError("The office primary runtime assignment is missing")
-            for seed in protocol["seeds"]:
-                path = results_root/"executions"/assignments[initial]/initial/f"seed_{seed}/batch_status.json"
-                if not path.exists() or json.loads(path.read_text())["status"] not in ("complete", "complete_with_failures"):
-                    raise RuntimeError("Initial office run is incomplete or its study records were not transferred")
     seeds = protocol["seeds"] if args.seed is None else [args.seed]
     manifests = {}
     for scene in scenes:

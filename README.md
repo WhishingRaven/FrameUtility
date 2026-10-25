@@ -225,8 +225,8 @@ The main question is:
 
 ## Running the Experiment
 
-The restart plan is in [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md). The initial primary experiment is **office**, using **5/10/15 views**, with one execution per condition at seed 2026. Office remains part of the main analysis. The other eleven eligible-size scene candidates are planned for the CUDA server after setup. The plan contains 726 reconstructions for office and at most 8,712 across all scenes, excluding recovery attempts and recomputations after fixes.
+The restart plan is in [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md). The initial primary experiment is **office**, using **5/10/15 views**, with one execution per condition at seed 2026. Office remains part of the main analysis. The other eleven eligible-size scene candidates use the same procedure. Every scene supports `--target local|cuda-server`, with `local` as the default; the server target forwards commands over SSH using a configured profile. The plan contains 726 reconstructions for office and at most 8,712 across all scenes, excluding recovery attempts and recomputations after fixes.
 
-[experiments/run_all.py](experiments/run_all.py) provides the same prepare/run/status/analyze interface on Mac and CUDA servers. GPU selection and runtime paths are automatic; VGGT uses one worker and MASt3R uses three, with inference and alignment on the same GPU. See [the interface and readiness documentation](experiments/README.md).
+[experiments/run_all.py](experiments/run_all.py) provides the same prepare/run/status/analyze interface on Mac and CUDA servers. Execution location is selected with `--target` independently of scene names, and GPU selection and runtime paths are automatic; VGGT uses one worker and MASt3R uses three, with inference and alignment on the same GPU. See [the interface and readiness documentation](experiments/README.md).
 
 The plan is **awaiting user approval**. Previous results and inference caches have been deleted from the working tree. The new experiment will not start until the plan is approved and its preparation, evaluation and analysis implementation is verified.

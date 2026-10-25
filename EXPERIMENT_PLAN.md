@@ -2,7 +2,7 @@
 
 **상태: 사용자 승인 대기. 이 문서의 새 실험은 아직 시작하지 않았다.**
 
-이번 준비의 첫 실행 대상은 **office 한 장면의 초기 주실험**이다. 집합 크기는 **5·10·15장**이다. 나머지 11개 주 분석 후보는 CUDA 서버 준비 후 같은 절차로 확장한다.
+이번 준비의 첫 실행 대상은 **office 한 장면의 초기 주실험**이다. 집합 크기는 **5·10·15장**이다. 실행 위치는 모든 장면에 공통인 `--target local|cuda-server`로 선택하며 기본값은 `local`이다. 나머지 11개 주 분석 후보는 같은 절차로 확장한다.
 
 이 연구는 여러 장의 사진으로 3차원 공간을 복원할 때, 흐린 사진 한 장을 추가하는 것이 그 사진을 빼는 것보다 언제 나빠지는지 측정한다. 모든 장면에 같은 사진 선정 규칙, 블러 생성법, 모델 설정, 단일 실행 원칙, 평가 기준과 분석 절차를 적용한다.
 
@@ -73,7 +73,7 @@
 ### 2.1 이번에 승인받을 범위
 
 1. office를 포함한 12개 ETH3D 장면을 주 분석 후보로 사용한다.
-2. office를 로컬에서 초기 주실험으로 새로 실행하고, 나머지 11개는 서버 준비 후 CUDA에서 실행한다. office도 전체 주 분석에 포함한다.
+2. office를 초기 주실험으로 새로 실행하고 나머지 11개로 확장한다. office도 전체 주 분석에 포함한다. 실행 위치는 장면과 독립적으로 --target 옵션으로 고르며 기본값은 local이다.
 3. 각 장면에서 중첩된 15장·10장·5장 집합을 만들고, 집합에 포함된 모든 사진을 차례로 타깃으로 사용한다.
 4. 두 모델에 동일한 12개 블러 단계와 단일 seed 2026을 적용한다.
 5. 공식 가림 처리가 반영된 깊이 GT와 공통 평가 좌표를 사용한다.
@@ -174,7 +174,7 @@ ETH3D test split은 공개 GT를 사용하는 동일 채점 절차를 적용할 
 | 공통 깊이 평가 격자 | 252×160. 두 모델 모두 같은 광선 위치에서 평가 |
 | 실행 seed | 2026 하나. 모든 장면과 조건에 동일하게 적용하며 통계적 반복 없음 |
 | 수치 정밀도 | float32 추론·정렬, 채점은 float64 |
-| GPU | office는 로컬 자동 선택, 확장 11장면은 CUDA. 각 실행 그룹 안의 장치·호스트 고정 |
+| 실행 위치·GPU | 모든 장면에 --target local 또는 cuda-server. 기본 local, 선택한 호스트의 GPU 사용. 각 실행 그룹 안의 장치·호스트 고정 |
 | MASt3R 정렬 | 추론과 같은 GPU, coarse 300회 + fine 300회 |
 | MASt3R 연결 그래프 | 모든 입력 사진 쌍의 양방향 비교 |
 | worker | VGGT 1개, MASt3R 3개 |
@@ -333,11 +333,11 @@ b는 노출 중 카메라가 회전한 **총 yaw 각도**다. 카메라는 노�
 
 세 worker는 서로 다른 타깃 작업을 분담하며 같은 조건을 반복하는 프로세스가 아니다. 같은 GPU 실행 그룹에서는 한 장면의 seed 2026 실행만 활성화되도록 잠금을 사용한다.
 
-MPS와 CUDA는 같은 사용자 명령과 과학적 코드 경로를 사용한다. 로컬은 MPS, 서버는 CUDA를 자동 선택하고, CPU로 조용히 전환하지 않는다. office는 로컬의 초기 주실험으로 진행하고 확장 11장면은 CUDA 서버에서 수행한다.
+MPS와 CUDA는 같은 과학적 코드 경로를 사용한다. 모든 장면의 prepare/run/status/analyze에 --target local|cuda-server를 공통으로 적용한다. local이 기본값이며 현재 컴퓨터의 GPU를 사용한다. cuda-server는 등록된 SSH 서버로 명령을 전달하고 재구성에는 CUDA를 사용한다. office와 확장 장면에 서로 다른 장치 규칙을 두지 않으며, CPU로 조용히 전환하지 않는다.
 
 전체 연구에서는 과학적 절차를 잠그고, 장치·호스트·패키지 같은 실행 환경은 실행 그룹별로 잠근다. 같은 타깃의 DROP과 ADD 및 두 모델를 서로 다른 장치의 결과로 이어 붙이지 않는다. 원래 진행하던 한 장면을 다른 플랫폼에서 다시 실행하면 별도 실행으로 구분하고 기존 결과를 덮어쓰지 않는다.
 
-사용자가 명령이나 파일 구조를 플랫폼별로 바꿀 필요는 없다. 서버의 가상환경·데이터 위치를 한 번 설정한 뒤에는 다음 명령을 양쪽에서 동일하게 사용한다.
+명령의 --scene은 사진 묶음, --target은 계산 위치를 고른다. 서버의 SSH 주소·프로젝트 경로·가상환경·자료를 한 번 설정한 뒤에는 16절의 공통 명령에서 target만 선택한다. 옵션을 생략한 다음 명령은 현재 컴퓨터에서 실행한다.
 
 ~~~sh
 .venv/bin/python experiments/run_all.py prepare --scene office
@@ -346,7 +346,7 @@ MPS와 CUDA는 같은 사용자 명령과 과학적 코드 경로를 사용한�
 .venv/bin/python experiments/run_all.py analyze --scene office
 ~~~
 
-서버에서는 장면 이름만 바꾼다. 확장 전체는 같은 프로그램의 run --remaining으로 선택한다. 이 선택은 처음 정한 office 외 11개 후보를 뜻하며 결과가 좋은 장면만 선택하는 기능이 아니다.
+확장 전체는 같은 프로그램의 run --remaining으로 선택한다. 이 선택은 처음 정한 office 외 11개 후보를 뜻하며 실행 위치와는 무관하다. 예를 들어 run --remaining --target local과 run --remaining --target cuda-server가 모두 같은 후보 목록을 사용한다.
 
 세 worker를 감당하지 못하는 장비이면 본실험 전에 worker 수를 계획서에서 변경·승인한다. 실행 중 OOM이 났다고 한 worker나 CPU, 다른 정밀도로 자동 전환하지 않는다.
 
@@ -540,11 +540,11 @@ ATE 정렬은 반사를 허용하지 않는 Sim(3) 정렬이다. 거리와 방�
 | 1 구현·단위 검증 | 사진별 보정, 공식 GT 대응, 공통 격자, 단일 실행·복구·분석 구현 | 15절의 시험 통과 |
 | 2 office 준비 | office의 파일·GT·보정·5·10·15장 선정 검사 | office 명단·마스크·입력 해시 확정 |
 | 3 과학적 절차 잠금 | 코드·가중치·입력 생성 규칙·모델 인수·채점·분석 잠금 | 승인 문서와 실제 구현 일치 |
-| 4 office 초기 주실험 | 로컬 자동 GPU에서 office의 전 조건을 seed 2026으로 한 번 실행 | 전 조건 유효를 목표로 복구. 미해결 시 완료로 선언하지 않음 |
+| 4 office 초기 주실험 | --target으로 선택한 실행 위치에서 office의 전 조건을 seed 2026으로 한 번 실행 | 전 조건 유효를 목표로 복구. 미해결 시 완료로 선언하지 않음 |
 | 5 office 초기 분석 | 같은 분석 코드로 실제 오차·전환·문턱 이내 효과·복구·실행 비용 보고 | 아직 없는 장면은 미실행으로 표시 |
 | 6 서버 준비 | 동일 코드 배치, CUDA 환경·자료 설정, 과학적 잠금 비교 | 알고리즘·가중치·설정이 office와 일치 |
 | 7 확장 자료 준비 | 나머지 11개에 같은 선정·GT·블러 절차 적용 | 각 장면 추론 전 명단·마스크·제외 이유 잠금 |
-| 8 CUDA 확장 | 통과 장면·모델·블러·seed 실행 | 계획한 모든 시도 또는 명시적 중단 기록 |
+| 8 다중 장면 확장 | --target으로 선택한 실행 위치에서 통과 장면·모델·블러·seed 실행 | 계획한 모든 시도 또는 명시적 중단 기록 |
 | 9 전체 분석 | office를 포함한 같은 정의의 주 분석 | 누락·실패·장치 그룹을 포함한 표·그림 |
 | 10 최종 보고 | 14절의 초심자용 설명 | 모든 수치를 원시 기록에서 추적 가능 |
 
@@ -581,7 +581,7 @@ office 결과를 본 뒤 블러·선정·채점·모델 방법을 바꾸면 새 
 
 기존 3회 반복안의 정확히 3분의 1이다. 위 수는 최초 정상 계획 계산량이며 오류 복구 재시도와 코드 수정에 따른 재계산은 별도 추가 비용으로 집계한다. 이는 작은 로컬 점검과는 다른 규모다. 새 장면이 사전 검사에서 제외되면 위의 장면당 수로 다시 계산하고, 실제 대상 명단과 수를 추론 전에 잠근다.
 
-지금 준비하는 초기 범위는 office의 726회다. 나머지 7,986회는 서버 준비 후의 확장 계획이며 지금 로컬에 함께 배정하지 않는다. 자료 변환·코드 시험 등 부대 비용은 구분해 기록한다.
+지금 준비하는 초기 범위는 office의 726회다. 나머지 7,986회는 다음 확장 범위다. 각 범위를 실행할 위치는 공통 --target 옵션으로 선택하며 장면별로 하드코딩하지 않는다. 자료 변환·코드 시험 등 부대 비용은 구분해 기록한다.
 
 ### 13.2 시간을 추정하는 기준
 
@@ -594,7 +594,7 @@ office 결과를 본 뒤 블러·선정·채점·모델 방법을 바꾸면 새 
 
 평균 작업 하나의 시간에 총 횟수를 곱하는 단순 추정만 사용하지 않고, 모델·크기·cache 상태별 비용을 나눠 예상 총시간과 변동 범위를 보고한다. 현재 문서 단계에서는 실제 CUDA 서버 성능이나 정확한 종료시간을 가정하지 않는다.
 
-기본 운영은 office를 로컬에서 먼저 실행하고, 나머지는 CUDA 서버 준비 후 실행하는 것이다. 사용자는 장치를 명시할 필요가 없고 프로그램이 가능한 CUDA 또는 MPS를 선택한다. 단, 확장 장면은 CUDA가 없으면 기다리며 로컬 MPS로 자동 배정하지 않는다.
+실행 위치의 기본값은 모든 장면에서 local이다. 현재 운영상 첫 실험은 office로 시작하고 이후에는 준비된 CUDA 서버를 사용할 수 있지만, 프로그램은 장면 이름으로 위치를 결정하지 않는다. 사용자가 --target cuda-server를 선택하면 등록된 서버에서 실행하고, 서버 연결이나 CUDA 사용이 실패하면 오류를 알려준다.
 
 ### 13.3 저장 공간
 
@@ -671,30 +671,62 @@ office 결과를 본 뒤 블러·선정·채점·모델 방법을 바꾸면 새 
 
 ## 16. 로컬과 서버의 공통 인터페이스와 파일
 
-사용자가 다루는 명령은 로컬과 서버에서 같다. 장면 이름만 고르고 장치·manifest·출력 경로를 수동으로 바꾸지 않는다. 최초 환경 설치와 서버 연결 설정은 한 번 필요하지만, 이후 실험의 조작 방법은 동일하게 유지한다.
+사용자는 장면과 실행 위치를 각각 선택한다. 모든 장면과 동작에 같은 `--target local|cuda-server` 옵션을 사용하며 기본값은 `local`이다. office는 첫 실험 장면일 뿐 특별한 실행 장치 규칙이 없다.
 
 ### 16.1 공통 명령
 
+| 옵션 | 의미 |
+|---|---|
+| --scene <장면 이름> | 사용할 이미지셋. office, courtyard 등 모든 주 분석 후보에 같은 규칙 적용 |
+| --target local | 현재 컴퓨터에서 실행. 생략했을 때의 기본값 |
+| --target cuda-server | 설정된 서버에 SSH로 명령을 전달. 재구성은 서버 CUDA에서 수행 |
+| --remaining | 계획한 office 외 11개 후보 선택. 실행 위치를 바꾸지 않음 |
+| --server-config <파일> | 서버 profile 경로. 기본 experiments/cuda_server.json. 서버 target에서만 사용 |
+
 ~~~sh
-# 양쪽 환경에서 같은 명령 형식
+# local은 기본값: 아래 네 명령은 현재 컴퓨터에서 실행
 .venv/bin/python experiments/run_all.py prepare --scene office
 .venv/bin/python experiments/run_all.py run --scene office
 .venv/bin/python experiments/run_all.py status --scene office
 .venv/bin/python experiments/run_all.py analyze --scene office
 
-# 서버 준비 후 office 외 계획된 확장 장면
-.venv/bin/python experiments/run_all.py prepare --remaining
-.venv/bin/python experiments/run_all.py run --remaining
+# 같은 office를 CUDA 서버에서 실행하려면 target만 선택
+.venv/bin/python experiments/run_all.py prepare --scene office --target cuda-server
+.venv/bin/python experiments/run_all.py run --scene office --target cuda-server
+.venv/bin/python experiments/run_all.py status --scene office --target cuda-server
+.venv/bin/python experiments/run_all.py analyze --scene office --target cuda-server
 
-# 전체 주 분석
-.venv/bin/python experiments/run_all.py analyze
+# 다른 장면도 동일. local을 명시하는 것도 가능
+.venv/bin/python experiments/run_all.py run --scene courtyard --target local
+.venv/bin/python experiments/run_all.py run --scene courtyard --target cuda-server
+
+# 확장 후보 전체와 전체 주 분석도 같은 target 선택
+.venv/bin/python experiments/run_all.py run --remaining --target cuda-server
+.venv/bin/python experiments/run_all.py analyze --target cuda-server
 ~~~
 
-기본 seed는 승인한 세 개 전부다. 특정 seed의 상태 확인·동일 조건 재개가 필요할 때만 같은 --seed 옵션을 사용한다. --device는 전문가용 덮어쓰기이며 일반 사용에는 필요 없다.
+local은 현재 명령을 실행하는 호스트를 뜻한다. 현재 Mac에서는 MPS를 사용하고, CUDA가 있는 컴퓨터에서 local을 선택하면 그 컴퓨터의 CUDA를 사용할 수 있다. cuda-server는 로컬 GPU를 검사하지 않고 등록된 원격 호스트에서 명령을 수행한다. 서버에서는 같은 진입점을 local 모드·CUDA 장치로 호출해 SSH 전달이 반복되지 않게 한다.
 
-현재는 승인 대기 상태이므로 prepare/run/analyze는 새 과학적 작업을 시작하지 않는다. status는 읽기 전용으로 준비 상태를 보여준다. 공통 전처리·분석 모듈은 승인한 정의에 맞게 구현·검증한 후 실행 준비 상태를 바꾼다.
+기본 seed는 2026 하나이며 통계적 반복은 없다. --seed는 승인한 값의 지정에 사용한다. --device는 실행 호스트의 GPU를 명시하는 전문가용 옵션이며, 실행 위치를 바꾸는 옵션은 --target이다. cuda-server와 --device mps는 함께 사용할 수 없다. GPU가 없으면 CPU로 자동 변경하지 않는다.
 
-### 16.2 자동 경로와 잠금
+현재는 승인 대기 상태이므로 prepare/run/analyze는 새 과학적 작업을 시작하지 않는다. 서버 target도 승인·구현 준비 검사를 통과해야 하며 서버에서도 같은 검사를 수행한다. status는 승인 대기 상태에서도 선택한 위치의 기록을 읽으며 GPU 작업이나 결과 폴더를 만들지 않는다. 서버 연결 실패를 local 실행으로 바꾸지 않는다.
+
+### 16.2 서버 설정, 자동 경로와 잠금
+
+서버 준비 후 [서버 profile 예시](experiments/cuda_server.example.json)를 experiments/cuda_server.json으로 복사하고 다음 값을 한 번 설정한다. 실제 profile은 Git에 포함하지 않는다. host는 SSH 설정 별칭 또는 user@host이며, 인증키 등은 기존 SSH 설정을 사용한다.
+
+~~~json
+{
+  "host": "user@your-cuda-server",
+  "project_dir": "/absolute/server/path/FrameUtility",
+  "python": ".venv/bin/python",
+  "port": 22
+}
+~~~
+
+서버에는 같은 코드·승인 문서·가중치·입력 snapshot과 CUDA 가상환경을 준비한다. python은 서버의 실행 파일이고 상대 경로는 project_dir 기준이다. Mac 가상환경을 Linux에 복사하지 않는다. --protocol은 양쪽 저장소에 같은 상대 경로로 두고, --input-root와 --results-root를 지정하면 선택한 실행 위치의 파일 시스템 기준으로 해석한다.
+
+두 위치에서 기본 파일 구조는 같다.
 
 ~~~text
 data/experiments/eth3d_restart_v1/<scene>/manifest.json
@@ -705,11 +737,9 @@ results/eth3d_restart_v1/executions/<자동 runtime ID>/<scene>/seed_2026/
 results/eth3d_restart_v1/analysis/report.md
 ~~~
 
-연구 수준의 잠금은 과학적 코드·문서·모델·설정을 고정한다. 실행 그룹의 잠금은 실제 GPU·호스트·패키지와 실행 환경을 고정한다. office가 어느 실행 그룹에 배정됐는지 첫 실행 전에 기록하고, 결과를 본 뒤 더 좋은 장치의 값으로 자동 교체하지 않는다.
+연구 수준의 잠금은 과학적 코드·문서·모델·설정을 고정한다. 실행 그룹의 잠금은 실제 GPU·호스트·패키지와 실행 환경을 고정한다. 모든 장면은 첫 실행 때 선택한 실행 그룹을 기록하며 한 장면의 ADD/DROP을 서로 다른 호스트의 중간 결과로 이어 붙이지 않는다. 한 장면의 기록이 이미 있는 결과 루트에서 target만 바꿔 그 장면을 이어 실행하지 않는다.
 
-서버에는 같은 코드와 승인 문서, 준비 입력 snapshot, 가중치, office의 결과·연구 잠금을 전달한다. Mac 가상환경을 Linux로 복사하지 않고 플랫폼에 맞게 설치한다. 모델 입력 경로는 저장소 기준 상대 경로를 사용하며 특정 Mac 사용자 경로를 넣지 않는다.
-
-최종 분석은 office와 CUDA 확장 결과를 같은 표 구조로 읽고 장치 정보를 보존한다. 임시 cache와 최적화 상태를 로컬에서 서버로 옮겨 한 조건의 중간 상태를 이어 붙이지 않는다.
+status와 analyze는 선택한 실행 위치의 결과 루트를 읽는다. 여러 위치의 결과를 함께 분석할 때는 최종 예측·점수·실행 이력과 연구 잠금을 공통 결과 루트에 모으고 과학적 정의와 해시를 확인한다. 이 통합은 office에만 적용되는 절차가 아니라 모든 장면에 동일하게 적용한다. 서버 명령 전달은 서버에 준비된 자료를 사용하며 자동 자료 동기화 기능과 구분한다. 임시 cache·정렬 상태를 옮겨 한 조건의 계산을 이어 붙이지 않는다.
 
 ### 16.3 승인 문서와 설정
 
@@ -731,21 +761,21 @@ results/eth3d_restart_v1/analysis/report.md
 
 | 항목 | 문서의 제안 |
 |---|---|
-| 초기 실행 | office를 로컬에서 새로 하는 주실험. 726회 재구성 |
-| 다음 단계 | 서버 준비 후 나머지 11개 후보를 CUDA에서 실행 |
+| 초기 실행 | office를 새로 하는 주실험. 726회 재구성. 위치는 공통 --target 옵션으로 선택 |
+| 다음 단계 | 나머지 11개 후보로 확장. 같은 --target 옵션으로 local 또는 CUDA 서버 선택 |
 | 전체 주 분석 | office 포함 최대 12장면. office도 같은 가중치로 포함 |
 | 제외 | pipes는 14장으로 최대 15장 조건을 만들 수 없음 |
 | 공통 조건 | 5·10·15장, 전 타깃, 12개 블러 단계, 두 모델, seed 2026 단일 실행 |
 | 주 채점 | 공식 occlusion-aware depth GT, 공통 평가 격자, 전체 고정 마스크 |
 | 작은 효과 | AbsRel ε=0.0005 고정. 원시 부호·민감도 표도 병기 |
 | 가속 | 같은 장치의 추론·정렬, MASt3R 세 worker·각 8 thread |
-| 사용자 인터페이스 | 양쪽의 prepare/run/status/analyze 명령 동일, MPS·CUDA 자동 선택 |
+| 사용자 인터페이스 | 모든 장면·동작에 --target local 또는 cuda-server. 기본 local, 서버는 SSH profile 한 번 설정 |
 | 일관성 | 과학적 절차는 연구 전체에서 잠금. 장치 환경은 기록하며 MPS/CUDA의 결론상 동등성 가정 |
 | 복구 | 같은 조건 최대 3회 시도 후 원인 수정. 영향 결과 재계산·이력 보존, 값 조작으로 성공 처리 금지 |
 | 최대 전체 계산량 | 모든 12장면 통과 시 8,712회 재구성 |
 | 최종 보고 | 초심자용 설명, 모든 장면·문턱 이내 효과·복구·미해결·장치와 원시 기록 공개 |
 
-승인 후 이 정의에 맞게 구현·검증·office 입력 준비를 마치고 초기 주실험을 시작한다. 확장은 CUDA 서버 준비 후 같은 절차로 진행한다. 승인 전에는 새 모델 추론을 수행하지 않는다.
+승인 후 이 정의에 맞게 구현·검증·office 입력 준비를 마치고 초기 주실험을 시작한다. 확장도 같은 절차와 공통 실행 위치 옵션을 사용한다. 승인 전에는 새 모델 추론을 수행하지 않는다.
 
 ## 참고 자료
 

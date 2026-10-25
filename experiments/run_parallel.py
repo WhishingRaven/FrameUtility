@@ -102,8 +102,6 @@ def run(args):
     manifest = json.loads(manifest_path.read_text())
     validate_protocol(protocol, manifest, args.seed)
     device = resolve_device(args.device)
-    if manifest["scene"] in protocol.get("expansion_scenes", []) and device != "cuda":
-        raise ValueError("Expansion scenes must run on the configured CUDA server")
     cohort = ROOT/args.cohort
     cohort.mkdir(parents=True, exist_ok=True)
     frozen = cohort_configuration(protocol_path, device, protocol)

@@ -2,30 +2,35 @@
 
 승인 대상은 [실험 계획과 분석 절차](../EXPERIMENT_PLAN.md)다. 현재는 **승인 대기 / 새 과학적 방법 구현 검증 미완료**이며 새 모델 추론은 시작하지 않았다.
 
-첫 대상은 **office 초기 주실험**이다. office도 전체 주 분석에 포함한다. 5·10·15장, 타깃 전부, 블러 12단계, 단일 seed 2026, 두 모델을 적용한다. 나머지 11개 후보는 CUDA 서버 준비 후 같은 방법으로 확장한다.
+첫 대상은 **office 초기 주실험**이다. office도 전체 주 분석에 포함한다. 5·10·15장, 타깃 전부, 블러 12단계, 단일 seed 2026, 두 모델을 적용한다. 나머지 11개 후보도 같은 방법으로 확장한다. 모든 장면의 실행 위치는 --target local|cuda-server로 선택하며 기본값은 local이다.
 
-## 사용자가 쓰는 명령은 양쪽에서 같다
+## 장면과 실행 위치를 각각 선택한다
 
 ~~~sh
+# 기본 local: 현재 컴퓨터에서 실행
 .venv/bin/python experiments/run_all.py prepare --scene office
 .venv/bin/python experiments/run_all.py run --scene office
 .venv/bin/python experiments/run_all.py status --scene office
 .venv/bin/python experiments/run_all.py analyze --scene office
+
+# 등록한 CUDA 서버에서 같은 동작 실행
+.venv/bin/python experiments/run_all.py prepare --scene office --target cuda-server
+.venv/bin/python experiments/run_all.py run --scene office --target cuda-server
+.venv/bin/python experiments/run_all.py status --scene office --target cuda-server
+.venv/bin/python experiments/run_all.py analyze --scene office --target cuda-server
+
+# 모든 장면에 동일한 옵션
+.venv/bin/python experiments/run_all.py run --scene courtyard --target local
+.venv/bin/python experiments/run_all.py run --scene courtyard --target cuda-server
+.venv/bin/python experiments/run_all.py run --remaining --target cuda-server
+.venv/bin/python experiments/run_all.py analyze --target cuda-server
 ~~~
 
-서버에서는 장면 이름만 바꾼다. 서버 준비 후 확장 전체는 다음과 같다.
+--target local이 기본값이며 현재 호스트에서 계산한다. GPU는 CUDA가 있으면 CUDA, 아니면 MPS를 사용한다. --target cuda-server는 설정된 서버에 SSH로 같은 프로그램을 실행하고 서버 CUDA를 사용한다. office와 다른 장면의 위치를 별도로 지정하거나 office 완료를 요구하는 분기는 없다. 두 target 모두 CPU로 조용히 전환하지 않는다.
 
-~~~sh
-.venv/bin/python experiments/run_all.py prepare --remaining
-.venv/bin/python experiments/run_all.py run --remaining
-.venv/bin/python experiments/run_all.py analyze
-~~~
+--remaining은 처음 정한 office 외 11개 후보를 고르는 옵션이며 실행 위치와 무관하다. --device는 실행 호스트의 GPU를 지정하는 전문가용 옵션이고, 실행 위치는 --target으로 고른다.
 
-일반 사용자는 --device, --manifest, --cohort를 장비에 맞춰 바꿀 필요가 없다. CUDA가 있으면 CUDA, 그렇지 않으면 MPS를 자동 선택한다. 둘 다 없으면 오류를 내며 CPU로 조용히 전환하지 않는다. 확장 장면은 CUDA에서만 실행하며, 서버가 없다고 로컬 MPS에 배정하지 않는다.
-
---remaining은 처음 정한 office 외 11개 확장 후보다. 좋은 결과만 선택하는 기능이 아니다. 서버 확장 전에 office 초기 실행의 기록과 연구 잠금을 전달해야 한다.
-
-현재 상태에서는 prepare/run/analyze의 승인 검사가 작업을 막는다. status는 GPU나 결과 폴더를 만들지 않고 읽기 전용으로 준비 상태를 보여준다.
+prepare/run/analyze는 승인·구현 준비 검사를 통과해야 하며 서버에서도 다시 검사한다. status는 읽기 전용으로 선택한 위치의 기록을 읽고 GPU나 결과 폴더를 만들지 않는다. 서버 연결 실패 시 local로 변경하지 않는다.
 
 ## 구현된 가속 실행부
 
@@ -60,7 +65,7 @@ results/eth3d_restart_v1/executions/<runtime ID>/<scene>/seed_2026/
 results/eth3d_restart_v1/analysis/report.md
 ~~~
 
-office의 로컬 결과도 주 분석에 포함한다. 전체 보고서는 장치 표기를 유지하고 혼합 플랫폼 평균과 플랫폼별 요약을 구분한다. 같은 장면 내부의 모델·ADD/DROP은 같은 플랫폼에서 수행한다. MPS와 CUDA 차이는 연구 결론에 영향을 주지 않는다고 가정하며 별도 장치 교차 실험은 하지 않는다. 재실행 변동도 측정하지 않는다.
+office도 선택한 실행 위치와 관계없이 주 분석에 포함한다. 전체 보고서는 장치 표기를 유지하고 혼합 플랫폼 평균과 플랫폼별 요약을 구분한다. 같은 장면 내부의 모델·ADD/DROP은 같은 플랫폼에서 수행한다. MPS와 CUDA 차이는 연구 결론에 영향을 주지 않는다고 가정하며 별도 장치 교차 실험은 하지 않는다. 재실행 변동도 측정하지 않는다.
 
 ## 승인 후 완성하고 검증할 부분
 
@@ -74,11 +79,13 @@ office의 로컬 결과도 주 분석에 포함한다. 전체 보고서는 장�
 
 ## 서버에 한 번 설정할 내용
 
-동일 코드, 승인 문서, 가중치, 준비 RGB/GT snapshot, office의 결과·연구 잠금을 전달한다. Mac 가상환경을 Linux에 복사하지 않고 해당 CUDA 환경에 패키지를 설치한다. 실제 사용 버전은 실행 그룹별로 기록한다.
+[cuda_server.example.json](cuda_server.example.json)을 experiments/cuda_server.json으로 복사해 host, project_dir, python, port를 설정한다. host는 SSH 별칭 또는 user@host, project_dir는 서버 저장소 절대 경로, python은 서버 가상환경 실행 파일이다. 실제 profile은 Git에서 제외한다. SSH 키·접속 설정은 기존 SSH 구성을 사용한다.
 
-기본 경로는 저장소 상대 경로다. 필요한 경우 --input-root와 --results-root를 양쪽에서 같은 방식으로 지정할 수 있다. --seed와 --device도 전문가용 옵션으로 동일하게 제공하지만 일반 실행에 필수는 아니다.
+서버에는 같은 코드·승인 문서·가중치·준비 RGB/GT snapshot을 배치하고 해당 CUDA 환경에 패키지를 설치한다. 실제 버전은 실행 그룹별로 기록한다. 서버 target은 준비된 서버 자료로 명령을 실행하며 자료의 자동 업로드·동기화와는 별도다.
 
-현재 통일한 것은 Mac과 CUDA 서버에서 같은 프로그램을 사용하는 인터페이스다. 실제 서버 주소·전송 설정과 CUDA 실기기 검증은 서버 준비 후 연결한다. SSH 연결이 이미 구성됐다고 주장하지 않는다.
+--protocol은 양쪽 저장소에서 같은 상대 경로를 사용한다. --input-root와 --results-root는 선택한 실행 위치의 경로다. status/analyze는 그 위치의 결과만 읽는다. 여러 위치의 결과를 합치려면 최종 결과와 연구 잠금을 공통 결과 루트에 모아 과학적 해시와 장면 배정을 확인한다. office에만 적용되는 선행 결과나 전송 조건은 없다.
+
+SSH 명령 전달은 가상 profile·subprocess로 검증한다. 실제 서버 접속과 CUDA 실기기 확인은 서버 준비 후 수행한다.
 
 ## 진행 상태와 재개
 
@@ -103,4 +110,4 @@ complete는 계획 비교가 모두 평가되고 모든 지표가 유효한 경�
 .venv/bin/python experiments/run_all.py status --scene office
 ~~~
 
-시험은 가상의 배열·파일·worker와 로컬 보정 metadata를 사용하며 실제 사전학습 모델 추론을 하지 않는다. 같은 사용자 명령의 MPS/CUDA dispatch, 승인 전 실행 차단, 단일 seed 전달, 1+3 worker, 장면·환경 잠금, 실패 보존을 검증한다.
+시험은 가상의 배열·파일·worker와 로컬 보정 metadata를 사용하며 실제 사전학습 모델 추론을 하지 않는다. 모든 장면의 local/CUDA 서버 target·SSH 전달·기본 local, 승인 전 실행 차단, 단일 seed 전달, 1+3 worker, 장면·환경 잠금, 실패 보존을 검증한다.

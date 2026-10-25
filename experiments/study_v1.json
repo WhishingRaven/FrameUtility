@@ -123,7 +123,7 @@
     "platform_equivalence": "assumed_no_material_effect_on_conclusions_not_empirically_tested"
   },
   "execution": {
-    "device": "auto_per_runtime_group_local_mps_then_server_cuda",
+    "device": "auto_on_selected_execution_host",
     "optimizer_device": "same_as_inference",
     "workers": 3,
     "threads_per_worker": 8,
@@ -139,7 +139,6 @@
     "resource_error_policy": "stop_no_device_precision_worker_count_or_iteration_fallback",
     "numerical_failure_policy": "same_condition_up_to_3_attempts_then_stop_diagnose_fix_and_recompute_affected_conditions",
     "old_predictions_or_caches": "forbidden",
-    "preferred_platform": "cuda",
     "maximum_active_scene_seed_runs": 1,
     "mast3r_coarse_learning_rate": 0.07,
     "mast3r_fine_learning_rate": 0.01,
@@ -149,13 +148,17 @@
     "mast3r_clean_depth": false,
     "vggt_point_head": false,
     "vggt_track_head": false,
-    "initial_scene_device": "auto",
-    "expansion_scene_device": "cuda",
-    "interface": "same_scene_prepare_run_status_analyze_commands_on_local_and_server",
+    "interface": "same_prepare_run_status_analyze_with_target_local_or_cuda_server_for_any_scene",
     "maximum_attempts_per_condition_before_diagnosis": 3,
     "accepted_attempt": "first_valid_never_best_error_all_attempts_logged",
     "bugfix_policy": "preserve_attempts_revalidate_recompute_all_affected_results_no_mixed_code_versions",
-    "unresolved_failure_policy": "stop_and_report_unresolved_never_fabricate_valid_values_or_declare_full_success"
+    "unresolved_failure_policy": "stop_and_report_unresolved_never_fabricate_valid_values_or_declare_full_success",
+    "default_target": "local",
+    "targets": [
+      "local",
+      "cuda-server"
+    ],
+    "server_config": "experiments/cuda_server.json"
   },
   "planned_counts_if_all_12_scenes_eligible": {
     "target_context_curves_per_backend_per_scene": 30,

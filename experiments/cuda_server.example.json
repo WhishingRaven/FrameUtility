@@ -1,0 +1,6 @@
+{
+  "host": "user@your-cuda-server",
+  "project_dir": "/absolute/server/path/FrameUtility",
+  "python": ".venv/bin/python",
+  "port": 22
+}
