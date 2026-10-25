@@ -6,6 +6,57 @@
 
 **현재 프로젝트 상태:** 실험 계획은 승인 대기이며 `implementation_ready`는 `false`다. 준비 자료와 공식 사진 선정 결과는 이미 존재하지만 최종 입력·GT 채점 통합은 작업 중이다. 인프라 준비와 작은 CUDA 연산 검증은 먼저 할 수 있다. 본실험은 담당자의 승인·구현 검증 이후에 시작한다. `analyze` 구현은 결과 확보 뒤 진행하며 서버 준비의 선행 조건이 아니다.
 
+## 0. run에 필요한 최소 구성
+
+이 문서는 **이미지는 별도의 분할 묶음으로 전송한다는 계획**을 전제로 한다. 그 이미지 묶음과 별도로 보내는 **실행 코드 묶음은 `experiments/`와 `EXPERIMENT_PLAN.md` 두 항목**이다. 모델 소스·가중치·Python/CUDA 환경은 서버 최초 설정 때 한 번 준비한다.
+
+아래 표는 최종적으로 서버에 있어야 할 구성이다. 이미지 묶음마다 이 전체 구성을 다시 보내라는 뜻이 아니다.
+
+| 구분 | 전송·설치 시점 |
+|---|---|
+| 실행 코드: experiments/ + EXPERIMENT_PLAN.md | 본실험 시작 전 한 번 동기화 |
+| 모델 소스·가중치·Python/CUDA | 서버 최초 설정 때 한 번 준비 |
+| 이미지·GT·manifest 분할 묶음 | 별도 계획대로 나눠 전송. 서버에서 원래 준비 경로로 복원 |
+| 실제 run | 해당 장면의 모든 입력이 수신·검증된 뒤 실행. 다른 장면의 전송 완료를 기다릴 필요는 없음 |
+
+| 항목 | run에서 필요한 이유 | 준비 방법 |
+|---|---|---|
+| `experiments/` | 실행 코드, 프로토콜 JSON, 가중치 목록, 추론 코드 해시 | 로컬과 같은 디렉토리 내용 전송 |
+| `EXPERIMENT_PLAN.md` | 승인한 문서의 SHA-256 대조 | 로컬과 같은 파일 전송 |
+| `vendor/vggt/`, `vendor/mast3r/`와 DUSt3R·CroCo 하위 모듈 | 모델·전처리·정렬 코드, 버전·변경분 확인 | 서버에서 고정 커밋으로 Git clone하거나 완전한 checkout 전송 |
+| `checkpoints/` | `vggt-1b.pt`, `mast3r.safetensors`, `mast3r-config.json` | 전송 후 가중치 크기·SHA-256 확인 |
+| `data/experiments/eth3d_multi_view/`의 실행할 장면과 공통 메타데이터 | 최종 manifest, 모든 입력 RGB 변형, 채점용 깊이·GT·마스크 등 참조 파일 | 완성된 입력 snapshot 전송 |
+| 서버의 `.venv/`와 NVIDIA 드라이버 | Python 의존성과 CUDA 실행 환경 | Linux 서버에서 새로 설치. Mac의 .venv는 복사하지 않음 |
+
+기본 배치는 다음과 같다. 상위 폴더 이름은 달라도 되지만 이 상대 구조는 유지한다.
+
+```text
+FrameUtility/
+├── EXPERIMENT_PLAN.md
+├── experiments/
+├── vendor/
+│   ├── vggt/
+│   └── mast3r/                 # dust3r와 croco 하위 모듈 포함
+├── checkpoints/
+│   ├── vggt-1b.pt
+│   ├── mast3r.safetensors
+│   └── mast3r-config.json
+├── data/experiments/eth3d_multi_view/
+│   ├── official_selection.json
+│   └── office/                 # 또는 실행할 다른 장면
+│       ├── manifest.json
+│       └── ...                 # manifest가 참조하는 모든 입력·GT 파일
+└── .venv/                      # 서버에서 생성
+```
+
+FrameUtility 자체의 루트 `.git`, `Proposal.pdf`, 일반 README, 과거 실험 결과와 분석 모듈은 `run`의 필수 입력이 아니다. `results/`도 신규 실행 때 자동 생성한다. 같은 작업을 재개할 때는 해당 작업의 기존 결과·실행 메타데이터를 보존해야 한다.
+
+반면 **vendor의 Git 정보는 현재 코드에 필수**다. 실행기가 `git rev-parse`와 `git diff`로 모델 버전을 확인하므로 모델 소스를 ZIP으로만 풀거나 `.git`과 하위 모듈 메타데이터를 제거하면 안 된다. 서버에서 5절대로 clone하는 방법을 권장한다.
+
+실행 전용 서버에는 입력 변환·선정에 썼던 `data/eth3d/high_res_multi_view/`의 원본·보정·GT archive 전체를 기본 전송하지 않는다. 이 생략은 **최종 manifest의 모든 실행 참조 파일이 준비 snapshot에 포함돼 있을 때** 가능하다. 외부 파일을 가리키는 경로나 심볼릭 링크가 남아 있으면 그 대상도 필요하다. 현재 worker는 manifest의 모든 frame에 선언된 depth와 RGB variant의 파일·해시를 확인하므로 사용하지 않을 것 같은 frame을 임의로 빼서 전송하지 않는다.
+
+현재 정리본의 12개 장면 manifest에서 RGB·깊이 참조 2,340건은 모두 준비 루트 내부에 있고 누락·심볼릭 링크가 없는 것을 확인했다. 이는 경로·존재 확인이다. **현재 정리본에는 최종 프로토콜 필드·GT 통합이 남아 있어 곧바로 run 가능한 완성 입력이라는 뜻은 아니다.** 최종 입력을 확정한 뒤 추가 GT·마스크를 포함해 다시 확인한다.
+
 ## 1. 조교에게 먼저 받을 정보
 
 아래 표를 채운 뒤 시작하면 접속 오류와 환경 재설치를 줄일 수 있다.
@@ -96,31 +147,27 @@ sudo apt-get update
 sudo apt-get install -y git rsync tmux build-essential python3-venv libgl1 libglib2.0-0
 ```
 
-## 4. 프로젝트 코드를 서버에 배치한다
+## 4. 실행 코드와 승인 문서를 서버에 배치한다
 
-`.venv`, `vendor`, `checkpoints`, `data`는 Git에서 제외돼 있다. **저장소 코드만 받는 것으로 준비가 끝나지 않는다.** 아래 절차는 현재 로컬 작업 트리의 코드를 새 서버 디렉토리로 옮기는 방법이다. 미커밋 수정도 포함하므로 팀이 사용할 코드 snapshot을 먼저 정한다.
+**이미지를 나눠 보내는 작업과 별개의 코드 전송 단계**다. 전송물은 `experiments/`와 `EXPERIMENT_PLAN.md`로 한정한다. 가중치·모델 소스·Python 환경이 이미 준비됐다면 다시 전송하지 않는다. 아래 절차는 현재 로컬 작업 트리의 코드를 전송하므로 미커밋 수정도 포함한다. 팀이 사용할 코드 snapshot을 먼저 정하고 본실험 시작 전에 동기화한다.
 
 ```bash
 # 로컬: FrameUtility 저장소 루트에서 실행
-ssh frameutility-gpu 'mkdir -p /home/ubuntu/projects/FrameUtility'
+ssh frameutility-gpu 'mkdir -p /home/ubuntu/projects/FrameUtility/experiments'
 
 rsync -av --progress \
-  --exclude='.venv/' --exclude='vendor/' \
-  --exclude='checkpoints/' --exclude='data/' --exclude='results/' \
-  --exclude='.cache/' --exclude='.codegraph/' --exclude='__pycache__/' \
-  --exclude='.aws/' --exclude='.ssh/' --exclude='.env*' \
-  --exclude='.codex/' --exclude='.agents/' \
-  --exclude='experiments/cuda_server.json' \
-  ./ frameutility-gpu:/home/ubuntu/projects/FrameUtility/
+  --exclude='__pycache__/' --exclude='cuda_server.json' \
+  experiments/ frameutility-gpu:/home/ubuntu/projects/FrameUtility/experiments/
+rsync -av --progress EXPERIMENT_PLAN.md \
+  frameutility-gpu:/home/ubuntu/projects/FrameUtility/
 ```
 
-`.git` 이력도 함께 옮겨 커밋·변경 내용을 확인할 수 있게 한다. 처음에는 빈 전용 디렉토리를 사용하고, 기존 타 프로젝트 위에 복사하지 않는다. `--delete`는 사용하지 않는다. 같은 커밋을 Git으로 clone하는 방법을 선택해도 되지만 로컬의 미커밋 변경이 빠지지 않았는지 별도로 확인해야 한다.
+FrameUtility 루트의 `.git` 이력은 전송 필수가 아니다. 커밋·미커밋 변경 이력은 로컬에서 기록하고 서버에서는 8절의 추론 소스 해시를 대조한다. 처음에는 빈 전용 디렉토리를 사용하고 기존 타 프로젝트 위에 복사하지 않는다. `--delete`는 사용하지 않는다. 전체 저장소를 clone하는 방식도 가능하지만 실행에 불필요한 문서와 Git 이력까지 반드시 전송할 필요는 없다.
 
 ```bash
 # 서버
 cd /home/ubuntu/projects/FrameUtility
-git rev-parse HEAD
-git status --short
+ls experiments/run_all.py experiments/study_v1.json experiments/weights.json EXPERIMENT_PLAN.md
 ```
 
 ## 5. 모델 소스를 같은 버전으로 준비한다
@@ -268,45 +315,53 @@ cd /home/ubuntu/projects/FrameUtility/vendor/mast3r/dust3r/croco/models/curope
 cd /home/ubuntu/projects/FrameUtility
 ```
 
-## 7. 기존 가중치와 준비 자료를 전송한다
+## 7. 가중치와 완성된 실행 입력을 전송한다
 
 자료는 실험 담당자가 준비하고 있다. 서버 담당자는 임의로 사진을 재선정하거나 블러를 다시 생성하지 않고 **전달받은 확정 snapshot**을 옮긴다. 아직 생성 중인 파일은 완료된 뒤 동기화·해시 확인을 다시 한다.
+
+### 7.1 준비가 끝난 자료로 run만 실행하는 경우
+
+이미지 분할 전송과 코드 전송은 독립적으로 진행한다. 각 이미지 묶음은 서버의 같은 `data/experiments/eth3d_multi_view/` 아래에 모이며, 분할 번호를 run의 입력 경로에 추가하지 않는다. 압축파일을 여러 조각으로 나누는 방식을 쓰면 조각을 모두 수신·검증한 뒤 원래 파일과 경로를 복원한다.
+
+분할 묶음은 RGB뿐 아니라 해당 장면의 최종 manifest와 그 manifest가 참조하는 깊이·GT·마스크도 빠짐없이 전달해야 한다. 한 장면의 필요한 파일과 해시가 모두 확인되면 그 장면의 run을 시작할 수 있다. 일부 조각만 있는 상태에서 실행하거나 같은 장면의 입력을 계산 도중 덮어쓰지 않는다.
+
+아래는 장면별 분할 전송을 rsync로 수행하는 예시다. 이미 다른 방식으로 나눠 전달한 이미지 파일을 다시 보낼 필요는 없으며, 최종 경로와 해시를 확인하면 된다. 가중치는 최초 준비 때 한 번만 전송한다.
 
 작성 시점 로컬 `du -sh` 참고값이다. 최종 자료가 추가되면 다시 측정한다.
 
 | 전송 경로 | 내용 | 현재 크기 |
 |---|---|---:|
 | `data/experiments/eth3d_multi_view/` | 사진별 PNG·참고 깊이·manifest·공식 선정 결과 | 약 2.0G |
-| `data/eth3d/high_res_multi_view/` | 고해상도 원본·보정·공식 GT 관련 자료 | 약 36G |
 | `checkpoints/` | 두 모델 가중치와 MASt3R 설정 JSON | 약 7.3G |
 
-`data/` 전체는 약 **396G**다. 현재 연구와 무관한 데이터와 low-res 자료까지 통째로 전송하지 않는다. 위 목록만으로 약 45G대이며 Python 환경·결과·pair cache 공간은 별도다. 여유 공간은 본실험 입력 크기와 예상 최대 임시 사용량까지 더해 확인한다. 이 수치는 필요한 VRAM이나 전체 실행 디스크의 보장값이 아니다.
+현재 정리본과 가중치의 합은 약 9G대다. 이는 최종 입력 크기의 확정값이 아니며 공식 GT·마스크 파일이 추가되면 늘 수 있다. Python 환경·결과·pair cache 공간도 별도다. `data/` 전체 약 **396G**나 원본 고해상도 자료 약 **36G**를 run용 기본 전송에 넣지 않는다. 여유 공간은 최종 입력과 예상 최대 임시 사용량을 합쳐 확인하며, 위 수치를 VRAM이나 전체 실행 디스크의 보장값으로 해석하지 않는다.
 
 ```bash
 # 서버: 수신 디렉토리 준비
-mkdir -p /home/ubuntu/projects/FrameUtility/data/experiments
-mkdir -p /home/ubuntu/projects/FrameUtility/data/eth3d
+mkdir -p /home/ubuntu/projects/FrameUtility/data/experiments/eth3d_multi_view
 mkdir -p /home/ubuntu/projects/FrameUtility/checkpoints
 ```
 
 ```bash
-# 로컬: FrameUtility 루트에서 실행
-rsync -av --progress --partial data/experiments/eth3d_multi_view/ \
+# 로컬: 공통 메타데이터와 office 이미지 묶음의 예시
+rsync -av --progress data/experiments/eth3d_multi_view/*.json \
   frameutility-gpu:/home/ubuntu/projects/FrameUtility/data/experiments/eth3d_multi_view/
-rsync -av --progress --partial data/eth3d/high_res_multi_view/ \
-  frameutility-gpu:/home/ubuntu/projects/FrameUtility/data/eth3d/high_res_multi_view/
+rsync -av --progress --partial data/experiments/eth3d_multi_view/office/ \
+  frameutility-gpu:/home/ubuntu/projects/FrameUtility/data/experiments/eth3d_multi_view/office/
+
+# 최초 한 번. 서버에 같은 가중치가 이미 있으면 생략
 rsync -av --progress --partial checkpoints/ \
   frameutility-gpu:/home/ubuntu/projects/FrameUtility/checkpoints/
 ```
 
 `official_selection.json`은 `data/experiments/eth3d_multi_view/`에 있으며 manifest와 프로토콜에서 이 경로와 해시를 참조한다. 파일명·카메라 ID·사진 순서·블러 단계·GT를 서버 사정에 맞춰 변경하지 않는다.
 
-전송 완료 뒤 준비 자료에 checksum 차이가 있는지 읽기 전용으로 확인한다. 오래 걸리면 실행할 장면부터 확인하되 본실험에서 사용할 모든 파일의 검증은 완료해야 한다.
+묶음 수신 뒤 해당 장면의 checksum 차이가 있는지 읽기 전용으로 확인한다. 다른 장면도 같은 절차로 나눠 전송·확인한다. 공식 선정 결과 등 공통 메타데이터의 해시도 대조한다.
 
 ```bash
 # 로컬: -n은 전송하지 않는 확인 모드, -c는 파일 내용 checksum 비교
-rsync -avnc --itemize-changes data/experiments/eth3d_multi_view/ \
-  frameutility-gpu:/home/ubuntu/projects/FrameUtility/data/experiments/eth3d_multi_view/
+rsync -avnc --itemize-changes data/experiments/eth3d_multi_view/office/ \
+  frameutility-gpu:/home/ubuntu/projects/FrameUtility/data/experiments/eth3d_multi_view/office/
 ```
 
 서버에서는 두 대형 가중치의 바이트 수와 SHA-256을 [weights.json](experiments/weights.json)에 대조한다. `mast3r-config.json`도 전송됐는지 함께 확인한다.
@@ -332,6 +387,19 @@ print('MASt3R config 확인 완료')
 PY
 ```
 
+### 7.2 서버에서 prepare·입력 재생성도 수행하는 경우에만 추가
+
+서버에서 원본 사진을 다시 변환하거나 공식 깊이 GT 대응·선정 검증을 수행한다면 준비 절차가 사용하는 원본·보정·공식 GT 자료가 추가로 필요하다. 그 경우에만 다음 전송을 추가한다. 준비된 입력만 사용하는 run의 기본 전송 명령이 아니다.
+
+```bash
+# 로컬: 서버에서도 자료 준비를 수행하기로 정한 경우에만
+ssh frameutility-gpu 'mkdir -p /home/ubuntu/projects/FrameUtility/data/eth3d'
+rsync -av --progress --partial data/eth3d/high_res_multi_view/ \
+  frameutility-gpu:/home/ubuntu/projects/FrameUtility/data/eth3d/high_res_multi_view/
+```
+
+서버에 vendor·가중치·완성 입력·Python 환경이 이미 동일하게 준비돼 있으면 다음 실행을 위해 이들을 재전송하지 않는다. 코드가 바뀌면 본실험 시작 전에 `experiments/`를 맞추고, 승인 문서가 바뀌면 `EXPERIMENT_PLAN.md`도 함께 맞춘다. 실행 중인 코드 위에 새 코드를 덮어쓰지 않는다.
+
 ## 8. 모델을 돌리기 전 설치 상태를 확인한다
 
 ```bash
@@ -355,7 +423,7 @@ PY
 
 단위 시험은 가상 자료와 가상 worker를 사용하며 본실험 추론을 하지 않는다. 옛 `data/prepared/eth3d/office` 또는 옛 office manifest를 요구하는 일부 회귀 시험은 그 자료를 전송하지 않았다면 skip될 수 있다. skip 이름·이유는 기록하고, 새 인터페이스·경로·실행 잠금 시험의 실패를 skip으로 대신하지 않는다. 이 시험 통과가 최종 GT 채점 통합이나 CUDA 모델 전체 실행을 보증하지는 않는다.
 
-최종 소스는 로컬·서버에서 커밋과 미커밋 변경분을 대조한다. 특히 실험 직전에는 추론 소스 해시가 같은지 확인한다.
+최종 프로젝트 코드의 커밋·미커밋 변경 이력은 로컬에서 남긴다. 서버에 루트 `.git`을 전송하지 않은 최소 구성에서도 다음 추론 소스 해시 대조는 가능하다. vendor는 Git checkout 정보를 별도로 유지하고, 실험 직전에는 추론 소스 해시가 같은지 확인한다.
 
 ```bash
 # 로컬과 서버에서 각각 같은 명령 실행 후 출력 비교
