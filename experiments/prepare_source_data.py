@@ -22,10 +22,8 @@ from scipy.spatial.transform import Rotation
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data/eth3d/high_res_multi_view"
 OUT_ROOT = ROOT / "data/experiments/eth3d_multi_view"
-SCENES = (
-    "courtyard", "delivery_area", "electro", "facade", "kicker", "meadow",
-    "office", "playground", "relief", "relief_2", "terrace", "terrains",
-)
+# Preview operations follow the active study so excluded scene folders stay absent.
+SCENES = tuple(json.loads((ROOT / "experiments/study_v1.json").read_text())["primary_scenes"])
 SEVERITIES = (0, 0.025, 0.05, 0.075, 0.1, 0.15, 0.2, 0.25, 0.5, 1, 2, 4)
 EXISTING_SEVERITIES = (0, 0.25, 0.5, 1, 2, 4)
 MISSING_SEVERITIES = (0.025, 0.05, 0.075, 0.1, 0.15, 0.2)
