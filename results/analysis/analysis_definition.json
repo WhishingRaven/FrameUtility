@@ -71,5 +71,30 @@
     "absolute": 1e-10
   },
   "diagnostics": "nonpositive and nonfinite depth fractions on entire fixed GT mask, plus strict-positive diagnostic only",
-  "exploratory_descriptors": "pre-inference pair overlaps; baseline, rotation and GT depth distributions derived during analysis from frozen GT snapshot"
+  "exploratory_descriptors": "pre-inference pair overlaps; baseline, rotation and GT depth distributions derived during analysis from frozen GT snapshot",
+  "qualitative_reconstruction": {
+    "clean_selection": "largest available common clean context; lexicographic middle reference photo",
+    "contrast_selection": "same context and middle target; largest configured nonzero blur",
+    "alignment": "one positive Sim(3) from predicted to GT camera centers; no depth/surface fitting",
+    "contrast_alignment_ids": "identical common context cameras, excluding target, in all six panels",
+    "contrast_display_ids": "identical common context views only; added target affects inference but contributes no displayed points",
+    "sampling": "protocol common prepared-image grid, no GT validity mask filtering of model points",
+    "color": "RGB of actual input variant after exact backend PIL resize/crop, sampled at native depth pixels",
+    "point_diameter_px": 2,
+    "max_points_per_panel": 400000,
+    "render_width": 900,
+    "render_height": 600,
+    "horizontal_fov_deg": 70,
+    "background_rgb": [
+      18,
+      24,
+      32
+    ],
+    "view_offset_right_up_back_in_reference_median_depth": [
+      0.18,
+      0.1,
+      0.12
+    ],
+    "occlusion": "perspective projection and nearest-depth z-buffer; no lighting or image synthesis"
+  }
 }

@@ -1,0 +1,813 @@
+{
+  "status": "generated",
+  "scene": "office",
+  "size": 15,
+  "reference_image_id": "DSC_0242",
+  "policy": {
+    "clean_selection": "largest available common clean context; lexicographic middle reference photo",
+    "contrast_selection": "same context and middle target; largest configured nonzero blur",
+    "alignment": "one positive Sim(3) from predicted to GT camera centers; no depth/surface fitting",
+    "contrast_alignment_ids": "identical common context cameras, excluding target, in all six panels",
+    "contrast_display_ids": "identical common context views only; added target affects inference but contributes no displayed points",
+    "sampling": "protocol common prepared-image grid, no GT validity mask filtering of model points",
+    "color": "RGB of actual input variant after exact backend PIL resize/crop, sampled at native depth pixels",
+    "point_diameter_px": 2,
+    "max_points_per_panel": 400000,
+    "render_width": 900,
+    "render_height": 600,
+    "horizontal_fov_deg": 70,
+    "background_rgb": [
+      18,
+      24,
+      32
+    ],
+    "view_offset_right_up_back_in_reference_median_depth": [
+      0.18,
+      0.1,
+      0.12
+    ],
+    "occlusion": "perspective projection and nearest-depth z-buffer; no lighting or image synthesis"
+  },
+  "shared_virtual_camera": {
+    "reference_image_id": "DSC_0242",
+    "c2w": [
+      [
+        -0.9896803230309033,
+        -0.0704933381595465,
+        0.12475394775545508,
+        -1.5070851892733799
+      ],
+      [
+        -0.14328811317888435,
+        0.4797355516891565,
+        -0.8656340549372674,
+        0.13958631053161902
+      ],
+      [
+        0.001172530205248786,
+        -0.8745767489023617,
+        -0.48488569318169544,
+        0.05659443312013929
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "intrinsics": [
+      [
+        642.6666030339516,
+        0.0,
+        449.5
+      ],
+      [
+        0.0,
+        642.6666030339516,
+        299.5
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "width": 900,
+    "height": 600,
+    "horizontal_fov_deg": 70,
+    "vertical_fov_deg": 50.046805678477824,
+    "near_m": 0.018135286569595337,
+    "far_m": 18.135286569595337,
+    "point_diameter_px": 2,
+    "focus_gt_world_m": [
+      -1.257294429902959,
+      -1.5936445155062833,
+      -0.9142763704646112
+    ],
+    "selection_uses_model_outputs": false
+  },
+  "clean_panels": {
+    "vggt": {
+      "prediction_file": "results/executions/office/vggt/predictions/m15_clean.npz",
+      "prediction_sha256": "59db1eed94d64f061e0bbbb5ec5e766ec54a7e1c367b7fdb9fe1460c655381dc",
+      "display_image_ids": [
+        "DSC_0219",
+        "DSC_0220",
+        "DSC_0221",
+        "DSC_0222",
+        "DSC_0223",
+        "DSC_0229",
+        "DSC_0231",
+        "DSC_0242",
+        "DSC_0243",
+        "DSC_0249",
+        "DSC_0250",
+        "DSC_0251",
+        "DSC_0252",
+        "DSC_0253",
+        "DSC_0254"
+      ],
+      "valid_generated_points": 604800,
+      "displayed_points": 400000,
+      "excluded_nonfinite_or_nonpositive_depth_samples": 0,
+      "native_image_transform": {
+        "source_size": [
+          1008,
+          672
+        ],
+        "resized_size": [
+          518,
+          350
+        ],
+        "crop_offset": [
+          0,
+          0
+        ],
+        "depth_shape": [
+          350,
+          518
+        ]
+      },
+      "alignment": {
+        "camera_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0242",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "scale": 2.5316662481690337,
+        "rotation": [
+          [
+            -0.9264174355004706,
+            0.018193769283297,
+            0.37605813640978075
+          ],
+          [
+            -0.3758661506119992,
+            0.013149650582923922,
+            -0.9265806621733833
+          ],
+          [
+            -0.021803027882601213,
+            -0.9997480049736599,
+            -0.005343643545123505
+          ]
+        ],
+        "translation": [
+          -1.6142550770366748,
+          -0.04056084989423531,
+          -0.1807819666306395
+        ],
+        "aligned_camera_center_rmse_m": 0.026657634262565375
+      },
+      "rendered_pixels": 338590,
+      "rendered_pixel_fraction": 0.6270185185185185,
+      "virtual_camera": "shared_virtual_camera"
+    },
+    "mast3r": {
+      "prediction_file": "results/executions/office/mast3r/predictions/m15_clean.npz",
+      "prediction_sha256": "325d4a631cdb252b7db45ea3d879964b31fcc38ecf05fc2cc252e92bc012e675",
+      "display_image_ids": [
+        "DSC_0219",
+        "DSC_0220",
+        "DSC_0221",
+        "DSC_0222",
+        "DSC_0223",
+        "DSC_0229",
+        "DSC_0231",
+        "DSC_0242",
+        "DSC_0243",
+        "DSC_0249",
+        "DSC_0250",
+        "DSC_0251",
+        "DSC_0252",
+        "DSC_0253",
+        "DSC_0254"
+      ],
+      "valid_generated_points": 604795,
+      "displayed_points": 400000,
+      "excluded_nonfinite_or_nonpositive_depth_samples": 5,
+      "native_image_transform": {
+        "source_size": [
+          1008,
+          672
+        ],
+        "resized_size": [
+          512,
+          341
+        ],
+        "crop_offset": [
+          0,
+          2
+        ],
+        "depth_shape": [
+          336,
+          512
+        ]
+      },
+      "alignment": {
+        "camera_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0242",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "scale": 0.9066339275135973,
+        "rotation": [
+          [
+            -0.31877847507221047,
+            0.6983333133959229,
+            -0.640867277392213
+          ],
+          [
+            0.9415544815410478,
+            0.15563954764352803,
+            -0.2987498778230488
+          ],
+          [
+            -0.10888269890393328,
+            -0.6986464875820889,
+            -0.7071333984960727
+          ]
+        ],
+        "translation": [
+          -0.23417645471322057,
+          -2.395484280812435,
+          -0.10726364862888994
+        ],
+        "aligned_camera_center_rmse_m": 0.011164885761795177
+      },
+      "rendered_pixels": 339445,
+      "rendered_pixel_fraction": 0.6286018518518518,
+      "virtual_camera": "shared_virtual_camera"
+    }
+  },
+  "contrast": {
+    "status": "generated",
+    "target": "DSC_0242",
+    "blur_deg": 4,
+    "size": 15,
+    "common_image_ids": [
+      "DSC_0219",
+      "DSC_0220",
+      "DSC_0221",
+      "DSC_0222",
+      "DSC_0223",
+      "DSC_0229",
+      "DSC_0231",
+      "DSC_0243",
+      "DSC_0249",
+      "DSC_0250",
+      "DSC_0251",
+      "DSC_0252",
+      "DSC_0253",
+      "DSC_0254"
+    ],
+    "panels": {
+      "vggt_drop": {
+        "prediction_file": "results/executions/office/vggt/predictions/m15_drop_DSC_0242.npz",
+        "prediction_sha256": "884cda701abdccbd290872a771077182d36577083fad6682d848fec929495007",
+        "display_image_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "valid_generated_points": 564480,
+        "displayed_points": 400000,
+        "excluded_nonfinite_or_nonpositive_depth_samples": 0,
+        "native_image_transform": {
+          "source_size": [
+            1008,
+            672
+          ],
+          "resized_size": [
+            518,
+            350
+          ],
+          "crop_offset": [
+            0,
+            0
+          ],
+          "depth_shape": [
+            350,
+            518
+          ]
+        },
+        "alignment": {
+          "camera_ids": [
+            "DSC_0219",
+            "DSC_0220",
+            "DSC_0221",
+            "DSC_0222",
+            "DSC_0223",
+            "DSC_0229",
+            "DSC_0231",
+            "DSC_0243",
+            "DSC_0249",
+            "DSC_0250",
+            "DSC_0251",
+            "DSC_0252",
+            "DSC_0253",
+            "DSC_0254"
+          ],
+          "scale": 2.56351730318474,
+          "rotation": [
+            [
+              -0.9263000803675995,
+              0.017211988247967124,
+              0.37639328975358965
+            ],
+            [
+              -0.3762560295346625,
+              0.010741223772892938,
+              -0.9264534669106006
+            ],
+            [
+              -0.019989030736612318,
+              -0.9997941656023059,
+              -0.0034734820854997977
+            ]
+          ],
+          "translation": [
+            -1.6132653298506567,
+            -0.0408981470572517,
+            -0.18147941158175715
+          ],
+          "aligned_camera_center_rmse_m": 0.02520677492728802
+        },
+        "rendered_pixels": 310445,
+        "rendered_pixel_fraction": 0.5748981481481481,
+        "virtual_camera": "shared_virtual_camera"
+      },
+      "vggt_clean": {
+        "prediction_file": "results/executions/office/vggt/predictions/m15_clean.npz",
+        "prediction_sha256": "59db1eed94d64f061e0bbbb5ec5e766ec54a7e1c367b7fdb9fe1460c655381dc",
+        "display_image_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "valid_generated_points": 564480,
+        "displayed_points": 400000,
+        "excluded_nonfinite_or_nonpositive_depth_samples": 0,
+        "native_image_transform": {
+          "source_size": [
+            1008,
+            672
+          ],
+          "resized_size": [
+            518,
+            350
+          ],
+          "crop_offset": [
+            0,
+            0
+          ],
+          "depth_shape": [
+            350,
+            518
+          ]
+        },
+        "alignment": {
+          "camera_ids": [
+            "DSC_0219",
+            "DSC_0220",
+            "DSC_0221",
+            "DSC_0222",
+            "DSC_0223",
+            "DSC_0229",
+            "DSC_0231",
+            "DSC_0243",
+            "DSC_0249",
+            "DSC_0250",
+            "DSC_0251",
+            "DSC_0252",
+            "DSC_0253",
+            "DSC_0254"
+          ],
+          "scale": 2.530142036005967,
+          "rotation": [
+            [
+              -0.926216511485843,
+              0.017848877577923958,
+              0.37656923854744523
+            ],
+            [
+              -0.3764009844422869,
+              0.012127089852937058,
+              -0.92637747846252
+            ],
+            [
+              -0.02110148719574034,
+              -0.9997671485205483,
+              -0.004513975766542357
+            ]
+          ],
+          "translation": [
+            -1.6142146319527924,
+            -0.042118268950781884,
+            -0.18105065647465923
+          ],
+          "aligned_camera_center_rmse_m": 0.027164473893725213
+        },
+        "rendered_pixels": 311028,
+        "rendered_pixel_fraction": 0.5759777777777778,
+        "virtual_camera": "shared_virtual_camera"
+      },
+      "vggt_blurred": {
+        "prediction_file": "results/executions/office/vggt/predictions/m15_add_DSC_0242_b4.npz",
+        "prediction_sha256": "cd2c094e39c20e37932c62e34acc0be92ab10e61cff30de5872e3f10be8edf29",
+        "display_image_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "valid_generated_points": 564480,
+        "displayed_points": 400000,
+        "excluded_nonfinite_or_nonpositive_depth_samples": 0,
+        "native_image_transform": {
+          "source_size": [
+            1008,
+            672
+          ],
+          "resized_size": [
+            518,
+            350
+          ],
+          "crop_offset": [
+            0,
+            0
+          ],
+          "depth_shape": [
+            350,
+            518
+          ]
+        },
+        "alignment": {
+          "camera_ids": [
+            "DSC_0219",
+            "DSC_0220",
+            "DSC_0221",
+            "DSC_0222",
+            "DSC_0223",
+            "DSC_0229",
+            "DSC_0231",
+            "DSC_0243",
+            "DSC_0249",
+            "DSC_0250",
+            "DSC_0251",
+            "DSC_0252",
+            "DSC_0253",
+            "DSC_0254"
+          ],
+          "scale": 2.5359091943805625,
+          "rotation": [
+            [
+              -0.9264849983431405,
+              0.017503021121903817,
+              0.3759244499852555
+            ],
+            [
+              -0.37579680691647416,
+              0.01021085317256142,
+              -0.9266458322298063
+            ],
+            [
+              -0.02005761093681775,
+              -0.9997946702844007,
+              -0.002882622835659538
+            ]
+          ],
+          "translation": [
+            -1.612478962823337,
+            -0.040810163235631164,
+            -0.18176318485967266
+          ],
+          "aligned_camera_center_rmse_m": 0.02394128883410668
+        },
+        "rendered_pixels": 310429,
+        "rendered_pixel_fraction": 0.5748685185185185,
+        "virtual_camera": "shared_virtual_camera"
+      },
+      "mast3r_drop": {
+        "prediction_file": "results/executions/office/mast3r/predictions/m15_drop_DSC_0242.npz",
+        "prediction_sha256": "60fbb7859a333e2dc1f753fd761d753c2c40bc8e317d7d0d938ecb46e2bc07fc",
+        "display_image_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "valid_generated_points": 564475,
+        "displayed_points": 400000,
+        "excluded_nonfinite_or_nonpositive_depth_samples": 5,
+        "native_image_transform": {
+          "source_size": [
+            1008,
+            672
+          ],
+          "resized_size": [
+            512,
+            341
+          ],
+          "crop_offset": [
+            0,
+            2
+          ],
+          "depth_shape": [
+            336,
+            512
+          ]
+        },
+        "alignment": {
+          "camera_ids": [
+            "DSC_0219",
+            "DSC_0220",
+            "DSC_0221",
+            "DSC_0222",
+            "DSC_0223",
+            "DSC_0229",
+            "DSC_0231",
+            "DSC_0243",
+            "DSC_0249",
+            "DSC_0250",
+            "DSC_0251",
+            "DSC_0252",
+            "DSC_0253",
+            "DSC_0254"
+          ],
+          "scale": 0.9085891813947543,
+          "rotation": [
+            [
+              -0.8723810192641338,
+              -0.2603205879560958,
+              0.4137445452375946
+            ],
+            [
+              -0.4750187755142307,
+              0.2517061895086769,
+              -0.8432088454659281
+            ],
+            [
+              0.11536255950971579,
+              -0.932135819314554,
+              -0.3432408690907202
+            ]
+          ],
+          "translation": [
+            0.2990060246531472,
+            -2.3301411537896066,
+            0.2920148378618812
+          ],
+          "aligned_camera_center_rmse_m": 0.010688563042659445
+        },
+        "rendered_pixels": 310803,
+        "rendered_pixel_fraction": 0.5755611111111111,
+        "virtual_camera": "shared_virtual_camera"
+      },
+      "mast3r_clean": {
+        "prediction_file": "results/executions/office/mast3r/predictions/m15_clean.npz",
+        "prediction_sha256": "325d4a631cdb252b7db45ea3d879964b31fcc38ecf05fc2cc252e92bc012e675",
+        "display_image_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "valid_generated_points": 564475,
+        "displayed_points": 400000,
+        "excluded_nonfinite_or_nonpositive_depth_samples": 5,
+        "native_image_transform": {
+          "source_size": [
+            1008,
+            672
+          ],
+          "resized_size": [
+            512,
+            341
+          ],
+          "crop_offset": [
+            0,
+            2
+          ],
+          "depth_shape": [
+            336,
+            512
+          ]
+        },
+        "alignment": {
+          "camera_ids": [
+            "DSC_0219",
+            "DSC_0220",
+            "DSC_0221",
+            "DSC_0222",
+            "DSC_0223",
+            "DSC_0229",
+            "DSC_0231",
+            "DSC_0243",
+            "DSC_0249",
+            "DSC_0250",
+            "DSC_0251",
+            "DSC_0252",
+            "DSC_0253",
+            "DSC_0254"
+          ],
+          "scale": 0.9066138680813938,
+          "rotation": [
+            [
+              -0.3185639546562256,
+              0.6984127540080544,
+              -0.6408873784313986
+            ],
+            [
+              0.941623114076492,
+              0.15547547816062404,
+              -0.2986189657868611
+            ],
+            [
+              -0.10891702268550803,
+              -0.698603607727307,
+              -0.707170475514719
+            ]
+          ],
+          "translation": [
+            -0.2344031996571163,
+            -2.3955129414142773,
+            -0.10723209162707847
+          ],
+          "aligned_camera_center_rmse_m": 0.01149412610332449
+        },
+        "rendered_pixels": 310599,
+        "rendered_pixel_fraction": 0.5751833333333334,
+        "virtual_camera": "shared_virtual_camera"
+      },
+      "mast3r_blurred": {
+        "prediction_file": "results/executions/office/mast3r/predictions/m15_add_DSC_0242_b4.npz",
+        "prediction_sha256": "316f55a2356604772fd575a1922923a5091e714ddfb4c598566174a4adf93543",
+        "display_image_ids": [
+          "DSC_0219",
+          "DSC_0220",
+          "DSC_0221",
+          "DSC_0222",
+          "DSC_0223",
+          "DSC_0229",
+          "DSC_0231",
+          "DSC_0243",
+          "DSC_0249",
+          "DSC_0250",
+          "DSC_0251",
+          "DSC_0252",
+          "DSC_0253",
+          "DSC_0254"
+        ],
+        "valid_generated_points": 564475,
+        "displayed_points": 400000,
+        "excluded_nonfinite_or_nonpositive_depth_samples": 5,
+        "native_image_transform": {
+          "source_size": [
+            1008,
+            672
+          ],
+          "resized_size": [
+            512,
+            341
+          ],
+          "crop_offset": [
+            0,
+            2
+          ],
+          "depth_shape": [
+            336,
+            512
+          ]
+        },
+        "alignment": {
+          "camera_ids": [
+            "DSC_0219",
+            "DSC_0220",
+            "DSC_0221",
+            "DSC_0222",
+            "DSC_0223",
+            "DSC_0229",
+            "DSC_0231",
+            "DSC_0243",
+            "DSC_0249",
+            "DSC_0250",
+            "DSC_0251",
+            "DSC_0252",
+            "DSC_0253",
+            "DSC_0254"
+          ],
+          "scale": 0.9053230711462833,
+          "rotation": [
+            [
+              0.16117552646046607,
+              -0.9863295047393009,
+              -0.03430098760848459
+            ],
+            [
+              -0.6448863048124189,
+              -0.07894380722154089,
+              -0.7601904558508695
+            ],
+            [
+              0.7470904252736589,
+              0.14464433408223773,
+              -0.6487941993285163
+            ]
+          ],
+          "translation": [
+            -0.1507505107190421,
+            -2.313896740448557,
+            -0.16120369468870965
+          ],
+          "aligned_camera_center_rmse_m": 0.009263209796260942
+        },
+        "rendered_pixels": 310714,
+        "rendered_pixel_fraction": 0.5753962962962963,
+        "virtual_camera": "shared_virtual_camera"
+      }
+    }
+  },
+  "inference_executed": false,
+  "original_rgb": {
+    "path": "data/experiments/eth3d_multi_view/office/DSC_0242/yaw_0.png",
+    "sha256": "6d073f734bf2a6533db17bc29e365db5b4923c39bd19a4da4a34721edd205119"
+  }
+}
