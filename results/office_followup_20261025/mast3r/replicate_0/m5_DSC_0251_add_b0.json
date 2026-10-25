@@ -1,0 +1,92 @@
+{
+  "backend": "mast3r",
+  "case": "m5_DSC_0251",
+  "size": 5,
+  "target": "DSC_0251",
+  "replicate": 0,
+  "condition": "add_b0",
+  "blur_deg": 0,
+  "ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0250",
+    "DSC_0251",
+    "DSC_0252"
+  ],
+  "input_sha256": [
+    "b5edce5fe623a5c425b71f38cb754567b4bbf54eb65eba91e57217a04ebbfb1e",
+    "2eb60d6e7ec8aeed3893f7753ee426c58d250b4f75c7de9bd26b8e91f2b8c74e",
+    "069814bd10b8c024ff4e235a69ad5c5d10ddda6d0774d8932408e02f3d10277a",
+    "5b5f97cc4130564a058f4149c7b5f1972ac5572d8508703d0711e2c23cc4440f",
+    "59a6b74642dc82c860235432aca9b2770d23db2734185de57ec18df17304e9cc"
+  ],
+  "common_ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0250",
+    "DSC_0252"
+  ],
+  "start_unix": 1792867153.602628,
+  "status": "ok",
+  "pid": 28474,
+  "metrics": {
+    "pose_ate_m": 0.004350980700076659,
+    "pose_ate_normalized": 0.01222694488418494,
+    "pose_pair_translation_relative": 0.014794778304590328,
+    "pose_pair_rotation_deg": 0.25129336397474406,
+    "alignment_pose_scale": 0.8315717581122358,
+    "geometry_depth_absrel": 0.029089929625383645,
+    "geometry_depth_rmse_m": 0.18770099595143566,
+    "alignment_depth_scale": 0.8558974339039955,
+    "evaluation_pixels": 541455
+  },
+  "errors": {},
+  "depth_diagnostics": {
+    "evaluation_pixels": 541455,
+    "nonpositive_pixels": 0,
+    "nonfinite_pixels": 0,
+    "frames": [
+      {
+        "frame": "DSC_0219",
+        "evaluation_pixels": 135488,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0220",
+        "evaluation_pixels": 135877,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0250",
+        "evaluation_pixels": 137135,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0252",
+        "evaluation_pixels": 132955,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      }
+    ],
+    "nonpositive_fraction": 0.0,
+    "nonfinite_fraction": 0.0
+  },
+  "strict_metrics": {
+    "pose_ate_m": 0.004350980700076659,
+    "pose_ate_normalized": 0.01222694488418494,
+    "pose_pair_translation_relative": 0.014794778304590328,
+    "pose_pair_rotation_deg": 0.25129336397474406,
+    "alignment_pose_scale": 0.8315717581122358,
+    "geometry_depth_absrel": 0.029089929625383645,
+    "geometry_depth_rmse_m": 0.18770099595143566,
+    "alignment_depth_scale": 0.8558974339039955,
+    "evaluation_pixels": 541455
+  },
+  "strict_errors": {},
+  "prediction_sha256": "328809d215ef3ddbbc21e5ea6bc86e9ba142ffe32d475f10266b9bc72b79863e",
+  "seconds": 196.37292981147766,
+  "finished_unix": 1792867355.138783
+}

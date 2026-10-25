@@ -45,8 +45,8 @@ def read_calibration(scene):
     return K, (w, h), sorted(frames, key=lambda f: f["filename"])
 
 
-def exposure(image, K, degrees, samples=33):
-    if degrees == 0:
+def exposure(image, K, degrees, samples=33, *, force_pipeline=False):
+    if degrees == 0 and not force_pipeline:
         return image.copy(), 0.
     srgb = image.astype(np.float32) / 255
     linear = np.where(srgb <= .04045, srgb / 12.92, ((srgb + .055) / 1.055) ** 2.4)

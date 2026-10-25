@@ -1,0 +1,415 @@
+{
+  "frozen_utc": "2026-10-24T18:31:48.852844+00:00",
+  "purpose": "Pilot-selected control, dense first-crossing and numerical-repeatability follow-up; one scene, no population inference",
+  "policy": {
+    "version": "fixed_mask_signed_depth_v1",
+    "primary_metric": "geometry_depth_absrel",
+    "secondary_metrics": [
+      "geometry_depth_rmse_m",
+      "pose_ate_normalized",
+      "pose_pair_translation_relative",
+      "pose_pair_rotation_deg"
+    ],
+    "mask": "Identical finite positive GT depth pixels in the common context; target excluded",
+    "minimum_reference_pixels_per_frame": 100,
+    "scale": "One median(GT/prediction) over finite positive predictions in the entire common context",
+    "minimum_positive_predictions_for_scale": 100,
+    "scoring": "Score every fixed-mask pixel, including finite zero and negative predictions; no clipping or removal",
+    "nonfinite": "Any nonfinite prediction on the fixed mask fails geometry only",
+    "diagnostics": "Report nonpositive and nonfinite counts/fractions separately, plus legacy strict scores/failures",
+    "absrel_effect_floor": 0.0005,
+    "effect_floor_note": "Prospectively fixed for this pilot-selected follow-up, informed by the exploratory run; not a significance threshold",
+    "replicates": 3,
+    "seed_per_reconstruction": 2026,
+    "stable_raw_transition": "Every DROP-minus-clean combination is positive and every DROP-minus-ADD combination is negative",
+    "stable_effect_transition": "Every DROP-minus-clean combination exceeds +0.0005 and every DROP-minus-ADD combination is below -0.0005",
+    "uncertainty": "Observed repeat ranges, no scene-level confidence intervals or p-values; same-seed numerical repeatability"
+  },
+  "cases": [
+    {
+      "backend": "vggt",
+      "size": 5,
+      "target": "DSC_0250",
+      "degrees": [
+        0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.15,
+        0.2,
+        0.25
+      ],
+      "selection": "Pilot depth transition with clean effect above the fixed floor; 5-view context"
+    },
+    {
+      "backend": "vggt",
+      "size": 10,
+      "target": "DSC_0242",
+      "degrees": [
+        0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.15,
+        0.2,
+        0.25
+      ],
+      "selection": "Pilot depth transition with clean effect above the fixed floor; 10-view context"
+    },
+    {
+      "backend": "vggt",
+      "size": 20,
+      "target": "DSC_0252",
+      "degrees": [
+        0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.15,
+        0.2,
+        0.25
+      ],
+      "selection": "Smallest pilot-positive VGGT clean depth effect; stress test of tiny sign changes"
+    },
+    {
+      "backend": "mast3r",
+      "size": 5,
+      "target": "DSC_0251",
+      "degrees": [
+        0,
+        0.5,
+        1
+      ],
+      "selection": "Small pilot clean depth benefit and first crossing in [0.5,1]"
+    },
+    {
+      "backend": "mast3r",
+      "size": 20,
+      "target": "DSC_0238",
+      "degrees": [
+        0,
+        2,
+        4
+      ],
+      "selection": "Previously illustrated strong five-metric transition in [2,4]"
+    }
+  ],
+  "selection_note": "All five cases chosen from the exploratory pilot before new inference; not random or independent scene samples",
+  "dense_degrees": [
+    0,
+    0.025,
+    0.05,
+    0.075,
+    0.1,
+    0.15,
+    0.2,
+    0.25
+  ],
+  "new_reconstructions": 105,
+  "zero_control": "All 20 images traverse 33 identity homographies, linear-radiance integration, transfer/quantization and the same crop; decoded pixels must equal clean exactly. Identical controls alias clean for inference.",
+  "repeat_design": "Three fresh same-seed reconstructions per condition. MASt3R neural pair caches are fresh and separate for each replicate block; only pairs within a block are reused. All alignment is recomputed. Pilot predictions are never counted as new repeats.",
+  "execution": "VGGT one process; MASt3R up to three simultaneous replicate processes; 8 CPU threads/process; float32; native model preprocessing; 300+300 MASt3R alignment iterations",
+  "analysis": "Report all five cases, all repeats and failures. First crossing is a grid bracket only; no monotonicity assumption or interpolation. Use all DROP/ADD repeat combinations for sign/effect stability. Primary AbsRel and secondary metrics kept separate.",
+  "pilot_sources_sha256": {
+    "vggt/utilities.json": "30fda7fcd2666b22a0828d4d52b8ea62436403056cfa4d99f88e22c8299f77cc",
+    "mast3r/utilities.json": "7bde90f90551fd758a8399bf23ab4ac113a95faef023b303597095161cde4497"
+  },
+  "pilot_manifest_sha256": "e050c331d50676cc858f974c1e5e4b14d665928730173b16ba3792d8b0d73ae5",
+  "code_sha256": {
+    "followup.py": "d562a4c0b02b001ad6ace71d8b25ac4e377a6e5c8904a7cde448502373c5f831",
+    "followup_metrics.py": "9f56ed6a1104c862de4224ed685860be3a2975e53a55a0944bd3b1a19764f0b5",
+    "prepare.py": "c4ff3052301a34b858708ac10474ce51ee133d3f69b6dcdd4460371d1725a5a8",
+    "backends.py": "1ccdaad62c5ec009d868f391bb71d4becc70fb7e1aa7a7eb3a6c12519551c5ff",
+    "metrics.py": "3adb19f94a456de5a6a3786f4eed0d08657832e0d35455db335ee0c7b35208df",
+    "run.py": "2cec015e724b1b55a86b367e4685945691f014e4536aaee2c1c83a7e6773aa7f"
+  },
+  "controls": [
+    {
+      "frame": "DSC_0219",
+      "path": "results/office_followup_20261025/images/DSC_0219_zero_pipeline.png",
+      "sha256": "b5edce5fe623a5c425b71f38cb754567b4bbf54eb65eba91e57217a04ebbfb1e",
+      "clean_sha256": "b5edce5fe623a5c425b71f38cb754567b4bbf54eb65eba91e57217a04ebbfb1e",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0220",
+      "path": "results/office_followup_20261025/images/DSC_0220_zero_pipeline.png",
+      "sha256": "2eb60d6e7ec8aeed3893f7753ee426c58d250b4f75c7de9bd26b8e91f2b8c74e",
+      "clean_sha256": "2eb60d6e7ec8aeed3893f7753ee426c58d250b4f75c7de9bd26b8e91f2b8c74e",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0222",
+      "path": "results/office_followup_20261025/images/DSC_0222_zero_pipeline.png",
+      "sha256": "43e70dd867964091e206a186b8664271da15ad5c0b999e56e9a9dcebcf601f34",
+      "clean_sha256": "43e70dd867964091e206a186b8664271da15ad5c0b999e56e9a9dcebcf601f34",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0223",
+      "path": "results/office_followup_20261025/images/DSC_0223_zero_pipeline.png",
+      "sha256": "8fcd5c091421e29a78087fae68cb3b3abbd432f485a7270f0152125474453ffc",
+      "clean_sha256": "8fcd5c091421e29a78087fae68cb3b3abbd432f485a7270f0152125474453ffc",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0228",
+      "path": "results/office_followup_20261025/images/DSC_0228_zero_pipeline.png",
+      "sha256": "3cb5b907a61a5c85c2be6be8744c92d38938ab5e5e5a6a4d14670f9eedb5aa64",
+      "clean_sha256": "3cb5b907a61a5c85c2be6be8744c92d38938ab5e5e5a6a4d14670f9eedb5aa64",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0230",
+      "path": "results/office_followup_20261025/images/DSC_0230_zero_pipeline.png",
+      "sha256": "06ac773512555ac3bc5377e907e1de956bdca969634452a1c09372fd1737235a",
+      "clean_sha256": "06ac773512555ac3bc5377e907e1de956bdca969634452a1c09372fd1737235a",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0231",
+      "path": "results/office_followup_20261025/images/DSC_0231_zero_pipeline.png",
+      "sha256": "f0524dddb7bf038a794085e57b6d0e3d88d80848b6e12bdea2c75802f8cbbc68",
+      "clean_sha256": "f0524dddb7bf038a794085e57b6d0e3d88d80848b6e12bdea2c75802f8cbbc68",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0235",
+      "path": "results/office_followup_20261025/images/DSC_0235_zero_pipeline.png",
+      "sha256": "7c5f0513c178d0709f220ddc714704d500de502166177008a99528668df34ef4",
+      "clean_sha256": "7c5f0513c178d0709f220ddc714704d500de502166177008a99528668df34ef4",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0237",
+      "path": "results/office_followup_20261025/images/DSC_0237_zero_pipeline.png",
+      "sha256": "86e35a6b990f07532581aa7f4df69d76fb2571d0097b761fd3f3474c49e0f86b",
+      "clean_sha256": "86e35a6b990f07532581aa7f4df69d76fb2571d0097b761fd3f3474c49e0f86b",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0238",
+      "path": "results/office_followup_20261025/images/DSC_0238_zero_pipeline.png",
+      "sha256": "ddd32da234ebd8e9a5fa0a6fd515ecc5718d10b2d41b0d11ddcda22184bf1d2a",
+      "clean_sha256": "ddd32da234ebd8e9a5fa0a6fd515ecc5718d10b2d41b0d11ddcda22184bf1d2a",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0239",
+      "path": "results/office_followup_20261025/images/DSC_0239_zero_pipeline.png",
+      "sha256": "f0231ebfbff52d0a41e92015e4405388fc2e82a8509487cf743ec7fb35663b7c",
+      "clean_sha256": "f0231ebfbff52d0a41e92015e4405388fc2e82a8509487cf743ec7fb35663b7c",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0240",
+      "path": "results/office_followup_20261025/images/DSC_0240_zero_pipeline.png",
+      "sha256": "0ca73e9cf785a2fcce1435888b973467d70d9b8395d6c3ad1880ab9474779ae4",
+      "clean_sha256": "0ca73e9cf785a2fcce1435888b973467d70d9b8395d6c3ad1880ab9474779ae4",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0242",
+      "path": "results/office_followup_20261025/images/DSC_0242_zero_pipeline.png",
+      "sha256": "6d073f734bf2a6533db17bc29e365db5b4923c39bd19a4da4a34721edd205119",
+      "clean_sha256": "6d073f734bf2a6533db17bc29e365db5b4923c39bd19a4da4a34721edd205119",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0243",
+      "path": "results/office_followup_20261025/images/DSC_0243_zero_pipeline.png",
+      "sha256": "ccd2c94596e6514f1514fdff98d6c1729d5ed96ea425fdc6893f2482001503be",
+      "clean_sha256": "ccd2c94596e6514f1514fdff98d6c1729d5ed96ea425fdc6893f2482001503be",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0248",
+      "path": "results/office_followup_20261025/images/DSC_0248_zero_pipeline.png",
+      "sha256": "086b49dd9e4afc86e001aa739d4db8846d5596a512f08449307c037972719e01",
+      "clean_sha256": "086b49dd9e4afc86e001aa739d4db8846d5596a512f08449307c037972719e01",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0250",
+      "path": "results/office_followup_20261025/images/DSC_0250_zero_pipeline.png",
+      "sha256": "069814bd10b8c024ff4e235a69ad5c5d10ddda6d0774d8932408e02f3d10277a",
+      "clean_sha256": "069814bd10b8c024ff4e235a69ad5c5d10ddda6d0774d8932408e02f3d10277a",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0251",
+      "path": "results/office_followup_20261025/images/DSC_0251_zero_pipeline.png",
+      "sha256": "5b5f97cc4130564a058f4149c7b5f1972ac5572d8508703d0711e2c23cc4440f",
+      "clean_sha256": "5b5f97cc4130564a058f4149c7b5f1972ac5572d8508703d0711e2c23cc4440f",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0252",
+      "path": "results/office_followup_20261025/images/DSC_0252_zero_pipeline.png",
+      "sha256": "59a6b74642dc82c860235432aca9b2770d23db2734185de57ec18df17304e9cc",
+      "clean_sha256": "59a6b74642dc82c860235432aca9b2770d23db2734185de57ec18df17304e9cc",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0254",
+      "path": "results/office_followup_20261025/images/DSC_0254_zero_pipeline.png",
+      "sha256": "e1d973808cfb5ed9b9e2a20094e935a5d3de1d6518b71a870b01ebeb9d350bfc",
+      "clean_sha256": "e1d973808cfb5ed9b9e2a20094e935a5d3de1d6518b71a870b01ebeb9d350bfc",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    },
+    {
+      "frame": "DSC_0255",
+      "path": "results/office_followup_20261025/images/DSC_0255_zero_pipeline.png",
+      "sha256": "93e94dbd2685a2b077b48dda2948f64d21df2ad2e07b433a42f9a131d2a99d60",
+      "clean_sha256": "93e94dbd2685a2b077b48dda2948f64d21df2ad2e07b433a42f9a131d2a99d60",
+      "changed_pixels": 0,
+      "maximum_channel_difference": 0,
+      "minimum_support": 1.0
+    }
+  ],
+  "variants": {
+    "DSC_0242": {
+      "0": {
+        "path": "data/experiments/office/DSC_0242/yaw_0.png",
+        "sha256": "6d073f734bf2a6533db17bc29e365db5b4923c39bd19a4da4a34721edd205119"
+      },
+      "0.025": {
+        "path": "results/office_followup_20261025/images/DSC_0242_yaw_0.025.png",
+        "sha256": "6981cc108c78bb8b2bc61a1908fec77071025f190b41b7a46ae83a759e12dd96"
+      },
+      "0.05": {
+        "path": "results/office_followup_20261025/images/DSC_0242_yaw_0.05.png",
+        "sha256": "394392cfc705fa70661ce96de70f7d8f4ad15294d6094755d6b82f5ed8ab95d6"
+      },
+      "0.075": {
+        "path": "results/office_followup_20261025/images/DSC_0242_yaw_0.075.png",
+        "sha256": "a2589edaac8eb6b8b70a142857a8788801e8615813581e074e1e474f3bd4d63c"
+      },
+      "0.1": {
+        "path": "results/office_followup_20261025/images/DSC_0242_yaw_0.1.png",
+        "sha256": "999c33d4795552c6a8e4ceb018fa3c011411f6bd072abee3165fc0707fb8aa97"
+      },
+      "0.15": {
+        "path": "results/office_followup_20261025/images/DSC_0242_yaw_0.15.png",
+        "sha256": "bcfccfea63104e524ff16e1bcfa64ac77122bb2da9f7695284c62ae50c26f1fd"
+      },
+      "0.2": {
+        "path": "results/office_followup_20261025/images/DSC_0242_yaw_0.2.png",
+        "sha256": "24c331628b1b36d50d1b4708831ee5884dd920af5d36d0cf9691f3da6dae905b"
+      },
+      "0.25": {
+        "path": "data/experiments/office/DSC_0242/yaw_0.25.png",
+        "sha256": "60ca7ce12aa6e6141f1384aee27006abdf55023231d6959f862c4c735da15b95"
+      }
+    },
+    "DSC_0250": {
+      "0": {
+        "path": "data/experiments/office/DSC_0250/yaw_0.png",
+        "sha256": "069814bd10b8c024ff4e235a69ad5c5d10ddda6d0774d8932408e02f3d10277a"
+      },
+      "0.025": {
+        "path": "results/office_followup_20261025/images/DSC_0250_yaw_0.025.png",
+        "sha256": "95eec980f2e74bbd6c9de3516b534f0f16ddc364da6750fd0b3efd99985eef65"
+      },
+      "0.05": {
+        "path": "results/office_followup_20261025/images/DSC_0250_yaw_0.05.png",
+        "sha256": "a623705df78d7e5b085cb26114a6690b8629dbab64eee8d3defdad473d934bb9"
+      },
+      "0.075": {
+        "path": "results/office_followup_20261025/images/DSC_0250_yaw_0.075.png",
+        "sha256": "3e0c74e7ecf06b2c86d49a8fee7ca0799e6a4f88514e86866418c1d5bf489314"
+      },
+      "0.1": {
+        "path": "results/office_followup_20261025/images/DSC_0250_yaw_0.1.png",
+        "sha256": "914aba43f1ab1fab930b7df5d2e6204785ad909ba8a52907d143bb9ec886cf24"
+      },
+      "0.15": {
+        "path": "results/office_followup_20261025/images/DSC_0250_yaw_0.15.png",
+        "sha256": "b44932022319609993151bd48f5782a19e6cf42952587163a4d3a31fd3844e77"
+      },
+      "0.2": {
+        "path": "results/office_followup_20261025/images/DSC_0250_yaw_0.2.png",
+        "sha256": "1e6b0fff3221ab8d35ec4cafe3f337787188af0c6be1c57d09daea5e682883ef"
+      },
+      "0.25": {
+        "path": "data/experiments/office/DSC_0250/yaw_0.25.png",
+        "sha256": "e7c7392ab8a0447e46781fb8e08c66b7c09666431813c874c3cb3d0a6a333713"
+      }
+    },
+    "DSC_0252": {
+      "0": {
+        "path": "data/experiments/office/DSC_0252/yaw_0.png",
+        "sha256": "59a6b74642dc82c860235432aca9b2770d23db2734185de57ec18df17304e9cc"
+      },
+      "0.025": {
+        "path": "results/office_followup_20261025/images/DSC_0252_yaw_0.025.png",
+        "sha256": "f511dc081e5858c2a4910447d63225dda1abe1b41828fd3feb187abe0ccf2681"
+      },
+      "0.05": {
+        "path": "results/office_followup_20261025/images/DSC_0252_yaw_0.05.png",
+        "sha256": "ec37fb50177c6382a8d413f71bd48a2e9f14059446afb3266b396683d514bf66"
+      },
+      "0.075": {
+        "path": "results/office_followup_20261025/images/DSC_0252_yaw_0.075.png",
+        "sha256": "dd423aa5f8b05640c44d894aefe80af026c48fede3db1bac3967c31529ef86aa"
+      },
+      "0.1": {
+        "path": "results/office_followup_20261025/images/DSC_0252_yaw_0.1.png",
+        "sha256": "ed0c6eb3387c169f6166dbce3c99e63c93718ceb476eb8b4c41debedd67a669a"
+      },
+      "0.15": {
+        "path": "results/office_followup_20261025/images/DSC_0252_yaw_0.15.png",
+        "sha256": "762541ea640c2594b35ace9814f9012ff08907959bf20f81b4c2fd5cf8eab7a0"
+      },
+      "0.2": {
+        "path": "results/office_followup_20261025/images/DSC_0252_yaw_0.2.png",
+        "sha256": "ce6c179ee349a6d1030f23a9fdfff81f7fb6b33310ebaa08df024f486958e9d4"
+      },
+      "0.25": {
+        "path": "data/experiments/office/DSC_0252/yaw_0.25.png",
+        "sha256": "46d2531431e8835ab865f508c4ce122c14d88dc368a918cfef7ea0b19f25b232"
+      }
+    }
+  }
+}

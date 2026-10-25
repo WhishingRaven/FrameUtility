@@ -1,0 +1,90 @@
+{
+  "backend": "mast3r",
+  "case": "m5_DSC_0251",
+  "size": 5,
+  "target": "DSC_0251",
+  "replicate": 0,
+  "condition": "drop",
+  "blur_deg": null,
+  "ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0250",
+    "DSC_0252"
+  ],
+  "input_sha256": [
+    "b5edce5fe623a5c425b71f38cb754567b4bbf54eb65eba91e57217a04ebbfb1e",
+    "2eb60d6e7ec8aeed3893f7753ee426c58d250b4f75c7de9bd26b8e91f2b8c74e",
+    "069814bd10b8c024ff4e235a69ad5c5d10ddda6d0774d8932408e02f3d10277a",
+    "59a6b74642dc82c860235432aca9b2770d23db2734185de57ec18df17304e9cc"
+  ],
+  "common_ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0250",
+    "DSC_0252"
+  ],
+  "start_unix": 1792867355.277996,
+  "status": "ok",
+  "pid": 28474,
+  "metrics": {
+    "pose_ate_m": 0.0059824621836107195,
+    "pose_ate_normalized": 0.016811666250195086,
+    "pose_pair_translation_relative": 0.019676383017115093,
+    "pose_pair_rotation_deg": 0.26324845542324987,
+    "alignment_pose_scale": 0.8821819853290715,
+    "geometry_depth_absrel": 0.029741576306680263,
+    "geometry_depth_rmse_m": 0.19382575269342348,
+    "alignment_depth_scale": 0.88021703271861,
+    "evaluation_pixels": 541455
+  },
+  "errors": {},
+  "depth_diagnostics": {
+    "evaluation_pixels": 541455,
+    "nonpositive_pixels": 0,
+    "nonfinite_pixels": 0,
+    "frames": [
+      {
+        "frame": "DSC_0219",
+        "evaluation_pixels": 135488,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0220",
+        "evaluation_pixels": 135877,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0250",
+        "evaluation_pixels": 137135,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0252",
+        "evaluation_pixels": 132955,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      }
+    ],
+    "nonpositive_fraction": 0.0,
+    "nonfinite_fraction": 0.0
+  },
+  "strict_metrics": {
+    "pose_ate_m": 0.0059824621836107195,
+    "pose_ate_normalized": 0.016811666250195086,
+    "pose_pair_translation_relative": 0.019676383017115093,
+    "pose_pair_rotation_deg": 0.26324845542324987,
+    "alignment_pose_scale": 0.8821819853290715,
+    "geometry_depth_absrel": 0.029741576306680263,
+    "geometry_depth_rmse_m": 0.19382575269342348,
+    "alignment_depth_scale": 0.88021703271861,
+    "evaluation_pixels": 541455
+  },
+  "strict_errors": {},
+  "prediction_sha256": "fa7219f821f761d0872a206a1499719198d86058a31e743997634c24361e7022",
+  "seconds": 72.05564403533936,
+  "finished_unix": 1792867427.337013
+}

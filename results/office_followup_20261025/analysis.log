@@ -1,0 +1,6 @@
+COMPLETE True OBSERVED 105 STATUSES {'ok': 105, 'partial': 0, 'failed': 0}
+vggt m5_DSC_0250 RAW [0.1, 0.15] EFFECT [0.075, 0.2]
+vggt m10_DSC_0242 RAW [0.1, 0.15] EFFECT [0.05, 0.2]
+vggt m20_DSC_0252 RAW [0, 0.025] EFFECT None
+mast3r m5_DSC_0251 RAW None EFFECT None
+mast3r m20_DSC_0238 RAW [2, 4] EFFECT [2, 4]

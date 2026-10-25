@@ -1,0 +1,225 @@
+{
+  "backend": "vggt",
+  "case": "m20_DSC_0252",
+  "size": 20,
+  "target": "DSC_0252",
+  "replicate": 1,
+  "condition": "drop",
+  "blur_deg": null,
+  "ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0222",
+    "DSC_0223",
+    "DSC_0228",
+    "DSC_0230",
+    "DSC_0231",
+    "DSC_0235",
+    "DSC_0237",
+    "DSC_0238",
+    "DSC_0239",
+    "DSC_0240",
+    "DSC_0242",
+    "DSC_0243",
+    "DSC_0248",
+    "DSC_0250",
+    "DSC_0251",
+    "DSC_0254",
+    "DSC_0255"
+  ],
+  "input_sha256": [
+    "b5edce5fe623a5c425b71f38cb754567b4bbf54eb65eba91e57217a04ebbfb1e",
+    "2eb60d6e7ec8aeed3893f7753ee426c58d250b4f75c7de9bd26b8e91f2b8c74e",
+    "43e70dd867964091e206a186b8664271da15ad5c0b999e56e9a9dcebcf601f34",
+    "8fcd5c091421e29a78087fae68cb3b3abbd432f485a7270f0152125474453ffc",
+    "3cb5b907a61a5c85c2be6be8744c92d38938ab5e5e5a6a4d14670f9eedb5aa64",
+    "06ac773512555ac3bc5377e907e1de956bdca969634452a1c09372fd1737235a",
+    "f0524dddb7bf038a794085e57b6d0e3d88d80848b6e12bdea2c75802f8cbbc68",
+    "7c5f0513c178d0709f220ddc714704d500de502166177008a99528668df34ef4",
+    "86e35a6b990f07532581aa7f4df69d76fb2571d0097b761fd3f3474c49e0f86b",
+    "ddd32da234ebd8e9a5fa0a6fd515ecc5718d10b2d41b0d11ddcda22184bf1d2a",
+    "f0231ebfbff52d0a41e92015e4405388fc2e82a8509487cf743ec7fb35663b7c",
+    "0ca73e9cf785a2fcce1435888b973467d70d9b8395d6c3ad1880ab9474779ae4",
+    "6d073f734bf2a6533db17bc29e365db5b4923c39bd19a4da4a34721edd205119",
+    "ccd2c94596e6514f1514fdff98d6c1729d5ed96ea425fdc6893f2482001503be",
+    "086b49dd9e4afc86e001aa739d4db8846d5596a512f08449307c037972719e01",
+    "069814bd10b8c024ff4e235a69ad5c5d10ddda6d0774d8932408e02f3d10277a",
+    "5b5f97cc4130564a058f4149c7b5f1972ac5572d8508703d0711e2c23cc4440f",
+    "e1d973808cfb5ed9b9e2a20094e935a5d3de1d6518b71a870b01ebeb9d350bfc",
+    "93e94dbd2685a2b077b48dda2948f64d21df2ad2e07b433a42f9a131d2a99d60"
+  ],
+  "common_ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0222",
+    "DSC_0223",
+    "DSC_0228",
+    "DSC_0230",
+    "DSC_0231",
+    "DSC_0235",
+    "DSC_0237",
+    "DSC_0238",
+    "DSC_0239",
+    "DSC_0240",
+    "DSC_0242",
+    "DSC_0243",
+    "DSC_0248",
+    "DSC_0250",
+    "DSC_0251",
+    "DSC_0254",
+    "DSC_0255"
+  ],
+  "start_unix": 1792867298.72879,
+  "status": "ok",
+  "pid": 25886,
+  "metrics": {
+    "pose_ate_m": 0.08292208043890364,
+    "pose_ate_normalized": 0.16446785362864697,
+    "pose_pair_translation_relative": 0.29457788054920414,
+    "pose_pair_rotation_deg": 1.5513907950527375,
+    "alignment_pose_scale": 2.4232674941267236,
+    "geometry_depth_absrel": 0.035125105683540866,
+    "geometry_depth_rmse_m": 0.16626512120466774,
+    "alignment_depth_scale": 2.526229857591175,
+    "evaluation_pixels": 2827963
+  },
+  "errors": {},
+  "depth_diagnostics": {
+    "evaluation_pixels": 2827963,
+    "nonpositive_pixels": 0,
+    "nonfinite_pixels": 0,
+    "frames": [
+      {
+        "frame": "DSC_0219",
+        "evaluation_pixels": 142855,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0220",
+        "evaluation_pixels": 143086,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0222",
+        "evaluation_pixels": 179895,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0223",
+        "evaluation_pixels": 152493,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0228",
+        "evaluation_pixels": 134726,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0230",
+        "evaluation_pixels": 149877,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0231",
+        "evaluation_pixels": 177924,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0235",
+        "evaluation_pixels": 178012,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0237",
+        "evaluation_pixels": 167725,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0238",
+        "evaluation_pixels": 160856,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0239",
+        "evaluation_pixels": 151074,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0240",
+        "evaluation_pixels": 165059,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0242",
+        "evaluation_pixels": 135786,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0243",
+        "evaluation_pixels": 128191,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0248",
+        "evaluation_pixels": 101644,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0250",
+        "evaluation_pixels": 144138,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0251",
+        "evaluation_pixels": 144437,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0254",
+        "evaluation_pixels": 139057,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      },
+      {
+        "frame": "DSC_0255",
+        "evaluation_pixels": 131128,
+        "nonpositive_pixels": 0,
+        "nonfinite_pixels": 0
+      }
+    ],
+    "nonpositive_fraction": 0.0,
+    "nonfinite_fraction": 0.0
+  },
+  "strict_metrics": {
+    "pose_ate_m": 0.08292208043890364,
+    "pose_ate_normalized": 0.16446785362864697,
+    "pose_pair_translation_relative": 0.29457788054920414,
+    "pose_pair_rotation_deg": 1.5513907950527375,
+    "alignment_pose_scale": 2.4232674941267236,
+    "geometry_depth_absrel": 0.035125105683540866,
+    "geometry_depth_rmse_m": 0.16626512120466774,
+    "alignment_depth_scale": 2.526229857591175,
+    "evaluation_pixels": 2827963
+  },
+  "strict_errors": {},
+  "prediction_sha256": "bb2cf38d49e4dbfffececf3a47daffe0e996ee2fb88d5080e0457031a23c1ce4",
+  "seconds": 24.289065837860107,
+  "finished_unix": 1792867323.0185778
+}

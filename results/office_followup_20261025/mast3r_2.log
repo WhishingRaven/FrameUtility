@@ -1,0 +1,84 @@
+START mast3r 2 m5_DSC_0251_add_b0
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/dust3r/dust3r/cloud_opt/base_opt.py:275: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @torch.cuda.amp.autocast(enabled=False)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:620: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:577: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  score, (xy1, xy2, confs) = torch.load(path_corres2)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:684: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, cconf), focal = torch.load(cache, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:707: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path2, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:756: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  score, (xy1, xy2, confs) = torch.load(path_corres, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:698: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  X, C, X2, C2 = torch.load(path1, map_location=device)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:457: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  loss = float(loss)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/mast3r/mast3r/cloud_opt/sparse_ga.py:78: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  (canon, canon2, conf), focal = torch.load(canon_path, map_location=device)
+Warning, cannot find cuda-compiled version of RoPE2D, using a slow pytorch version instead
+init focals = [301.27518 298.82275 298.51144 304.3575  310.61258]
+>> final loss = 0.1034737229347229
+>> final loss = 0.4416482150554657
+Final focals = [314.3251  314.7018  311.8604  311.88568 312.1456 ]
+DONE mast3r 2 m5_DSC_0251_add_b0 ok 77.73
+START mast3r 2 m5_DSC_0251_drop
+init focals = [303.27853 300.02606 303.61783 308.96536]
+>> final loss = 0.10709062963724136
+>> final loss = 0.46275660395622253
+Final focals = [314.6364  313.6787  313.21432 313.7375 ]
+DONE mast3r 2 m5_DSC_0251_drop ok 11.51
+START mast3r 2 m5_DSC_0251_add_b0.5
+init focals = [301.49878 299.17734 299.15994 303.2376  310.54504]
+>> final loss = 0.10192462801933289
+>> final loss = 0.44676122069358826
+Final focals = [313.89404 313.95496 312.11493 312.1041  312.26947]
+DONE mast3r 2 m5_DSC_0251_add_b0.5 ok 39.92
+START mast3r 2 m5_DSC_0251_add_b1
+init focals = [301.32547 299.11386 299.15265 303.69675 310.37006]
+>> final loss = 0.10880428552627563
+>> final loss = 0.46163034439086914
+Final focals = [314.38895 314.2918  312.7287  312.50555 312.9483 ]
+DONE mast3r 2 m5_DSC_0251_add_b1 ok 39.32
+START mast3r 2 m20_DSC_0238_add_b0
+init focals = [296.4693  296.28784 299.14966 308.49265 306.02805 306.29752 310.03903
+ 298.8987  312.6057  308.6083  305.84158 312.40143 310.055   295.11865
+ 304.3542  300.63614 300.06415 306.94128 301.0008  299.78552]
+>> final loss = 0.11042795330286026
+>> final loss = 0.5442616939544678
+Final focals = [312.79553 312.25262 312.2248  316.48825 314.93164 311.8112  311.97748
+ 305.494   310.72147 311.6025  310.87305 404.63773 311.92883 311.55212
+ 312.15616 312.32352 311.9395  312.17374 313.89133 312.08505]
+DONE mast3r 2 m20_DSC_0238_add_b0 ok 1242.2
+START mast3r 2 m20_DSC_0238_drop
+init focals = [296.769   296.862   299.41794 308.63773 306.19208 307.08533 310.04596
+ 298.99905 311.7575  300.30002 314.26843 310.1211  295.4225  304.50922
+ 300.85196 300.32407 307.13834 301.01773 299.96542]
+>> final loss = 0.10932452231645584
+>> final loss = 0.5454815626144409
+Final focals = [312.81494 312.2705  312.39026 316.21674 314.12177 311.82962 311.07397
+ 305.377   301.10196 309.0871  419.72067 311.95352 311.55853 312.19086
+ 312.3487  311.9581  312.19354 313.88293 312.09784]
+DONE mast3r 2 m20_DSC_0238_drop ok 127.65
+START mast3r 2 m20_DSC_0238_add_b2
+init focals = [296.52982 296.4902  299.1879  308.56165 306.01346 306.7056  309.954
+ 298.94543 312.24207 340.23584 302.43387 312.54193 310.10513 295.19537
+ 304.42255 300.6635  300.1254  306.9716  301.00336 299.84384]
+>> final loss = 0.11081920564174652
+>> final loss = 0.5462655425071716
+Final focals = [312.81836 312.2808  312.3925  316.36664 316.14978 311.82367 311.21478
+ 305.25882 302.46198 327.2389  328.4075  421.45264 311.94308 311.559
+ 312.1404  312.34378 311.9581  312.1967  313.8993  312.09647]
+DONE mast3r 2 m20_DSC_0238_add_b2 ok 237.94
+START mast3r 2 m20_DSC_0238_add_b4
+init focals = [296.64053 296.64194 299.35587 308.62698 306.11194 306.87555 310.02188
+ 299.00635 312.68234 347.2332  304.1923  314.71832 310.1372  295.31238
+ 304.49442 300.73865 300.25992 307.1035  301.00696 299.90594]
+>> final loss = 0.11056169122457504
+>> final loss = 0.546171247959137
+Final focals = [312.83224 312.29193 312.46994 316.42383 314.63113 311.85815 311.2255
+ 305.77454 301.87772 437.9289  280.3079  451.72446 311.96732 311.5621
+ 312.17953 312.35806 311.96973 312.20276 313.90405 312.09814]
+DONE mast3r 2 m20_DSC_0238_add_b4 ok 203.66

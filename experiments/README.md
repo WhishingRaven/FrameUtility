@@ -93,3 +93,11 @@ For the parallel MASt3R runner on a fresh CUDA environment, omit the MPS cache s
 Keep CPU/MPS/CUDA outputs in separate roots. Within one root, rerunning the same command resumes completed reconstructions; a different device/software/code fingerprint is rejected to prevent mixing measurements. The reference images, severities, nested image sets, evaluation rules and pretrained weights remain identical across hardware.
 
 Only complete observed curves support crossing summaries. Report already-negative clean conditions separately; do not infer a transition for them. Repeated clean inference measures representative numerical variation, not confidence intervals over scenes. Multiple scenes/contexts and variance checks are required before general claims.
+
+## Bounded follow-up (2026-10-25)
+
+The frozen follow-up lives in results/office_followup_20261025. Its protocol.json fixes five pilot-selected contexts, three fresh repeats per reconstruction condition (105 reconstructions), a dense VGGT ladder from 0 to 0.25 degrees, zero-motion processing controls, and the fixed_mask_signed_depth_v1 scoring policy before new inference. Legacy strict results remain unchanged.
+
+The follow-up scores finite negative/zero depths on the entire fixed GT mask, fits only the positive median scale from positive predictions, and records invalid-depth fractions plus legacy strict scores separately. Nonfinite evaluated predictions remain explicit geometry failures. The primary AbsRel effect floor is 0.0005, informed by the exploratory pilot and fixed before this follow-up; it is not a significance threshold.
+
+See [the frozen readable protocol](../results/office_followup_20261025/protocol.md) for exact selections, execution commands, repeat-cache semantics and CUDA handoff. Use experiments/analyze_followup.py to regenerate summary.json, utilities.csv and repeat-range figures. Repeated numerical agreement within a pilot-selected scene does not establish population-level prevalence.

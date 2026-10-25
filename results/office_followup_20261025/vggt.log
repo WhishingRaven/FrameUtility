@@ -1,0 +1,164 @@
+START vggt 0 m5_DSC_0250_add_b0
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/vggt/vggt/models/vggt.py:65: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+DONE vggt 0 m5_DSC_0250_add_b0 ok 3.98
+START vggt 0 m5_DSC_0250_drop
+DONE vggt 0 m5_DSC_0250_drop ok 3.05
+START vggt 0 m5_DSC_0250_add_b0.025
+DONE vggt 0 m5_DSC_0250_add_b0.025 ok 3.86
+START vggt 0 m5_DSC_0250_add_b0.05
+DONE vggt 0 m5_DSC_0250_add_b0.05 ok 3.74
+START vggt 0 m5_DSC_0250_add_b0.075
+DONE vggt 0 m5_DSC_0250_add_b0.075 ok 3.88
+START vggt 0 m5_DSC_0250_add_b0.1
+DONE vggt 0 m5_DSC_0250_add_b0.1 ok 3.76
+START vggt 0 m5_DSC_0250_add_b0.15
+DONE vggt 0 m5_DSC_0250_add_b0.15 ok 3.77
+START vggt 0 m5_DSC_0250_add_b0.2
+DONE vggt 0 m5_DSC_0250_add_b0.2 ok 3.87
+START vggt 0 m5_DSC_0250_add_b0.25
+DONE vggt 0 m5_DSC_0250_add_b0.25 ok 3.75
+START vggt 0 m10_DSC_0242_add_b0
+DONE vggt 0 m10_DSC_0242_add_b0 ok 8.95
+START vggt 0 m10_DSC_0242_drop
+DONE vggt 0 m10_DSC_0242_drop ok 7.87
+START vggt 0 m10_DSC_0242_add_b0.025
+DONE vggt 0 m10_DSC_0242_add_b0.025 ok 8.98
+START vggt 0 m10_DSC_0242_add_b0.05
+DONE vggt 0 m10_DSC_0242_add_b0.05 ok 9.0
+START vggt 0 m10_DSC_0242_add_b0.075
+DONE vggt 0 m10_DSC_0242_add_b0.075 ok 9.0
+START vggt 0 m10_DSC_0242_add_b0.1
+DONE vggt 0 m10_DSC_0242_add_b0.1 ok 9.09
+START vggt 0 m10_DSC_0242_add_b0.15
+DONE vggt 0 m10_DSC_0242_add_b0.15 ok 9.05
+START vggt 0 m10_DSC_0242_add_b0.2
+DONE vggt 0 m10_DSC_0242_add_b0.2 ok 9.05
+START vggt 0 m10_DSC_0242_add_b0.25
+DONE vggt 0 m10_DSC_0242_add_b0.25 ok 9.05
+START vggt 0 m20_DSC_0252_add_b0
+DONE vggt 0 m20_DSC_0252_add_b0 ok 23.97
+START vggt 0 m20_DSC_0252_drop
+DONE vggt 0 m20_DSC_0252_drop ok 22.26
+START vggt 0 m20_DSC_0252_add_b0.025
+DONE vggt 0 m20_DSC_0252_add_b0.025 ok 23.91
+START vggt 0 m20_DSC_0252_add_b0.05
+DONE vggt 0 m20_DSC_0252_add_b0.05 ok 23.9
+START vggt 0 m20_DSC_0252_add_b0.075
+DONE vggt 0 m20_DSC_0252_add_b0.075 ok 23.91
+START vggt 0 m20_DSC_0252_add_b0.1
+DONE vggt 0 m20_DSC_0252_add_b0.1 ok 24.19
+START vggt 0 m20_DSC_0252_add_b0.15
+DONE vggt 0 m20_DSC_0252_add_b0.15 ok 23.94
+START vggt 0 m20_DSC_0252_add_b0.2
+DONE vggt 0 m20_DSC_0252_add_b0.2 ok 23.89
+START vggt 0 m20_DSC_0252_add_b0.25
+DONE vggt 0 m20_DSC_0252_add_b0.25 ok 24.02
+START vggt 1 m5_DSC_0250_add_b0
+DONE vggt 1 m5_DSC_0250_add_b0 ok 3.96
+START vggt 1 m5_DSC_0250_drop
+DONE vggt 1 m5_DSC_0250_drop ok 3.01
+START vggt 1 m5_DSC_0250_add_b0.025
+DONE vggt 1 m5_DSC_0250_add_b0.025 ok 3.86
+START vggt 1 m5_DSC_0250_add_b0.05
+DONE vggt 1 m5_DSC_0250_add_b0.05 ok 3.94
+START vggt 1 m5_DSC_0250_add_b0.075
+DONE vggt 1 m5_DSC_0250_add_b0.075 ok 4.41
+START vggt 1 m5_DSC_0250_add_b0.1
+DONE vggt 1 m5_DSC_0250_add_b0.1 ok 4.6
+START vggt 1 m5_DSC_0250_add_b0.15
+DONE vggt 1 m5_DSC_0250_add_b0.15 ok 4.59
+START vggt 1 m5_DSC_0250_add_b0.2
+DONE vggt 1 m5_DSC_0250_add_b0.2 ok 4.8
+START vggt 1 m5_DSC_0250_add_b0.25
+DONE vggt 1 m5_DSC_0250_add_b0.25 ok 4.6
+START vggt 1 m10_DSC_0242_add_b0
+DONE vggt 1 m10_DSC_0242_add_b0 ok 10.43
+START vggt 1 m10_DSC_0242_drop
+DONE vggt 1 m10_DSC_0242_drop ok 9.42
+START vggt 1 m10_DSC_0242_add_b0.025
+DONE vggt 1 m10_DSC_0242_add_b0.025 ok 10.66
+START vggt 1 m10_DSC_0242_add_b0.05
+DONE vggt 1 m10_DSC_0242_add_b0.05 ok 10.4
+START vggt 1 m10_DSC_0242_add_b0.075
+DONE vggt 1 m10_DSC_0242_add_b0.075 ok 10.3
+START vggt 1 m10_DSC_0242_add_b0.1
+DONE vggt 1 m10_DSC_0242_add_b0.1 ok 10.4
+START vggt 1 m10_DSC_0242_add_b0.15
+DONE vggt 1 m10_DSC_0242_add_b0.15 ok 10.52
+START vggt 1 m10_DSC_0242_add_b0.2
+DONE vggt 1 m10_DSC_0242_add_b0.2 ok 9.98
+START vggt 1 m10_DSC_0242_add_b0.25
+DONE vggt 1 m10_DSC_0242_add_b0.25 ok 10.38
+START vggt 1 m20_DSC_0252_add_b0
+DONE vggt 1 m20_DSC_0252_add_b0 ok 26.41
+START vggt 1 m20_DSC_0252_drop
+DONE vggt 1 m20_DSC_0252_drop ok 24.29
+START vggt 1 m20_DSC_0252_add_b0.025
+DONE vggt 1 m20_DSC_0252_add_b0.025 ok 26.1
+START vggt 1 m20_DSC_0252_add_b0.05
+DONE vggt 1 m20_DSC_0252_add_b0.05 ok 25.91
+START vggt 1 m20_DSC_0252_add_b0.075
+DONE vggt 1 m20_DSC_0252_add_b0.075 ok 26.07
+START vggt 1 m20_DSC_0252_add_b0.1
+DONE vggt 1 m20_DSC_0252_add_b0.1 ok 26.12
+START vggt 1 m20_DSC_0252_add_b0.15
+DONE vggt 1 m20_DSC_0252_add_b0.15 ok 28.13
+START vggt 1 m20_DSC_0252_add_b0.2
+DONE vggt 1 m20_DSC_0252_add_b0.2 ok 27.56
+START vggt 1 m20_DSC_0252_add_b0.25
+DONE vggt 1 m20_DSC_0252_add_b0.25 ok 26.45
+START vggt 2 m5_DSC_0250_add_b0
+DONE vggt 2 m5_DSC_0250_add_b0 ok 4.24
+START vggt 2 m5_DSC_0250_drop
+DONE vggt 2 m5_DSC_0250_drop ok 3.23
+START vggt 2 m5_DSC_0250_add_b0.025
+DONE vggt 2 m5_DSC_0250_add_b0.025 ok 4.05
+START vggt 2 m5_DSC_0250_add_b0.05
+DONE vggt 2 m5_DSC_0250_add_b0.05 ok 4.06
+START vggt 2 m5_DSC_0250_add_b0.075
+DONE vggt 2 m5_DSC_0250_add_b0.075 ok 4.02
+START vggt 2 m5_DSC_0250_add_b0.1
+DONE vggt 2 m5_DSC_0250_add_b0.1 ok 4.05
+START vggt 2 m5_DSC_0250_add_b0.15
+DONE vggt 2 m5_DSC_0250_add_b0.15 ok 4.12
+START vggt 2 m5_DSC_0250_add_b0.2
+DONE vggt 2 m5_DSC_0250_add_b0.2 ok 4.61
+START vggt 2 m5_DSC_0250_add_b0.25
+DONE vggt 2 m5_DSC_0250_add_b0.25 ok 4.36
+START vggt 2 m10_DSC_0242_add_b0
+DONE vggt 2 m10_DSC_0242_add_b0 ok 10.38
+START vggt 2 m10_DSC_0242_drop
+DONE vggt 2 m10_DSC_0242_drop ok 9.13
+START vggt 2 m10_DSC_0242_add_b0.025
+DONE vggt 2 m10_DSC_0242_add_b0.025 ok 10.18
+START vggt 2 m10_DSC_0242_add_b0.05
+DONE vggt 2 m10_DSC_0242_add_b0.05 ok 10.02
+START vggt 2 m10_DSC_0242_add_b0.075
+DONE vggt 2 m10_DSC_0242_add_b0.075 ok 9.26
+START vggt 2 m10_DSC_0242_add_b0.1
+DONE vggt 2 m10_DSC_0242_add_b0.1 ok 9.33
+START vggt 2 m10_DSC_0242_add_b0.15
+DONE vggt 2 m10_DSC_0242_add_b0.15 ok 9.29
+START vggt 2 m10_DSC_0242_add_b0.2
+DONE vggt 2 m10_DSC_0242_add_b0.2 ok 9.3
+START vggt 2 m10_DSC_0242_add_b0.25
+DONE vggt 2 m10_DSC_0242_add_b0.25 ok 9.31
+START vggt 2 m20_DSC_0252_add_b0
+DONE vggt 2 m20_DSC_0252_add_b0 ok 27.96
+START vggt 2 m20_DSC_0252_drop
+DONE vggt 2 m20_DSC_0252_drop ok 25.68
+START vggt 2 m20_DSC_0252_add_b0.025
+DONE vggt 2 m20_DSC_0252_add_b0.025 ok 27.76
+START vggt 2 m20_DSC_0252_add_b0.05
+DONE vggt 2 m20_DSC_0252_add_b0.05 ok 27.28
+START vggt 2 m20_DSC_0252_add_b0.075
+DONE vggt 2 m20_DSC_0252_add_b0.075 ok 26.86
+START vggt 2 m20_DSC_0252_add_b0.1
+DONE vggt 2 m20_DSC_0252_add_b0.1 ok 27.1
+START vggt 2 m20_DSC_0252_add_b0.15
+DONE vggt 2 m20_DSC_0252_add_b0.15 ok 27.93
+START vggt 2 m20_DSC_0252_add_b0.2
+DONE vggt 2 m20_DSC_0252_add_b0.2 ok 27.88
+START vggt 2 m20_DSC_0252_add_b0.25
+DONE vggt 2 m20_DSC_0252_add_b0.25 ok 27.47
