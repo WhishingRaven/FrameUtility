@@ -1,0 +1,731 @@
+Loading vggt on mps
+START m5_clean: 5 views (attempt 1/3)
+/Users/whishingraven/Documents/Github/FrameUtility/vendor/vggt/vggt/models/vggt.py:65: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+DONE m5_clean: 4.1s
+START m5_drop_DSC_0221: 4 views (attempt 1/3)
+DONE m5_drop_DSC_0221: 3.0s
+START m5_add_DSC_0221_b0.025: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.025: 3.8s
+START m5_add_DSC_0221_b0.05: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.05: 3.8s
+START m5_add_DSC_0221_b0.075: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.075: 3.8s
+START m5_add_DSC_0221_b0.1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.1: 3.8s
+START m5_add_DSC_0221_b0.15: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.15: 3.8s
+START m5_add_DSC_0221_b0.2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.2: 3.9s
+START m5_add_DSC_0221_b0.25: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.25: 3.7s
+START m5_add_DSC_0221_b0.5: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b0.5: 3.7s
+START m5_add_DSC_0221_b1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b1: 3.7s
+START m5_add_DSC_0221_b2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b2: 3.7s
+START m5_add_DSC_0221_b4: 5 views (attempt 1/3)
+DONE m5_add_DSC_0221_b4: 3.7s
+START m5_drop_DSC_0222: 4 views (attempt 1/3)
+DONE m5_drop_DSC_0222: 2.9s
+START m5_add_DSC_0222_b0.025: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.025: 3.8s
+START m5_add_DSC_0222_b0.05: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.05: 3.7s
+START m5_add_DSC_0222_b0.075: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.075: 3.7s
+START m5_add_DSC_0222_b0.1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.1: 3.8s
+START m5_add_DSC_0222_b0.15: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.15: 3.7s
+START m5_add_DSC_0222_b0.2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.2: 3.7s
+START m5_add_DSC_0222_b0.25: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.25: 3.7s
+START m5_add_DSC_0222_b0.5: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b0.5: 3.7s
+START m5_add_DSC_0222_b1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b1: 3.8s
+START m5_add_DSC_0222_b2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b2: 3.8s
+START m5_add_DSC_0222_b4: 5 views (attempt 1/3)
+DONE m5_add_DSC_0222_b4: 3.8s
+START m5_drop_DSC_0223: 4 views (attempt 1/3)
+DONE m5_drop_DSC_0223: 3.3s
+START m5_add_DSC_0223_b0.025: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.025: 3.9s
+START m5_add_DSC_0223_b0.05: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.05: 3.8s
+START m5_add_DSC_0223_b0.075: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.075: 3.8s
+START m5_add_DSC_0223_b0.1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.1: 3.8s
+START m5_add_DSC_0223_b0.15: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.15: 3.9s
+START m5_add_DSC_0223_b0.2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.2: 3.8s
+START m5_add_DSC_0223_b0.25: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.25: 3.8s
+START m5_add_DSC_0223_b0.5: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b0.5: 3.7s
+START m5_add_DSC_0223_b1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b1: 3.8s
+START m5_add_DSC_0223_b2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b2: 3.8s
+START m5_add_DSC_0223_b4: 5 views (attempt 1/3)
+DONE m5_add_DSC_0223_b4: 3.8s
+START m5_drop_DSC_0231: 4 views (attempt 1/3)
+DONE m5_drop_DSC_0231: 3.0s
+START m5_add_DSC_0231_b0.025: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.025: 3.8s
+START m5_add_DSC_0231_b0.05: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.05: 3.8s
+START m5_add_DSC_0231_b0.075: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.075: 3.8s
+START m5_add_DSC_0231_b0.1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.1: 3.8s
+START m5_add_DSC_0231_b0.15: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.15: 3.8s
+START m5_add_DSC_0231_b0.2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.2: 3.8s
+START m5_add_DSC_0231_b0.25: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.25: 3.8s
+START m5_add_DSC_0231_b0.5: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b0.5: 3.8s
+START m5_add_DSC_0231_b1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b1: 3.8s
+START m5_add_DSC_0231_b2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b2: 3.8s
+START m5_add_DSC_0231_b4: 5 views (attempt 1/3)
+DONE m5_add_DSC_0231_b4: 3.8s
+START m5_drop_DSC_0254: 4 views (attempt 1/3)
+DONE m5_drop_DSC_0254: 3.0s
+START m5_add_DSC_0254_b0.025: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.025: 3.8s
+START m5_add_DSC_0254_b0.05: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.05: 3.8s
+START m5_add_DSC_0254_b0.075: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.075: 3.8s
+START m5_add_DSC_0254_b0.1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.1: 3.8s
+START m5_add_DSC_0254_b0.15: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.15: 3.7s
+START m5_add_DSC_0254_b0.2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.2: 3.8s
+START m5_add_DSC_0254_b0.25: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.25: 3.8s
+START m5_add_DSC_0254_b0.5: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b0.5: 3.8s
+START m5_add_DSC_0254_b1: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b1: 3.8s
+START m5_add_DSC_0254_b2: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b2: 3.7s
+START m5_add_DSC_0254_b4: 5 views (attempt 1/3)
+DONE m5_add_DSC_0254_b4: 3.7s
+START m10_clean: 10 views (attempt 1/3)
+DONE m10_clean: 8.6s
+START m10_drop_DSC_0220: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0220: 7.5s
+START m10_add_DSC_0220_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.025: 8.5s
+START m10_add_DSC_0220_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.05: 8.5s
+START m10_add_DSC_0220_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.075: 8.3s
+START m10_add_DSC_0220_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.1: 8.6s
+START m10_add_DSC_0220_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.15: 8.6s
+START m10_add_DSC_0220_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.2: 8.6s
+START m10_add_DSC_0220_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.25: 8.5s
+START m10_add_DSC_0220_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b0.5: 8.7s
+START m10_add_DSC_0220_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b1: 8.5s
+START m10_add_DSC_0220_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b2: 8.5s
+START m10_add_DSC_0220_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0220_b4: 8.7s
+START m10_drop_DSC_0221: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0221: 7.5s
+START m10_add_DSC_0221_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.025: 8.5s
+START m10_add_DSC_0221_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.05: 8.5s
+START m10_add_DSC_0221_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.075: 8.5s
+START m10_add_DSC_0221_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.1: 8.5s
+START m10_add_DSC_0221_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.15: 8.3s
+START m10_add_DSC_0221_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.2: 8.3s
+START m10_add_DSC_0221_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.25: 8.3s
+START m10_add_DSC_0221_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b0.5: 8.3s
+START m10_add_DSC_0221_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b1: 8.3s
+START m10_add_DSC_0221_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b2: 8.3s
+START m10_add_DSC_0221_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0221_b4: 8.3s
+START m10_drop_DSC_0222: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0222: 7.3s
+START m10_add_DSC_0222_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.025: 8.3s
+START m10_add_DSC_0222_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.05: 8.4s
+START m10_add_DSC_0222_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.075: 8.3s
+START m10_add_DSC_0222_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.1: 8.3s
+START m10_add_DSC_0222_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.15: 8.3s
+START m10_add_DSC_0222_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.2: 8.3s
+START m10_add_DSC_0222_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.25: 8.3s
+START m10_add_DSC_0222_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b0.5: 8.3s
+START m10_add_DSC_0222_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b1: 8.3s
+START m10_add_DSC_0222_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b2: 8.3s
+START m10_add_DSC_0222_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0222_b4: 8.3s
+START m10_drop_DSC_0223: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0223: 7.3s
+START m10_add_DSC_0223_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.025: 8.4s
+START m10_add_DSC_0223_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.05: 8.3s
+START m10_add_DSC_0223_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.075: 8.7s
+START m10_add_DSC_0223_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.1: 8.7s
+START m10_add_DSC_0223_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.15: 8.8s
+START m10_add_DSC_0223_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.2: 8.7s
+START m10_add_DSC_0223_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.25: 8.6s
+START m10_add_DSC_0223_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b0.5: 8.7s
+START m10_add_DSC_0223_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b1: 8.5s
+START m10_add_DSC_0223_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b2: 8.4s
+START m10_add_DSC_0223_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0223_b4: 8.3s
+START m10_drop_DSC_0231: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0231: 7.4s
+START m10_add_DSC_0231_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.025: 8.3s
+START m10_add_DSC_0231_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.05: 8.5s
+START m10_add_DSC_0231_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.075: 8.8s
+START m10_add_DSC_0231_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.1: 8.5s
+START m10_add_DSC_0231_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.15: 8.6s
+START m10_add_DSC_0231_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.2: 8.7s
+START m10_add_DSC_0231_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.25: 8.9s
+START m10_add_DSC_0231_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b0.5: 8.9s
+START m10_add_DSC_0231_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b1: 8.9s
+START m10_add_DSC_0231_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b2: 8.9s
+START m10_add_DSC_0231_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0231_b4: 8.9s
+START m10_drop_DSC_0243: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0243: 8.0s
+START m10_add_DSC_0243_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.025: 8.8s
+START m10_add_DSC_0243_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.05: 8.6s
+START m10_add_DSC_0243_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.075: 8.3s
+START m10_add_DSC_0243_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.1: 8.4s
+START m10_add_DSC_0243_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.15: 8.5s
+START m10_add_DSC_0243_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.2: 8.8s
+START m10_add_DSC_0243_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.25: 8.5s
+START m10_add_DSC_0243_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b0.5: 8.8s
+START m10_add_DSC_0243_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b1: 8.6s
+START m10_add_DSC_0243_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b2: 8.6s
+START m10_add_DSC_0243_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0243_b4: 8.5s
+START m10_drop_DSC_0250: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0250: 7.4s
+START m10_add_DSC_0250_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.025: 8.6s
+START m10_add_DSC_0250_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.05: 8.6s
+START m10_add_DSC_0250_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.075: 8.7s
+START m10_add_DSC_0250_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.1: 8.6s
+START m10_add_DSC_0250_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.15: 8.5s
+START m10_add_DSC_0250_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.2: 8.5s
+START m10_add_DSC_0250_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.25: 8.5s
+START m10_add_DSC_0250_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b0.5: 8.5s
+START m10_add_DSC_0250_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b1: 8.5s
+START m10_add_DSC_0250_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b2: 8.5s
+START m10_add_DSC_0250_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0250_b4: 8.5s
+START m10_drop_DSC_0252: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0252: 7.4s
+START m10_add_DSC_0252_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.025: 8.5s
+START m10_add_DSC_0252_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.05: 8.5s
+START m10_add_DSC_0252_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.075: 8.5s
+START m10_add_DSC_0252_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.1: 8.5s
+START m10_add_DSC_0252_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.15: 8.5s
+START m10_add_DSC_0252_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.2: 8.5s
+START m10_add_DSC_0252_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.25: 8.5s
+START m10_add_DSC_0252_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b0.5: 8.5s
+START m10_add_DSC_0252_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b1: 8.5s
+START m10_add_DSC_0252_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b2: 8.5s
+START m10_add_DSC_0252_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0252_b4: 8.5s
+START m10_drop_DSC_0253: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0253: 7.5s
+START m10_add_DSC_0253_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.025: 8.6s
+START m10_add_DSC_0253_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.05: 8.5s
+START m10_add_DSC_0253_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.075: 8.5s
+START m10_add_DSC_0253_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.1: 8.5s
+START m10_add_DSC_0253_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.15: 8.5s
+START m10_add_DSC_0253_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.2: 8.5s
+START m10_add_DSC_0253_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.25: 8.5s
+START m10_add_DSC_0253_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b0.5: 8.5s
+START m10_add_DSC_0253_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b1: 8.5s
+START m10_add_DSC_0253_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b2: 8.5s
+START m10_add_DSC_0253_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0253_b4: 8.5s
+START m10_drop_DSC_0254: 9 views (attempt 1/3)
+DONE m10_drop_DSC_0254: 7.5s
+START m10_add_DSC_0254_b0.025: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.025: 8.5s
+START m10_add_DSC_0254_b0.05: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.05: 8.5s
+START m10_add_DSC_0254_b0.075: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.075: 8.5s
+START m10_add_DSC_0254_b0.1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.1: 9.0s
+START m10_add_DSC_0254_b0.15: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.15: 8.7s
+START m10_add_DSC_0254_b0.2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.2: 8.5s
+START m10_add_DSC_0254_b0.25: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.25: 9.0s
+START m10_add_DSC_0254_b0.5: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b0.5: 8.7s
+START m10_add_DSC_0254_b1: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b1: 8.3s
+START m10_add_DSC_0254_b2: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b2: 8.8s
+START m10_add_DSC_0254_b4: 10 views (attempt 1/3)
+DONE m10_add_DSC_0254_b4: 8.7s
+START m15_clean: 15 views (attempt 1/3)
+DONE m15_clean: 15.6s
+START m15_drop_DSC_0219: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0219: 13.8s
+START m15_add_DSC_0219_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.025: 15.0s
+START m15_add_DSC_0219_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.05: 15.5s
+START m15_add_DSC_0219_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.075: 15.2s
+START m15_add_DSC_0219_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.1: 14.9s
+START m15_add_DSC_0219_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.15: 14.9s
+START m15_add_DSC_0219_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.2: 15.7s
+START m15_add_DSC_0219_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.25: 15.3s
+START m15_add_DSC_0219_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b0.5: 15.3s
+START m15_add_DSC_0219_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b1: 15.8s
+START m15_add_DSC_0219_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b2: 16.0s
+START m15_add_DSC_0219_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0219_b4: 16.0s
+START m15_drop_DSC_0220: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0220: 14.8s
+START m15_add_DSC_0220_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.025: 16.1s
+START m15_add_DSC_0220_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.05: 15.8s
+START m15_add_DSC_0220_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.075: 16.1s
+START m15_add_DSC_0220_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.1: 17.0s
+START m15_add_DSC_0220_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.15: 17.0s
+START m15_add_DSC_0220_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.2: 15.5s
+START m15_add_DSC_0220_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.25: 16.1s
+START m15_add_DSC_0220_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b0.5: 16.0s
+START m15_add_DSC_0220_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b1: 16.1s
+START m15_add_DSC_0220_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b2: 16.0s
+START m15_add_DSC_0220_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0220_b4: 14.6s
+START m15_drop_DSC_0221: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0221: 13.3s
+START m15_add_DSC_0221_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.025: 14.6s
+START m15_add_DSC_0221_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.05: 14.7s
+START m15_add_DSC_0221_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.075: 14.7s
+START m15_add_DSC_0221_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.1: 14.6s
+START m15_add_DSC_0221_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.15: 14.7s
+START m15_add_DSC_0221_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.2: 14.7s
+START m15_add_DSC_0221_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.25: 14.6s
+START m15_add_DSC_0221_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b0.5: 14.7s
+START m15_add_DSC_0221_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b1: 14.6s
+START m15_add_DSC_0221_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b2: 14.6s
+START m15_add_DSC_0221_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0221_b4: 14.6s
+START m15_drop_DSC_0222: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0222: 13.3s
+START m15_add_DSC_0222_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.025: 14.6s
+START m15_add_DSC_0222_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.05: 14.6s
+START m15_add_DSC_0222_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.075: 14.7s
+START m15_add_DSC_0222_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.1: 14.6s
+START m15_add_DSC_0222_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.15: 14.7s
+START m15_add_DSC_0222_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.2: 14.6s
+START m15_add_DSC_0222_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.25: 14.8s
+START m15_add_DSC_0222_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b0.5: 14.6s
+START m15_add_DSC_0222_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b1: 14.6s
+START m15_add_DSC_0222_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b2: 14.6s
+START m15_add_DSC_0222_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0222_b4: 14.7s
+START m15_drop_DSC_0223: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0223: 13.2s
+START m15_add_DSC_0223_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.025: 14.5s
+START m15_add_DSC_0223_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.05: 14.6s
+START m15_add_DSC_0223_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.075: 14.6s
+START m15_add_DSC_0223_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.1: 14.6s
+START m15_add_DSC_0223_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.15: 14.7s
+START m15_add_DSC_0223_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.2: 15.4s
+START m15_add_DSC_0223_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.25: 15.4s
+START m15_add_DSC_0223_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b0.5: 15.5s
+START m15_add_DSC_0223_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b1: 15.6s
+START m15_add_DSC_0223_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b2: 15.5s
+START m15_add_DSC_0223_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0223_b4: 15.2s
+START m15_drop_DSC_0229: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0229: 13.2s
+START m15_add_DSC_0229_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.025: 14.7s
+START m15_add_DSC_0229_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.05: 14.6s
+START m15_add_DSC_0229_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.075: 14.6s
+START m15_add_DSC_0229_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.1: 14.6s
+START m15_add_DSC_0229_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.15: 14.4s
+START m15_add_DSC_0229_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.2: 14.4s
+START m15_add_DSC_0229_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.25: 14.4s
+START m15_add_DSC_0229_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b0.5: 14.4s
+START m15_add_DSC_0229_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b1: 14.6s
+START m15_add_DSC_0229_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b2: 14.6s
+START m15_add_DSC_0229_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0229_b4: 14.5s
+START m15_drop_DSC_0231: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0231: 13.2s
+START m15_add_DSC_0231_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.025: 14.6s
+START m15_add_DSC_0231_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.05: 14.9s
+START m15_add_DSC_0231_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.075: 14.8s
+START m15_add_DSC_0231_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.1: 14.7s
+START m15_add_DSC_0231_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.15: 14.5s
+START m15_add_DSC_0231_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.2: 14.6s
+START m15_add_DSC_0231_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.25: 14.5s
+START m15_add_DSC_0231_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b0.5: 14.5s
+START m15_add_DSC_0231_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b1: 14.5s
+START m15_add_DSC_0231_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b2: 14.5s
+START m15_add_DSC_0231_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0231_b4: 14.5s
+START m15_drop_DSC_0242: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0242: 14.1s
+START m15_add_DSC_0242_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.025: 15.1s
+START m15_add_DSC_0242_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.05: 14.8s
+START m15_add_DSC_0242_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.075: 15.1s
+START m15_add_DSC_0242_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.1: 14.8s
+START m15_add_DSC_0242_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.15: 14.6s
+START m15_add_DSC_0242_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.2: 14.6s
+START m15_add_DSC_0242_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.25: 14.6s
+START m15_add_DSC_0242_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b0.5: 14.6s
+START m15_add_DSC_0242_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b1: 14.7s
+START m15_add_DSC_0242_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b2: 14.7s
+START m15_add_DSC_0242_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0242_b4: 14.6s
+START m15_drop_DSC_0243: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0243: 13.3s
+START m15_add_DSC_0243_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.025: 14.6s
+START m15_add_DSC_0243_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.05: 14.7s
+START m15_add_DSC_0243_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.075: 14.7s
+START m15_add_DSC_0243_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.1: 14.7s
+START m15_add_DSC_0243_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.15: 14.7s
+START m15_add_DSC_0243_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.2: 14.7s
+START m15_add_DSC_0243_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.25: 14.6s
+START m15_add_DSC_0243_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b0.5: 14.6s
+START m15_add_DSC_0243_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b1: 14.7s
+START m15_add_DSC_0243_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b2: 14.7s
+START m15_add_DSC_0243_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0243_b4: 14.6s
+START m15_drop_DSC_0249: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0249: 13.3s
+START m15_add_DSC_0249_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.025: 14.7s
+START m15_add_DSC_0249_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.05: 14.8s
+START m15_add_DSC_0249_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.075: 14.8s
+START m15_add_DSC_0249_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.1: 14.8s
+START m15_add_DSC_0249_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.15: 14.8s
+START m15_add_DSC_0249_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.2: 14.9s
+START m15_add_DSC_0249_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.25: 14.7s
+START m15_add_DSC_0249_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b0.5: 14.8s
+START m15_add_DSC_0249_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b1: 14.8s
+START m15_add_DSC_0249_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b2: 14.7s
+START m15_add_DSC_0249_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0249_b4: 14.7s
+START m15_drop_DSC_0250: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0250: 13.4s
+START m15_add_DSC_0250_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.025: 14.7s
+START m15_add_DSC_0250_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.05: 14.8s
+START m15_add_DSC_0250_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.075: 14.8s
+START m15_add_DSC_0250_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.1: 14.7s
+START m15_add_DSC_0250_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.15: 14.7s
+START m15_add_DSC_0250_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.2: 14.8s
+START m15_add_DSC_0250_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.25: 14.8s
+START m15_add_DSC_0250_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b0.5: 14.8s
+START m15_add_DSC_0250_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b1: 14.8s
+START m15_add_DSC_0250_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b2: 14.5s
+START m15_add_DSC_0250_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0250_b4: 14.3s
+START m15_drop_DSC_0251: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0251: 13.0s
+START m15_add_DSC_0251_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.025: 14.3s
+START m15_add_DSC_0251_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.05: 14.3s
+START m15_add_DSC_0251_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.075: 14.3s
+START m15_add_DSC_0251_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.1: 14.3s
+START m15_add_DSC_0251_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.15: 14.3s
+START m15_add_DSC_0251_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.2: 14.3s
+START m15_add_DSC_0251_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.25: 14.3s
+START m15_add_DSC_0251_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b0.5: 14.3s
+START m15_add_DSC_0251_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b1: 14.3s
+START m15_add_DSC_0251_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b2: 14.3s
+START m15_add_DSC_0251_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0251_b4: 14.3s
+START m15_drop_DSC_0252: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0252: 13.0s
+START m15_add_DSC_0252_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.025: 14.3s
+START m15_add_DSC_0252_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.05: 14.3s
+START m15_add_DSC_0252_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.075: 14.3s
+START m15_add_DSC_0252_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.1: 14.3s
+START m15_add_DSC_0252_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.15: 14.3s
+START m15_add_DSC_0252_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.2: 14.3s
+START m15_add_DSC_0252_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.25: 14.3s
+START m15_add_DSC_0252_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b0.5: 14.5s
+START m15_add_DSC_0252_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b1: 14.5s
+START m15_add_DSC_0252_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b2: 14.5s
+START m15_add_DSC_0252_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0252_b4: 14.5s
+START m15_drop_DSC_0253: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0253: 13.2s
+START m15_add_DSC_0253_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.025: 14.5s
+START m15_add_DSC_0253_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.05: 14.5s
+START m15_add_DSC_0253_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.075: 14.5s
+START m15_add_DSC_0253_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.1: 14.5s
+START m15_add_DSC_0253_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.15: 14.5s
+START m15_add_DSC_0253_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.2: 14.5s
+START m15_add_DSC_0253_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.25: 14.5s
+START m15_add_DSC_0253_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b0.5: 14.5s
+START m15_add_DSC_0253_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b1: 14.5s
+START m15_add_DSC_0253_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b2: 14.5s
+START m15_add_DSC_0253_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0253_b4: 14.5s
+START m15_drop_DSC_0254: 14 views (attempt 1/3)
+DONE m15_drop_DSC_0254: 13.2s
+START m15_add_DSC_0254_b0.025: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.025: 14.5s
+START m15_add_DSC_0254_b0.05: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.05: 14.5s
+START m15_add_DSC_0254_b0.075: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.075: 14.5s
+START m15_add_DSC_0254_b0.1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.1: 14.5s
+START m15_add_DSC_0254_b0.15: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.15: 14.5s
+START m15_add_DSC_0254_b0.2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.2: 14.5s
+START m15_add_DSC_0254_b0.25: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.25: 14.5s
+START m15_add_DSC_0254_b0.5: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b0.5: 14.5s
+START m15_add_DSC_0254_b1: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b1: 14.5s
+START m15_add_DSC_0254_b2: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b2: 14.4s
+START m15_add_DSC_0254_b4: 15 views (attempt 1/3)
+DONE m15_add_DSC_0254_b4: 14.5s
+Saved 1800 metric rows; new reconstructions 363; elapsed 3947.8s
+Saved 1800 metric rows; new reconstructions 0; elapsed 1.4s

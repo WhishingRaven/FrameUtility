@@ -1,0 +1,30 @@
+[
+  {
+    "scene": "office",
+    "backend": "vggt",
+    "attempts": 363,
+    "successful_attempts": 363,
+    "failed_attempts": 0,
+    "retries": 0,
+    "summed_worker_inference_seconds": 3902.2666709423065,
+    "inference_interval_union_seconds": 3902.2666709423065,
+    "first_to_last_prediction_seconds": 3938.5614109039307,
+    "first_prediction_unix": 1792923839.502773,
+    "last_prediction_unix": 1792927778.064184,
+    "max_single_worker_process_rss_bytes": 9837871104
+  },
+  {
+    "scene": "office",
+    "backend": "mast3r",
+    "attempts": 363,
+    "successful_attempts": 363,
+    "failed_attempts": 0,
+    "retries": 0,
+    "summed_worker_inference_seconds": 27623.941514492035,
+    "inference_interval_union_seconds": 9364.116350889206,
+    "first_to_last_prediction_seconds": 9364.207530975342,
+    "first_prediction_unix": 1792927903.621304,
+    "last_prediction_unix": 1792937267.828835,
+    "max_single_worker_process_rss_bytes": 5823561728
+  }
+]

@@ -14,7 +14,8 @@ experiments/                         실행 코드와 잠금된 프로토콜
 ├── prepare_official_gt.py           공식 GT snapshot 생성
 ├── select_official_scenes.py        공식 GT 기반 사진 선정
 ├── study_v1.json + weights.json     프로토콜·가중치 잠금 자료
-├── analyze_*.py + summarize.py      결과가 나온 뒤 사용할 분석 코드
+├── analyze_study.py                공통 analyze 진입점
+├── analysis/                       검산·집계·그림·한국어 보고서 모듈
 └── test_*.py                        검증 코드
 
 data/experiments/eth3d_multi_view/<scene>/
@@ -114,7 +115,7 @@ office도 선택한 실행 위치와 관계없이 주 분석에 포함한다. �
 
 [study_v1.json](study_v1.json)의 status는 approved다. 구현 준비 여부는 사전 검증 결과를 확인한 뒤 갱신한다.
 
-공식 GT와 보정 파일을 이용한 정식 사진 선정은 [선정 스크립트](select_official_scenes.py)로 완료했고, 선정된 사진들의 공식 깊이·마스크 스냅샷도 준비했다. `prepare_study.py`는 정식 RGB·블러 입력 manifest를 만들고 추론 전 검증을 수행한다. `run.py`는 해당 GT를 해시·선정 명단과 대조하고, 두 모델의 깊이 예측을 동일 공통 격자로 표본화해 고정 마스크에서 채점한다. `analyze_study.py`는 실험 결과가 나온 뒤 구현한다.
+공식 GT와 보정 파일을 이용한 정식 사진 선정은 [선정 스크립트](select_official_scenes.py)로 완료했고, 선정된 사진들의 공식 깊이·마스크 스냅샷도 준비했다. `prepare_study.py`는 정식 RGB·블러 입력 manifest를 만들고 추론 전 검증을 수행한다. `run.py`는 해당 GT를 해시·선정 명단과 대조하고, 두 모델의 깊이 예측을 동일 공통 격자로 표본화해 고정 마스크에서 채점한다. `analyze_study.py`와 `analysis/`는 저장된 결과를 검산하고 모든 장면에 같은 분석을 적용한다.
 
 모델 실행은 승인과 구현 검증 이후에 가능하다. 가속 실행부가 준비됐다는 것과 새 실험의 전체 과학적 구현이 완료됐다는 것을 구분한다.
 
@@ -132,11 +133,15 @@ office도 선택한 실행 위치와 관계없이 주 분석에 포함한다. �
 
 SSH 명령 전달은 가상 profile·subprocess로 검증한다. 실제 서버 접속과 CUDA 실기기 확인은 서버 준비 후 수행한다.
 
-## 분석은 결과가 나온 뒤 구현한다
+## 모든 장면에 같은 분석을 적용한다
 
 run은 장면별 원시 예측·점수·입력·환경·복구 이력을 저장한 뒤 끝난다. 분석 모듈이 없어도 실행할 수 있으며 자동 분석하지 않는다. 주 지표·U·실패 처리·집계 정의는 먼저 고정한다.
 
-현재 analyze_study.py는 미구현이다. 향후 analyze --scene office는 results/executions/office/의 두 모델 점수와 메타데이터를, 장면 옵션이 없으면 승인한 주 분석 장면 폴더들을 읽어 results/analysis/에 그래프·표·보고서를 작성하도록 한다. 이 단계는 모델 재실행이 아니다. 분석 코드 변경은 추론 잠금에서 제외하고 분석 단계에서 버전과 입력 해시를 따로 기록한다.
+`analyze --scene office`는 `results/executions/office/`의 원시 예측·점수·실행 기록과 공식 GT/RGB snapshot을 검증하고, CPU에서 점수를 다시 계산한 뒤 `results/analysis/`에 그래프·CSV·한국어 보고서를 만든다. 장면 옵션이 없으면 전체 주 분석 명단을 요청 범위로 삼고 미계산 장면도 상태 표에 남긴다. 장면별 상세 보고서는 `results/analysis/scenes/<scene>/report.md`다. 상위 `results/analysis/report.md`와 통합 표는 이번 요청 범위로 생성하며 다른 장면의 상세 보고서는 보존한다.
+
+분석 정의·분모·전환 구간·민감도·미해결 처리·산출물·검증은 [공통 분석 설계](ANALYSIS_METHOD.md)에 설명했다. 주 지표의 문턱은 프로토콜에서 읽고, 포즈를 포함한 모든 U는 `E_DROP − E_ADD` 원래 차이로 재계산한다. 누락·실패를 분모에서 숨기지 않으며, 장면을 묶을 때 장면별 비율을 같은 가중치로 평균한다. 전체·장치별·실행 그룹별 표를 함께 만든다.
+
+분석은 신경망 재실행을 하지 않는다. 모든 저장 예측의 해시와 공식 GT 재채점이 일치해야 보고서를 교체한다. 분석 코드·입력·출력 해시, 적용한 프로토콜과 실제 분석 코드 사본을 결과에 보존한다. 테스트는 `.venv/bin/python -m unittest discover -s experiments -p test_analysis.py -v`로 실행한다. 예전 office 반복·20장·6단계 전용 분석 CLI는 퇴역 상태이며 새 공통 분석에는 사용하지 않는다.
 
 ## 진행 상태와 재개
 

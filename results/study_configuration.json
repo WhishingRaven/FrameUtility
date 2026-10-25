@@ -1,6 +1,6 @@
 {
-  "protocol_sha256": "962e5713117d3642ffea3ac5dd093d8a04d395f4fae70fee53cb75205fb299f4",
-  "plan_sha256": "f3e29d12a3efcfc849201e153e070ccfabde838906c8f453e8f2c0b5d807055a",
+  "protocol_sha256": "0410dfd5143bea9262c09c41f6cfaa01ef5b75659cf49d74906100b64f2d1815",
+  "plan_sha256": "8e94873335f1be0e7a480626563e4b7fa3f7fef07a9a00b7725c0e7ec4e9cb7b",
   "precision": "float32",
   "workers": 3,
   "threads_per_worker": 8,

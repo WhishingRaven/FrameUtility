@@ -1,0 +1,14 @@
+{
+  "reason": "Approved-plan wording updated to reflect already completed official GT snapshot and final input validation. Diff review confirmed no experimental parameters or procedures changed. Existing valid VGGT conditions were produced with identical code, model, inputs, metrics and device.",
+  "old_plan_sha256": "f3e29d12a3efcfc849201e153e070ccfabde838906c8f453e8f2c0b5d807055a",
+  "new_plan_sha256": "8e94873335f1be0e7a480626563e4b7fa3f7fef07a9a00b7725c0e7ec4e9cb7b",
+  "old_protocol_sha256": "962e5713117d3642ffea3ac5dd093d8a04d395f4fae70fee53cb75205fb299f4",
+  "new_protocol_sha256": "0410dfd5143bea9262c09c41f6cfaa01ef5b75659cf49d74906100b64f2d1815",
+  "reconciled_paths": [
+    "experiments/study_v1.json",
+    "results/study_configuration.json",
+    "results/runtime_configurations.json",
+    "results/executions/office/cohort_configuration.json",
+    "results/executions/office/vggt/environment.json"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "analysis_version": "1.0.0",
+  "protocol_id": "eth3d_multi_view",
+  "primary_metric": "geometry_depth_absrel",
+  "secondary_metrics": [
+    "geometry_depth_rmse_m",
+    "pose_ate_normalized",
+    "pose_pair_translation_relative",
+    "pose_pair_rotation_deg"
+  ],
+  "sizes": [
+    5,
+    10,
+    15
+  ],
+  "blur_degrees": [
+    0,
+    0.025,
+    0.05,
+    0.075,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.5,
+    1,
+    2,
+    4
+  ],
+  "seeds": [
+    2026
+  ],
+  "utility": "E_DROP - E_ADD in original metric units; never the stored relative pose utility",
+  "primary_effect_floor": 0.0005,
+  "sensitivity_effect_floors": [
+    0,
+    0.0001,
+    0.0005,
+    0.001
+  ],
+  "classes": {
+    "helpful": "U > +epsilon",
+    "harmful": "U < -epsilon",
+    "within_threshold": "-epsilon <= U <= +epsilon",
+    "unavailable": "missing or invalid DROP/ADD metric"
+  },
+  "stage_denominator": "all planned targets m, with missing and invalid counts explicit",
+  "target_distribution": "mean, median, Q25, Q75, min, max of valid observed target values; not confidence intervals",
+  "transition": "clean helpful followed by observed harmful; bracket last helpful sample before first harmful sample; no interpolation",
+  "transition_interior": "retain within-threshold and unavailable samples inside bracket; label unresolved interior path",
+  "transition_reversals": "record all helpful/harmful switches, skipping neutral/NA but preserving their locations",
+  "transition_complete_primary": "all planned curve slots valid; incomplete observed transitions reported separately",
+  "cohort": "scene fractions first, then equal scene weights; mean/median/min/max across scenes; target pooling secondary",
+  "strata": [
+    "all available requested scenes",
+    "device",
+    "runtime_group"
+  ],
+  "missing_scene": "not imputed; requested and available counts always reported",
+  "representatives": "lexicographic first, floor(N/2), last image ID within each selected set",
+  "statistical_inference": "none: no repeats, confidence intervals, p-values, population or causal claims",
+  "platform_equivalence": "assumed_no_material_effect_on_conclusions_not_empirically_tested",
+  "score_audit": "SHA-256 of every saved prediction + CPU rescore all recorded metrics from frozen common-grid depths/poses and official GT",
+  "score_tolerance": {
+    "relative": 1e-08,
+    "absolute": 1e-10
+  },
+  "diagnostics": "nonpositive and nonfinite depth fractions on entire fixed GT mask, plus strict-positive diagnostic only",
+  "exploratory_descriptors": "pre-inference pair overlaps; baseline, rotation and GT depth distributions derived during analysis from frozen GT snapshot"
+}

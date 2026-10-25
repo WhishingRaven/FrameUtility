@@ -1,0 +1,31 @@
+{
+  "key": "m15_add_DSC_0252_b4",
+  "ids": [
+    "DSC_0219",
+    "DSC_0220",
+    "DSC_0221",
+    "DSC_0222",
+    "DSC_0223",
+    "DSC_0229",
+    "DSC_0231",
+    "DSC_0242",
+    "DSC_0243",
+    "DSC_0249",
+    "DSC_0250",
+    "DSC_0251",
+    "DSC_0252",
+    "DSC_0253",
+    "DSC_0254"
+  ],
+  "target": "DSC_0252",
+  "severity_deg": 4,
+  "attempt": 1,
+  "max_attempts": 3,
+  "start_unix": 1792937154.3093681,
+  "status": "ok",
+  "pid": 71537,
+  "shard_index": 0,
+  "prediction_sha256": "52ce30689d639658de940a472881b98d9b420f6d41cacfcc13d7da40e89e06b2",
+  "seconds": 84.52803468704224,
+  "process_peak_rss_bytes": 5817335808
+}

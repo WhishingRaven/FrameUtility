@@ -1,0 +1,217 @@
+{
+  "protocol_id": "eth3d_multi_view",
+  "status": "approved",
+  "implementation_ready": true,
+  "plan": "EXPERIMENT_PLAN.md",
+  "excluded_scenes": {
+    "delivery_area": "Official section 6 selection failed: could not reduce the 15-view robust component to 10 while preserving biconnectivity",
+    "playground": "Official section 6 selection failed: could not reduce the 10-view robust set to 5 while preserving biconnectivity",
+    "pipes": "14 calibrated images; fewer than the required 15"
+  },
+  "backends": [
+    "vggt",
+    "mast3r"
+  ],
+  "sizes": [
+    5,
+    10,
+    15
+  ],
+  "blur_degrees": [
+    0,
+    0.025,
+    0.05,
+    0.075,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.5,
+    1,
+    2,
+    4
+  ],
+  "seeds": [
+    2026
+  ],
+  "preparation": {
+    "intrinsics": "Per-image CAMERA_ID; never the first camera for the whole scene",
+    "source_width": 1120,
+    "crop_width": 1008,
+    "crop_height": 672,
+    "exposure_samples": 33,
+    "exposure_axis": "camera_y",
+    "exposure_path": "symmetric_constant_angular_velocity",
+    "integration": "linear_srgb_equal_weights",
+    "zero_motion_uses_full_pipeline": true,
+    "minimum_warp_support": 0.999,
+    "ground_truth": "official_dslr_depth_occlusion_aware",
+    "ground_truth_distortion_mapping": "official_COLMAP_THIN_PRISM_FISHEYE_to_PINHOLE_per_image",
+    "evaluation_roi": [
+      0,
+      16,
+      1008,
+      640
+    ],
+    "evaluation_grid": [
+      252,
+      160
+    ],
+    "minimum_gt_pixels_per_image": 500,
+    "minimum_gt_camera_center_rank": 2,
+    "validation": {
+      "resize_crop_roundtrip_max_prepared_px": 1e-06,
+      "camera_distortion_roundtrip_max_original_px": 0.001,
+      "synthetic_reference_depth_max_relative_error": 1e-06,
+      "synthetic_score_absrel_max_absolute_error": 5e-05,
+      "synthetic_sampling_utility_max_absolute_error": 5e-05,
+      "identical_context_max_absolute_utility": 1e-10,
+      "mask_hash_agreement": "exact",
+      "blur_integration_reference_samples": [
+        33,
+        65,
+        129
+      ],
+      "blur_integration_check_deg": 4,
+      "blur_integration_linear_rgb_mean_absolute_error_max": 0.001,
+      "blur_integration_linear_rgb_absolute_error_p99_max": 0.01,
+      "validation_runs_model_inference": false
+    }
+  },
+  "selection": {
+    "method": "largest_biconnected_component_then_greedy_lowest_overlap_removal_v1",
+    "visibility_sampling_stride": 4,
+    "visibility_absolute_tolerance_m": 0.05,
+    "visibility_relative_tolerance": 0.02,
+    "overlap_edge_threshold": 0.1,
+    "tie_break": "lexicographic_image_id",
+    "nested_sets": [
+      15,
+      10,
+      5
+    ],
+    "requires_connected_context_after_any_target_drop": true,
+    "uses_model_outputs": false,
+    "result_file": "data/experiments/eth3d_multi_view/official_selection.json",
+    "result_sha256": "68071062c0edf2e651b82a4939cb44ed60909bbd9592419e67d1ef009902b2e7",
+    "selector_script": "experiments/select_official_scenes.py",
+    "selector_script_sha256": "7e7b30ccbc64bfc75d64f4a042a9f7b0050c10923fcb6416c0b7e3e4c8082ec4"
+  },
+  "evaluation": {
+    "policy": "fixed_common_grid_signed_depth_v1",
+    "primary_metric": "geometry_depth_absrel",
+    "secondary_metrics": [
+      "geometry_depth_rmse_m",
+      "pose_ate_normalized",
+      "pose_pair_translation_relative",
+      "pose_pair_rotation_deg"
+    ],
+    "target_excluded": true,
+    "depth_scale": "one_positive_median_gt_over_prediction_per_common_context",
+    "minimum_positive_predictions_for_scale": 100,
+    "finite_nonpositive_depth": "score_as_error_on_entire_fixed_gt_mask",
+    "nonfinite_depth": "geometry_failure_only",
+    "legacy_strict_geometry_scores": "diagnostic_only",
+    "primary_absrel_effect_floor": 0.0005,
+    "repeat_comparison": "none_single_run_fixed_seed_2026",
+    "crossing": "first_observed_single_run_positive_to_negative_grid_bracket_no_interpolation",
+    "scene_aggregation": "equal_weight_all_eligible_primary_scenes_including_office_with_runtime_stratification",
+    "confidence_intervals": false,
+    "p_values": false,
+    "sensitivity_absrel_effect_floors": [
+      0,
+      0.0001,
+      0.0005,
+      0.001
+    ],
+    "pose_sign_definition": "raw_error_difference",
+    "reference_pixel_weights": "identical_across_backends_and_add_drop",
+    "platform_equivalence": "assumed_no_material_effect_on_conclusions_not_empirically_tested"
+  },
+  "execution": {
+    "device": "auto_on_selected_execution_host",
+    "optimizer_device": "same_as_inference",
+    "workers": 3,
+    "threads_per_worker": 8,
+    "precision": "float32",
+    "float32_matmul_precision": "highest",
+    "tf32": false,
+    "mast3r_graph": "complete_symmetrized",
+    "mast3r_coarse_iterations": 300,
+    "mast3r_fine_iterations": 300,
+    "repeat_clean_inside_seed": false,
+    "pair_cache": "share_only_within_one_scene_and_seed_never_across_seeds_or_old_runs",
+    "canonical_and_alignment_state": "always_fresh_per_input_set",
+    "resource_error_policy": "stop_no_device_precision_worker_count_or_iteration_fallback",
+    "numerical_failure_policy": "same_condition_up_to_3_attempts_then_stop_diagnose_fix_and_recompute_affected_conditions",
+    "old_predictions_or_caches": "forbidden",
+    "maximum_active_scene_seed_runs": 1,
+    "mast3r_coarse_learning_rate": 0.07,
+    "mast3r_fine_learning_rate": 0.01,
+    "mast3r_subsample": 8,
+    "mast3r_matching_confidence_threshold": 5,
+    "mast3r_shared_intrinsics": false,
+    "mast3r_clean_depth": false,
+    "vggt_point_head": false,
+    "vggt_track_head": false,
+    "interface": "same_prepare_run_status_analyze_with_target_local_or_cuda_server_for_any_scene",
+    "maximum_attempts_per_condition_before_diagnosis": 3,
+    "accepted_attempt": "first_valid_never_best_error_all_attempts_logged",
+    "bugfix_policy": "preserve_attempts_revalidate_recompute_all_affected_results_no_mixed_code_versions",
+    "unresolved_failure_policy": "stop_and_report_unresolved_never_fabricate_valid_values_or_declare_full_success",
+    "default_target": "local",
+    "targets": [
+      "local",
+      "cuda-server"
+    ],
+    "server_config": "experiments/cuda_server.json"
+  },
+  "primary_scenes": [
+    "courtyard",
+    "electro",
+    "facade",
+    "kicker",
+    "meadow",
+    "office",
+    "relief",
+    "relief_2",
+    "terrace",
+    "terrains"
+  ],
+  "initial_scenes": [
+    "office"
+  ],
+  "expansion_scenes": [
+    "courtyard",
+    "electro",
+    "facade",
+    "kicker",
+    "meadow",
+    "relief",
+    "relief_2",
+    "terrace",
+    "terrains"
+  ],
+  "minimum_scenes_for_multi_scene_summary": 5,
+  "planned_counts_exclude_recovery_attempts_and_bugfix_recomputations": true,
+  "planned_counts_after_official_selection": {
+    "target_context_curves_per_backend_per_scene": 30,
+    "utility_comparisons_per_scene_all_seeds": 720,
+    "metric_rows_per_scene_all_seeds": 3600,
+    "unique_reconstructions_per_backend_per_scene_per_seed": 363,
+    "unique_reconstructions_per_scene_all_seeds": 726,
+    "initial_office_unique_reconstructions": 726,
+    "expansion_9_scenes_unique_reconstructions": 6534,
+    "all_primary_unique_reconstructions": 7260,
+    "total_unique_reconstructions": 7260,
+    "total_utility_comparisons": 7200,
+    "total_metric_rows": 36000
+  },
+  "official_selection_status": {
+    "passing_expansion_scenes": 9,
+    "minimum_required": 5,
+    "minimum_met": true,
+    "report": "experiments/official_selection_summary.md"
+  },
+  "approved_plan_sha256": "8e94873335f1be0e7a480626563e4b7fa3f7fef07a9a00b7725c0e7ec4e9cb7b"
+}
