@@ -53,6 +53,16 @@ def validate_protocol(protocol, manifest, seed):
         raise ValueError("Seed is outside the approved single-run plan")
     if manifest["scene"] not in protocol["primary_scenes"]:
         raise ValueError("Scene is outside the approved cohort")
+    preparation = manifest.get("preparation_validation", {})
+    required_preparation_checks = (
+        "zero_motion_all_frames_matches_clean",
+        "all_blur_crops_meet_minimum_warp_support",
+        "official_gt_mask_count_matches_selection",
+    )
+    if any(preparation.get(check) is not True for check in required_preparation_checks):
+        raise ValueError("Prepared inputs have not passed the approved per-scene validation checks")
+    if preparation.get("preflight_status") != "pass":
+        raise ValueError("The scene-specific scientific preflight has not passed")
     for size in protocol["sizes"]:
         if str(size) not in manifest["sets"]:
             raise ValueError("Manifest is missing an approved context size")

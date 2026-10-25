@@ -132,6 +132,8 @@ class MASt3RBackend:
         pairs = make_pairs(images, scene_graph="complete", prefilter=None, symmetrize=True)
         pairs = convert_dust3r_pairs_naming(paths, pairs)
         cache = self.cache / key
+        if cache.exists():
+            shutil.rmtree(cache)
         cache.mkdir(exist_ok=True)
         pair_root = self.pair_cache.with_name(self.pair_cache.name + "_repeat") if key.endswith("_repeat") else self.pair_cache
         # Only pairwise inference is shared. Canonical maps, spanning tree, poses and

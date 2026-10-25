@@ -1,7 +1,7 @@
 {
   "protocol_id": "eth3d_multi_view",
   "status": "approved",
-  "implementation_ready": false,
+  "implementation_ready": true,
   "plan": "EXPERIMENT_PLAN.md",
   "excluded_scenes": {
     "delivery_area": "Official section 6 selection failed: could not reduce the 15-view robust component to 10 while preserving biconnectivity",

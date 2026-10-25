@@ -127,8 +127,8 @@ def rasterize(points: np.ndarray, c2w: np.ndarray, K: np.ndarray,
 
 
 def exposure(image: np.ndarray, K: np.ndarray, degrees: float,
-             samples: int = 33) -> tuple[np.ndarray, np.ndarray]:
-    if degrees == 0:
+             samples: int = 33, *, force_pipeline: bool = False) -> tuple[np.ndarray, np.ndarray]:
+    if degrees == 0 and not force_pipeline:
         return image.copy(), np.ones(image.shape[:2], dtype=np.float32)
     srgb = image.astype(np.float32) / 255
     linear = np.where(srgb <= .04045, srgb / 12.92, ((srgb + .055) / 1.055) ** 2.4)

@@ -306,49 +306,60 @@ def run(args):
             print(f"Loading {args.backend} on {args.device}", flush=True)
             model = load_backend(args.backend, args.device, out / "mast3r_cache",
                                  optimizer_device=args.optimizer_device, pair_cache=pair_cache)
-        np.random.seed(seed)
-        torch.manual_seed(seed)
         paths = [str(ROOT / frames[i]["variants"][f"{severity if i == target else 0:g}"]["path"]) for i in ids]
-        before = time.time()
-        print(f"START {key}: {len(ids)} views", flush=True)
-        record = {"key": key, "ids": ids, "target": target, "severity_deg": severity,
-                  "start_unix": before, "status": "running", "pid": os.getpid(), "shard_index": args.shard_index}
-        atomic_json(out / "current.json", record)
-        atomic_json(out / f"current_worker_{args.shard_index}.json", record)
-        executions += 1
-        try:
-            result = model.predict(ids, paths, key)
-            if list(result["ids"]) != ids:
-                raise ValueError("Backend changed the requested image set/order")
-            if official_study:
-                result["depth_common_grid"] = project_depth_to_common_grid(
-                    result, args.backend,
-                    [study_protocol["preparation"]["crop_width"],
-                     study_protocol["preparation"]["crop_height"]],
-                    study_protocol["preparation"]["evaluation_roi"],
-                    study_protocol["preparation"]["evaluation_grid"],
-                )
-            temp = path.with_suffix(".tmp.npz")
-            np.savez_compressed(temp, **result)
-            temp.replace(path)
-            record["status"] = "ok"
-            print(f"DONE {key}: {time.time()-before:.1f}s", flush=True)
-            return result
-        except Exception as e:
-            record.update({"status": "failed", "error": str(e), "traceback": traceback.format_exc()})
-            print(f"FAILED {key}: {e}", flush=True)
-            if isinstance(e, MemoryError) or "out of memory" in str(e).lower():
-                raise
-            return None
-        finally:
-            record["seconds"] = time.time()-before
-            record["process_peak_rss_bytes"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (1 if sys.platform == "darwin" else 1024)
-            with runlog.open("a") as stream:
-                stream.write(json.dumps(record) + "\n")
+        max_attempts = (study_protocol["execution"]["maximum_attempts_per_condition_before_diagnosis"]
+                        if official_study else 1)
+        last_error = None
+        for attempt in range(1, max_attempts + 1):
+            before = time.time()
+            np.random.seed(seed)
+            torch.manual_seed(seed)
+            print(f"START {key}: {len(ids)} views (attempt {attempt}/{max_attempts})", flush=True)
+            record = {"key": key, "ids": ids, "target": target, "severity_deg": severity,
+                      "attempt": attempt, "max_attempts": max_attempts, "start_unix": before,
+                      "status": "running", "pid": os.getpid(), "shard_index": args.shard_index}
             atomic_json(out / "current.json", record)
             atomic_json(out / f"current_worker_{args.shard_index}.json", record)
-            if args.device == "mps":
-                torch.mps.empty_cache()
+            executions += 1
+            try:
+                result = model.predict(ids, paths, key)
+                if list(result["ids"]) != ids:
+                    raise ValueError("Backend changed the requested image set/order")
+                if official_study:
+                    result["depth_common_grid"] = project_depth_to_common_grid(
+                        result, args.backend,
+                        [study_protocol["preparation"]["crop_width"],
+                         study_protocol["preparation"]["crop_height"]],
+                        study_protocol["preparation"]["evaluation_roi"],
+                        study_protocol["preparation"]["evaluation_grid"],
+                    )
+                temp = path.with_suffix(".tmp.npz")
+                np.savez_compressed(temp, **result)
+                temp.replace(path)
+                record["status"] = "ok"
+                record["prediction_sha256"] = sha256(path)
+                record["seconds"] = time.time() - before
+                print(f"DONE {key}: {record['seconds']:.1f}s", flush=True)
+                return result
+            except Exception as error:
+                last_error = error
+                record.update({"status": "failed", "error": str(error),
+                               "traceback": traceback.format_exc(), "seconds": time.time() - before})
+                path.with_suffix(".tmp.npz").unlink(missing_ok=True)
+                print(f"{'STOP' if attempt == max_attempts else 'RETRY'} {key}: {error}", flush=True)
+            finally:
+                record["process_peak_rss_bytes"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (1 if sys.platform == "darwin" else 1024)
+                with runlog.open("a") as stream:
+                    stream.write(json.dumps(record) + "\n")
+                atomic_json(out / "current.json", record)
+                atomic_json(out / f"current_worker_{args.shard_index}.json", record)
+                if args.device == "mps":
+                    torch.mps.empty_cache()
+            if attempt == max_attempts:
+                raise RuntimeError(
+                    f"Condition {key} failed after {attempt} attempt(s); preserve the failure record, "
+                    "diagnose and repair the cause before recomputing."
+                ) from last_error
 
     records_path = out / "utilities.json"
     records = json.loads(records_path.read_text()) if records_path.exists() else []

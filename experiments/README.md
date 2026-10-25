@@ -1,6 +1,34 @@
 # 로컬과 CUDA 서버의 공통 실험 인터페이스
 
-실험 계획과 분석 절차는 승인됐다. **새 과학적 방법의 구현 검증은 아직 끝나지 않아 모델 추론은 시작하지 않았다.**
+실험 계획과 분석 절차는 승인됐다. **사전 검증을 모두 통과해야 모델 추론을 시작한다.**
+
+## 디렉토리 구조
+
+~~~text
+experiments/                         실행 코드와 잠금된 프로토콜
+├── run_all.py                       로컬/CUDA 공통 명령
+├── run_parallel.py → run.py         GPU 작업자와 실행 기록
+├── backends.py + metrics.py         모델 어댑터와 승인된 점수 계산
+├── prepare_study.py                 선택된 장면 입력 manifest와 사전 검증
+├── prepare_source_data.py           확장 장면 원본 자료·블러 생성
+├── prepare_official_gt.py           공식 GT snapshot 생성
+├── select_official_scenes.py        공식 GT 기반 사진 선정
+├── study_v1.json + weights.json     프로토콜·가중치 잠금 자료
+├── analyze_*.py + summarize.py      결과가 나온 뒤 사용할 분석 코드
+└── test_*.py                        검증 코드
+
+data/experiments/eth3d_multi_view/<scene>/
+├── manifest.json                    장면 입력과 5·10·15장 집합
+├── official_ground_truth_manifest.json
+└── <image-id>/                       사진 변형과 사진별 공식 GT
+
+results/
+├── study_configuration.json         과학적 절차 잠금
+├── runtime_configurations.json      실행 장치·환경 기록
+└── executions/<scene>/              원시 실행 결과·상태
+~~~
+
+실행 모듈은 현재 CLI 경로와 소스 해시 잠금을 유지하도록 한 곳에 둔다. 생성 데이터와 결과는 각각 `data/`와 `results/` 아래에 분리한다. 승인된 단일 실행에서 호출되지 않는 이전 반복 후속 분석 코드는 제거했다.
 
 첫 대상은 **office 초기 주실험**이다. office도 전체 주 분석에 포함한다. 5·10·15장, 타깃 전부, 블러 12단계, 단일 seed 2026, 두 모델을 적용한다. 공식 사진 선정에 통과한 확장 9개 장면도 같은 방법을 적용한다. 모든 장면의 실행 위치는 --target local|cuda-server로 선택하며 기본값은 local이다.
 
@@ -84,9 +112,9 @@ office도 선택한 실행 위치와 관계없이 주 분석에 포함한다. �
 
 ## 승인 후 완성하고 검증할 부분
 
-[study_v1.json](study_v1.json)의 status는 approved, implementation_ready는 false다.
+[study_v1.json](study_v1.json)의 status는 approved다. 구현 준비 여부는 사전 검증 결과를 확인한 뒤 갱신한다.
 
-공식 GT와 보정 파일을 이용한 정식 사진 선정은 [선정 스크립트](select_official_scenes.py)로 완료했고, 선정된 사진들의 공식 깊이·마스크 스냅샷도 준비했다. `run.py`는 해당 GT를 해시·선정 명단과 대조하고, 두 모델의 깊이 예측을 동일 공통 격자로 표본화해 고정 마스크에서 채점한다. 다만 `prepare_study.py`가 없어 공식 사진 명단에 맞춘 RGB·블러 입력 manifest 생성 및 전체 실행 전 검증은 남아 있으므로, 현재 전체 추론 준비가 끝난 것은 아니다. `analyze_study.py`는 실험 결과가 나온 뒤 구현한다.
+공식 GT와 보정 파일을 이용한 정식 사진 선정은 [선정 스크립트](select_official_scenes.py)로 완료했고, 선정된 사진들의 공식 깊이·마스크 스냅샷도 준비했다. `prepare_study.py`는 정식 RGB·블러 입력 manifest를 만들고 추론 전 검증을 수행한다. `run.py`는 해당 GT를 해시·선정 명단과 대조하고, 두 모델의 깊이 예측을 동일 공통 격자로 표본화해 고정 마스크에서 채점한다. `analyze_study.py`는 실험 결과가 나온 뒤 구현한다.
 
 모델 실행은 승인과 구현 검증 이후에 가능하다. 가속 실행부가 준비됐다는 것과 새 실험의 전체 과학적 구현이 완료됐다는 것을 구분한다.
 
