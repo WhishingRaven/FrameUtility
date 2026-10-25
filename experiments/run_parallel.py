@@ -1,8 +1,11 @@
-"""Parallel fixed-set MASt3R sweep with shared baselines and process-safe records."""
+"""Approved fixed-protocol execution: VGGT once, then parallel GPU MASt3R."""
 import argparse
+import hashlib
+import importlib.metadata
 import json
 import os
 from pathlib import Path
+import platform
 import signal
 import subprocess
 import sys
@@ -10,81 +13,177 @@ import time
 
 from filelock import FileLock
 from metrics import condition_counts
-from run import atomic_json
+from run import atomic_json, resolve_device, sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def build_parser():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--protocol", default="experiments/study_v1.json")
+    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--cohort", required=True, help="One root for all scenes and repeats on the same fixed platform")
+    parser.add_argument("--device", required=True, choices=("mps", "cuda"),
+                        help="Choose one GPU platform explicitly for the entire cohort")
+    parser.add_argument("--seed", type=int, default=2026)
+    return parser
+
+
+def validate_protocol(protocol, manifest, seed):
+    if protocol.get("status") != "approved":
+        raise RuntimeError("Experimental plan awaits user approval; no experiment was started")
+    if not protocol.get("implementation_ready", False):
+        raise RuntimeError("Approved procedure is not yet fully implemented and verified; no experiment was started")
+    if manifest.get("protocol_id") != protocol["protocol_id"]:
+        raise ValueError("Manifest does not belong to the approved protocol")
+    if manifest["severities_deg"] != protocol["blur_degrees"]:
+        raise ValueError("Blur ladder differs from the approved protocol")
+    if seed not in protocol["seeds"]:
+        raise ValueError("Seed is outside the approved repeat plan")
+    if manifest["scene"] not in protocol["confirmatory_scenes"] + protocol["control_scenes"]:
+        raise ValueError("Scene is outside the approved cohort")
+    for size in protocol["sizes"]:
+        ids = manifest["sets"][str(size)]
+        if len(ids) != size or len(set(ids)) != size:
+            raise ValueError("Manifest subset size/order is invalid")
+    if protocol["execution"]["workers"] < 1 or protocol["execution"]["threads_per_worker"] < 1:
+        raise ValueError("Workers and threads must be positive")
+
+
+def cohort_configuration(protocol_path, device, protocol):
+    packages = dict(sorted((dist.metadata["Name"], dist.version)
+                           for dist in importlib.metadata.distributions() if dist.metadata["Name"]))
+    sources = sorted((ROOT/"experiments").glob("*.py")) + [ROOT/"experiments/weights.json"]
+    vendors = {}
+    for name, path in {"vggt": "vggt", "mast3r": "mast3r",
+                       "dust3r": "mast3r/dust3r", "croco": "mast3r/dust3r/croco"}.items():
+        base = ROOT/"vendor"/path
+        commit = subprocess.check_output(["git", "-C", str(base), "rev-parse", "HEAD"], text=True).strip()
+        changes = subprocess.check_output(["git", "-C", str(base), "diff", "--binary", "HEAD"])
+        vendors[name] = {"commit": commit, "tracked_diff_sha256": hashlib.sha256(changes).hexdigest()}
+    return {"protocol_sha256": sha256(protocol_path), "plan_sha256": sha256(ROOT/protocol["plan"]),
+            "device": device, "optimizer_device": device,
+            "precision": "float32", "workers": protocol["execution"]["workers"],
+            "threads_per_worker": protocol["execution"]["threads_per_worker"],
+            "seeds": protocol["seeds"], "packages": packages,
+            "vendor_versions": vendors,
+            "mast3r_model_config_sha256": sha256(ROOT/"checkpoints/mast3r-config.json"),
+            "platform": platform.platform(), "host": platform.node(), "python": platform.python_version(),
+            "runtime_environment": {name: os.environ.get(name) for name in
+                                    ("CUDA_VISIBLE_DEVICES", "PYTORCH_MPS_FAST_MATH",
+                                     "PYTORCH_ENABLE_MPS_FALLBACK", "CUBLAS_WORKSPACE_CONFIG")},
+            "source_sha256": {str(p.relative_to(ROOT)): sha256(p) for p in sources}}
+
+
+def worker_command(manifest_path, out, backend, device, seed, threads, sizes, stop_file, index, workers):
+    return [sys.executable, "-u", str(ROOT/"experiments/run.py"), "--backend", backend,
+            "--manifest", str(manifest_path), "--output", str(out), "--device", device,
+            "--optimizer-device", device, "--threads", str(threads), "--seed", str(seed),
+            "--shard-index", str(index), "--shard-count", str(workers),
+            "--stop-file", str(stop_file), "--sizes", *map(str, sizes)]
+
+
 def run(args):
-    out = ROOT / args.output
-    out.mkdir(parents=True, exist_ok=True)
-    with FileLock(str(out / "controller.lock"), timeout=0):
-        execute(args, out)
+    protocol_path, manifest_path = ROOT/args.protocol, ROOT/args.manifest
+    protocol = json.loads(protocol_path.read_text())
+    # Approval/readiness is checked before touching inputs, GPU or output folders.
+    if protocol.get("status") != "approved":
+        raise RuntimeError("Experimental plan awaits user approval; no experiment was started")
+    if not protocol.get("implementation_ready", False):
+        raise RuntimeError("Approved procedure is not yet fully implemented and verified; no experiment was started")
+    if protocol.get("approved_plan_sha256") != sha256(ROOT/protocol["plan"]):
+        raise ValueError("Plan text differs from the approved document")
+    manifest = json.loads(manifest_path.read_text())
+    validate_protocol(protocol, manifest, args.seed)
+    device = resolve_device(args.device)
+    cohort = ROOT/args.cohort
+    cohort.mkdir(parents=True, exist_ok=True)
+    frozen = cohort_configuration(protocol_path, device, protocol)
+    lock_path = cohort/"cohort_configuration.json"
+    with FileLock(str(lock_path)+".lock"):
+        if lock_path.exists() and json.loads(lock_path.read_text()) != frozen:
+            raise ValueError("Cohort hardware, code, packages or settings changed; use a new approved cohort")
+        atomic_json(lock_path, frozen)
+    with FileLock(str(cohort/"active_run.lock"), timeout=0):
+        out = cohort/manifest["scene"]/f"seed_{args.seed}"
+        out.mkdir(parents=True, exist_ok=True)
+        with FileLock(str(out/"controller.lock"), timeout=0):
+            execute(protocol, protocol_path, manifest, manifest_path, out, device, args.seed, frozen)
 
 
-def execute(args, out):
-    stop_file = out / "stop_requested"
+def execute(protocol, protocol_path, manifest, manifest_path, out, device, seed, frozen):
+    stop_file = out/"stop_requested"
     stop_file.unlink(missing_ok=True)
+    sizes, backends = protocol["sizes"], protocol["backends"]
+    threads, workers = protocol["execution"]["threads_per_worker"], protocol["execution"]["workers"]
     state = {"pid": os.getpid(), "status": "running", "started_unix": time.time(),
-             "device": args.device, "optimizer_device": args.optimizer_device or args.device,
-             "threads_per_worker": args.threads, "worker_count": args.workers, "workers": []}
+             "scene": manifest["scene"], "seed": seed, "device": device, "optimizer_device": device,
+             "threads_per_worker": threads, "worker_count": workers, "backends": backends,
+             "planned_conditions": len(backends)*sum(sizes)*len(manifest["severities_deg"]), "workers": []}
     processes, logs = [], []
 
     def request_stop(signum, frame):
         stop_file.touch()
         state["status"] = "stopping"
 
-    signal.signal(signal.SIGTERM, request_stop)
+    previous_handlers = {sig: signal.signal(sig, request_stop) for sig in (signal.SIGTERM, signal.SIGINT)}
 
     def refresh():
         rows = []
-        backends = ["mast3r"]
-        if (out / "vggt/utilities.json").exists():
-            backends.append("vggt")
         for backend in backends:
-            path = out / backend / "utilities.json"
+            path = out/backend/"utilities.json"
             if path.exists():
                 rows.extend(json.loads(path.read_text()))
-        counts = condition_counts(rows, args.sizes)
+        counts = condition_counts(rows, sizes)
         state.update(updated_unix=time.time(), completed_conditions=counts["ok"],
                      attempted_conditions=counts["attempted"], partial_conditions=counts["partial"],
-                     failed_conditions=counts["failed"], planned_conditions=len(backends)*sum(args.sizes)*6)
+                     failed_conditions=counts["failed"])
         for info, process in zip(state["workers"], processes):
             info["returncode"] = process.poll()
-            path = out / "mast3r" / f"current_worker_{info['index']}.json"
+            path = out/info["backend"]/f"current_worker_{info['index']}.json"
             if path.exists():
                 info["current"] = json.loads(path.read_text())
-        atomic_json(out / "batch_status.json", state)
-        subprocess.run([sys.executable, str(ROOT / "experiments/summarize.py"), str(out)], check=True)
+        atomic_json(out/"batch_status.json", state)
 
     try:
-        for index in range(args.workers):
-            command = [sys.executable, "-u", str(ROOT / "experiments/run.py"), "--backend", "mast3r",
-                       "--device", args.device, "--threads", str(args.threads), "--repeat-clean",
-                       "--shard-index", str(index), "--shard-count", str(args.workers),
-                       "--stop-file", str(stop_file), "--output", str(out), "--sizes", *map(str, args.sizes)]
-            if args.optimizer_device:
-                command += ["--optimizer-device", args.optimizer_device]
-            if args.pair_cache_source:
-                command += ["--pair-cache-source", args.pair_cache_source]
-            logpath = out / f"worker_{index}.log"
-            logfile = logpath.open("a")
-            logs.append(logfile)
-            process = subprocess.Popen(command, cwd=ROOT, stdout=logfile, stderr=subprocess.STDOUT,
-                                       env={**os.environ, "TQDM_DISABLE": "1"})
-            processes.append(process)
-            state["workers"].append({"index": index, "pid": process.pid, "log": logpath.name})
-        refresh()
-        while any(process.poll() is None for process in processes):
-            time.sleep(15)
+        for backend in backends:
+            if stop_file.exists():
+                break
+            if cohort_configuration(protocol_path, device, protocol) != frozen:
+                raise ValueError("Code/environment changed during the cohort")
+            group = []
+            count = workers if backend == "mast3r" else 1
+            for index in range(count):
+                command = worker_command(manifest_path, out, backend, device, seed, threads,
+                                         sizes, stop_file, index, count)
+                logfile = (out/f"{backend}_worker_{index}.log").open("a")
+                logs.append(logfile)
+                process = subprocess.Popen(command, cwd=ROOT, stdout=logfile, stderr=subprocess.STDOUT,
+                                           env={**os.environ, "TQDM_DISABLE": "1"})
+                group.append(process)
+                processes.append(process)
+                state["workers"].append({"backend": backend, "index": index, "pid": process.pid,
+                                         "log": Path(logfile.name).name})
             refresh()
+            while any(p.poll() is None for p in group):
+                time.sleep(15)
+                refresh()
+            refresh()
+            if any(p.returncode != 0 for p in group):
+                raise RuntimeError(f"{backend} worker exited unsuccessfully; later phases were not launched")
+        if cohort_configuration(protocol_path, device, protocol) != frozen:
+            raise ValueError("Code/environment changed during execution")
         if stop_file.exists():
             state["status"] = "interrupted"
-        elif all(process.returncode == 0 for process in processes) and state["attempted_conditions"] == state["planned_conditions"]:
+        elif state["attempted_conditions"] == state["planned_conditions"]:
             state["status"] = "complete" if not state["partial_conditions"] and not state["failed_conditions"] else "complete_with_failures"
         else:
             state["status"] = "partial"
         refresh()
+    except BaseException:
+        state["status"] = "interrupted" if stop_file.exists() else "failed"
+        refresh()
+        raise
     finally:
         for process in processes:
             if process.poll() is None:
@@ -92,15 +191,9 @@ def execute(args, out):
                 process.wait()
         for logfile in logs:
             logfile.close()
+        for sig, handler in previous_handlers.items():
+            signal.signal(sig, handler)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--output", default="results/office_fast")
-    parser.add_argument("--device", default="mps", choices=["mps", "cuda", "cpu"])
-    parser.add_argument("--optimizer-device", choices=["mps", "cuda", "cpu"])
-    parser.add_argument("--threads", type=int, default=8)
-    parser.add_argument("--workers", type=int, default=3)
-    parser.add_argument("--sizes", nargs="+", type=int, default=[5, 10, 20])
-    parser.add_argument("--pair-cache-source", help="Output root with compatible pretrained neural pairs")
-    run(parser.parse_args())
+    run(build_parser().parse_args())

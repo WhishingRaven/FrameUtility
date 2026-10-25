@@ -13,5 +13,5 @@ results/**/*.lock
 results/performance_tuning_*/*.npz
 results/performance_tuning_*/*.prof
 .codegraph/
-results/office_followup_*/**/cache/
-results/office_followup_*/**/pair_cache/
+results/**/cache/
+results/**/pair_cache/

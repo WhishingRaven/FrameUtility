@@ -26,7 +26,7 @@ class ParallelTests(unittest.TestCase):
         accelerated["mast3r"]["optimizer_device"] = "mps"
         self.assertEqual(pair_cache_signature(base), pair_cache_signature(accelerated))
         for key, value in [("device", "cuda"), ("manifest_sha256", "images-b"),
-                           ("weight_sha256", "weights-b"), ("precision", "float16")]:
+                           ("weight_sha256", "weights-b"), ("precision", "float16"), ("seed", 2027)]:
             incompatible = {**accelerated, key: value}
             self.assertNotEqual(pair_cache_signature(base), pair_cache_signature(incompatible))
 

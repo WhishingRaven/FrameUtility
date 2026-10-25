@@ -75,4 +75,5 @@ def main():
 
 
 if __name__ == "__main__":
+    raise SystemExit("Retired one-off/legacy entry point. Review EXPERIMENT_PLAN.md and use the approved experiments/run_all.py workflow.")
     main()

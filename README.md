@@ -225,4 +225,6 @@ The main question is:
 
 ## Running the Experiment
 
-The fixed-set VGGT/MASt3R runner, input preparation, evaluation definitions, and local/CUDA instructions are in [experiments/README.md](experiments/README.md). It implements the 20/10/5-view, six-severity add-vs-drop sweep from `실험 순서.txt`, preserving separate pose and geometry metrics and recording reproducibility information. The current GPU parallel run writes progress and results to `results/office_fast/report.md`; the original CPU-alignment reference is preserved in `results/office_sweep`.
+The restart protocol is in [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md), with a beginner-readable explanation of the question, all named image sets, selection, blur generation, repeats, failure handling and analysis. Its status is **awaiting user approval**. Previous experiment results and inference caches have been deleted from the working tree.
+
+The common accelerated execution path and readiness status are documented in [experiments/README.md](experiments/README.md). The canonical entry point is experiments/run_all.py: VGGT runs in one worker, MASt3R in three, with inference and alignment on the same GPU. The new experiment is blocked until its plan is approved and the exact procedure has been implemented and verified.

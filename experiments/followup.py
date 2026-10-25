@@ -299,6 +299,7 @@ def run(out, backend, device, replicate):
 
 
 if __name__ == "__main__":
+    raise SystemExit("Retired one-off/legacy entry point. Review EXPERIMENT_PLAN.md and use the approved experiments/run_all.py workflow.")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("phase", choices=("prepare", "audit", "run"))
     parser.add_argument("--output", default=DEFAULT_OUT)

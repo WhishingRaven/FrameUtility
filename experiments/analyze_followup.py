@@ -295,6 +295,7 @@ def write_report(result, protocol, records, out):
 
 
 if __name__ == "__main__":
+    raise SystemExit("Retired one-off/legacy entry point. Review EXPERIMENT_PLAN.md and use the approved experiments/run_all.py workflow.")
     parser = argparse.ArgumentParser()
     parser.add_argument("folder", nargs="?", default=DEFAULT_OUT)
     analyze(ROOT / parser.parse_args().folder)

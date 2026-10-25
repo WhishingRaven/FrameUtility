@@ -20,8 +20,11 @@ def digest(path):
 
 
 def read_calibration(scene):
-    camera = next(line.split() for line in (scene / "dslr_calibration_undistorted/cameras.txt").read_text().splitlines()
-                  if line and not line.startswith("#"))
+    cameras = [line.split() for line in (scene / "dslr_calibration_undistorted/cameras.txt").read_text().splitlines()
+               if line and not line.startswith("#")]
+    if len(cameras) != 1:
+        raise ValueError("Legacy preparation supports one intrinsics block only; use the approved per-image CAMERA_ID preparation")
+    camera = cameras[0]
     assert camera[1] == "PINHOLE"
     w, h = map(int, camera[2:4])
     fx, fy, cx, cy = map(float, camera[4:])
@@ -229,6 +232,7 @@ def prepare(scene_name="office"):
 
 
 if __name__ == "__main__":
+    raise SystemExit("Retired one-off/legacy entry point. Review EXPERIMENT_PLAN.md and use the approved experiments/run_all.py workflow.")
     parser = argparse.ArgumentParser()
     parser.add_argument("--scene", default="office")
     print(prepare(parser.parse_args().scene))

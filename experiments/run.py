@@ -31,6 +31,23 @@ def sha256(path):
     return h.hexdigest()
 
 
+def resolve_device(device):
+    """Resolve once; accelerator requests never silently fall back to CPU."""
+    if device == "auto":
+        if torch.cuda.is_available():
+            return "cuda"
+        if torch.backends.mps.is_available():
+            return "mps"
+        raise RuntimeError("No GPU available; select --device cpu explicitly for a diagnostic run")
+    if device == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("CUDA is unavailable in this process")
+    if device == "mps" and not torch.backends.mps.is_available():
+        raise RuntimeError("Metal GPU is unavailable in this process")
+    if device not in ("cpu", "mps", "cuda"):
+        raise ValueError(f"Unknown device: {device}")
+    return device
+
+
 def atomic_json(path, value):
     temp = path.with_suffix(path.suffix + f".{os.getpid()}.tmp")
     temp.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
@@ -93,7 +110,7 @@ def environment(args, manifest_path):
     if weight_sha != weights["sha256"]:
         raise ValueError(f"Model SHA-256 differs from the official pinned checkpoint: {model_path}")
     return {"manifest_sha256": sha256(manifest_path), "backend": args.backend,
-            "device": args.device, "precision": "float32", "seed": 2026,
+            "device": args.device, "precision": "float32", "seed": getattr(args, "seed", 2026),
             "float32_matmul_precision": torch.get_float32_matmul_precision(),
             "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
             "source_commits": commits, "weight_sha256": weight_sha, "weight_revision": weights["revision"],
@@ -118,12 +135,8 @@ def run(args):
         for variant in f["variants"].values():
             if sha256(ROOT / variant["path"]) != variant["sha256"]:
                 raise ValueError(f"Input image changed: {variant['path']}")
-    if args.device == "auto":
-        args.device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
-    if args.device == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError("CUDA is unavailable in this process; check the PyTorch build and GPU driver")
-    if args.device == "mps" and not torch.backends.mps.is_available():
-        raise RuntimeError("Metal GPU is unavailable in this process; check GPU access or select --device cpu")
+    args.device = resolve_device(args.device)
+    seed = getattr(args, "seed", 2026)
     args.optimizer_device = getattr(args, "optimizer_device", None) or args.device
     args.shard_count = getattr(args, "shard_count", 1)
     args.shard_index = getattr(args, "shard_index", 0)
@@ -132,8 +145,8 @@ def run(args):
     torch.set_float32_matmul_precision("highest")
     torch.backends.cudnn.allow_tf32 = False
     torch.set_num_threads(getattr(args, "threads", None) or min(8, os.cpu_count() or 1))
-    np.random.seed(2026)
-    torch.manual_seed(2026)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
     out = ROOT / args.output / args.backend
     predictions = out / "predictions"
     predictions.mkdir(parents=True, exist_ok=True)
@@ -180,8 +193,8 @@ def run(args):
             print(f"Loading {args.backend} on {args.device}", flush=True)
             model = load_backend(args.backend, args.device, out / "mast3r_cache",
                                  optimizer_device=args.optimizer_device, pair_cache=pair_cache)
-        np.random.seed(2026)
-        torch.manual_seed(2026)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
         paths = [str(ROOT / frames[i]["variants"][f"{severity if i == target else 0:g}"]["path"]) for i in ids]
         before = time.time()
         print(f"START {key}: {len(ids)} views", flush=True)
@@ -261,17 +274,18 @@ def run(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--manifest", default="data/experiments/office/manifest.json")
-    parser.add_argument("--output", default="results/office_sweep")
+    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--output", required=True)
     parser.add_argument("--backend", required=True, choices=["vggt", "mast3r"])
     parser.add_argument("--device", default="auto", choices=["auto", "cpu", "mps", "cuda"])
     parser.add_argument("--optimizer-device", choices=["cpu", "mps", "cuda"], help="Default: same device as inference")
     parser.add_argument("--threads", type=int, help="PyTorch CPU threads per worker; default 8 or CPU count")
+    parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--pair-cache-source", help="Reuse neural pairs from a verified compatible output root")
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument("--stop-file", help="Finish the current reconstruction, then stop before new inference")
-    parser.add_argument("--sizes", nargs="+", type=int, default=[5, 10, 20])
+    parser.add_argument("--sizes", nargs="+", type=int, default=[5, 10, 15])
     parser.add_argument("--targets", type=int, help="Limit target count per size for a pilot; default all targets")
     parser.add_argument("--max-new-runs", type=int, help="Bound new reconstructions; completed predictions are resumable")
     parser.add_argument("--repeat-clean", action="store_true", help="Repeat clean inference to measure representative numerical variation")
