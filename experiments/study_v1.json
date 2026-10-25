@@ -4,6 +4,8 @@
   "implementation_ready": false,
   "plan": "EXPERIMENT_PLAN.md",
   "excluded_scenes": {
+    "delivery_area": "Official section 6 selection failed: could not reduce the 15-view robust component to 10 while preserving biconnectivity",
+    "playground": "Official section 6 selection failed: could not reduce the 10-view robust set to 5 while preserving biconnectivity",
     "pipes": "14 calibrated images; fewer than the required 15"
   },
   "backends": [
@@ -89,7 +91,11 @@
       5
     ],
     "requires_connected_context_after_any_target_drop": true,
-    "uses_model_outputs": false
+    "uses_model_outputs": false,
+    "result_file": "data/experiments/eth3d_restart_v1/official_selection.json",
+    "result_sha256": "08d41cb015b3b66b058a1ccd038999baa854a4e31da886f0fe93abbedfd53462",
+    "selector_script": "experiments/select_official_scenes.py",
+    "selector_script_sha256": "88f25ac9a79470514ec97ba7430233d646dbcfad28b003adbb04e8ed1f9ac1ae"
   },
   "evaluation": {
     "policy": "fixed_common_grid_signed_depth_v1",
@@ -160,28 +166,13 @@
     ],
     "server_config": "experiments/cuda_server.json"
   },
-  "planned_counts_if_all_12_scenes_eligible": {
-    "target_context_curves_per_backend_per_scene": 30,
-    "utility_comparisons_per_scene_all_seeds": 720,
-    "metric_rows_per_scene_all_seeds": 3600,
-    "unique_reconstructions_per_backend_per_scene_per_seed": 363,
-    "unique_reconstructions_per_scene_all_seeds": 726,
-    "initial_office_unique_reconstructions": 726,
-    "expansion_11_scenes_unique_reconstructions": 7986,
-    "all_primary_unique_reconstructions": 8712,
-    "total_unique_reconstructions": 8712,
-    "total_utility_comparisons": 8640,
-    "total_metric_rows": 43200
-  },
   "primary_scenes": [
     "courtyard",
-    "delivery_area",
     "electro",
     "facade",
     "kicker",
     "meadow",
     "office",
-    "playground",
     "relief",
     "relief_2",
     "terrace",
@@ -192,17 +183,34 @@
   ],
   "expansion_scenes": [
     "courtyard",
-    "delivery_area",
     "electro",
     "facade",
     "kicker",
     "meadow",
-    "playground",
     "relief",
     "relief_2",
     "terrace",
     "terrains"
   ],
   "minimum_scenes_for_multi_scene_summary": 5,
-  "planned_counts_exclude_recovery_attempts_and_bugfix_recomputations": true
+  "planned_counts_exclude_recovery_attempts_and_bugfix_recomputations": true,
+  "planned_counts_after_official_selection": {
+    "target_context_curves_per_backend_per_scene": 30,
+    "utility_comparisons_per_scene_all_seeds": 720,
+    "metric_rows_per_scene_all_seeds": 3600,
+    "unique_reconstructions_per_backend_per_scene_per_seed": 363,
+    "unique_reconstructions_per_scene_all_seeds": 726,
+    "initial_office_unique_reconstructions": 726,
+    "expansion_9_scenes_unique_reconstructions": 6534,
+    "all_primary_unique_reconstructions": 7260,
+    "total_unique_reconstructions": 7260,
+    "total_utility_comparisons": 7200,
+    "total_metric_rows": 36000
+  },
+  "official_selection_status": {
+    "passing_expansion_scenes": 9,
+    "minimum_required": 5,
+    "minimum_met": true,
+    "report": "experiments/official_selection_summary.md"
+  }
 }

@@ -1,8 +1,6 @@
 """One user interface on Mac and CUDA servers: prepare, run, status, analyze."""
 import argparse
-import hashlib
 import json
-import platform
 from pathlib import PurePosixPath
 import shlex
 import subprocess
@@ -11,7 +9,7 @@ from types import SimpleNamespace
 
 from filelock import FileLock
 from run import ROOT, atomic_json, resolve_device
-from run_parallel import cohort_configuration, require_approval, run as run_worker_group, validate_protocol
+from run_parallel import cohort_configuration, require_approval, run as run_worker_group, runtime_identifier, validate_protocol
 
 
 def build_parser():
@@ -28,8 +26,8 @@ def build_parser():
     parser.add_argument("--seed", type=int, help="Default: all seeds in the approved protocol")
     parser.add_argument("--device", default="auto", choices=("auto", "mps", "cuda"),
                         help="GPU override on the execution host; auto prefers CUDA then MPS, never implicit CPU")
-    parser.add_argument("--input-root", help="Default: data/experiments/<protocol_id>")
-    parser.add_argument("--results-root", help="Default: results/<protocol_id>")
+    parser.add_argument("--input-root", help="Default: data/experiments/eth3d_multi_view/")
+    parser.add_argument("--results-root", help="Default: results/ under the project root")
     return parser
 
 
@@ -45,11 +43,6 @@ def select_scenes(args, protocol):
     if len(scenes) != len(set(scenes)) or any(s not in protocol["primary_scenes"] for s in scenes):
         raise ValueError("Scene selection is not in the approved primary scene list")
     return scenes
-
-
-def runtime_identifier(device):
-    host = hashlib.sha256(platform.node().encode()).hexdigest()[:8]
-    return f"{device}-{host}"
 
 
 def scientific_configuration(runtime):
@@ -101,17 +94,16 @@ def run(args):
         if args.action != "status":
             require_approval(protocol, require_implementation=args.action != "prepare")
         return run_remote(args)
-    input_root = ROOT/args.input_root if args.input_root else ROOT/"data/experiments"/protocol["protocol_id"]
-    results_root = ROOT/args.results_root if args.results_root else ROOT/"results"/protocol["protocol_id"]
+    input_root = ROOT/args.input_root if args.input_root else ROOT/"data/experiments/eth3d_multi_view"
+    results_root = ROOT/args.results_root if args.results_root else ROOT/"results"
     if args.action == "status":
         rows = []
         for scene in scenes:
-            found = sorted(results_root.glob(f"executions/*/{scene}/seed_*/batch_status.json"))
-            if not found:
+            path = results_root/"executions"/scene/"batch_status.json"
+            if not path.exists():
                 rows.append({"scene": scene, "status": "not_started"})
-            for path in found:
-                state = json.loads(path.read_text())
-                rows.append({**state, "runtime_group": path.parents[2].name})
+            else:
+                rows.append(json.loads(path.read_text()))
         result = {"protocol_id": protocol["protocol_id"], "approval_status": protocol["status"],
                   "sizes": protocol["sizes"], "seeds": protocol["seeds"], "runs": rows}
         print(json.dumps(result, indent=2, ensure_ascii=False))
@@ -125,9 +117,9 @@ def run(args):
         subprocess.run([sys.executable, str(prepare_script), "--protocol", str(protocol_path),
                         "--input-root", str(input_root), "--scenes", *scenes], check=True, cwd=ROOT)
         return
-    if not analysis_script.exists():
-        raise RuntimeError("The approved common analysis is not implemented yet")
     if args.action == "analyze":
+        if not analysis_script.exists():
+            raise RuntimeError("The analysis module will be implemented after experiment results are available")
         subprocess.run([sys.executable, str(analysis_script), "--protocol", str(protocol_path),
                         "--results-root", str(results_root), "--scenes", *scenes], check=True, cwd=ROOT)
         return
@@ -157,16 +149,11 @@ def run(args):
                 raise ValueError("Scene already belongs to a different runtime group; cross-device resume is forbidden")
             assignments[scene] = runtime_id
         atomic_json(assignment_path, assignments)
-    cohort = results_root/"executions"/runtime_id
+    cohort = results_root
     for scene in scenes:
         for seed in seeds:
             run_worker_group(SimpleNamespace(protocol=str(protocol_path), manifest=str(manifests[scene]),
                                             cohort=str(cohort), device=device, seed=seed))
-    # Automatic reporting includes office and every available primary scene,
-    # even when the just-finished command selected only the expansion scenes.
-    subprocess.run([sys.executable, str(analysis_script), "--protocol", str(protocol_path),
-                    "--results-root", str(results_root), "--scenes", *protocol["primary_scenes"]],
-                   check=True, cwd=ROOT)
 
 
 if __name__ == "__main__":

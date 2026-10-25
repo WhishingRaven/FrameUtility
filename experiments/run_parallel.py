@@ -22,7 +22,7 @@ def build_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--protocol", default="experiments/study_v1.json")
     parser.add_argument("--manifest", required=True)
-    parser.add_argument("--cohort", required=True, help="One root for all scenes and repeats on the same fixed platform")
+    parser.add_argument("--cohort", required=True, help="Results root containing executions/<scene>/ and runtime records")
     parser.add_argument("--device", required=True, choices=("mps", "cuda"),
                         help="Choose one GPU platform explicitly for the entire cohort")
     parser.add_argument("--seed", type=int, default=2026)
@@ -47,8 +47,10 @@ def validate_protocol(protocol, manifest, seed):
         raise ValueError("Manifest does not belong to the approved protocol")
     if manifest["severities_deg"] != protocol["blur_degrees"]:
         raise ValueError("Blur ladder differs from the approved protocol")
+    if len(protocol["seeds"]) != 1:
+        raise ValueError("The per-scene result layout requires one configured seed")
     if seed not in protocol["seeds"]:
-        raise ValueError("Seed is outside the approved repeat plan")
+        raise ValueError("Seed is outside the approved single-run plan")
     if manifest["scene"] not in protocol["primary_scenes"]:
         raise ValueError("Scene is outside the approved cohort")
     for size in protocol["sizes"]:
@@ -61,10 +63,21 @@ def validate_protocol(protocol, manifest, seed):
         raise ValueError("Workers and threads must be positive")
 
 
+def runtime_identifier(device):
+    host = hashlib.sha256(platform.node().encode()).hexdigest()[:8]
+    return f"{device}-{host}"
+
+
+def inference_source_hashes():
+    sources = sorted(p for p in (ROOT/"experiments").glob("*.py")
+                     if not p.name.startswith(("analyze_", "test_")) and p.name != "summarize.py")
+    sources.append(ROOT/"experiments/weights.json")
+    return {str(p.relative_to(ROOT)): sha256(p) for p in sources}
+
+
 def cohort_configuration(protocol_path, device, protocol):
     packages = dict(sorted((dist.metadata["Name"], dist.version)
                            for dist in importlib.metadata.distributions() if dist.metadata["Name"]))
-    sources = sorted((ROOT/"experiments").glob("*.py")) + [ROOT/"experiments/weights.json"]
     vendors = {}
     for name, path in {"vggt": "vggt", "mast3r": "mast3r",
                        "dust3r": "mast3r/dust3r", "croco": "mast3r/dust3r/croco"}.items():
@@ -83,7 +96,7 @@ def cohort_configuration(protocol_path, device, protocol):
             "runtime_environment": {name: os.environ.get(name) for name in
                                     ("CUDA_VISIBLE_DEVICES", "PYTORCH_MPS_FAST_MATH",
                                      "PYTORCH_ENABLE_MPS_FALLBACK", "CUBLAS_WORKSPACE_CONFIG")},
-            "source_sha256": {str(p.relative_to(ROOT)): sha256(p) for p in sources}}
+            "source_sha256": inference_source_hashes()}
 
 
 def worker_command(manifest_path, out, backend, device, seed, threads, sizes, stop_file, index, workers):
@@ -105,15 +118,22 @@ def run(args):
     cohort = ROOT/args.cohort
     cohort.mkdir(parents=True, exist_ok=True)
     frozen = cohort_configuration(protocol_path, device, protocol)
-    lock_path = cohort/"cohort_configuration.json"
+    runtime_id = runtime_identifier(device)
+    lock_path = cohort/"runtime_configurations.json"
     with FileLock(str(lock_path)+".lock"):
-        if lock_path.exists() and json.loads(lock_path.read_text()) != frozen:
+        configurations = json.loads(lock_path.read_text()) if lock_path.exists() else {}
+        if runtime_id in configurations and configurations[runtime_id] != frozen:
             raise ValueError("Cohort hardware, code, packages or settings changed; use a new approved cohort")
-        atomic_json(lock_path, frozen)
-    with FileLock(str(cohort/"active_run.lock"), timeout=0):
-        out = cohort/manifest["scene"]/f"seed_{args.seed}"
+        configurations[runtime_id] = frozen
+        atomic_json(lock_path, configurations)
+    with FileLock(str(cohort/f".active_{runtime_id}.lock"), timeout=0):
+        out = cohort/"executions"/manifest["scene"]
         out.mkdir(parents=True, exist_ok=True)
         with FileLock(str(out/"controller.lock"), timeout=0):
+            scene_configuration = out/"cohort_configuration.json"
+            if scene_configuration.exists() and json.loads(scene_configuration.read_text()) != frozen:
+                raise ValueError("Scene execution environment changed; results cannot be overwritten or mixed")
+            atomic_json(scene_configuration, frozen)
             execute(protocol, protocol_path, manifest, manifest_path, out, device, args.seed, frozen)
 
 
@@ -124,6 +144,7 @@ def execute(protocol, protocol_path, manifest, manifest_path, out, device, seed,
     threads, workers = protocol["execution"]["threads_per_worker"], protocol["execution"]["workers"]
     state = {"pid": os.getpid(), "status": "running", "started_unix": time.time(),
              "scene": manifest["scene"], "seed": seed, "device": device, "optimizer_device": device,
+             "runtime_group": runtime_identifier(device), "host": frozen.get("host", platform.node()),
              "threads_per_worker": threads, "worker_count": workers, "backends": backends,
              "planned_conditions": len(backends)*sum(sizes)*len(manifest["severities_deg"]), "workers": []}
     processes, logs = [], []

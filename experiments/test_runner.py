@@ -20,7 +20,7 @@ class RunnerTests(unittest.TestCase):
         return {"status": "approved", "implementation_ready": True, "protocol_id": "fixture",
                 "primary_scenes": ["new_scene", "office"], "initial_scenes": ["office"],
                 "expansion_scenes": ["new_scene"],
-                "seeds": [2026, 2027, 2028], "sizes": [5], "blur_degrees": [0, .025, .25],
+                "seeds": [2026], "sizes": [5], "blur_degrees": [0, .025, .25],
                 "backends": ["vggt", "mast3r"], "execution": {"workers": 3, "threads_per_worker": 8}}
 
     def manifest(self):
@@ -75,6 +75,8 @@ class RunnerTests(unittest.TestCase):
                 run_parallel.validate_protocol(self.protocol(), {**self.manifest(), **changed}, 2026)
         with self.assertRaises(ValueError):
             run_parallel.validate_protocol(self.protocol(), self.manifest(), 999)
+        with self.assertRaisesRegex(ValueError, "one.*seed|single.*seed"):
+            run_parallel.validate_protocol({**self.protocol(), "seeds": [2026, 2027]}, self.manifest(), 2026)
 
     def test_worker_uses_gpu_alignment_explicit_inputs_and_block_seed(self):
         command = run_parallel.worker_command(Path("manifest.json"), Path("output"), "mast3r", "mps",
@@ -95,7 +97,7 @@ class RunnerTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "CAMERA_ID"):
                 read_calibration(scene)
 
-    def test_cohort_lock_rejects_changes_between_scenes_or_seeds(self):
+    def test_runtime_lock_rejects_changes_between_flat_scene_runs(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root/"plan.md").write_text("approved fixture")
@@ -112,13 +114,59 @@ class RunnerTests(unittest.TestCase):
                 patch.object(run_parallel, "execute") as execute,
             ):
                 run_parallel.run(args)
-                args.seed = 2027
+                (root/"manifest.json").write_text(json.dumps({**self.manifest(), "scene": "office"}))
                 run_parallel.run(args)
                 self.assertEqual(execute.call_count, 2)
+                self.assertEqual([call.args[4] for call in execute.call_args_list],
+                                 [root/"outputs/executions/new_scene", root/"outputs/executions/office"])
                 config.return_value = {"source": "changed"}
                 with self.assertRaisesRegex(ValueError, "changed"):
                     run_parallel.run(args)
                 self.assertEqual(execute.call_count, 2)
+                with patch.object(run_parallel, "resolve_device", return_value="cuda"):
+                    with self.assertRaisesRegex(ValueError, "Scene execution environment changed"):
+                        run_parallel.run(args)
+                self.assertEqual(json.loads((root/"outputs/executions/office/cohort_configuration.json").read_text()),
+                                 {"source": "fixed"})
+
+    def test_different_scenes_can_use_different_devices_in_one_results_root(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/"plan.md").write_text("approved fixture")
+            protocol = self.protocol()
+            protocol.update(plan="plan.md", approved_plan_sha256=run.sha256(root/"plan.md"))
+            (root/"protocol.json").write_text(json.dumps(protocol))
+            (root/"manifest.json").write_text(json.dumps(self.manifest()))
+            args = SimpleNamespace(protocol="protocol.json", manifest="manifest.json", cohort="results",
+                                   device="mps", seed=2026)
+            with (
+                patch.object(run_parallel, "ROOT", root),
+                patch.object(run_parallel, "resolve_device", side_effect=["mps", "cuda"]),
+                patch.object(run_parallel, "cohort_configuration", side_effect=[{"device": "mps"}, {"device": "cuda"}]),
+                patch.object(run_parallel, "execute") as execute,
+            ):
+                run_parallel.run(args)
+                (root/"manifest.json").write_text(json.dumps({**self.manifest(), "scene": "office"}))
+                run_parallel.run(args)
+            self.assertEqual([call.args[4] for call in execute.call_args_list],
+                             [root/"results/executions/new_scene", root/"results/executions/office"])
+            environments = json.loads((root/"results/runtime_configurations.json").read_text())
+            self.assertEqual({value["device"] for value in environments.values()}, {"mps", "cuda"})
+
+    def test_later_analysis_implementation_does_not_change_inference_fingerprint(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root/"experiments"
+            source.mkdir()
+            (source/"weights.json").write_text("{}")
+            (source/"run.py").write_text("compute")
+            with patch.object(run_parallel, "ROOT", root):
+                before = run_parallel.inference_source_hashes()
+                (source/"analyze_study.py").write_text("later analysis fixture")
+                (source/"test_runner.py").write_text("test fixture")
+                self.assertEqual(run_parallel.inference_source_hashes(), before)
+                (source/"run.py").write_text("changed computation")
+                self.assertNotEqual(run_parallel.inference_source_hashes(), before)
 
     def test_two_backends_use_one_then_three_workers_and_manifest_counts(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -161,6 +209,9 @@ class RunnerTests(unittest.TestCase):
             self.assertEqual(state["planned_conditions"], 30)
             self.assertEqual(state["attempted_conditions"], 30)
             self.assertEqual(state["status"], "complete")
+            self.assertEqual(state["seed"], 2026)
+            self.assertTrue(state["runtime_group"].startswith("mps-"))
+            self.assertIn("host", state)
 
 
 class InterfaceTests(unittest.TestCase):
@@ -177,7 +228,7 @@ class InterfaceTests(unittest.TestCase):
         scripts.mkdir()
         (scripts/"prepare_study.py").touch()
         (scripts/"analyze_study.py").touch()
-        folder = root/"data/experiments/fixture/office"
+        folder = root/"data/experiments/eth3d_multi_view/office"
         folder.mkdir(parents=True)
         (folder/"manifest.json").write_text(json.dumps(
             {"protocol_id": "fixture", "scene": "office", "sets": {"5": list("abcde")},
@@ -189,6 +240,7 @@ class InterfaceTests(unittest.TestCase):
             with self.subTest(device=device), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 self.make_fixture(root)
+                (root/"experiments/analyze_study.py").unlink()
                 args = run_all.build_parser().parse_args(["run", "--protocol", "protocol.json", "--scene", "office"])
                 scientific = {key: "fixed" for key in
                               ("protocol_sha256", "plan_sha256", "precision", "workers", "threads_per_worker",
@@ -205,10 +257,10 @@ class InterfaceTests(unittest.TestCase):
                 calls = [item.args[0] for item in launch.call_args_list]
                 self.assertEqual([c.seed for c in calls], [2026])
                 self.assertTrue(all(c.device == device for c in calls))
-                self.assertTrue(all(c.manifest.endswith("fixture/office/manifest.json") for c in calls))
-                self.assertTrue(all(f"/{device}-" in c.cohort for c in calls))
-                self.assertEqual(analyze.call_count, 1)
-                assignments = json.loads((root/"results/fixture/scene_assignments.json").read_text())
+                self.assertTrue(all(c.manifest.endswith("eth3d_multi_view/office/manifest.json") for c in calls))
+                self.assertTrue(all(Path(c.cohort) == root/"results" for c in calls))
+                analyze.assert_not_called()
+                assignments = json.loads((root/"results/scene_assignments.json").read_text())
                 self.assertTrue(assignments["office"].startswith(device+"-"))
 
     def test_human_entrypoint_blocks_unapproved_work_before_gpu_or_outputs(self):
@@ -232,6 +284,7 @@ class InterfaceTests(unittest.TestCase):
                         remote.assert_not_called()
             self.assertFalse((root/"results").exists())
 
+
     def test_status_is_read_only_and_does_not_require_gpu(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -247,11 +300,26 @@ class InterfaceTests(unittest.TestCase):
             self.assertEqual(result["runs"], [{"scene": "office", "status": "not_started"}])
             self.assertFalse((root/"results").exists())
 
+            # Existing per-scene status is read directly, without seed/host folders.
+            path = root/"results/executions/office/batch_status.json"
+            path.parent.mkdir(parents=True)
+            state = {"scene": "office", "status": "complete", "seed": 2026,
+                     "device": "mps", "runtime_group": "mps-local", "host": "test-host"}
+            path.write_text(json.dumps(state))
+            args = run_all.build_parser().parse_args(["status", "--protocol", "protocol.json", "--scene", "office"])
+            before = path.read_bytes()
+            with patch.object(run_all, "ROOT", root), patch.object(run_all, "resolve_device") as gpu, \
+                    contextlib.redirect_stdout(io.StringIO()):
+                result = run_all.run(args)
+            self.assertEqual(result["runs"], [state])
+            self.assertEqual(path.read_bytes(), before)
+            gpu.assert_not_called()
+
     def test_any_scene_can_run_locally_without_office_results(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             self.make_fixture(root)
-            data = root/"data/experiments/fixture/courtyard"
+            data = root/"data/experiments/eth3d_multi_view/courtyard"
             data.mkdir()
             (data/"manifest.json").write_text(json.dumps(
                 {"protocol_id": "fixture", "scene": "courtyard", "sets": {"5": list("abcde")},
@@ -272,7 +340,7 @@ class InterfaceTests(unittest.TestCase):
             self.assertEqual(launch.call_count, 1)
             self.assertEqual(launch.call_args.args[0].device, "mps")
             self.assertTrue(launch.call_args.args[0].manifest.endswith("courtyard/manifest.json"))
-            assignments = json.loads((root/"results/fixture/scene_assignments.json").read_text())
+            assignments = json.loads((root/"results/scene_assignments.json").read_text())
             self.assertNotIn("office", assignments)
 
     def test_remote_target_dispatches_all_actions_and_scenes_without_local_gpu(self):
@@ -360,17 +428,17 @@ class InterfaceTests(unittest.TestCase):
     def test_server_expansion_keeps_office_in_primary_analysis(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            protocol = self.make_fixture(root)
-            data = root/"data/experiments/fixture/courtyard"
+            self.make_fixture(root)
+            data = root/"data/experiments/eth3d_multi_view/courtyard"
             data.mkdir()
             (data/"manifest.json").write_text(json.dumps(
                 {"protocol_id": "fixture", "scene": "courtyard", "sets": {"5": list("abcde")},
                  "severities_deg": [0, .25]}))
-            results = root/"results/fixture"
-            for seed in protocol["seeds"]:
-                state = results/"executions/mps-local/office"/f"seed_{seed}"
-                state.mkdir(parents=True)
-                (state/"batch_status.json").write_text(json.dumps({"status": "complete", "seed": seed}))
+            results = root/"results"
+            state = results/"executions/office"
+            state.mkdir(parents=True)
+            (state/"batch_status.json").write_text(json.dumps(
+                {"status": "complete", "seed": 2026, "runtime_group": "mps-local"}))
             (results/"scene_assignments.json").write_text(json.dumps({"office": "mps-local"}))
             scientific = {key: "fixed" for key in
                           ("protocol_sha256", "plan_sha256", "precision", "workers", "threads_per_worker",
@@ -391,6 +459,12 @@ class InterfaceTests(unittest.TestCase):
             assignments = json.loads((results/"scene_assignments.json").read_text())
             self.assertEqual(assignments["office"], "mps-local")
             self.assertTrue(assignments["courtyard"].startswith("cuda-"))
+            analyze.assert_not_called()
+            # Overall analysis is an explicit later action and still includes office.
+            args = run_all.build_parser().parse_args(["analyze", "--protocol", "protocol.json"])
+            with patch.object(run_all, "ROOT", root), patch.object(run_parallel, "ROOT", root), \
+                    patch.object(run_all.subprocess, "run") as analyze:
+                run_all.run(args)
             command = analyze.call_args.args[0]
             self.assertEqual(command[command.index("--scenes")+1:], ["office", "courtyard"])
 
