@@ -143,7 +143,7 @@
     }
   ],
   "minimum_image_count": 15,
-  "official_selection_result": "data/experiments/eth3d_restart_v1/official_selection.json",
-  "official_selection_result_sha256": "08d41cb015b3b66b058a1ccd038999baa854a4e31da886f0fe93abbedfd53462",
+  "official_selection_result": "data/experiments/eth3d_multi_view/official_selection.json",
+  "official_selection_result_sha256": "68071062c0edf2e651b82a4939cb44ed60909bbd9592419e67d1ef009902b2e7",
   "official_depth_archives_dir": "data/eth3d/high_res_multi_view/multi_view_training_dslr_depth_archives"
 }

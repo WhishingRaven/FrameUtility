@@ -229,4 +229,6 @@ The restart plan is in [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md). The initial pri
 
 [experiments/run_all.py](experiments/run_all.py) provides the same prepare/run/status/analyze interface on Mac and CUDA servers. Execution location is selected with `--target` independently of scene names, and GPU selection and runtime paths are automatic; VGGT uses one worker and MASt3R uses three, with inference and alignment on the same GPU. See [the interface and readiness documentation](experiments/README.md).
 
+For a teammate preparing a TA-provided Amazon GPU server, follow the [CUDA server setup guide](CUDA_SERVER_SETUP.md).
+
 The plan is **awaiting user approval**. Previous results and inference caches have been deleted from the working tree. The new experiment will not start until the plan is approved and its preparation, evaluation and analysis implementation is verified.

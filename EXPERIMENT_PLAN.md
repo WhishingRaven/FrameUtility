@@ -304,7 +304,7 @@ courtyard 등 여러 장면에는 내부 파라미터 묶음이 둘 이상 있�
 | terrains | 통과 | 15·10·5장 집합 생성 완료 |
 | pipes | 사전 제외 | 보정 사진 14장으로 15장 최소 조건 미달 |
 
-각 통과 장면의 정식 15·10·5장 사진 ID, 실패 중간 과정, 모든 쌍 겹침, 사진별 유효 GT 표본·마스크 해시는 [읽기 쉬운 결과표](experiments/official_selection_summary.md)와 `data/experiments/eth3d_restart_v1/official_selection.json`에 저장했다. JSON SHA-256은 `08d41cb015b3b66b058a1ccd038999baa854a4e31da886f0fe93abbedfd53462`다. 실패 장면의 부분 집합은 정식 명단으로 사용하지 않는다.
+각 통과 장면의 정식 15·10·5장 사진 ID, 실패 중간 과정, 모든 쌍 겹침, 사진별 유효 GT 표본·마스크 해시는 [읽기 쉬운 결과표](experiments/official_selection_summary.md)와 `data/experiments/eth3d_multi_view/official_selection.json`에 저장했다. JSON SHA-256은 `68071062c0edf2e651b82a4939cb44ed60909bbd9592419e67d1ef009902b2e7`다. 실패 장면의 부분 집합은 정식 명단으로 사용하지 않는다.
 
 ## 7. 블러를 동일하게 부여하는 방법
 
@@ -785,7 +785,7 @@ status와 analyze는 선택한 실행 위치의 결과 루트를 읽는다. 여�
 
 그 임시 검사에서는 8개 장면(office 포함)이 통과했고 delivery_area·electro·facade·playground는 통과하지 못했다. 이 수와 사유는 그 시점의 균등 표본·레이저 자료에 대한 준비 진단만 뜻한다. **8개 통과를 정식 후보 수, 최종 통과 장면 수, 최소 5개 조건의 충족 근거로 세지 않는다.** 이 검사 결과로 사진을 최종 선택하거나 장면을 공식 제외하지 않는다.
 
-이 이력은 `data/experiments/eth3d_multi_view/dataset_index.json`의 `staging_*` 필드와 장면별 `manifest.json`의 `staging_sets`, `staging_selection`에 보존한다. 공식 선정은 완료했고, 같은 매니페스트의 `official_selection_status`에는 통과·실패와 정식 결과 파일을 기록했다. 최종 중첩 명단과 전체 계산 자료는 `data/experiments/eth3d_restart_v1/official_selection.json`, 사람이 확인할 요약은 `experiments/official_selection_summary.md`에 저장했다. 임시 staging 사진 폴더의 내용을 정식 집합으로 간주하지 않는다.
+이 이력은 `data/experiments/eth3d_multi_view/dataset_index.json`의 `staging_*` 필드와 장면별 `manifest.json`의 `staging_sets`, `staging_selection`에 보존한다. 공식 선정은 완료했고, 같은 매니페스트의 `official_selection_status`에는 통과·실패와 정식 결과 파일을 기록했다. 최종 중첩 명단과 전체 계산 자료는 `data/experiments/eth3d_multi_view/official_selection.json`, 사람이 확인할 요약은 `experiments/official_selection_summary.md`에 저장했다. 임시 staging 사진 폴더의 내용을 정식 집합으로 간주하지 않는다.
 
 ### 16.5 결과 생성과 분석 코드 구현 시점
 

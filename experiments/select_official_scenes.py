@@ -18,7 +18,7 @@ from scipy.spatial.transform import Rotation
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data/eth3d/high_res_multi_view"
 ARCHIVE_ROOT = DATA_ROOT / "multi_view_training_dslr_depth_archives"
-OUTPUT_PATH = ROOT / "data/experiments/eth3d_restart_v1/official_selection.json"
+OUTPUT_PATH = ROOT / "data/experiments/eth3d_multi_view/official_selection.json"
 SCENES = (
     "courtyard", "delivery_area", "electro", "facade", "kicker", "meadow",
     "office", "playground", "relief", "relief_2", "terrace", "terrains",

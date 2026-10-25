@@ -1,5 +1,5 @@
 {
-  "protocol_id": "eth3d_restart_v1",
+  "protocol_id": "eth3d_multi_view",
   "status": "awaiting_approval",
   "implementation_ready": false,
   "plan": "EXPERIMENT_PLAN.md",
@@ -92,10 +92,10 @@
     ],
     "requires_connected_context_after_any_target_drop": true,
     "uses_model_outputs": false,
-    "result_file": "data/experiments/eth3d_restart_v1/official_selection.json",
-    "result_sha256": "08d41cb015b3b66b058a1ccd038999baa854a4e31da886f0fe93abbedfd53462",
+    "result_file": "data/experiments/eth3d_multi_view/official_selection.json",
+    "result_sha256": "68071062c0edf2e651b82a4939cb44ed60909bbd9592419e67d1ef009902b2e7",
     "selector_script": "experiments/select_official_scenes.py",
-    "selector_script_sha256": "88f25ac9a79470514ec97ba7430233d646dbcfad28b003adbb04e8ed1f9ac1ae"
+    "selector_script_sha256": "7e7b30ccbc64bfc75d64f4a042a9f7b0050c10923fcb6416c0b7e3e4c8082ec4"
   },
   "evaluation": {
     "policy": "fixed_common_grid_signed_depth_v1",

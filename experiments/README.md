@@ -84,6 +84,8 @@ office도 선택한 실행 위치와 관계없이 주 분석에 포함한다. �
 
 ## 서버에 한 번 설정할 내용
 
+조교가 제공한 Amazon GPU 서버를 팀원이 준비할 때는 [CUDA 서버 설정 가이드](../CUDA_SERVER_SETUP.md)를 따른다. SSH, Python/CUDA, 코드·가중치·자료 전송, 연결 확인과 인수인계를 설명한다.
+
 [cuda_server.example.json](cuda_server.example.json)을 experiments/cuda_server.json으로 복사해 host, project_dir, python, port를 설정한다. host는 SSH 별칭 또는 user@host, project_dir는 서버 저장소 절대 경로, python은 서버 가상환경 실행 파일이다. 실제 profile은 Git에서 제외한다. SSH 키·접속 설정은 기존 SSH 구성을 사용한다.
 
 서버에는 같은 코드·승인 문서·가중치·준비 RGB/GT snapshot을 배치하고 해당 CUDA 환경에 패키지를 설치한다. 실제 버전은 실행 그룹별로 기록한다. 서버 target은 준비된 서버 자료로 명령을 실행하며 자료의 자동 업로드·동기화와는 별도다.
@@ -112,7 +114,7 @@ complete는 계획 비교가 모두 평가되고 모든 지표가 유효한 경�
 - [기계 판독 설정](study_v1.json)
 - [공식 archive의 장면별 metadata](dataset_inventory.json)
 - [공식 15·10·5장 사진 명단과 장면 판정](official_selection_summary.md)
-- [선정 계산 상세 JSON](../data/experiments/eth3d_restart_v1/official_selection.json)
+- [선정 계산 상세 JSON](../data/experiments/eth3d_multi_view/official_selection.json)
 - [선정 계산 스크립트](select_official_scenes.py)
 - [가중치 revision과 SHA-256](weights.json)
 

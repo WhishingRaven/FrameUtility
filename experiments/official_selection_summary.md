@@ -1,9 +1,12 @@
 # ETH3D 공식 사진 선정 결과
 
-계산 시각: 2026-10-25T08:14:33+00:00 UTC  
-정식 결과 JSON: `data/experiments/eth3d_restart_v1/official_selection.json`  
-결과 SHA-256: `08d41cb015b3b66b058a1ccd038999baa854a4e31da886f0fe93abbedfd53462`  
-선정 스크립트 SHA-256: `88f25ac9a79470514ec97ba7430233d646dbcfad28b003adbb04e8ed1f9ac1ae`
+계산 시각: 2026-10-25T08:14:33+00:00 UTC
+
+정식 결과 JSON: `data/experiments/eth3d_multi_view/official_selection.json`
+
+결과 SHA-256: `68071062c0edf2e651b82a4939cb44ed60909bbd9592419e67d1ef009902b2e7`
+
+선정 스크립트 SHA-256: `7e7b30ccbc64bfc75d64f4a042a9f7b0050c10923fcb6416c0b7e3e4c8082ec4`
 
 ## 적용 방법
 
