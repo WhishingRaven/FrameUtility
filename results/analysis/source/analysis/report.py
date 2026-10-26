@@ -1,7 +1,46 @@
 """Korean explanations generated from the same audited tables as the figures."""
+import re
+
 from .core import PRIMARY, LABELS, representative_ids
 
 KOREAN = {"helpful": "도움", "harmful": "해로움", "within_threshold": "문턱 이내", "unavailable": "평가 불가"}
+RECONSTRUCTION_START = "<!-- reconstruction-visualization:start -->"
+RECONSTRUCTION_END = "<!-- reconstruction-visualization:end -->"
+
+
+def reconstruction_section(info):
+    lines = [RECONSTRUCTION_START, "## RGB 사진에서 복원한 실제 3D 공간", ""]
+    if info["status"] != "generated":
+        lines += ["두 모델의 저장된 clean 재구성이 모두 준비된 뒤 같은 규칙으로 3D 비교 그림을 생성한다. 이 분석에서 추가 신경망 추론은 실행하지 않는다.", ""]
+    else:
+        size, reference = info["size"], info["reference_image_id"]
+        camera = info["shared_virtual_camera"]
+        lines += ["![Original RGB와 두 모델의 RGB 3D 점군](figures/reconstruction_comparison.png)", "",
+                  f"**그림:** 서로 다른 위치에서 찍은 RGB 사진 {size}장으로 3D 구조를 복원했다. 왼쪽은 선명한 입력 사진 {reference} 한 장이고, 가운데·오른쪽은 각각 VGGT·MASt3R가 복원한 geometry를 RGB 색의 3D 점군으로 표시한 결과다.", "",
+                  f"저장된 깊이·카메라 내부 파라미터·포즈를 사용해 각 점의 3D 위치를 계산하고 실제 입력 RGB로 색을 입혔다. 두 점군은 추정 카메라 중심을 같은 GT 카메라 중심에 전역 Sim(3) 정렬한 좌표계에서 **같은 가상 시점, 수평 화각 {camera['horizontal_fov_deg']:g}°, 점 크기 {camera['point_diameter_px']}픽셀**로 렌더링했다. GT 표면으로 예측 형상을 보정하거나 채우지는 않았다. 가상 시점은 GT와 입력 사진만으로 정했고 원본 RGB 촬영 시점에서 약간 이동했으므로 왼쪽 사진과 완전히 같은 투영은 아니다.", "",
+                  "점군은 두 모델에 공통인 영상 격자에서 표본화하며 GT 유효 마스크로 예측 점을 골라내지 않는다. 비유한·비양수 깊이는 그림에서만 제외하고 그 수를 별도 JSON에 기록한다. 점의 겹침·가림·표본 밀도 때문에 보이는 차이도 있으므로, 이 정성 그림을 실제 AbsRel·포즈 점수와 함께 읽는다.", ""]
+        contrast = info["contrast"]
+        if contrast["status"] == "generated":
+            lines += ["![DROP, ADD clean, ADD blurred의 공통 컨텍스트 3D 점군](figures/reconstruction_conditions.png)", "",
+                      f"**그림:** 대표 타깃 {contrast['target']}을 뺀 DROP, 선명한 타깃을 넣은 ADD clean, yaw {contrast['blur_deg']:g}°로 흐린 타깃을 넣은 ADD blurred다. 위 행은 VGGT, 아래 행은 MASt3R이며 여섯 패널 모두 위와 같은 가상 카메라·화각·점 크기를 사용한다.", "",
+                      f"타깃은 사진 ID 사전순 가운데 사진으로, 블러는 사전에 설정된 가장 큰 단계로 정했다. 모든 패널에서 **동일한 나머지 {len(contrast['common_image_ids'])}장만 점의 공급원과 정렬 기준으로 사용**한다. ADD는 타깃을 포함해 계산된 예측이지만 타깃 자체의 점은 표시하지 않아, 단순히 점이 추가되는 효과와 나머지 공간의 재구성 변화를 구별한다. 결과가 나쁜 타깃을 사후 선택한 사례는 아니다.", ""]
+    lines += [RECONSTRUCTION_END, "", ""]
+    return "\n".join(lines)
+
+
+def insert_reconstruction_section(report, info):
+    """Replace only our managed block, retaining all authored text outside it."""
+    block = reconstruction_section(info)
+    if RECONSTRUCTION_START in report:
+        pattern = re.escape(RECONSTRUCTION_START) + r"[\s\S]*?" + re.escape(RECONSTRUCTION_END) + r"\n\n"
+        if report.count(RECONSTRUCTION_START) != 1 or len(re.findall(pattern, report)) != 1:
+            raise ValueError("Malformed or duplicate reconstruction report block")
+        return re.sub(pattern, lambda match: block, report, count=1)
+    for anchor in ("## 선정 사진과 정답 표본 수", "## 원시 예측과 점수를 얼마나 확인했는가"):
+        if anchor in report:
+            index = report.index(anchor)
+            return report[:index] + block + report[index:]
+    return report.rstrip() + "\n\n" + block
 
 
 def f(value, digits=4, scale=1):

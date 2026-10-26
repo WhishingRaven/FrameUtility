@@ -1,0 +1,30 @@
+[
+  {
+    "scene": "kicker",
+    "backend": "vggt",
+    "attempts": 363,
+    "successful_attempts": 363,
+    "failed_attempts": 0,
+    "retries": 0,
+    "summed_worker_inference_seconds": 3843.974536180496,
+    "inference_interval_union_seconds": 3843.974536180496,
+    "first_to_last_prediction_seconds": 4054.6071557998657,
+    "first_prediction_unix": 1792946594.9775722,
+    "last_prediction_unix": 1792950649.584728,
+    "max_single_worker_process_rss_bytes": 10100473856
+  },
+  {
+    "scene": "kicker",
+    "backend": "mast3r",
+    "attempts": 363,
+    "successful_attempts": 363,
+    "failed_attempts": 0,
+    "retries": 0,
+    "summed_worker_inference_seconds": 26591.49687051773,
+    "inference_interval_union_seconds": 9076.522024393082,
+    "first_to_last_prediction_seconds": 9076.792207717896,
+    "first_prediction_unix": 1792950664.78464,
+    "last_prediction_unix": 1792959741.5768478,
+    "max_single_worker_process_rss_bytes": 5820547072
+  }
+]

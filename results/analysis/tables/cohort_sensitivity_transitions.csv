@@ -1,73 +1,73 @@
 ﻿backend,size,metric,policy,epsilon,stratum,stratum_value,n_scenes_used,n_scenes_requested,scenes_used,transition_scene_fraction_mean,transition_scene_fraction_median,transition_scene_fraction_q25,transition_scene_fraction_q75,transition_scene_fraction_min,transition_scene_fraction_max,complete_curve_scene_fraction_mean,complete_curve_scene_fraction_median,complete_curve_scene_fraction_q25,complete_curve_scene_fraction_q75,complete_curve_scene_fraction_min,complete_curve_scene_fraction_max,incomplete_curves,observed_transitions_incomplete
-mast3r,5,geometry_depth_absrel,sensitivity,0,all,all,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0,device,mps,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.0001,all,all,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.0001,device,mps,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.0005,all,all,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.0005,device,mps,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.001,all,all,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.001,device,mps,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,5,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0,all,all,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0,device,mps,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.0001,all,all,1,10,"[""office""]",0.3,0.3,0.3,0.3,0.3,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.0001,device,mps,1,10,"[""office""]",0.3,0.3,0.3,0.3,0.3,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.3,0.3,0.3,0.3,0.3,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.0005,all,all,1,10,"[""office""]",0.3,0.3,0.3,0.3,0.3,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.0005,device,mps,1,10,"[""office""]",0.3,0.3,0.3,0.3,0.3,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.3,0.3,0.3,0.3,0.3,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.001,all,all,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.001,device,mps,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,10,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0,all,all,1,10,"[""office""]",0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0,device,mps,1,10,"[""office""]",0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.0001,all,all,1,10,"[""office""]",0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.0001,device,mps,1,10,"[""office""]",0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.0005,all,all,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.0005,device,mps,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.2,0.2,0.2,0.2,0.2,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.001,all,all,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.001,device,mps,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-mast3r,15,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0,all,all,1,10,"[""office""]",0.8,0.8,0.8,0.8,0.8,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0,device,mps,1,10,"[""office""]",0.8,0.8,0.8,0.8,0.8,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.8,0.8,0.8,0.8,0.8,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.0001,all,all,1,10,"[""office""]",0.8,0.8,0.8,0.8,0.8,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.0001,device,mps,1,10,"[""office""]",0.8,0.8,0.8,0.8,0.8,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.8,0.8,0.8,0.8,0.8,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.0005,all,all,1,10,"[""office""]",0.6,0.6,0.6,0.6,0.6,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.0005,device,mps,1,10,"[""office""]",0.6,0.6,0.6,0.6,0.6,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.6,0.6,0.6,0.6,0.6,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.001,all,all,1,10,"[""office""]",0.6,0.6,0.6,0.6,0.6,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.001,device,mps,1,10,"[""office""]",0.6,0.6,0.6,0.6,0.6,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,5,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.6,0.6,0.6,0.6,0.6,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0,all,all,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0,device,mps,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.0001,all,all,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.0001,device,mps,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.0005,all,all,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.0005,device,mps,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.001,all,all,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.001,device,mps,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,10,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0,all,all,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0,device,mps,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.0001,all,all,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.0001,device,mps,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.0005,all,all,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.0005,device,mps,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.001,all,all,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.001,device,mps,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
-vggt,15,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,1,10,"[""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0,all,all,2,10,"[""kicker"", ""office""]",0.30000000000000004,0.30000000000000004,0.25,0.35000000000000003,0.2,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0,device,mps,2,10,"[""kicker"", ""office""]",0.30000000000000004,0.30000000000000004,0.25,0.35000000000000003,0.2,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.30000000000000004,0.30000000000000004,0.25,0.35000000000000003,0.2,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.0001,all,all,2,10,"[""kicker"", ""office""]",0.30000000000000004,0.30000000000000004,0.25,0.35000000000000003,0.2,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.0001,device,mps,2,10,"[""kicker"", ""office""]",0.30000000000000004,0.30000000000000004,0.25,0.35000000000000003,0.2,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.30000000000000004,0.30000000000000004,0.25,0.35000000000000003,0.2,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.0005,all,all,2,10,"[""kicker"", ""office""]",0.2,0.2,0.1,0.30000000000000004,0.0,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.0005,device,mps,2,10,"[""kicker"", ""office""]",0.2,0.2,0.1,0.30000000000000004,0.0,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.2,0.2,0.1,0.30000000000000004,0.0,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.001,all,all,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.001,device,mps,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,5,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0,all,all,2,10,"[""kicker"", ""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0,device,mps,2,10,"[""kicker"", ""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.4,0.4,0.4,0.4,0.4,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.0001,all,all,2,10,"[""kicker"", ""office""]",0.35,0.35,0.325,0.375,0.3,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.0001,device,mps,2,10,"[""kicker"", ""office""]",0.35,0.35,0.325,0.375,0.3,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.35,0.35,0.325,0.375,0.3,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.0005,all,all,2,10,"[""kicker"", ""office""]",0.15,0.15,0.075,0.22499999999999998,0.0,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.0005,device,mps,2,10,"[""kicker"", ""office""]",0.15,0.15,0.075,0.22499999999999998,0.0,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.15,0.15,0.075,0.22499999999999998,0.0,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.001,all,all,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.001,device,mps,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,10,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0,all,all,2,10,"[""kicker"", ""office""]",0.3666666666666667,0.3666666666666667,0.35,0.38333333333333336,0.3333333333333333,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0,device,mps,2,10,"[""kicker"", ""office""]",0.3666666666666667,0.3666666666666667,0.35,0.38333333333333336,0.3333333333333333,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.3666666666666667,0.3666666666666667,0.35,0.38333333333333336,0.3333333333333333,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.0001,all,all,2,10,"[""kicker"", ""office""]",0.23333333333333334,0.23333333333333334,0.18333333333333332,0.2833333333333333,0.13333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.0001,device,mps,2,10,"[""kicker"", ""office""]",0.23333333333333334,0.23333333333333334,0.18333333333333332,0.2833333333333333,0.13333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.23333333333333334,0.23333333333333334,0.18333333333333332,0.2833333333333333,0.13333333333333333,0.3333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.0005,all,all,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.0005,device,mps,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.001,all,all,2,10,"[""kicker"", ""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.001,device,mps,2,10,"[""kicker"", ""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+mast3r,15,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0,all,all,2,10,"[""kicker"", ""office""]",0.6000000000000001,0.6000000000000001,0.5,0.7000000000000001,0.4,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0,device,mps,2,10,"[""kicker"", ""office""]",0.6000000000000001,0.6000000000000001,0.5,0.7000000000000001,0.4,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.6000000000000001,0.6000000000000001,0.5,0.7000000000000001,0.4,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.0001,all,all,2,10,"[""kicker"", ""office""]",0.6000000000000001,0.6000000000000001,0.5,0.7000000000000001,0.4,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.0001,device,mps,2,10,"[""kicker"", ""office""]",0.6000000000000001,0.6000000000000001,0.5,0.7000000000000001,0.4,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.6000000000000001,0.6000000000000001,0.5,0.7000000000000001,0.4,0.8,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.0005,all,all,2,10,"[""kicker"", ""office""]",0.5,0.5,0.45,0.55,0.4,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.0005,device,mps,2,10,"[""kicker"", ""office""]",0.5,0.5,0.45,0.55,0.4,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.5,0.5,0.45,0.55,0.4,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.001,all,all,2,10,"[""kicker"", ""office""]",0.5,0.5,0.45,0.55,0.4,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.001,device,mps,2,10,"[""kicker"", ""office""]",0.5,0.5,0.45,0.55,0.4,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,5,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.5,0.5,0.45,0.55,0.4,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0,all,all,2,10,"[""kicker"", ""office""]",0.45,0.45,0.42500000000000004,0.475,0.4,0.5,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0,device,mps,2,10,"[""kicker"", ""office""]",0.45,0.45,0.42500000000000004,0.475,0.4,0.5,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.45,0.45,0.42500000000000004,0.475,0.4,0.5,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.0001,all,all,2,10,"[""kicker"", ""office""]",0.45,0.45,0.42500000000000004,0.475,0.4,0.5,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.0001,device,mps,2,10,"[""kicker"", ""office""]",0.45,0.45,0.42500000000000004,0.475,0.4,0.5,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.45,0.45,0.42500000000000004,0.475,0.4,0.5,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.0005,all,all,2,10,"[""kicker"", ""office""]",0.2,0.2,0.1,0.30000000000000004,0.0,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.0005,device,mps,2,10,"[""kicker"", ""office""]",0.2,0.2,0.1,0.30000000000000004,0.0,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.2,0.2,0.1,0.30000000000000004,0.0,0.4,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.001,all,all,2,10,"[""kicker"", ""office""]",0.15,0.15,0.075,0.22499999999999998,0.0,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.001,device,mps,2,10,"[""kicker"", ""office""]",0.15,0.15,0.075,0.22499999999999998,0.0,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,10,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.15,0.15,0.075,0.22499999999999998,0.0,0.3,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0,all,all,2,10,"[""kicker"", ""office""]",0.3,0.3,0.15,0.44999999999999996,0.0,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0,device,mps,2,10,"[""kicker"", ""office""]",0.3,0.3,0.15,0.44999999999999996,0.0,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.3,0.3,0.15,0.44999999999999996,0.0,0.6,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.0001,all,all,2,10,"[""kicker"", ""office""]",0.23333333333333334,0.23333333333333334,0.11666666666666667,0.35,0.0,0.4666666666666667,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.0001,device,mps,2,10,"[""kicker"", ""office""]",0.23333333333333334,0.23333333333333334,0.11666666666666667,0.35,0.0,0.4666666666666667,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.0001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.23333333333333334,0.23333333333333334,0.11666666666666667,0.35,0.0,0.4666666666666667,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.0005,all,all,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.0005,device,mps,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.0005,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.1,0.1,0.05,0.15000000000000002,0.0,0.2,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.001,all,all,2,10,"[""kicker"", ""office""]",0.06666666666666667,0.06666666666666667,0.03333333333333333,0.1,0.0,0.13333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.001,device,mps,2,10,"[""kicker"", ""office""]",0.06666666666666667,0.06666666666666667,0.03333333333333333,0.1,0.0,0.13333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0
+vggt,15,geometry_depth_absrel,sensitivity,0.001,runtime_group,mps-6ab37fd9,2,10,"[""kicker"", ""office""]",0.06666666666666667,0.06666666666666667,0.03333333333333333,0.1,0.0,0.13333333333333333,1.0,1.0,1.0,1.0,1.0,1.0,0,0

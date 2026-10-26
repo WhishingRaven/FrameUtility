@@ -1,0 +1,20 @@
+[
+  {
+    "scene": "kicker",
+    "backend": "vggt",
+    "expected_predictions": 363,
+    "verified_prediction_hashes": 363,
+    "stored_metric_rows": 1800,
+    "rescored_metric_rows": 1800,
+    "all_stored_scores_match_cpu_rescoring": true
+  },
+  {
+    "scene": "kicker",
+    "backend": "mast3r",
+    "expected_predictions": 363,
+    "verified_prediction_hashes": 363,
+    "stored_metric_rows": 1800,
+    "rescored_metric_rows": 1800,
+    "all_stored_scores_match_cpu_rescoring": true
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "key": "m15_add_DSC_6513_b4",
+  "ids": [
+    "DSC_6489",
+    "DSC_6490",
+    "DSC_6491",
+    "DSC_6494",
+    "DSC_6499",
+    "DSC_6500",
+    "DSC_6502",
+    "DSC_6503",
+    "DSC_6504",
+    "DSC_6506",
+    "DSC_6507",
+    "DSC_6510",
+    "DSC_6511",
+    "DSC_6512",
+    "DSC_6513"
+  ],
+  "target": "DSC_6513",
+  "severity_deg": 4,
+  "attempt": 1,
+  "max_attempts": 3,
+  "start_unix": 1792959489.104246,
+  "status": "ok",
+  "pid": 31239,
+  "shard_index": 2,
+  "prediction_sha256": "f1511c18c6c06e52207df20164450e5ba0c4defba9855bcb51639b64ea207099",
+  "seconds": 128.88086891174316,
+  "process_peak_rss_bytes": 5818646528
+}
